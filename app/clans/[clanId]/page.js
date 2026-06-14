@@ -20,7 +20,7 @@ export default function ClanDetail({ params }) {
 
     const clan = mockClans.find(c => c.id === clanId) || mockClans[0];
     const clanPitches = mockPitches
-        .filter((p) => p.clanId === clan.id)
+        .filter((p) => p.clanId === clan.id && (p.status === 'active' || p.status === 'activated'))
         .map((p) => ({
             ...p,
             hostName: 'Arjun R.',
