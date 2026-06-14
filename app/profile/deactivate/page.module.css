@@ -1,0 +1,472 @@
+/* ============================================================
+   Account Deactivation / Deletion Preview
+   Matches design: account_deactivation_preview
+   ============================================================ */
+
+/* ── Page ── */
+.page {
+    min-height: 100vh;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header ── */
+.header {
+    width: 100%;
+    padding: 24px 32px;
+}
+
+.headerInner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    color: var(--on-surface-variant);
+    transition: background 150ms;
+}
+.backBtn:hover {
+    background: var(--surface-container);
+}
+
+.headerTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.025em;
+}
+
+/* ── Container ── */
+.container {
+    flex: 1;
+    width: 100%;
+    max-width: 672px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+}
+
+/* ── Hero Section (centered) ── */
+.heroSection {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heading {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.subtext {
+    font-size: 1.125rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+}
+
+/* ── Option Cards Grid ── */
+.optionGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.optionCard {
+    text-align: left;
+    padding: 24px;
+    border-radius: 12px;
+    background: var(--surface-container-lowest);
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 200ms ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.optionBreakActive {
+    border-color: var(--primary);
+}
+
+.optionDeleteActive {
+    border-color: var(--error);
+}
+
+.optionTopRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.optionIconWrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.optionIconGreen {
+    background: rgba(0, 105, 72, 0.1);
+    color: var(--primary);
+}
+
+.optionIconRed {
+    background: rgba(186, 26, 26, 0.1);
+    color: var(--error);
+}
+
+/* Custom radio circle */
+.radioOuter {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    border: 2px solid var(--outline-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 200ms;
+    flex-shrink: 0;
+}
+
+.radioOuterGreen {
+    border-color: var(--primary);
+}
+
+.radioOuterRed {
+    border-color: var(--error);
+}
+
+.radioDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    transform: scale(0);
+    transition: transform 200ms;
+}
+
+.radioDotGreen {
+    background: var(--primary);
+    transform: scale(1);
+}
+
+.radioDotRed {
+    background: var(--error);
+    transform: scale(1);
+}
+
+.optionTitle {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 8px;
+}
+
+.optionDesc {
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+}
+
+/* ── Community Impact Card ── */
+.impactCard {
+    background: var(--surface-container-low);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.impactWatermark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 16px;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.impactTitle {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+    margin-bottom: 24px;
+}
+
+.impactStats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.impactStat {
+    display: flex;
+    flex-direction: column;
+}
+
+.impactNumPrimary {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.impactNum {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    margin-bottom: 4px;
+}
+
+.impactLabel {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+}
+
+.impactQuoteWrap {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--outline-variant);
+}
+
+.impactQuote {
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+}
+
+/* ── Reason Section ── */
+.reasonSection {
+    margin-bottom: 48px;
+}
+
+.reasonTitle {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 16px;
+}
+
+.reasonList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reasonOption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--surface-container-lowest);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 150ms;
+}
+.reasonOption:hover {
+    background: var(--surface-container-high);
+}
+
+.radioInput {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 9999px;
+    border: 2px solid var(--outline);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: border-color 150ms;
+    position: relative;
+}
+.radioInput:checked {
+    border-color: var(--primary);
+    background: var(--primary);
+    box-shadow: inset 0 0 0 3px var(--surface-container-lowest);
+}
+
+.reasonText {
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    flex: 1;
+}
+
+.feedbackWrap {
+    margin-top: 16px;
+}
+
+.feedbackArea {
+    width: 100%;
+    padding: 16px;
+    font-size: 0.875rem;
+    background: var(--surface-container-highest);
+    border-radius: 12px;
+    color: var(--on-surface);
+    resize: vertical;
+    min-height: 80px;
+    border: none;
+    outline: none;
+    font-family: var(--font-body);
+}
+.feedbackArea::placeholder {
+    color: var(--on-surface-muted);
+}
+.feedbackArea:focus {
+    background: var(--surface-container-lowest);
+    box-shadow: 0 0 0 2px rgba(0, 105, 72, 0.2);
+}
+
+/* ── Action Buttons ── */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.keepBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #006948, #00855d);
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 105, 72, 0.2);
+    transition: all 200ms;
+    text-align: center;
+}
+.keepBtn:hover {
+    filter: brightness(1.1);
+}
+.keepBtn:active {
+    transform: scale(0.98);
+}
+
+.deactivateBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    background: transparent;
+    border: 2px solid var(--outline-variant);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 200ms;
+}
+.deactivateBtn:hover {
+    background: var(--surface-container);
+}
+
+/* ── Legal text ── */
+.legal {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+    padding: 0 48px;
+}
+
+.legalLink {
+    text-decoration: underline;
+    color: inherit;
+}
+
+/* ── Footer ── */
+.footer {
+    padding: 48px 0;
+    border-top: 1px solid var(--outline-variant);
+    text-align: center;
+}
+
+.footerBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.footerText {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .header {
+        padding: 16px 20px;
+    }
+
+    .container {
+        padding: 0 20px 64px;
+    }
+
+    .heading {
+        font-size: 1.5rem;
+    }
+
+    .subtext {
+        font-size: 1rem;
+    }
+
+    .optionGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .impactStats {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .legal {
+        padding: 0 12px;
+    }
+
+    .keepBtn,
+    .deactivateBtn {
+        font-size: 1rem;
+        padding: 14px;
+    }
+}

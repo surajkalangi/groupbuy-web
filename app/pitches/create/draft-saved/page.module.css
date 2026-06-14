@@ -1,0 +1,243 @@
+.page {
+    min-height: 100vh;
+    background-color: var(--surface);
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1rem 8rem;
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.card {
+    background: var(--surface-container-lowest);
+    border-radius: 2rem;
+    padding: 2rem;
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.06);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 3rem;
+    }
+}
+
+.successIcon {
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: var(--primary-fixed);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.successIcon span {
+    font-size: 2.25rem;
+    color: var(--primary);
+    font-variation-settings: 'FILL' 1, 'wght' 600;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 1.75rem;
+    }
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Draft Card */
+.draftCard {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background-color: var(--surface-container-low);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    text-align: left;
+    border: 1px solid rgba(188, 202, 192, 0.1);
+}
+
+.draftThumb {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.draftThumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.draftInfo {
+    flex-grow: 1;
+}
+
+.draftBadgeRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.draftBadge {
+    background-color: var(--secondary-fixed);
+    color: var(--on-secondary-fixed);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.375rem;
+}
+
+.draftTime {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+}
+
+.draftName {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--on-surface);
+    line-height: 1.25;
+    margin-bottom: 0.25rem;
+}
+
+.draftMetaRow {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.draftMeta {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+}
+
+@media (min-width: 640px) {
+    .actions {
+        flex-direction: row;
+    }
+}
+
+.primaryBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--on-primary);
+    background: linear-gradient(to bottom right, var(--primary), var(--primary-container));
+    border-radius: 9999px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: all 0.2s;
+    order: 1;
+}
+
+.outlineBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    background-color: var(--surface-container-high);
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s;
+    order: 2;
+}
+
+@media (min-width: 640px) {
+    .primaryBtn { order: 2; }
+    .outlineBtn { order: 1; }
+}
+
+.primaryBtn:hover {
+    opacity: 0.9;
+    transform: scale(0.98);
+}
+
+.outlineBtn:hover {
+    background-color: var(--surface-dim);
+    transform: scale(0.98);
+}
+
+/* Footer */
+.helpText {
+    text-align: center;
+    margin-top: 2rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+}
+
+.supportLink {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.supportLink:hover {
+    text-decoration: underline;
+}

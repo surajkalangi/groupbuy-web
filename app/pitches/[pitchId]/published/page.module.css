@@ -1,0 +1,317 @@
+/* ============================================================
+   Screen 21: Publish Success
+   ============================================================ */
+
+.page {
+    min-height: 100vh;
+    background: var(--surface);
+    padding-top: calc(var(--nav-height) + var(--space-2));
+    padding-bottom: calc(var(--bottom-nav-height) + var(--space-2));
+}
+
+.container {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+/* ── Success Header ── */
+.successHeader {
+    text-align: center;
+    padding: var(--space-4) 0 var(--space-4);
+}
+
+.successIcon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--success-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-3);
+    color: var(--success);
+    animation: scaleIn 0.5s var(--ease-out);
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.successTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    margin-bottom: var(--space-2);
+}
+
+.successSub {
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+}
+
+/* ── Summary Card ── */
+.summaryCard {
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--space-6);
+}
+
+.summaryImage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--surface-container-high);
+}
+
+.summaryImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--on-surface-muted);
+}
+
+.activeBadge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--on-primary);
+    background: var(--success);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+}
+
+.summaryContent {
+    padding: var(--space-5);
+}
+
+.summaryTitleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-1);
+}
+
+.summaryName {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 0;
+}
+
+.summaryPrice {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.summaryGoal {
+    font-size: 0.8125rem;
+    color: var(--on-surface-muted);
+    margin: var(--space-2) 0 var(--space-4);
+}
+
+.progressWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-1);
+}
+
+.progressLabel,
+.progressCount {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--on-surface-muted);
+}
+
+.progressTrack {
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--surface-container-high);
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    background: var(--gradient-reputation);
+    transition: width var(--duration-slow) var(--ease-out);
+}
+
+/* ── Share Section ── */
+.shareSection {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+}
+
+.whatsappBtn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--on-primary);
+    background-color: var(--primary);
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+
+.whatsappBtn:hover {
+    transform: translateY(-2px);
+    background-color: var(--primary-hover);
+}
+
+.copyLinkBtn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--on-surface);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: background var(--duration-fast);
+}
+
+.copyLinkBtn:hover {
+    background: var(--surface-container-high);
+}
+
+/* ── What Happens Next ── */
+.nextSection {
+    margin-bottom: var(--space-8);
+}
+
+.nextTitle {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: var(--space-5);
+}
+
+.nextTimeline {
+    display: flex;
+    flex-direction: column;
+}
+
+.nextStep {
+    display: flex;
+    gap: var(--space-4);
+    position: relative;
+}
+
+.nextDot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.nextLine {
+    position: absolute;
+    left: 17px;
+    top: 36px;
+    width: 2px;
+    height: calc(100% - 36px);
+    background: var(--outline-variant);
+}
+
+.nextContent {
+    padding-bottom: var(--space-6);
+}
+
+.nextStepTitle {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 2px;
+}
+
+.nextStepDesc {
+    font-size: 0.8125rem;
+    color: var(--on-surface-variant);
+    line-height: 1.5;
+}
+
+/* ── Actions ── */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-bottom: var(--space-4);
+}
+
+.primaryBtn {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-primary);
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.primaryBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.secondaryBtn {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: transparent;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.secondaryBtn:hover {
+    background: var(--primary-light);
+}

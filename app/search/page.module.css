@@ -1,0 +1,204 @@
+/* ============================================================
+   Search Results Page
+   ============================================================ */
+
+.page {
+    min-height: 100vh;
+    background: var(--surface);
+    padding-top: calc(var(--nav-height) + var(--space-4));
+    padding-bottom: calc(var(--bottom-nav-height) + var(--space-8));
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+}
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--on-surface);
+    cursor: pointer;
+    transition: background var(--duration-fast);
+}
+
+.backBtn:hover {
+    background: var(--surface-container-low);
+}
+
+.searchBar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--surface-container-highest);
+    border-radius: var(--radius-full);
+    transition: background var(--duration-fast);
+}
+
+.searchBar:focus-within {
+    background: var(--surface-container-lowest);
+    box-shadow: 0 0 0 2px rgba(0, 105, 72, 0.15);
+}
+
+.searchInput {
+    flex: 1;
+    font-size: 0.875rem;
+    color: var(--on-surface);
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.searchInput::placeholder {
+    color: var(--on-surface-muted);
+}
+
+.clearBtn {
+    background: transparent;
+    border: none;
+    color: var(--on-surface-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Tabs ── */
+.tabs {
+    display: flex;
+    gap: var(--space-4);
+    border-bottom: 1px solid var(--outline-variant);
+    margin-bottom: var(--space-5);
+}
+
+.tab {
+    padding: var(--space-3) 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--on-surface-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: color var(--duration-fast);
+}
+
+.tab:hover {
+    color: var(--on-surface);
+}
+
+.activeTab {
+    color: var(--primary);
+}
+
+.activeTab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px 2px 0 0;
+}
+
+.resultCount {
+    font-size: 0.75rem;
+    color: var(--on-surface-muted);
+    font-weight: 500;
+    margin-bottom: var(--space-4);
+}
+
+/* ── Lists ── */
+.pitchGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-5);
+}
+
+.clanList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.clanCard {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast);
+}
+
+.clanCard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.clanIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.clanName {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin-bottom: 2px;
+}
+
+.clanMeta {
+    font-size: 0.75rem;
+    color: var(--on-surface-muted);
+}
+
+/* ── Empty State ── */
+.emptyState {
+    text-align: center;
+    padding: var(--space-16) var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.emptyTitle {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.emptyText {
+    font-size: 0.875rem;
+    color: var(--on-surface-muted);
+}

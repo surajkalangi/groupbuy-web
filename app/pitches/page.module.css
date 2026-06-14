@@ -1,0 +1,1499 @@
+.page {
+    padding-top: calc(var(--nav-height) + var(--space-4));
+    padding-bottom: 10rem;
+    min-height: 100vh;
+    background-color: var(--surface);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    transition: max-width 300ms var(--ease-out);
+}
+
+.containerWide {
+    max-width: 1200px;
+}
+
+/* ── Header ── */
+.pageHeader {
+    margin-bottom: var(--space-8);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+
+.pageTitle {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-2);
+}
+
+.pageSubtitle {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+}
+
+/* ── Tabs ── */
+.tabs {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 50ms;
+}
+
+.tab {
+    padding: var(--space-3) var(--space-6);
+    border-radius: 999px;
+    border: 2px solid var(--outline-variant);
+    background: none;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.tabActive {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* ── Filter Chips ── */
+.filterRow {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-6);
+    scrollbar-width: none;
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 100ms;
+}
+
+.filterRow::-webkit-scrollbar {
+    display: none;
+}
+
+.filterChip {
+    flex-shrink: 0;
+    padding: var(--space-2) var(--space-4);
+    border-radius: 999px;
+    border: 1.5px solid var(--outline-variant);
+    background: none;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.filterChipActive {
+    background-color: var(--secondary-container);
+    border-color: var(--secondary-container);
+    color: var(--on-secondary-container);
+}
+
+/* ── Pitch List ── */
+.pitchList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 150ms;
+}
+
+/* ── Pitch Card ── */
+.pitchCard {
+    background-color: var(--surface-container-lowest);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    transition: box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.pitchCard:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.pitchCardFull {
+    padding: var(--space-6);
+}
+
+/* Participating card top row */
+.cardTop {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+}
+
+.cardImageWrap {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardImagePlaceholder {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-lg);
+    background-color: var(--surface-container-high);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cardInfo {
+    flex: 1;
+    position: relative;
+}
+
+.statusBadge {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-bottom: var(--space-2);
+    display: inline-block;
+}
+
+.badgeActive {
+    background-color: var(--primary-fixed);
+    color: var(--on-primary-fixed-variant);
+}
+
+.badgeActivated {
+    background-color: var(--secondary-container);
+    color: var(--on-secondary-container);
+}
+
+.badgeCompleted {
+    background-color: var(--surface-container-high);
+    color: var(--on-surface-variant);
+}
+
+.cardTitle {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: var(--space-1);
+}
+
+.cardMeta {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-2);
+}
+
+.clanRow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.clanName {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+}
+
+/* ── Progress Section ── */
+.progressSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.progressTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progressLabel {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-surface-muted);
+}
+
+.progressStat {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.progressStatGreen {
+    color: var(--primary);
+}
+
+.progressStatGold {
+    color: var(--secondary);
+}
+
+.progressTrack {
+    height: 8px;
+    background-color: var(--surface-container);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-container) 100%);
+    border-radius: 999px;
+    transition: width 0.5s var(--ease-out);
+}
+
+.progressFillGold {
+    background: linear-gradient(90deg, var(--secondary-container) 0%, var(--primary) 100%);
+}
+
+/* ── Card Actions ── */
+.cardActions {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+}
+
+.viewDetailsBtn {
+    flex: 1;
+    padding: var(--space-3) var(--space-5);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.viewDetailsBtn:hover {
+    transform: translateY(-1px);
+}
+
+.shareIconBtn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--surface-container-low);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--on-surface-variant);
+    transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.shareIconBtn:hover {
+    background-color: var(--surface-container-high);
+}
+
+.trackPickupBtn {
+    flex: 1;
+    padding: var(--space-3) var(--space-5);
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    transition: all var(--duration-fast) var(--ease-out);
+    box-shadow: 0 4px 12px rgba(254, 166, 25, 0.2);
+}
+
+.trackPickupBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(254, 166, 25, 0.3);
+}
+
+/* ── Hosting Card ── */
+.hostingCardTop {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+}
+
+.hostingImageWrap {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.hostingImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hostingInfo {
+    flex: 1;
+}
+
+.featuredRow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.featuredLabel {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--secondary);
+}
+
+.hostingBadges {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.badgeHosting {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background-color: var(--primary);
+    color: white;
+    letter-spacing: 0.06em;
+}
+
+.badgeActivated2 {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background-color: var(--surface-container-high);
+    color: var(--on-surface-variant);
+    letter-spacing: 0.06em;
+}
+
+.hostingTitle {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: var(--space-2);
+}
+
+.hostingDesc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    line-height: 1.4;
+}
+
+.hostingMeta {
+    display: flex;
+    gap: var(--space-8);
+    align-items: flex-end;
+}
+
+.hostMetaLabel {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-surface-muted);
+    margin-bottom: var(--space-1);
+}
+
+.hostMetaAmt {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--on-surface);
+}
+
+.goalStatusRow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.goalStatusVal {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    white-space: nowrap;
+}
+
+.progressTrackSmall {
+    width: 80px;
+    height: 8px;
+    background-color: var(--surface-container);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progressFillSmall {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-container) 100%);
+    border-radius: 999px;
+}
+
+.hostingActions {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.manageDashBtn {
+    flex: 1;
+    padding: var(--space-4);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.manageDashBtn:hover {
+    transform: translateY(-1px);
+}
+
+.editPitchBtn {
+    padding: var(--space-4) var(--space-6);
+    border: 2px solid var(--outline-variant);
+    background: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.editPitchBtn:hover {
+    background-color: var(--surface-container-low);
+}
+
+/* ── Empty State ── */
+.emptyState {
+    text-align: center;
+    padding: var(--space-16) var(--space-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--on-surface-variant);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+}
+
+/* ── FAB ── */
+.fab {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + var(--space-6));
+    right: var(--space-6);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--on-primary);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+    z-index: 40;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+    .fab {
+        bottom: var(--space-8);
+        right: var(--space-8);
+    }
+}
+
+/* ── Tab Icons ── */
+.tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+/* ============================================================
+   Saved Tab — Bento Grid Cards
+   ============================================================ */
+
+.savedGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 150ms;
+}
+
+@media (min-width: 640px) {
+    .savedGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .savedGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ── Saved Card ── */
+.savedCard {
+    background-color: var(--surface-container-lowest);
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: all 400ms var(--ease-out);
+}
+
+.savedCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(5, 150, 105, 0.08);
+}
+
+.savedCardCompleted {
+    opacity: 0.95;
+}
+
+.savedCardExpired {
+    opacity: 0.7;
+}
+
+/* ── Saved Card Image ── */
+.savedImageWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.savedImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out);
+}
+
+.savedCard:hover .savedImage {
+    transform: scale(1.05);
+}
+
+.savedImageGrayscale {
+    filter: grayscale(1);
+}
+
+.savedImagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background: var(--surface-container-high);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Bookmark remove button */
+.savedBookmarkBtn {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(25, 28, 29, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.savedBookmarkBtn:hover {
+    background: rgba(25, 28, 29, 0.65);
+    transform: scale(1.08);
+    color: white;
+}
+
+/* Status badge overlay on image */
+.savedStatusOverlay {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.clanBadgeOverlay {
+    text-transform: capitalize;
+    letter-spacing: 0.02em;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.savedBadgeActive {
+    background: rgba(5, 150, 105, 0.9);
+    color: white;
+}
+
+.savedBadgeCompleted {
+    background: rgba(133, 83, 0, 0.9);
+    color: white;
+}
+
+.savedBadgeExpired {
+    background: var(--on-surface-variant);
+    color: white;
+}
+
+/* ── Saved Card Body ── */
+.savedBody {
+    padding: var(--space-4) var(--space-5) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.savedTitleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.savedTitle {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.savedTitleMuted {
+    color: var(--on-surface-variant);
+}
+
+.savedDesc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    margin-top: 2px;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.savedDescMuted {
+    color: var(--on-surface-muted);
+}
+
+.savedPrice {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.savedPriceUnit {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--on-surface-muted);
+}
+
+.savedPriceMuted {
+    color: var(--on-surface-variant);
+}
+
+/* Time row */
+.savedTimeRow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+/* Community Goal */
+.savedGoalSection {
+    margin-bottom: var(--space-5);
+}
+
+.savedGoalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--on-surface-variant);
+}
+
+.savedGoalPct {
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.savedGoalPctMuted {
+    color: var(--on-surface-variant);
+}
+
+.savedGoalTrack {
+    width: 100%;
+    height: 8px;
+    background: var(--surface-container-high);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.savedGoalFill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary, #855300) 0%, var(--primary) 100%);
+    border-radius: 999px;
+    transition: width 500ms var(--ease-out);
+}
+
+.savedGoalFillMuted {
+    background: rgba(61, 74, 66, 0.3);
+}
+
+/* Host row */
+.savedHostRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(188, 202, 192, 0.15);
+    margin-top: auto;
+}
+
+.savedHostInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.savedHostAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    ring: 2px solid rgba(5, 150, 105, 0.05);
+}
+
+.savedHostAvatarPlaceholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface-container-high);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.savedHostLabel {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--on-surface-variant);
+}
+
+.savedHostName {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--on-surface);
+}
+
+.savedBtnView {
+    padding: var(--space-2) var(--space-4);
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--primary);
+    border: none;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.savedBtnView:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.savedBtnDisabled {
+    padding: var(--space-2) var(--space-4);
+    background: var(--surface-container-high);
+    color: var(--on-surface-variant);
+    border: none;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: not-allowed;
+}
+
+/* ============================================================
+   Bento Card — Shared across Participating & Hosting
+   ============================================================ */
+
+.bentoCard {
+    position: relative;
+    background-color: var(--surface-container-lowest);
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: all 400ms var(--ease-out);
+}
+
+.bentoCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(5, 150, 105, 0.08);
+}
+
+.bentoDraft {
+    border: 2px dashed var(--outline-variant);
+}
+
+.bentoDraftReady {
+    border: 1px solid rgba(0, 105, 72, 0.2);
+}
+
+/* Bookmark button on card */
+.bentoBmBtn {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 105, 72, 0.1);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--primary);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.bentoBmBtn:hover {
+    background: rgba(186, 26, 26, 0.1);
+    color: var(--error, #ba1a1a);
+}
+
+/* Hero image */
+.bentoImgWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.bentoDraftImgWrap {
+    background: var(--surface-container-low);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bentoImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms var(--ease-out);
+}
+
+.bentoCard:hover .bentoImg {
+    transform: scale(1.05);
+}
+
+.bentoImgPlaceholder {
+    width: 100%;
+    height: 100%;
+    background: var(--surface-container-low);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Clan badge on image */
+.bentoClanBadge {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 6px;
+}
+
+/* Body */
+.bentoBody {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.bentoTitleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.textClampWrap {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+}
+
+.bentoTitle {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.bentoSubtitle {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+
+.bentoPrice {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.bentoPriceUnit {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--on-surface-muted);
+    opacity: 0.6;
+    letter-spacing: -0.01em;
+}
+
+/* Progress bar */
+.bentoProgress {
+    margin-bottom: var(--space-5);
+}
+
+.bentoProgressHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--on-surface-variant);
+}
+
+.bentoProgressTrack {
+    width: 100%;
+    height: 8px;
+    background: var(--surface-container-high);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.bentoProgressFill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary, #855300) 0%, var(--primary) 100%);
+    border-radius: 999px;
+    transition: width 500ms var(--ease-out);
+}
+
+/* Host row */
+.bentoHostRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(188, 202, 192, 0.15);
+    margin-top: auto;
+}
+
+.bentoHostInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.bentoHostAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bentoHostAvatarPh {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface-container-high);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--on-surface-variant);
+}
+
+.bentoHostLabel {
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-surface-variant);
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.bentoHostName {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--on-surface);
+    line-height: 1;
+}
+
+.bentoDetailsBtn {
+    padding: var(--space-2) var(--space-5);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 105, 72, 0.2);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.bentoDetailsBtn:hover {
+    box-shadow: 0 8px 20px rgba(0, 105, 72, 0.3);
+    transform: scale(0.97);
+}
+
+/* ============================================================
+   Hosting-Specific Styles
+   ============================================================ */
+
+.hostBadgeDraft {
+    background: var(--surface-variant, #e1e3e4);
+    color: var(--on-surface-variant);
+}
+
+.hostBadgeCompleted {
+    background: rgba(0, 62, 40, 0.9);
+    color: white;
+}
+
+.hostDraftNotice {
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--on-surface-variant);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-style: italic;
+}
+
+.hostDraftReady {
+    background: rgba(5, 150, 105, 0.05);
+    color: var(--primary);
+    font-style: normal;
+    font-weight: 500;
+    border: 1px solid rgba(0, 105, 72, 0.1);
+}
+
+.hostEditDraftBtn {
+    width: 100%;
+    padding: var(--space-3);
+    margin-top: auto;
+    border: 2px solid var(--primary);
+    background: none;
+    color: var(--primary);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.hostEditDraftBtn:hover {
+    background: rgba(5, 150, 105, 0.05);
+}
+
+.hostProgressCompleted {
+    background: var(--primary);
+}
+
+.hostManageMuted {
+    background: var(--surface-container);
+    color: var(--on-surface);
+    box-shadow: none;
+}
+
+.hostViewBtn {
+    width: 100%;
+    padding: var(--space-3);
+    background: var(--surface-container-low);
+    color: var(--on-surface-variant);
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+/* Avatar stack for hosting cards */
+.hostAvatarStack {
+    display: flex;
+    align-items: center;
+}
+
+.hostStackAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--surface-container-lowest);
+    margin-left: -8px;
+}
+
+.hostStackAvatar:first-child {
+    margin-left: 0;
+}
+
+.hostJoinedCount {
+    margin-left: var(--space-3);
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+}
+
+/* ============================================================
+   Finding Your People Section
+   ============================================================ */
+
+.fyp {
+    margin-top: var(--space-16);
+    padding-top: var(--space-10);
+    border-top: 1px solid rgba(188, 202, 192, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 300ms;
+}
+
+@media (min-width: 768px) {
+    .fyp {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.fypText {
+    flex: 1;
+}
+
+.fypTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: var(--space-3);
+}
+
+.fypDesc {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+    margin-bottom: var(--space-5);
+}
+
+.fypBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    background: var(--secondary, #855300);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(133, 83, 0, 0.2);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.fypBtn:hover {
+    box-shadow: 0 10px 28px rgba(133, 83, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.fypQuote {
+    flex: 1;
+    max-width: 400px;
+    aspect-ratio: 1;
+    background: var(--surface-container);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    padding: var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fypQuoteInner {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    text-align: center;
+}
+
+.fypQuoteText {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: rgba(0, 62, 40, 0.6);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* ============================================================
+   Extended FAB
+   ============================================================ */
+
+.fabExtended {
+    position: fixed;
+    bottom: 6rem;
+    right: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-6);
+    background: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.12);
+    z-index: 40;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.fabExtended:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 16px 40px rgba(0, 105, 72, 0.2);
+    transform: scale(0.97);
+}
+
+.fabLabel {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .fabLabel {
+        display: inline;
+    }
+}
+
+/* ============================================================
+   My Pitches Bottom Nav — 3-Tab
+   ============================================================ */
+
+.myPitchesBottomNav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom)) var(--space-4);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(5, 150, 105, 0.1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem 1rem 0 0;
+    z-index: 50;
+}
+
+.bnTab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: var(--space-2) var(--space-4);
+    border: none;
+    background: none;
+    color: rgba(5, 150, 105, 0.4);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    border-radius: 1rem;
+}
+
+.bnTab:hover {
+    color: var(--primary);
+}
+
+.bnTabActive {
+    color: var(--primary);
+    background: rgba(5, 150, 105, 0.08);
+}
+
+.bnLabel {
+    font-family: var(--font-display);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}

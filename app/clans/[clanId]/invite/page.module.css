@@ -1,0 +1,466 @@
+.page {
+    padding-top: calc(var(--nav-height) + var(--space-6));
+    padding-bottom: calc(var(--bottom-nav-height) + var(--space-8));
+    min-height: 100vh;
+    background-color: var(--surface);
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+/* ── Success Banner ── */
+.successBanner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: var(--space-10);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+
+.checkIcon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-5);
+    animation: scaleIn var(--duration-slow) var(--ease-out) both;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: var(--space-2);
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+    line-height: 1.5;
+    max-width: 340px;
+}
+
+/* ── Card Headers ── */
+.card {
+    margin-bottom: var(--space-4);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 150ms;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+}
+
+.cardLabel {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: var(--on-surface-muted);
+}
+
+/* ── Link Row ── */
+.linkRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--surface-container-highest);
+    border-radius: var(--radius-md);
+}
+
+.linkText {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface);
+    word-break: break-all;
+}
+
+.copyBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--primary);
+    color: var(--on-primary);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    white-space: nowrap;
+}
+
+.copyBtn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ── Share Grid ── */
+.shareGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 250ms;
+}
+
+@media (max-width: 500px) {
+    .shareGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.shareCard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.shareButtons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.whatsappBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--primary);
+    color: var(--on-primary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.whatsappBtn:hover {
+    background-color: var(--primary-hover);
+}
+
+.secondaryShareRow {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.smsBtn,
+.moreBtn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    padding: var(--space-3);
+    background-color: var(--surface-container-highest);
+    color: var(--on-surface-variant);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.smsBtn:hover,
+.moreBtn:hover {
+    background-color: var(--surface-container-low);
+}
+
+/* ── QR ── */
+.qrCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.qrPlaceholder {
+    padding: var(--space-4);
+    background: white;
+    border-radius: var(--radius-md);
+}
+
+.qrLabel {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--on-surface-muted);
+}
+
+/* ── Pending ── */
+.pendingSection {
+    margin-bottom: var(--space-8);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 350ms;
+}
+
+.pendingHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+}
+
+.pendingTitle {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.pendingEmpty {
+    padding: var(--space-8) var(--space-6);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--outline-variant);
+}
+
+.pendingEmptyIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--surface-container-highest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pendingEmptyTitle {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.pendingEmptyText {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--on-surface-muted);
+    max-width: 320px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* ── CTAs ── */
+.ctaSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+    animation-delay: 450ms;
+}
+
+.secondaryCta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    color: var(--primary);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    box-shadow: inset 0 0 0 1.5px var(--outline-variant);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.secondaryCta:hover {
+    background-color: var(--primary-light);
+    box-shadow: inset 0 0 0 1.5px rgba(0, 105, 72, 0.25);
+}
+
+/* ── Request List ── */
+.requestList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.requestCard {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-fast) var(--ease-out);
+    animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+
+.requestCard:hover {
+    background-color: var(--surface-container);
+}
+
+.requestAvatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+}
+
+.requestInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.requestName {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.requestMeta {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.requestTime {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--on-surface-muted);
+}
+
+.requestActions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+}
+
+.approveBtn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-4);
+    background-color: var(--primary);
+    color: var(--on-primary);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    white-space: nowrap;
+}
+
+.approveBtn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 105, 72, 0.2);
+}
+
+.rejectBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1.5px solid var(--outline-variant);
+    border-radius: 50%;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.rejectBtn:hover {
+    background-color: #fef2f2;
+    border-color: #f87171;
+    color: #ef4444;
+}
+
+/* ── Toast ── */
+.toast {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + var(--space-6));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    animation: toastIn 0.3s var(--ease-out) both;
+    white-space: nowrap;
+}
+
+.toastSuccess {
+    background-color: var(--primary);
+    color: white;
+}
+
+.toastReject {
+    background-color: var(--on-surface);
+    color: var(--surface);
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}

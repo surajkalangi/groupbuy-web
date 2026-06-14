@@ -1,0 +1,94 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    position: relative;
+}
+
+.label {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--on-surface);
+}
+
+.required {
+    color: var(--error);
+    margin-left: 2px;
+}
+
+.inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    position: absolute;
+    left: var(--space-4);
+    color: var(--on-surface-variant);
+    font-size: 1.125rem;
+    pointer-events: none;
+    display: flex;
+}
+
+.input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--surface-container-highest);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.input::placeholder {
+    color: var(--on-surface-muted);
+}
+
+.input:focus {
+    background-color: var(--surface-container-lowest);
+    box-shadow: inset 0 0 0 1.5px rgba(0, 105, 72, 0.2);
+}
+
+.hasIcon {
+    padding-left: calc(var(--space-4) + 1.5rem + var(--space-2));
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ── Error State ── */
+.hasError .input {
+    box-shadow: inset 0 0 0 1.5px rgba(211, 47, 47, 0.3);
+}
+
+.hasError .input:focus {
+    box-shadow: inset 0 0 0 1.5px rgba(211, 47, 47, 0.5);
+}
+
+.helper {
+    font-size: 0.75rem;
+    color: var(--on-surface-muted);
+}
+
+.errorText {
+    color: var(--error);
+}
+
+.counter {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 0.6875rem;
+    color: var(--on-surface-muted);
+}

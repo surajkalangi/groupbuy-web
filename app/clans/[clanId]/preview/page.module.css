@@ -1,0 +1,683 @@
+/* ============================================================
+   Screen 6: Join Clan (Invite Link Preview)
+   Public-facing landing page — "Editorial Hyperlocalism"
+   ============================================================ */
+
+.page {
+    min-height: 100vh;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Not Found ── */
+.notFound {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--space-8);
+    text-align: center;
+}
+
+.notFound h1 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.backBtn {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-6);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.headerLink {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+.headerLink:hover {
+    color: var(--primary);
+}
+
+.loginBtn {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--on-primary);
+    background: var(--gradient-primary);
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.loginBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ── Hero ── */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    padding: var(--space-10) var(--space-6) var(--space-12);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+        padding: var(--space-16) var(--space-6) var(--space-20);
+    }
+}
+
+.heroContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.verifiedBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+.clanName {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: var(--on-surface);
+    line-height: 1.15;
+}
+
+.clanLocation {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+}
+
+.clanDesc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--on-surface-variant);
+    max-width: 520px;
+}
+
+.heroActions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5);
+    margin-top: var(--space-2);
+}
+
+.joinBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-primary);
+    background: var(--gradient-primary);
+    padding: 12px 28px;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.joinBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.requestSent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 12px 20px;
+    border-radius: var(--radius-full);
+}
+
+.avatarStack {
+    display: flex;
+    align-items: center;
+}
+
+.stackAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -8px;
+    border: 2px solid var(--surface);
+    position: relative;
+}
+
+.stackAvatar:first-child {
+    margin-left: 0;
+}
+
+.avatarLetter {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.memberCount {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--on-surface-muted);
+    margin-left: var(--space-2);
+}
+
+.heroImage {
+    display: flex;
+    justify-content: center;
+}
+
+.coverImg {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: var(--radius-xl);
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    box-shadow: var(--shadow-lg);
+}
+
+/* ── How It Works ── */
+.howSection {
+    background: var(--surface-container-low);
+    padding: var(--space-12) var(--space-6);
+}
+
+.sectionTitle {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.howGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-5);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.howCard {
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: center;
+    box-shadow: var(--shadow-xs);
+    transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.howCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.howIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-3);
+    color: var(--primary);
+}
+
+.howTitle {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: var(--space-2);
+}
+
+.howDesc {
+    font-size: 0.8125rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+}
+
+/* ── Active Pitches Section ── */
+.pitchesSection {
+    padding: var(--space-12) var(--space-6);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+}
+
+.pitchesHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-6);
+}
+
+.sectionTitleDark {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.pitchesSubtitle {
+    font-size: 0.8125rem;
+    color: var(--on-surface-muted);
+    margin-top: 2px;
+}
+
+.seeAllLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.seeAllLink:hover {
+    text-decoration: underline;
+}
+
+/* ── Pitch Cards ── */
+.pitchGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-5);
+}
+
+.pitchCard {
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.pitchCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.pitchImageWrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--surface-container-high);
+}
+
+.pitchImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pitchImagePlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--on-surface-muted);
+}
+
+.categoryBadge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    background: rgba(25, 28, 29, 0.72);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+}
+
+.saveBadge {
+    position: absolute;
+    bottom: var(--space-3);
+    right: var(--space-3);
+    background: var(--secondary);
+    color: var(--on-secondary);
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+}
+
+.pitchContent {
+    padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+.pitchTitle {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: var(--space-1);
+}
+
+.pitchDesc {
+    font-size: 0.8125rem;
+    color: var(--on-surface-variant);
+    line-height: 1.5;
+    margin-bottom: var(--space-3);
+}
+
+.trustMeter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-1);
+}
+
+.trustLabel {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--on-surface-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.trustPercent {
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.spotsText {
+    font-size: 0.75rem;
+    color: var(--on-surface-muted);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.viewDetailsBtn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: transparent;
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.viewDetailsBtn:hover {
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+/* ── Members Only Locked Card ── */
+.lockedCard {
+    background: var(--surface-container-high);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: 300px;
+    position: relative;
+}
+
+.lockedOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    background: rgba(248, 249, 250, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: var(--space-6);
+    text-align: center;
+    color: var(--on-surface-variant);
+}
+
+.lockedBadge {
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--secondary);
+    background: var(--secondary-container);
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
+}
+
+.lockedText {
+    font-size: 0.8125rem;
+    color: var(--on-surface-muted);
+    max-width: 240px;
+}
+
+.unlockBtn {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: transparent;
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius-full);
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.unlockBtn:hover {
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+.lockedCount {
+    font-size: 0.6875rem;
+    color: var(--on-surface-muted);
+    margin-top: var(--space-1);
+}
+
+/* ── Empty State ── */
+.emptyPitches {
+    text-align: center;
+    padding: var(--space-12);
+    color: var(--on-surface-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.emptyPitches p {
+    font-size: 0.875rem;
+}
+
+/* ── Bottom CTA Banner ── */
+.ctaBanner {
+    background: var(--gradient-primary);
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+    color: #fff;
+}
+
+.ctaTitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+}
+
+.ctaSub {
+    font-size: 0.875rem;
+    opacity: 0.85;
+    max-width: 480px;
+    margin: 0 auto var(--space-6);
+}
+
+.ctaActions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.ctaPrimary {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: #fff;
+    padding: 12px 28px;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.ctaPrimary:hover {
+    transform: translateY(-2px);
+}
+
+.ctaSecondary {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.12);
+    padding: 12px 28px;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.ctaSecondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.requestSentBanner {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px 28px;
+    border-radius: var(--radius-full);
+}
+
+/* ── Footer ── */
+.footer {
+    padding: var(--space-8) var(--space-6);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    background: var(--surface-container-low);
+}
+
+.footerBrand {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.footerTagline {
+    font-size: 0.75rem;
+    color: var(--on-surface-muted);
+    flex: 1;
+    min-width: 200px;
+}
+
+.footerLinks {
+    display: flex;
+    gap: var(--space-5);
+}
+
+.footerLinks a {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+    text-decoration: none;
+}
+
+.footerLinks a:hover {
+    color: var(--primary);
+}

@@ -1,0 +1,372 @@
+/* ============================================================
+   Join Pitch Modal — "Confirm Participation"
+   Matches design from join_pitch - quantity_and_note
+   ============================================================ */
+
+/* ── Backdrop ── */
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* ── Dialog Shell ── */
+.modal {
+    border: none;
+    border-radius: var(--radius-xl);
+    padding: 0;
+    max-width: 460px;
+    width: calc(100% - 2rem);
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+    background: var(--surface-container-lowest);
+    animation: modalSlideUp 0.35s var(--ease-out) both;
+    margin: auto;
+}
+
+.modal[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ── Inner Content ── */
+.modalContent {
+    padding: var(--space-6) var(--space-6) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+/* ── Header ── */
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.modalHeaderText {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.modalEyebrow {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--secondary);
+}
+
+.modalTitle {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    line-height: 1.2;
+}
+
+.closeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--on-surface-variant);
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    flex-shrink: 0;
+}
+
+.closeBtn:hover {
+    background: var(--surface-container-high);
+}
+
+/* ── Quantity Section ── */
+.qtySection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.qtyHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.qtyLabel {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.qtyLimit {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--on-surface-muted);
+}
+
+/* ── Stepper ── */
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    border-radius: var(--radius-full);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-container-low);
+}
+
+.stepperBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--surface-container-lowest);
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.stepperBtn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.stepperBtn:active {
+    transform: scale(0.95);
+}
+
+.stepperBtn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.stepperValue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+}
+
+.stepperNum {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    line-height: 1;
+}
+
+.stepperUnit {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--on-surface-muted);
+}
+
+/* ── Price Summary Card ── */
+.priceSummary {
+    background: var(--primary-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.priceRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priceLabel {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+}
+
+.priceValue {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface);
+}
+
+.totalLabel {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.totalValue {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.priceBreakdown {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+}
+
+/* ── Note Section ── */
+.noteSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.noteLabel {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.noteLabelOptional {
+    font-weight: 400;
+    color: var(--on-surface-muted);
+}
+
+.noteInput {
+    width: 100%;
+    resize: none;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface);
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    min-height: 80px;
+    transition: border-color 0.15s ease;
+}
+
+.noteInput::placeholder {
+    color: var(--on-surface-muted);
+}
+
+.noteInput:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* ── Escrow Trust Line ── */
+.trustLine {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    line-height: 1.5;
+}
+
+.trustIcon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.escrowLink {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* ── Policy Consent ── */
+.policyConsent {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--on-surface-muted);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* ── Footer Actions ── */
+.modalFooter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 0 var(--space-6) var(--space-6);
+}
+
+.confirmBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-4);
+    background: var(--gradient-primary);
+    color: var(--on-primary);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.confirmBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.confirmBtn:active {
+    transform: translateY(0);
+}
+
+.cancelBtn {
+    width: 100%;
+    padding: var(--space-3);
+    background: transparent;
+    color: var(--on-surface);
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.15s ease;
+}
+
+.cancelBtn:hover {
+    color: var(--on-surface-variant);
+}

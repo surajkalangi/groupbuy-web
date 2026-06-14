@@ -1,0 +1,360 @@
+.page {
+    padding-top: var(--nav-height);
+    padding-bottom: var(--space-10);
+    min-height: 100vh;
+    background-color: var(--surface);
+}
+
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+/* ── Product Banner ── */
+.productBanner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    background-color: var(--surface-container);
+}
+
+.bannerImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bannerPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bannerOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-6);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+    color: white;
+}
+
+.bannerEyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-1);
+    opacity: 0.85;
+}
+
+.bannerTitle {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+/* ── Qty Section ── */
+.qtyRow {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 var(--space-6);
+}
+
+.qtyLabel {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-2);
+}
+
+.unitPrice {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.unitPriceAmt {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--on-surface);
+}
+
+.unitPriceUnit {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+}
+
+.qtyRight {
+    text-align: right;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.stepperBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid var(--outline-variant);
+    background: none;
+    color: var(--on-surface);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.stepperBtnActive {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.stepperVal {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    min-width: 24px;
+    text-align: center;
+}
+
+/* ── Summary Card ── */
+.summaryCard {
+    margin: 0 var(--space-6);
+    padding: var(--space-6);
+    background-color: var(--surface-container-lowest);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summaryKey {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+}
+
+.summaryVal {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface);
+}
+
+.discountKey {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--primary);
+}
+
+.discountVal {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--outline-variant);
+    margin: var(--space-1) 0;
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.totalKey {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.totalRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.totalAmt {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--on-surface);
+}
+
+.saveChip {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+}
+
+/* ── Note ── */
+.noteSection {
+    padding: 0 var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.noteLabel {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--on-surface);
+}
+
+.noteInput {
+    width: 100%;
+    padding: var(--space-4);
+    background: none;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface);
+    outline: none;
+    resize: vertical;
+    box-sizing: border-box;
+    min-height: 80px;
+}
+
+.noteInput::placeholder {
+    color: var(--outline);
+}
+
+/* ── Policy Agreement ── */
+.policyAgreement {
+    margin: 0 var(--space-6);
+    padding: var(--space-5);
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(0, 105, 72, 0.08);
+}
+
+.policyAgreementHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.policyAgreementTitle {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.policyRulesList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.policyRule {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--on-surface-variant);
+    line-height: 1.4;
+}
+
+.policyConsent {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    font-style: italic;
+    padding-top: var(--space-3);
+    border-top: 1px solid rgba(0, 105, 72, 0.06);
+}
+
+/* ── CTA ── */
+.confirmBtn {
+    margin: 0 var(--space-6);
+    padding: var(--space-5);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    box-shadow: 0 8px 24px rgba(0, 105, 72, 0.3);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.confirmBtn:hover {
+    transform: translateY(-1px);
+}
+
+.cancelBtn {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    text-align: center;
+    padding: var(--space-2);
+}
+
+/* ── Trust Footer ── */
+.trustFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    padding-bottom: var(--space-4);
+}

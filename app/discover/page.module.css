@@ -1,0 +1,296 @@
+/* ============================================================
+   Screen 26: Discover / Explore Public Pitches
+   ============================================================ */
+
+.page {
+    min-height: 100vh;
+    background: var(--surface);
+    padding-top: calc(var(--nav-height) + var(--space-4));
+    padding-bottom: calc(var(--bottom-nav-height) + var(--space-8));
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+/* ── Hero Header ── */
+.heroHeader {
+    max-width: 56rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.heading {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--on-surface);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .heading {
+        font-size: 3rem;
+    }
+}
+
+.headingAccent {
+    color: var(--primary);
+}
+
+.subtext {
+    font-size: 1.125rem;
+    color: var(--on-surface-variant);
+    max-width: 36rem;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ── Search ── */
+.searchWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 1.25rem 1.5rem;
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-full);
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04);
+    width: 100%;
+    max-width: 48rem;
+    transition: all 0.2s ease;
+}
+
+.searchBar:focus-within {
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04), 0 0 0 2px rgba(0, 105, 72, 0.15);
+}
+
+.searchInput {
+    flex: 1;
+    font-size: 1rem;
+    color: var(--on-surface);
+    background: transparent;
+}
+
+.searchInput::placeholder {
+    color: rgba(109, 122, 114, 0.6);
+}
+
+/* ── Categories ── */
+.categories {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-5);
+    justify-content: center;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+.categoryChip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.categoryChip:hover {
+    background: var(--surface-container-high);
+}
+
+.categoryActive {
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+}
+
+.categoryActive:hover {
+    background: var(--secondary-container);
+}
+
+/* ── Sort ── */
+.sortRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-5);
+}
+
+.resultCount {
+    font-size: 0.75rem;
+    color: var(--on-surface-muted);
+    font-weight: 500;
+}
+
+.sortTabs {
+    display: flex;
+    gap: var(--space-1);
+}
+
+.sortTab {
+    padding: 4px 12px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--on-surface-muted);
+    cursor: pointer;
+    border-radius: var(--radius-full);
+    transition: all var(--duration-fast);
+}
+
+.sortTab:hover {
+    color: var(--on-surface);
+    background: var(--surface-container-low);
+}
+
+.sortActive {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+.sortActive:hover {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+/* ── Nearby Clans Carousel ── */
+.clansCarousel {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+}
+
+.carouselTitle {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: var(--space-3);
+}
+
+.clanCards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.clanMiniCard {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast);
+}
+
+.clanMiniCard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.clanMiniIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.clanMiniName {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--on-surface);
+}
+
+.clanMiniMeta {
+    font-size: 0.6875rem;
+    color: var(--on-surface-muted);
+}
+
+/* ── Pitch Grid ── */
+.pitchGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-5);
+}
+
+/* ── Empty State ── */
+.emptyState {
+    text-align: center;
+    padding: var(--space-16) var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.emptyTitle {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.emptyText {
+    font-size: 0.875rem;
+    color: var(--on-surface-muted);
+}
+
+/* ── FAB ── */
+.fab {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + var(--space-6));
+    right: var(--space-6);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--on-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    text-decoration: none;
+    z-index: 50;
+    transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal);
+}
+
+.fab:hover {
+    transform: scale(1.08);
+    box-shadow: var(--shadow-xl);
+}
+
+@media (min-width: 768px) {
+    .fab {
+        bottom: var(--space-8);
+        right: var(--space-8);
+    }
+}

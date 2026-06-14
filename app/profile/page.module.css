@@ -1,0 +1,477 @@
+.page {
+    min-height: 100vh;
+    background: var(--surface);
+}
+
+.main {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: calc(var(--nav-height) + 2rem) 1.5rem calc(var(--bottom-nav-height) + 4rem);
+}
+
+/* --- Profile Header --- */
+.profileHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    .profileHeader {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+}
+
+.profileLeft {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.avatarWrap {
+    position: relative;
+}
+
+.avatarCircle {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-container));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 105, 72, 0.25);
+    border: 4px solid var(--surface-container-lowest);
+}
+
+.avatarLetter {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+}
+
+.verifiedDot {
+    position: absolute;
+    bottom: -0.25rem;
+    right: -0.25rem;
+    background: var(--secondary-container);
+    border-radius: 50%;
+    padding: 0.375rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileName {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+}
+
+.profileLocation {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.editBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 105, 72, 0.2);
+    white-space: nowrap;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.editBtn:hover {
+    box-shadow: 0 8px 24px rgba(0, 105, 72, 0.3);
+}
+
+.editBtn:active {
+    transform: scale(0.97);
+}
+
+/* --- Stats Grid --- */
+.statsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+    .statsGrid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* Reputation Card */
+.reputationCard {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    border-radius: 2rem;
+    padding: 1.5rem;
+    color: white;
+    box-shadow: 0 16px 48px rgba(0, 105, 72, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.repoDeco {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    width: 8rem;
+    height: 8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    filter: blur(30px);
+}
+
+.repoContent {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.repoEyebrow {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(133, 248, 196, 0.8);
+}
+
+.repoHeading {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+}
+
+.repoSub {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.25rem;
+}
+
+.trustMeterWrap {
+    display: block;
+}
+
+.trustMeterLabels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+}
+
+.trustMeterTrack {
+    height: 0.75rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.trustMeterFill {
+    height: 100%;
+    background: var(--secondary-container);
+    border-radius: 999px;
+    box-shadow: 0 0 12px rgba(254, 166, 25, 0.6);
+}
+
+/* Quick Stats */
+.quickStats {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.statCard {
+    background: var(--surface-container-lowest);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(25, 28, 29, 0.04);
+}
+
+.statNum {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.statLabel {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-surface-variant);
+    margin-top: 0.25rem;
+}
+
+/* --- Bottom grid --- */
+.bottomGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .bottomGrid {
+        grid-template-columns: 2fr 3fr;
+    }
+}
+
+.sectionTitle {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding: 0 0.25rem;
+}
+
+/* My Clans */
+.clansCol {
+    display: block;
+}
+
+.clanList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.clanItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--surface-container-low);
+    border-radius: 1rem;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.clanItem:hover {
+    background: var(--surface-container-lowest);
+}
+
+.clanLeft {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.clanIconBox {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconBg_secondary {
+    background: var(--secondary-fixed);
+    color: var(--on-secondary-fixed);
+}
+
+.iconBg_primary {
+    background: var(--primary-fixed);
+    color: var(--on-primary-fixed);
+}
+
+.clanName {
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--on-surface);
+    font-size: 0.9375rem;
+}
+
+.clanRole {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    font-weight: 500;
+}
+
+.joinClanBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem;
+    border: 2px dashed var(--outline-variant);
+    border-radius: 1rem;
+    background: none;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.joinClanBtn:hover {
+    background: var(--surface-container-lowest);
+}
+
+/* Preferences */
+.prefsCol {
+    display: block;
+}
+
+.prefsList {
+    background: var(--surface-container-lowest);
+    border-radius: 1.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 2px 8px rgba(25, 28, 29, 0.04);
+    margin-bottom: 1rem;
+}
+
+.prefRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.prefBorder {
+    border-bottom: 1px solid rgba(237, 238, 239, 0.5);
+}
+
+.prefLeft {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.prefIconWrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.prefLabel {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.prefSub {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+}
+
+/* Toggle */
+.toggle {
+    position: relative;
+    width: 2.75rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.toggleOn {
+    background: var(--primary);
+}
+
+.toggleOff {
+    background: var(--surface-container-high);
+}
+
+.toggleThumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+
+.thumbOn {
+    transform: translateX(1.25rem);
+}
+
+/* Sign out */
+.signOutBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--error);
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.signOutBtn:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Version */
+.version {
+    text-align: center;
+    margin-top: 1rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    opacity: 0.4;
+}

@@ -1,0 +1,80 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 100%;
+}
+
+.labelRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+}
+
+.percentage {
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.track {
+    width: 100%;
+    background-color: var(--surface-container-high);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+/* ── Sizes ── */
+.sm {
+    height: 4px;
+}
+
+.md {
+    height: 8px;
+}
+
+.lg {
+    height: 12px;
+}
+
+/* ── Fill ── */
+.fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.6s var(--ease-out);
+}
+
+.animated {
+    animation: progressGrow 0.8s var(--ease-out) both;
+}
+
+/* ── Variants ── */
+.primary {
+    background: var(--gradient-primary);
+}
+
+.funding {
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+}
+
+.reputation {
+    background: var(--gradient-reputation);
+}
+
+.success {
+    background-color: var(--success);
+}
+
+.warning {
+    background-color: var(--warning);
+}

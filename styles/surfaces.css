@@ -1,0 +1,80 @@
+/* ============================================================
+   Surface System & Glassmorphism
+   "No-Line Rule" — boundaries via background shifts only
+   ============================================================ */
+
+/* ── Surface Layers ── */
+.surface-base {
+    background-color: var(--surface);
+}
+
+.surface-low {
+    background-color: var(--surface-container-low);
+}
+
+.surface-container {
+    background-color: var(--surface-container);
+}
+
+.surface-high {
+    background-color: var(--surface-container-high);
+}
+
+.surface-highest {
+    background-color: var(--surface-container-highest);
+}
+
+.surface-card {
+    background-color: var(--surface-container-lowest);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.surface-card-elevated {
+    background-color: var(--surface-container-lowest);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+/* ── Glassmorphism ── */
+.glass {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.glass-solid {
+    background: var(--glass-bg-dark);
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+/* ── Ghost Border (15% opacity — only when absolutely needed) ── */
+.ghost-border {
+    box-shadow: inset 0 0 0 1px var(--outline-variant);
+}
+
+/* ── Ambient Shadow Levels ── */
+.elevation-0 {
+    box-shadow: none;
+}
+
+.elevation-1 {
+    box-shadow: var(--shadow-xs);
+}
+
+.elevation-2 {
+    box-shadow: var(--shadow-sm);
+}
+
+.elevation-3 {
+    box-shadow: var(--shadow-md);
+}
+
+.elevation-4 {
+    box-shadow: var(--shadow-lg);
+}
+
+.elevation-5 {
+    box-shadow: var(--shadow-xl);
+}

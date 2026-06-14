@@ -1,0 +1,270 @@
+.page {
+    padding-top: var(--nav-height);
+    padding-bottom: var(--space-12);
+    min-height: 100vh;
+    background-color: var(--surface);
+}
+
+.container {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+/* ── Success Icon ── */
+.successIcon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-6);
+    box-shadow: 0 12px 32px rgba(0, 105, 72, 0.3);
+    animation: scaleIn 0.5s var(--ease-out) both;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.headerText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1); /* Very tight gap */
+}
+
+.heading {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    text-align: center;
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.subtext {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+    text-align: center;
+    line-height: 1.5;
+    max-width: 100%;
+    white-space: nowrap;
+}
+
+/* ── Summary Card ── */
+.summaryCard {
+    width: 100%;
+    background-color: var(--surface-container-lowest);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.productRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+}
+
+.productInfo {
+    flex: 1;
+}
+
+.productLabel {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-surface-muted);
+    margin-bottom: var(--space-2);
+}
+
+.productName {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.productThumb {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.metaGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+}
+
+.metaItem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.metaLabel {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-surface-muted);
+}
+
+.metaVal {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface);
+}
+
+.metaValBold {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+}
+
+.blockedChip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--primary);
+    background-color: var(--primary-fixed);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-lg);
+}
+
+/* ── What happens next ── */
+.nextSection {
+    width: 100%;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.nextHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.nextTitle {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.nextBody {
+    padding: var(--space-4);
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-xl);
+}
+
+.nextText {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--on-surface-variant);
+}
+
+/* ── Share Button ── */
+.shareBtn {
+    width: 100%;
+    padding: var(--space-4);
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    box-shadow: 0 8px 24px rgba(0, 105, 72, 0.3);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.shareBtn:hover {
+    transform: translateY(-1px);
+}
+
+/* ── Action Group ── */
+.actionGroup {
+    width: 100%;
+    display: flex;
+    gap: var(--space-4);
+}
+
+.secondaryBtn {
+    flex: 1;
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    margin-bottom: var(--space-6);
+}
+
+.secondaryBtn:hover {
+    background-color: var(--surface-container-low);
+    border-color: var(--primary);
+}
+
+.homeBtn {
+    flex: 1;
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    margin-bottom: var(--space-6);
+}
+
+.homeBtn:hover {
+    background-color: var(--surface-container-low);
+    border-color: var(--outline);
+}

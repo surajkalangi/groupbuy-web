@@ -1,0 +1,566 @@
+/* ============================================================
+   Browse Nearby Clans — matches browse_nearby_clans design
+   ============================================================ */
+
+.page {
+    padding-top: calc(var(--nav-height) + var(--space-4));
+    padding-bottom: calc(var(--bottom-nav-height) + var(--space-16));
+    min-height: 100vh;
+    background-color: var(--surface);
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ── View Toggle ── */
+
+.viewToggle {
+    display: flex;
+    padding: 4px;
+    background: var(--surface-container-low);
+    border-radius: 9999px;
+}
+
+.toggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggleBtn:hover {
+    background: var(--surface-container-high);
+}
+
+.toggleActive {
+    background: var(--surface-container-lowest);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    color: var(--primary);
+}
+
+.toggleActive:hover {
+    background: var(--surface-container-lowest);
+}
+
+/* ── Section Headers ── */
+.sectionHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .sectionHeader {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.sectionTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--on-surface);
+}
+
+.sectionSubtitle {
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    margin-top: 0.25rem;
+}
+
+.viewAllBtn {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.viewAllBtn:hover {
+    text-decoration: underline;
+}
+
+/* ── Social Circle Section ── */
+.socialSection {
+    margin-bottom: 3rem;
+}
+
+.bentoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .bentoGrid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* Featured Card */
+.featuredCard {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2.5rem;
+    background: var(--surface-container-lowest);
+    padding: 2rem;
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04);
+    transition: box-shadow 0.5s ease;
+}
+
+.featuredCard:hover {
+    box-shadow: 0 20px 48px rgba(25, 28, 29, 0.1);
+}
+
+.featuredInner {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    height: 100%;
+}
+
+.featuredTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.verifiedBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: rgba(254, 166, 25, 0.1);
+    color: #684000;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+}
+
+.featuredName {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #022c22;
+}
+
+.featuredLocation {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+}
+
+.featuredIconBox {
+    background: rgba(0, 105, 72, 0.05);
+    padding: 1rem;
+    border-radius: 1.5rem;
+    flex-shrink: 0;
+}
+
+.featuredBottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.avatarRow {
+    display: flex;
+    align-items: center;
+}
+
+.stackAvatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #006948, #00855d);
+    border: 4px solid var(--surface-container-lowest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    margin-left: -0.75rem;
+}
+
+.stackAvatar:first-child {
+    margin-left: 0;
+}
+
+.stackMore {
+    background: #68dba9;
+    color: #002114;
+    font-size: 0.6875rem;
+    font-weight: 700;
+}
+
+.friendText {
+    margin-left: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.viewDetailsBtn {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #006948, #00855d);
+    color: white;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(0, 105, 72, 0.2);
+    transition: all 0.2s ease;
+}
+
+.viewDetailsBtn:hover {
+    box-shadow: 0 12px 32px rgba(0, 105, 72, 0.3);
+    transform: scale(0.98);
+}
+
+.featuredDeco {
+    position: absolute;
+    right: -3rem;
+    bottom: -3rem;
+    width: 16rem;
+    height: 16rem;
+    background: rgba(0, 105, 72, 0.05);
+    border-radius: 50%;
+    filter: blur(48px);
+    pointer-events: none;
+}
+
+/* Secondary Card */
+.secondaryCard {
+    border-radius: 2.5rem;
+    background: var(--surface-container-lowest);
+    padding: 2rem;
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.5s ease;
+}
+
+.secondaryCard:hover {
+    box-shadow: 0 20px 48px rgba(25, 28, 29, 0.1);
+}
+
+.nearbyBadge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--surface-container-high);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--on-surface-variant);
+    margin-bottom: 1rem;
+}
+
+.secondaryName {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #064e3b;
+    line-height: 1.3;
+}
+
+.secondaryLocation {
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    margin-top: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.memberRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.memberCount {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.contactText {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    line-height: 1.5;
+}
+
+.joinClanOutlineBtn {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 2rem;
+    border: 1px solid rgba(188, 202, 192, 0.3);
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.joinClanOutlineBtn:hover {
+    background: rgba(0, 105, 72, 0.05);
+}
+
+/* ── Public Clans Section ── */
+.publicSection {
+    margin-bottom: 3rem;
+}
+
+.publicGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .publicGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .publicGrid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.publicCard {
+    background: var(--surface-container-lowest);
+    border-radius: 2rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(25, 28, 29, 0.04);
+    transition: all 0.3s ease;
+}
+
+.publicCard:hover {
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.1);
+    transform: translateY(-2px);
+}
+
+.publicCover {
+    height: 10rem;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coverBadge {
+    position: absolute;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+
+.coverBadgePremium {
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgba(25, 28, 29, 0.8);
+    backdrop-filter: blur(8px);
+    color: var(--surface);
+}
+
+.coverBadgeNew {
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--primary);
+    color: white;
+}
+
+.publicName {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #022c22;
+}
+
+.publicLocation {
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    margin-bottom: 1rem;
+}
+
+.publicStats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.publicStat {
+    display: flex;
+    flex-direction: column;
+}
+
+.statLabel {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+}
+
+.statValue {
+    font-weight: 700;
+    color: #064e3b;
+}
+
+.statDivider {
+    width: 1px;
+    height: 2rem;
+    background: rgba(188, 202, 192, 0.3);
+}
+
+.publicViewBtn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    text-align: center;
+    background-color: transparent;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    border-radius: 9999px;
+    border: 1px solid var(--primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.publicViewBtn:hover {
+    background-color: rgba(0, 105, 72, 0.05);
+}
+
+/* ── Map CTA Banner ── */
+.mapBanner {
+    margin-bottom: 5rem;
+    border-radius: 2.5rem;
+    background: #064e3b;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.mapBannerContent {
+    position: relative;
+    z-index: 10;
+    max-width: 28rem;
+}
+
+.mapBannerTitle {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.mapBannerText {
+    font-weight: 500;
+    color: rgba(133, 248, 196, 0.8);
+    margin-bottom: 2rem;
+}
+
+.mapBannerBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    background: #855300;
+    color: white;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mapBannerBtn:hover {
+    transform: scale(0.98);
+}
+
+/* ── FAB ── */
+.fab {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + var(--space-6));
+    right: var(--space-6);
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: #855300;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.2);
+    z-index: 40;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.fab:hover {
+    transform: scale(1.1);
+}
+
+.fab:active {
+    transform: scale(0.9);
+}
+
+@media (min-width: 768px) {
+    .fab {
+        bottom: var(--space-8);
+        right: var(--space-8);
+    }
+}

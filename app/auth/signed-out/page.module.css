@@ -1,0 +1,232 @@
+.page {
+    min-height: 100vh;
+    background-color: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.main {
+    width: 100%;
+    max-width: 32rem;
+}
+
+/* Logo */
+.logoWrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.logoText {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.6px;
+}
+
+/* Card */
+.card {
+    background-color: var(--surface-container-lowest);
+    border-radius: 2rem;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04);
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 2rem;
+    }
+}
+
+/* Decorative Elements */
+.decoTopRight {
+    position: absolute;
+    top: -3rem;
+    right: -3rem;
+    width: 8rem;
+    height: 8rem;
+    background-color: rgba(255, 185, 95, 0.3);
+    border-radius: 50%;
+    filter: blur(40px);
+}
+
+.decoBottomLeft {
+    position: absolute;
+    bottom: -3rem;
+    left: -3rem;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgba(133, 248, 196, 0.2);
+    border-radius: 50%;
+    filter: blur(40px);
+}
+
+/* Content Area */
+.contentArea {
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1.5rem;
+}
+
+.iconWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--surface-container-low);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.heading {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .heading {
+        font-size: 1.75rem;
+    }
+}
+
+.subtext {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+    line-height: 1.5;
+    max-width: 24rem;
+    margin: 0 auto;
+}
+
+.brandHighlight {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Image Area */
+.imageWrap {
+    width: 100%;
+    height: 12rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    background-color: var(--surface-container-high);
+    position: relative;
+    z-index: 10;
+}
+
+.editorialImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.primaryBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    color: var(--on-primary);
+    font-family: var(--font-display);
+    font-weight: 600;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    width: 100%;
+    max-width: 20rem;
+    box-shadow: 0 8px 16px rgba(0, 105, 72, 0.2);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primaryBtn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 105, 72, 0.3);
+}
+
+.primaryBtn:active {
+    transform: scale(0.95);
+}
+
+.secondaryBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--primary);
+    font-family: var(--font-body);
+    font-weight: 600;
+    padding: 0.5rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.secondaryBtn:hover {
+    color: var(--primary-container);
+}
+
+.secondaryBtn span {
+    transition: transform 0.2s;
+}
+
+.secondaryBtn:hover span {
+    transform: translateX(4px);
+}
+
+/* Footer */
+.footer {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.trustSignals {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    opacity: 0.6;
+}
+
+.trustItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.trustLabel {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.copyright {
+    margin-top: 2rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    opacity: 0.5;
+}
