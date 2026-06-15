@@ -23,8 +23,9 @@ export default function ClanDetail({ params }) {
         .filter((p) => p.clanId === clan.id && (p.status === 'active' || p.status === 'activated'))
         .map((p) => ({
             ...p,
-            hostName: 'Arjun R.',
-            hostRating: 4.8,
+            hostName: p.host?.name,
+            hostRating: p.host?.rating,
+            hostAvatar: p.host?.avatarUrl,
         }));
 
     const clanMembers = mockUsers;

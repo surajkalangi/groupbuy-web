@@ -35,8 +35,9 @@ export default function HomeFeed() {
     const pitchesWithClan = filteredPitches.map((p) => ({
         ...p,
         clanName: mockClans.find((c) => c.id === p.clanId)?.name,
-        hostName: 'Arjun R.',
-        hostRating: 4.8,
+        hostName: p.host?.name,
+        hostRating: p.host?.rating,
+        hostAvatar: p.host?.avatarUrl,
     }));
 
     return (
