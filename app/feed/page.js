@@ -27,9 +27,10 @@ export default function HomeFeed() {
         ...mockClans.map((c) => ({ id: c.id, label: c.name })),
     ];
 
+    const activePitches = mockPitches.filter((p) => p.status === 'active' || p.status === 'activated');
     const filteredPitches = activeFilter === 'all'
-        ? mockPitches
-        : mockPitches.filter((p) => p.clanId === activeFilter);
+        ? activePitches
+        : activePitches.filter((p) => p.clanId === activeFilter);
 
     const pitchesWithClan = filteredPitches.map((p) => ({
         ...p,

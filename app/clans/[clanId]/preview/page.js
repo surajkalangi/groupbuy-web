@@ -33,7 +33,7 @@ export default function ClanPreviewPage() {
     const isApprovalRequired = clan.privacy === 'approval_required';
 
     // Determine which pitches to show based on access rules
-    const clanPitches = mockPitches.filter(p => p.clanId === clan.id);
+    const clanPitches = mockPitches.filter(p => p.clanId === clan.id && (p.status === 'active' || p.status === 'activated'));
     const visiblePitches = clanPitches.filter(p => {
         if (isMemberOfClan) return true; // Members see everything
         if (p.visibility === 'public') return true; // Public pitches always visible

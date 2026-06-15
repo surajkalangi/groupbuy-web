@@ -35,7 +35,7 @@ function SearchContent() {
 
     // Data for search
     const publicPitches = mockPitches
-        .filter(p => p.visibility === 'public')
+        .filter(p => p.visibility === 'public' && (p.status === 'active' || p.status === 'activated'))
         .map(p => ({
             ...p,
             productName: p.title,
