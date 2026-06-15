@@ -7,6 +7,7 @@ import Navbar from '@/components/layout/Navbar';
 import BottomNav from '@/components/layout/BottomNav';
 import { mockUsers } from '@/data/users';
 import styles from '../page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function PublicProfilePage({ params }) {
     const resolvedParams = use(params);
@@ -16,6 +17,7 @@ export default function PublicProfilePage({ params }) {
     const user = mockUsers.find(u => u.id === resolvedParams.userId) || mockUsers[0];
 
     return (
+        <AuthGuard>
         <div className={styles.page}>
             <Navbar />
             <main className={styles.main}>
@@ -85,5 +87,6 @@ export default function PublicProfilePage({ params }) {
             </main>
             <BottomNav />
         </div>
+        </AuthGuard>
     );
 }

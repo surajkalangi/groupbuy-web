@@ -8,6 +8,7 @@ import { mockPitches } from '@/data/pitches';
 import { pluralizeUnit } from '@/utils/pluralize';
 import Navbar from '@/components/layout/Navbar';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 const UPI_APPS = [
     { id: 'gpay', name: 'Google Pay', icon: 'payments', color: '#4285F4' },
@@ -121,8 +122,10 @@ function PaymentContent({ pitchId }) {
 export default function PaymentPage({ params }) {
     const { pitchId } = use(params);
     return (
+        <AuthGuard>
         <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading payment details...</div>}>
             <PaymentContent pitchId={pitchId} />
         </Suspense>
+        </AuthGuard>
     );
 }

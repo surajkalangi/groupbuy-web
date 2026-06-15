@@ -4,9 +4,11 @@ import Link from 'next/link';
 import BottomNav from '@/components/layout/BottomNav';
 import Navbar from '@/components/layout/Navbar';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function DraftSavedPage() {
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <main className={styles.page}>
@@ -53,5 +55,6 @@ export default function DraftSavedPage() {
             </main>
             <BottomNav />
         </>
+        </AuthGuard>
     );
 }

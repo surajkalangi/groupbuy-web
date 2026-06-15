@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function EditProfilePage() {
     const router = useRouter();
@@ -34,6 +35,7 @@ export default function EditProfilePage() {
     ];
 
     return (
+        <AuthGuard>
         <main className={styles.page}>
             {/* Header */}
             <header className={styles.header}>
@@ -195,5 +197,6 @@ export default function EditProfilePage() {
                 </div>
             </div>
         </main>
+        </AuthGuard>
     );
 }

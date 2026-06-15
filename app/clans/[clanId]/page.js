@@ -12,6 +12,7 @@ import { mockClans } from '@/data/clans';
 import { mockPitches } from '@/data/pitches';
 import { mockUsers } from '@/data/users';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function ClanDetail({ params }) {
     const { clanId } = use(params);
@@ -43,6 +44,7 @@ export default function ClanDetail({ params }) {
     ];
 
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <main className={styles.page}>
@@ -227,5 +229,6 @@ export default function ClanDetail({ params }) {
             </main>
             <BottomNav />
         </>
+        </AuthGuard>
     );
 }

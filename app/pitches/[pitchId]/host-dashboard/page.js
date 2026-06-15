@@ -7,6 +7,7 @@ import { pluralizeUnit } from '@/utils/pluralize';
 import Navbar from '@/components/layout/Navbar';
 import BottomNav from '@/components/layout/BottomNav';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 const STEPS = ['Activated', 'Order Placed', 'Ready for Pickup', 'Completed'];
 
@@ -96,6 +97,7 @@ export default function HostDashboardPage({ params }) {
     };
 
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <div className={styles.page}>
@@ -326,5 +328,6 @@ export default function HostDashboardPage({ params }) {
             </div>
             <BottomNav />
         </>
+        </AuthGuard>
     );
 }

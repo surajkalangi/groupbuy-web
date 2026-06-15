@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { mockClans } from '@/data/clans';
 import ClanDetail from '../page';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function WelcomeToClanPage({ params }) {
     const { clanId } = use(params);
@@ -30,6 +31,7 @@ export default function WelcomeToClanPage({ params }) {
     const userName = 'Arpan';
 
     return (
+        <AuthGuard>
         <>
             {/* The background (Clan details) */}
             <ClanDetail params={params} />
@@ -103,5 +105,6 @@ export default function WelcomeToClanPage({ params }) {
                 </div>
             </div>
         </>
+        </AuthGuard>
     );
 }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function DeactivatedPage() {
     const { logout } = useAuth();
@@ -15,6 +16,7 @@ export default function DeactivatedPage() {
     };
 
     return (
+        <AuthGuard>
         <main className={styles.page}>
             <header className={styles.header}>
                 <Link href="/" className={styles.logo}>GroupBuy</Link>
@@ -35,5 +37,6 @@ export default function DeactivatedPage() {
                 <p className={styles.copyright}>© 2024 GroupBuy. All rights reserved.</p>
             </div>
         </main>
+        </AuthGuard>
     );
 }

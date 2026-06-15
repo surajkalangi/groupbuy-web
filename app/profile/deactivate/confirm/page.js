@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function ConfirmDeletePage() {
     const router = useRouter();
@@ -20,6 +21,7 @@ export default function ConfirmDeletePage() {
     };
 
     return (
+        <AuthGuard>
         <main className={styles.page}>
             {/* Fixed glassmorphic navbar */}
             <nav className={styles.navbar}>
@@ -122,5 +124,6 @@ export default function ConfirmDeletePage() {
                 </div>
             </div>
         </main>
+        </AuthGuard>
     );
 }

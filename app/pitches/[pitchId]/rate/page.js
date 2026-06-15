@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { mockPitches } from '@/data/pitches';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 const HOST_TAGS = ['Great communication', 'Friendly host', 'Well organized', 'Punctual'];
 const PRODUCT_TAGS = ['Fresh', 'Premium quality', 'Good value'];
@@ -44,6 +45,7 @@ export default function RatePage({ params }) {
     const renderStars = (rating, hovered, setHovered, setRating) => {
         const display = hovered || rating;
         return (
+            <AuthGuard>
             <div className={styles.starRow}>
                 {[1, 2, 3, 4, 5].map(star => (
                     <button
@@ -68,6 +70,7 @@ export default function RatePage({ params }) {
                     </button>
                 ))}
             </div>
+            </AuthGuard>
         );
     };
 

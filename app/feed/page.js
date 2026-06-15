@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
+import AuthGuard from '@/components/auth/AuthGuard';
 import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
 import navStyles from '@/components/layout/Navbar.module.css';
@@ -12,7 +13,7 @@ import { mockClans } from '@/data/clans';
 import styles from './page.module.css';
 
 export default function HomeFeed() {
-    const { isLoggedIn, triggerRatingModal } = useAuth();
+    const { isLoggedIn, isGuest, triggerRatingModal } = useAuth();
     const [activeFilter, setActiveFilter] = useState('all');
 
     useEffect(() => {
@@ -41,6 +42,7 @@ export default function HomeFeed() {
     }));
 
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <main className={styles.page}>
@@ -139,5 +141,6 @@ export default function HomeFeed() {
             </main>
             <BottomNav />
         </>
+        </AuthGuard>
     );
 }

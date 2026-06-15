@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import AuthGuard from '@/components/auth/AuthGuard';
 import Navbar from '@/components/layout/Navbar';
 import BottomNav from '@/components/layout/BottomNav';
 import styles from './page.module.css';
@@ -27,6 +28,7 @@ export default function ProfilePage() {
     const togglePref = (id) => setPrefs(ps => ps.map(p => p.id === id ? { ...p, enabled: !p.enabled } : p));
 
     return (
+        <AuthGuard>
         <div className={styles.page}>
             <Navbar />
             <main className={styles.main}>
@@ -158,5 +160,6 @@ export default function ProfilePage() {
             </main>
             <BottomNav />
         </div>
+        </AuthGuard>
     );
 }

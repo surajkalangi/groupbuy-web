@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { mockPitches } from '@/data/pitches';
 import { pluralizeUnit } from '@/utils/pluralize';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function EditPitchPage() {
     const { pitchId } = useParams();
@@ -43,6 +44,7 @@ export default function EditPitchPage() {
     };
 
     return (
+        <AuthGuard>
         <>
             {/* Sticky Edit Header (replaces Navbar to prevent accidental navigation) */}
             <header className={styles.editHeader}>
@@ -325,5 +327,6 @@ export default function EditPitchPage() {
                 </div>
             </div>
         </>
+        </AuthGuard>
     );
 }

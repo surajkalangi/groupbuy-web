@@ -8,6 +8,7 @@ import { mockClans } from '@/data/clans';
 import { mockPitches } from '@/data/pitches';
 import { pluralizeUnit } from '@/utils/pluralize';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 function CreatePitchForm() {
     const router = useRouter();
@@ -515,8 +516,10 @@ function CreatePitchForm() {
 
 export default function CreatePitch() {
     return (
+        <AuthGuard>
         <Suspense fallback={<div>Loading...</div>}>
             <CreatePitchForm />
         </Suspense>
+        </AuthGuard>
     );
 }

@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import BottomNav from '@/components/layout/BottomNav';
 import { mockClans } from '@/data/clans';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 // Mock social circle data
 const SOCIAL_CLANS = [
@@ -51,6 +52,7 @@ export default function BrowseClans() {
     });
 
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <main className={styles.page}>
@@ -200,5 +202,6 @@ export default function BrowseClans() {
                 <span className="material-symbols-outlined" style={{ fontSize: '1.75rem' }}>add</span>
             </Link>
         </>
+        </AuthGuard>
     );
 }

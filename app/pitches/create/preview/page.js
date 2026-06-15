@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function PitchPreviewPage() {
     const router = useRouter();
@@ -32,6 +33,7 @@ export default function PitchPreviewPage() {
     };
 
     return (
+        <AuthGuard>
         <main className={styles.page}>
             {/* ── Header ── */}
             <header className={styles.header}>
@@ -185,5 +187,6 @@ export default function PitchPreviewPage() {
                 </button>
             </div>
         </main>
+        </AuthGuard>
     );
 }

@@ -3,11 +3,13 @@
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
 import BottomNav from '@/components/layout/BottomNav';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function QRCodePage() {
     const router = useRouter();
 
     return (
+        <AuthGuard>
         <div style={{ minHeight: '100vh', background: 'var(--surface)' }}>
             <Navbar />
             <main style={{ padding: 'calc(var(--nav-height) + 2rem) 1rem calc(var(--bottom-nav-height) + 2rem)', maxWidth: 'var(--max-width)', margin: '0 auto', textAlign: 'center' }}>
@@ -52,5 +54,6 @@ export default function QRCodePage() {
             </main>
             <BottomNav />
         </div>
+        </AuthGuard>
     );
 }

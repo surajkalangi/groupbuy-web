@@ -8,6 +8,7 @@ import BottomNav from '@/components/layout/BottomNav';
 import { mockPitches } from '@/data/pitches';
 import { pluralizeUnit } from '@/utils/pluralize';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 const NEXT_STEPS = [
     { icon: 'group_add', title: 'Neighbors Join', desc: 'Your pitch is now visible to clan members. They can join with one tap.' },
@@ -28,6 +29,7 @@ export default function PublishSuccessPage() {
     };
 
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <main className={styles.page}>
@@ -126,5 +128,6 @@ export default function PublishSuccessPage() {
             </main>
             <BottomNav />
         </>
+        </AuthGuard>
     );
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
 import BottomNav from '@/components/layout/BottomNav';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function CreateClan() {
     const router = useRouter();
@@ -47,6 +48,7 @@ export default function CreateClan() {
     };
 
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <main className={styles.page}>
@@ -176,5 +178,6 @@ export default function CreateClan() {
             </main>
             <BottomNav />
         </>
+        </AuthGuard>
     );
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { mockClans } from '@/data/clans';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function JoinClanPrompt() {
     const router = useRouter();
@@ -25,6 +26,7 @@ export default function JoinClanPrompt() {
     };
 
     return (
+        <AuthGuard>
         <main className={styles.page}>
             <div className={styles.container}>
                 {/* Header Icon */}
@@ -94,5 +96,6 @@ export default function JoinClanPrompt() {
                 </button>
             </div>
         </main>
+        </AuthGuard>
     );
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
+import AuthGuard from '@/components/auth/AuthGuard';
 import { mockPitches } from '@/data/pitches';
 import styles from '../page.module.css';
 
@@ -542,8 +543,10 @@ function MyPitchesContent() {
 
 export default function MyPitches() {
     return (
+        <AuthGuard>
         <Suspense fallback={<div>Loading...</div>}>
             <MyPitchesContent />
         </Suspense>
+        </AuthGuard>
     );
 }

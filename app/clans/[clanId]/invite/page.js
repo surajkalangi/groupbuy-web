@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 const INITIAL_REQUESTS = [
     { id: 1, name: 'Rahul Sharma', initials: 'RS', location: 'B-Block, Prestige Lakeside', time: '2 min ago', color: '#4A90D9' },
@@ -48,6 +49,7 @@ export default function InviteMembers({ params }) {
     };
 
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <main className={styles.page}>
@@ -222,5 +224,6 @@ export default function InviteMembers({ params }) {
                 </div>
             )}
         </>
+        </AuthGuard>
     );
 }

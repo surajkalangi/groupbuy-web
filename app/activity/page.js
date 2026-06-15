@@ -7,6 +7,7 @@ import BottomNav from '@/components/layout/BottomNav';
 import { globalStore } from '@/utils/store';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 const NOTIFICATIONS = [
     {
@@ -107,6 +108,7 @@ export default function ActivityPage() {
     const unreadCount = notifications.filter(n => !n.read).length;
 
     return (
+        <AuthGuard>
         <div className={styles.page}>
             <Navbar />
             <main className={styles.main}>
@@ -175,5 +177,6 @@ export default function ActivityPage() {
             </main>
             <BottomNav />
         </div>
+        </AuthGuard>
     );
 }

@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import { mockPitches } from '@/data/pitches';
 import { pluralizeUnit } from '@/utils/pluralize';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 function ConfirmationContent({ pitchId }) {
     const router = useRouter();
@@ -106,6 +107,7 @@ export default function Confirmation({ params }) {
     const { pitchId } = use(params);
     
     return (
+        <AuthGuard>
         <>
             <Navbar />
             <main className={styles.page}>
@@ -114,5 +116,6 @@ export default function Confirmation({ params }) {
                 </Suspense>
             </main>
         </>
+        </AuthGuard>
     );
 }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 const REASONS = [
     'Moving to a different location',
@@ -29,6 +30,7 @@ export default function DeactivatePreviewPage() {
     };
 
     return (
+        <AuthGuard>
         <main className={styles.page}>
             {/* Header */}
             <header className={styles.header}>
@@ -161,5 +163,6 @@ export default function DeactivatePreviewPage() {
                 </div>
             </footer>
         </main>
+        </AuthGuard>
     );
 }
