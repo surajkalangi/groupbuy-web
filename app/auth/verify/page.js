@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import GuestGuard from '@/components/auth/GuestGuard';
 import styles from './page.module.css';
 
 export default function MobileSignIn() {
@@ -16,6 +17,7 @@ export default function MobileSignIn() {
     };
 
     return (
+        <GuestGuard>
         <main className={styles.page}>
             {/* Decorative Background Elements */}
             <div className={styles.blobTopRight} />
@@ -103,5 +105,6 @@ export default function MobileSignIn() {
                 </div>
             </div>
         </main>
+        </GuestGuard>
     );
 }

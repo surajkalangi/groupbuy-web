@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import GuestGuard from '@/components/auth/GuestGuard';
 import styles from './page.module.css';
 
 
@@ -150,9 +151,11 @@ function OTPContent() {
 
 export default function OTPVerificationPage() {
     return (
+        <GuestGuard>
         <Suspense fallback={null}>
             <OTPContent />
         </Suspense>
+        </GuestGuard>
     );
 }
 
