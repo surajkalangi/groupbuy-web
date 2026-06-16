@@ -49,7 +49,7 @@ export default function ProfileSetupPage() {
             setErrors(newErrors);
             return;
         }
-        router.push('/auth/join-clan');
+        router.push('/onboarding/welcome');
     };
 
     return (
