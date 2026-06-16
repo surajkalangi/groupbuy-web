@@ -34,8 +34,8 @@ export default function WelcomePage() {
                                 </span>
                             </div>
                             <div className={styles.optionContent}>
-                                <h3 className={styles.optionTitle}>I have an invite code</h3>
-                                <p className={styles.optionDesc}>Join a private Clan using a link or code.</p>
+                                <h3 className={styles.optionTitle}>I was invited to a Clan</h3>
+                                <p className={styles.optionDesc}>Use a link or code from a friend to join their community.</p>
                             </div>
                             <span className={`material-symbols-outlined ${styles.arrowIcon}`}>chevron_right</span>
                         </Link>
