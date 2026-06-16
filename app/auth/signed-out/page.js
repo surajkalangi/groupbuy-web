@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import GuestGuard from '@/components/auth/GuestGuard';
 import styles from './page.module.css';
 
 export default function SignedOutPage() {
     return (
+        <GuestGuard>
         <div className={styles.page}>
             <main className={styles.main}>
                 {/* Brand Logo */}
@@ -74,5 +76,6 @@ export default function SignedOutPage() {
                 </footer>
             </main>
         </div>
+        </GuestGuard>
     );
 }

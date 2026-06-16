@@ -4,25 +4,12 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+import GuestGuard from '@/components/auth/GuestGuard';
 import styles from './page.module.css';
 
 export default function LandingPage() {
-    const router = useRouter();
-    const { isLoggedIn, isHydrated } = useAuth();
-
-    // Redirect logged in users to the feed
-    useEffect(() => {
-        if (isHydrated && isLoggedIn) {
-            router.replace('/feed');
-        }
-    }, [isLoggedIn, isHydrated, router]);
-
-    // Don't render anything while checking auth state or if logged in
-    if (!isHydrated || isLoggedIn) {
-        return null; 
-    }
-
     return (
+        <GuestGuard>
         <main className={styles.page}>
             {/* Header */}
             <header className={styles.header}>
@@ -144,5 +131,6 @@ export default function LandingPage() {
                 </div>
             </footer>
         </main>
+        </GuestGuard>
     );
 }
