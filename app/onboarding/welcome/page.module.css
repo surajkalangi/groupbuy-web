@@ -7,6 +7,33 @@
     overflow: hidden;
 }
 
+/* ── Top Bar ── */
+.topBar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: 56px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--surface-container);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1.25rem;
+}
+
+.brandName {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.6px;
+    text-decoration: none;
+}
+
+.topBarSpacer {
+    flex: 1;
+}
+
 /* Background blobs for visual interest */
 .blobTopRight {
     position: absolute;

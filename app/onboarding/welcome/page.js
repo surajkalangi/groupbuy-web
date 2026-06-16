@@ -8,6 +8,12 @@ export default function WelcomePage() {
     return (
         <AuthGuard>
             <div className={styles.page}>
+                {/* Top brand bar */}
+                <header className={styles.topBar}>
+                    <Link href="/feed" className={styles.brandName}>GroupBuy</Link>
+                    <div className={styles.topBarSpacer} />
+                </header>
+
                 <div className={styles.blobTopRight} />
                 <div className={styles.blobBottomLeft} />
 
