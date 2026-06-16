@@ -182,13 +182,14 @@
 }
 
 .skipContainer {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     text-align: center;
 }
 
 .skipLink {
-    display: inline-block;
-    font-size: 0.9375rem;
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--on-surface-variant);
     text-decoration: none;

@@ -58,7 +58,7 @@ export default function WelcomePage() {
 
                     <div className={styles.skipContainer}>
                         <Link href="/feed" className={styles.skipLink}>
-                            Skip for now, explore feed
+                            Skip for now
                         </Link>
                     </div>
                 </main>
