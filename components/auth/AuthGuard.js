@@ -39,7 +39,7 @@ export default function AuthGuard({ children, redirect = false }) {
             <main className={styles.guardPage}>
                 <div className={styles.guardCard}>
                     <div className={styles.iconWrap}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '3rem' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '2.5rem', fontVariationSettings: "'FILL' 1" }}>
                             shield_person
                         </span>
                     </div>
