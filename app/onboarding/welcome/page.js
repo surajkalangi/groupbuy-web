@@ -54,18 +54,11 @@ export default function WelcomePage() {
                             <span className={`material-symbols-outlined ${styles.arrowIcon}`}>chevron_right</span>
                         </Link>
 
-                        {/* Option 3: Explore feed */}
-                        <Link href="/feed" className={styles.optionCard}>
-                            <div className={styles.iconWrap}>
-                                <span className={`material-symbols-outlined ${styles.iconTertiary}`}>
-                                    local_mall
-                                </span>
-                            </div>
-                            <div className={styles.optionContent}>
-                                <h3 className={styles.optionTitle}>Skip for now</h3>
-                                <p className={styles.optionDesc}>Explore the feed and see active deals right away.</p>
-                            </div>
-                            <span className={`material-symbols-outlined ${styles.arrowIcon}`}>chevron_right</span>
+                    </div>
+
+                    <div className={styles.skipContainer}>
+                        <Link href="/feed" className={styles.skipLink}>
+                            Skip for now, explore feed
                         </Link>
                     </div>
                 </main>

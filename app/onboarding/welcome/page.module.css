@@ -180,3 +180,22 @@
     background: linear-gradient(135deg, var(--surface-container) 0%, var(--primary-container) 200%);
     border-color: var(--primary);
 }
+
+.skipContainer {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.skipLink {
+    display: inline-block;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    text-decoration: none;
+    transition: color 0.2s;
+    padding: 0.5rem;
+}
+
+.skipLink:hover {
+    color: var(--primary);
+}
