@@ -40,7 +40,7 @@ export default function AuthGuard({ children, redirect = false }) {
                 <div className={styles.guardCard}>
                     <div className={styles.iconWrap}>
                         <span className="material-symbols-outlined" style={{ fontSize: '3rem' }}>
-                            lock
+                            shield_person
                         </span>
                     </div>
                     <h2 className={styles.title}>Sign in to continue</h2>
