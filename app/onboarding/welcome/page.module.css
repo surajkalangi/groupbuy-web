@@ -209,12 +209,17 @@
 }
 
 .stepIcon {
+    font-size: 1.25rem !important;
+    color: var(--primary);
+}
+
+.stepIconSmall {
     font-size: 1rem !important;
     color: var(--primary);
 }
 
 .stepIconSecondary {
-    font-size: 1rem !important;
+    font-size: 1.25rem !important;
     color: #855300;
 }
 

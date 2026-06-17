@@ -89,7 +89,7 @@ export default function WelcomePage() {
                                 <div className={styles.stepContent}>
                                     <div className={styles.stepTitleWrap}>
                                         <h3 className={styles.stepTitle}>Commit & Save</h3>
-                                        <span className={`material-symbols-outlined ${styles.stepIcon}`} style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                                        <span className={`material-symbols-outlined ${styles.stepIconSmall}`} style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
                                     </div>
                                     <p className={styles.stepDesc}>
                                         Click <strong>"I'm In"</strong> on a pitch. Once enough members join to hit the wholesale threshold, the deal triggers and everyone saves.
