@@ -50,6 +50,7 @@
     color: var(--on-surface-variant);
     cursor: pointer;
     transition: color var(--duration-fast), background var(--duration-fast);
+    margin-right: -0.5rem;
 }
 
 .backBtn:hover {
@@ -64,6 +65,7 @@
     color: var(--primary);
     text-decoration: none;
     letter-spacing: -0.6px;
+    margin-left: -0.625rem;
 }
 
 .headerNav {
