@@ -104,7 +104,8 @@
 }
 
 .nameHighlight {
-    color: #855300; /* Deep orange/brown */
+    color: #855300;
+    /* Deep orange/brown */
 }
 
 .subtext {
@@ -135,7 +136,8 @@
     left: 0;
     bottom: 0;
     width: 6px;
-    background: #f59e0b; /* Amber */
+    background: #f59e0b;
+    /* Amber */
 }
 
 .cardTitle {
@@ -160,7 +162,8 @@
     position: absolute;
     top: 24px;
     bottom: 24px;
-    left: 19px; /* Centered with the 40px circle */
+    left: 19px;
+    /* Centered with the 40px circle */
     width: 2px;
     background: #e5e7eb;
     z-index: 0;
@@ -242,7 +245,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: #047857; /* Darker green */
+    background: #047857;
+    /* Darker green */
     color: #ffffff;
     padding: 0.625rem 1.25rem;
     border-radius: 999px;
@@ -265,8 +269,10 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: #e5e7eb; /* Light grey */
-    color: #374151; /* Dark grey */
+    background: #e5e7eb;
+    /* Light grey */
+    color: #374151;
+    /* Dark grey */
     padding: 0.625rem 1.25rem;
     border-radius: 999px;
     font-size: 0.875rem;
@@ -298,9 +304,4 @@
     text-decoration: none;
     transition: color 0.2s;
     padding: 0.5rem;
-}
-
-.learnLink:hover {
-    color: var(--primary-container);
-    text-decoration: underline;
 }

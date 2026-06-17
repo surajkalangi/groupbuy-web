@@ -101,7 +101,7 @@ export default function WelcomePage() {
 
                     {/* Footer Link */}
                     <div className={styles.footerContainer}>
-                        <Link href="/how-it-works" className={styles.learnLink}>
+                        <Link href="/how-it-works-2" className={styles.learnLink}>
                             Still curious? Learn how GroupBuy works
                         </Link>
                     </div>
