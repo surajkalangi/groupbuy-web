@@ -43,9 +43,6 @@ export default function HowItWorks2Page() {
             <header className={styles.header}>
                 <div className={styles.headerInner}>
                     <div className={styles.headerLeft}>
-                        <button onClick={() => router.back()} className={styles.backBtn} aria-label="Go back">
-                            <span className="material-symbols-outlined">arrow_back</span>
-                        </button>
                         <Link href={isLoggedIn ? '/feed' : '/'} className={styles.logo}>GroupBuy</Link>
                     </div>
                     <nav className={styles.headerNav}>
