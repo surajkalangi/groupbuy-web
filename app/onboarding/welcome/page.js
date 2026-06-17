@@ -51,7 +51,7 @@ export default function WelcomePage() {
                                 <div className={styles.stepContent}>
                                     <div className={styles.stepTitleWrap}>
                                         <h3 className={styles.stepTitle}>Find Your Community</h3>
-                                        <span className={`material-symbols-outlined ${styles.stepIcon}`} style={{ fontVariationSettings: "'FILL' 1" }}>diversity_3</span>
+                                        <span className={`material-symbols-outlined ${styles.stepIcon}`} style={{ fontVariationSettings: "'FILL' 1" }}>groups</span>
                                     </div>
                                     <p className={styles.stepDesc}>
                                         Find a community by browsing nearby clans for public groups, or joining via invite using a code or link from a friend (apartment, office, etc.).
