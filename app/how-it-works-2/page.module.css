@@ -40,21 +40,32 @@
     gap: var(--space-4);
 }
 
-.backBtn {
+.floatingBackBtn {
+    position: absolute;
+    left: var(--space-6);
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-1);
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-full);
     color: var(--on-surface-variant);
     cursor: pointer;
     transition: color var(--duration-fast), background var(--duration-fast);
-    margin-right: -0.5rem;
+    z-index: 100;
 }
 
-.backBtn:hover {
+.floatingBackBtn:hover {
     color: var(--primary);
     background: var(--surface-container-high);
+}
+
+@media (max-width: 768px) {
+    .floatingBackBtn {
+        left: var(--space-4);
+    }
 }
 
 .logo {
