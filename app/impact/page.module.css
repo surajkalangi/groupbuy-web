@@ -1,0 +1,428 @@
+.page {
+    min-height: 100vh;
+    background: #fdfdfd; /* Off-white background */
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-6) var(--space-12);
+    background: transparent;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.headerNav {
+    display: flex;
+    gap: var(--space-8);
+}
+
+.navLink {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    text-decoration: none;
+    transition: color var(--duration-fast);
+}
+
+.navLink:hover {
+    color: var(--on-surface);
+}
+
+.navLinkActive {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.joinBtn {
+    background: var(--primary);
+    color: white;
+    padding: var(--space-2) var(--space-6);
+    border-radius: var(--radius-full);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform var(--duration-fast);
+}
+
+.joinBtn:hover {
+    transform: translateY(-2px);
+}
+
+/* ── Main Content ── */
+.mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Hero Section ── */
+.hero {
+    padding: var(--space-16) var(--space-12);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.heroBadge {
+    display: inline-block;
+    background: #e6f4ee; /* Light green */
+    color: var(--primary);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+}
+
+.heroTitle {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.heroTitleAccent {
+    color: var(--primary);
+    font-style: italic;
+}
+
+.heroDesc {
+    font-size: 1.25rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto var(--space-12) auto;
+}
+
+/* ── Bento Grid Section ── */
+.bentoSection {
+    padding: 0 var(--space-12) var(--space-16) var(--space-12);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.bentoGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(280px, auto);
+    gap: var(--space-6);
+}
+
+.bentoCard {
+    background: white;
+    border-radius: 24px;
+    padding: var(--space-8);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.bentoCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+.bentoCardLarge {
+    grid-column: span 2;
+    background: #113629; /* Dark brand color */
+    color: white;
+}
+
+.bentoCardLarge .bentoValue {
+    color: white;
+}
+
+.bentoCardLarge .bentoLabel {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bentoCardLarge .bentoIcon {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.bentoIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e6f4ee;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-6);
+}
+
+.bentoIcon span {
+    font-size: 24px;
+}
+
+.bentoContent {
+    margin-top: auto;
+}
+
+.bentoValue {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: var(--space-2);
+    letter-spacing: -0.02em;
+}
+
+.bentoLabel {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: var(--space-2);
+}
+
+.bentoDesc {
+    font-size: 0.95rem;
+    color: var(--on-surface-variant);
+    line-height: 1.5;
+}
+
+/* ── Storytelling Section ── */
+.storySection {
+    padding: var(--space-16) var(--space-12);
+    background: white;
+}
+
+.storyInner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+}
+
+.storyReverse {
+    direction: rtl;
+}
+
+.storyReverse > * {
+    direction: ltr;
+}
+
+.storyImageWrap {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+}
+
+.storyImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.storyImageWrap:hover .storyImage {
+    transform: scale(1.05);
+}
+
+.storyText {
+    padding: var(--space-8) 0;
+}
+
+.storyTitle {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: var(--space-6);
+    line-height: 1.2;
+}
+
+.storyDesc {
+    font-size: 1.125rem;
+    color: var(--on-surface-variant);
+    line-height: 1.7;
+    margin-bottom: var(--space-8);
+}
+
+.storyQuote {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+.storyAuthor {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.storyAuthor span {
+    color: var(--on-surface-variant);
+    font-weight: 400;
+}
+
+/* ── CTA Section ── */
+.ctaSection {
+    padding: var(--space-24) var(--space-12);
+    background: var(--primary);
+    text-align: center;
+    color: white;
+}
+
+.ctaTitle {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+}
+
+.ctaSubtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto var(--space-12) auto;
+}
+
+.ctaBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: white;
+    color: var(--primary);
+    padding: var(--space-4) var(--space-10);
+    border-radius: var(--radius-full);
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.ctaBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Footer ── */
+.footer {
+    background: #f4f5f7;
+    padding: var(--space-8) var(--space-12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #888;
+}
+
+.footerRight {
+    display: flex;
+    gap: var(--space-6);
+}
+
+.footerRight a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footerRight a:hover {
+    color: #1a1a1a;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .bentoGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bentoCardLarge {
+        grid-column: span 2;
+    }
+    
+    .storyInner {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+    
+    .storyReverse {
+        direction: ltr;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: 3rem;
+    }
+    
+    .bentoGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bentoCardLarge {
+        grid-column: span 1;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: var(--space-4);
+        padding: var(--space-4);
+    }
+    
+    .headerNav {
+        display: none; /* Can be replaced with a hamburger menu later */
+    }
+    
+    .ctaTitle {
+        font-size: 2.5rem;
+    }
+    
+    .footer {
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: center;
+    }
+}

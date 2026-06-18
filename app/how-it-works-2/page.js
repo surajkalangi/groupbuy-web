@@ -54,8 +54,8 @@ export default function HowItWorks2Page() {
                         <Link href="/discover" className={styles.navLink}>Explore</Link>
                     </nav>
                     <div className={styles.headerRight}>
-                        <Link href={isLoggedIn ? '/clans/browse' : '/'} className={styles.joinClanBtn}>
-                            {isLoggedIn ? 'Browse Clans' : 'Join Clan'}
+                        <Link href={isLoggedIn ? '/clans/browse' : '/auth/verify'} className={styles.joinClanBtn}>
+                            {isLoggedIn ? 'Browse Clans' : 'Get Started'}
                         </Link>
                         <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-variant)', cursor: 'pointer' }}>account_circle</span>
                     </div>
@@ -194,8 +194,8 @@ export default function HowItWorks2Page() {
                 <section className={styles.ctaSection}>
                     <h2 className={styles.ctaTitle}>Ready to start saving<br />with your neighbors?</h2>
                     <div className={styles.ctaActions}>
-                        <Link href={isLoggedIn ? '/clans/browse' : '/'} className={styles.ctaPrimary}>
-                            {isLoggedIn ? 'Browse Clans' : 'Join Clan'}
+                        <Link href={isLoggedIn ? '/clans/browse' : '/auth/verify'} className={styles.ctaPrimary}>
+                            {isLoggedIn ? 'Browse Clans' : 'Get Started'}
                         </Link>
                         <Link href="#" className={styles.ctaSecondary}>Contact Support</Link>
                     </div>
