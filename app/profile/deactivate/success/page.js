@@ -32,7 +32,7 @@ export default function DeactivatedPage() {
                 </div>
                 <button onClick={handleReturnHome} className={styles.homeBtn}>Return to Home →</button>
                 <div className={styles.footerLinks}>
-                    <a href="#">HELP CENTER</a><a href="#">PRIVACY POLICY</a><a href="#">TERMS OF SERVICE</a>
+                    <a href="#">HELP CENTER</a><Link href="/privacy">PRIVACY POLICY</Link><Link href="/terms">TERMS OF SERVICE</Link>
                 </div>
                 <p className={styles.copyright}>© 2024 GroupBuy. All rights reserved.</p>
             </div>

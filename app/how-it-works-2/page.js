@@ -201,11 +201,10 @@ export default function HowItWorks2Page() {
                 <div className={styles.footerInner}>
                     <span className={styles.footerBrand}>GroupBuy</span>
                     <div className={styles.footerLinks}>
-                        <Link href="/how-it-works" className={styles.footerLink}>How it Works</Link>
-                        <a href="#" className={styles.footerLink}>Trust &amp; Safety</a>
-                        <a href="#" className={styles.footerLink}>Privacy Policy</a>
-                        <a href="#" className={styles.footerLink}>Terms of Service</a>
-                        <a href="#" className={styles.footerLink}>Contact Us</a>
+                        <Link href="/terms" className={styles.footerLink}>Terms of Service</Link>
+                        <Link href="/privacy" className={styles.footerLink}>Privacy Policy</Link>
+                        <Link href="/guidelines" className={styles.footerLink}>Community Guidelines</Link>
+                        <a href="mailto:support@groupbuy.local" className={styles.footerLink}>Contact Us</a>
                     </div>
                     <span className={styles.footerCopyright}>© 2026 GroupBuy. Hyperlocal Group Buying.</span>
                 </div>

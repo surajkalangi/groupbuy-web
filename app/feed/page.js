@@ -132,9 +132,9 @@ export default function HomeFeed() {
                     <footer className={styles.footer}>
                         <p>© 2024 GROUPBUY. EDITORIAL HYPERLOCALISM. V1.0.2</p>
                         <div className={styles.footerLinks}>
-                            <a href="#">Terms of Service</a>
-                            <a href="#">Privacy Policy</a>
-                            <a href="#">Community Guidelines</a>
+                            <Link href="/terms">Terms of Service</Link>
+                            <Link href="/privacy">Privacy Policy</Link>
+                            <Link href="/guidelines">Community Guidelines</Link>
                         </div>
                     </footer>
                 </div>

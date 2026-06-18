@@ -151,7 +151,7 @@ export default function DeactivatePreviewPage() {
                 </div>
 
                 <p className={styles.legal}>
-                    By deactivating, you agree to our <a href="#" className={styles.legalLink}>Terms of Service</a>. Permanent deletion may take up to 30 days to process across all our systems.
+                    By deactivating, you agree to our <Link href="/terms" className={styles.legalLink}>Terms of Service</Link>. Permanent deletion may take up to 30 days to process across all our systems.
                 </p>
             </div>
 

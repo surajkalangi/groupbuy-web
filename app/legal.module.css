@@ -1,0 +1,112 @@
+.page {
+    min-height: 100vh;
+    background: #fdfdfd;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    color: var(--on-surface);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-6) var(--space-12);
+    background: transparent;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: var(--space-4);
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.navLink {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    text-decoration: none;
+    transition: color var(--duration-fast);
+}
+
+.navLink:hover {
+    color: var(--on-surface);
+}
+
+.mainContent {
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-16) var(--space-6);
+    width: 100%;
+}
+
+.pageTitle {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--on-surface);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+}
+
+.lastUpdated {
+    font-size: 0.95rem;
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-12);
+    display: block;
+}
+
+.section {
+    margin-bottom: var(--space-10);
+}
+
+.sectionTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: var(--space-4);
+}
+
+.text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-4);
+}
+
+.list {
+    margin-left: var(--space-6);
+    margin-bottom: var(--space-4);
+    list-style-type: disc;
+}
+
+.listItem {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-2);
+}
+
+.footer {
+    border-top: 1px solid var(--outline-variant);
+    padding: var(--space-8) var(--space-12);
+    display: flex;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: #888;
+}

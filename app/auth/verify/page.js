@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import GuestGuard from '@/components/auth/GuestGuard';
 import styles from './page.module.css';
 
@@ -78,9 +79,9 @@ export default function MobileSignIn() {
                     <div className={styles.footerLinks}>
                         <p className={styles.termsText}>
                             By signing in, you agree to our{' '}
-                            <a href="#" className={styles.link}>Terms of Service</a>{' '}
+                            <Link href="/terms" className={styles.link}>Terms of Service</Link>{' '}
                             and{' '}
-                            <a href="#" className={styles.link}>Privacy Policy</a>
+                            <Link href="/privacy" className={styles.link}>Privacy Policy</Link>
                         </p>
                         
                         <div className={styles.trustBadges}>
