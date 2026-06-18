@@ -40,27 +40,21 @@ export default function HowItWorks2Page() {
     return (
         <div className={styles.page}>
             {/* ── Header ── */}
-            <header className={styles.header}>
-                <button onClick={() => router.back()} className={styles.floatingBackBtn} aria-label="Go back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </button>
-                <div className={styles.headerInner}>
-                    <div className={styles.headerLeft}>
-                        <Link href={isLoggedIn ? '/feed' : '/'} className={styles.logo}>GroupBuy</Link>
-                    </div>
+            <div className={styles.headerWrapper}>
+                <header className={styles.header}>
+                    <Link href={isLoggedIn ? '/feed' : '/'} className={styles.logo}>GroupBuy</Link>
                     <nav className={styles.headerNav}>
                         <Link href={isLoggedIn ? '/feed' : '/'} className={styles.navLink}>Home</Link>
                         <span className={styles.navLinkActive}>How it Works</span>
-                        <Link href="/discover" className={styles.navLink}>Explore</Link>
+                        <Link href="/impact" className={styles.navLink}>Our Impact</Link>
                     </nav>
                     <div className={styles.headerRight}>
-                        <Link href={isLoggedIn ? '/clans/browse' : '/auth/verify'} className={styles.joinClanBtn}>
+                        <Link href={isLoggedIn ? '/clans/browse' : '/auth/verify'} className={styles.joinBtn}>
                             {isLoggedIn ? 'Browse Clans' : 'Get Started'}
                         </Link>
-                        <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-variant)', cursor: 'pointer' }}>account_circle</span>
                     </div>
-                </div>
-            </header>
+                </header>
+            </div>
 
             <main className={styles.mainContent}>
                 {/* ── Hero Section ── */}
