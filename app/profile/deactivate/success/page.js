@@ -34,7 +34,7 @@ export default function DeactivatedPage() {
                 <div className={styles.footerLinks}>
                     <a href="#">HELP CENTER</a><Link href="/privacy">PRIVACY POLICY</Link><Link href="/terms">TERMS OF SERVICE</Link>
                 </div>
-                <p className={styles.copyright}>© 2024 GroupBuy. All rights reserved.</p>
+                <p className={styles.copyright}>© 2026 GroupBuy. All rights reserved.</p>
             </div>
         </main>
         </AuthGuard>

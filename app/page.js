@@ -122,7 +122,7 @@ export default function LandingPage() {
             {/* Footer */}
             <footer className={styles.footer}>
                 <div className={styles.footerLeft}>
-                    © 2024 GroupBuy. Editorial Hyperlocalism. v1.0.2
+                    © 2026 GroupBuy. Editorial Hyperlocalism. v1.0.2
                 </div>
                 <div className={styles.footerRight}>
                     <Link href="/terms">Terms of Service</Link>

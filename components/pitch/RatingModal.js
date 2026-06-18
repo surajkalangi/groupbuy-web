@@ -193,7 +193,10 @@ export default function RatingModal() {
                             {submitting ? 'Submitting…' : 'Submit Rating'}
                             {!submitting && <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>arrow_forward</span>}
                         </button>
-                        <p className={styles.footnote}>Your feedback helps the GroupBuy community grow stronger.</p>
+                        <p className={styles.footnote}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--primary)' }}>verified_user</span>
+                            Community trust is built on honest reviews.
+                        </p>
                     </div>
                 </div>
             </div>

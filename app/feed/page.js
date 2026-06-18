@@ -130,7 +130,7 @@ export default function HomeFeed() {
 
                     {/* Footer */}
                     <footer className={styles.footer}>
-                        <p>© 2024 GROUPBUY. EDITORIAL HYPERLOCALISM. V1.0.2</p>
+                        <p>© 2026 GROUPBUY. EDITORIAL HYPERLOCALISM. V1.0.2</p>
                         <div className={styles.footerLinks}>
                             <Link href="/terms">Terms of Service</Link>
                             <Link href="/privacy">Privacy Policy</Link>
