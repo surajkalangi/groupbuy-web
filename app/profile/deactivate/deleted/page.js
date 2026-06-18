@@ -1,13 +1,24 @@
 'use client';
+import { useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
+import GuestGuard from '@/components/auth/GuestGuard';
 
 export default function AccountDeletedPage() {
+    const { logout } = useAuth();
+
+    useEffect(() => {
+        // Automatically log out when landing on this page
+        logout();
+    }, [logout]);
+
     return (
+        <GuestGuard>
         <main className={styles.page}>
             <header className={styles.header}>
                 <Link href="/" className={styles.logo}>GroupBuy</Link>
-                <Link href="#" className={styles.supportLink}>Support</Link>
+                <Link href="/support" className={styles.supportLink}>Support</Link>
             </header>
             <div className={styles.container}>
                 <div className={styles.icon}><span className="material-symbols-outlined" style={{ fontSize: '3rem' }}>delete_forever</span></div>
@@ -17,5 +28,6 @@ export default function AccountDeletedPage() {
                 <Link href="/" className={styles.homeBtn}>Return to Landing Page →</Link>
             </div>
         </main>
+        </GuestGuard>
     );
 }

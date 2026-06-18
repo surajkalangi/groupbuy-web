@@ -9,10 +9,11 @@ import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function ConfirmDeletePage() {
     const router = useRouter();
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, logout } = useAuth();
     const [option, setOption] = useState('delete'); // pre-selected as per design
 
     const handleConfirm = () => {
+        logout(); // Log out before routing so GuestGuard allows access
         if (option === 'break') {
             router.push('/profile/deactivate/success');
         } else {

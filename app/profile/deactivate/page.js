@@ -16,13 +16,14 @@ const REASONS = [
 
 export default function DeactivatePreviewPage() {
     const router = useRouter();
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, logout } = useAuth();
     const [option, setOption] = useState('break'); // 'break' or 'delete'
     const [reason, setReason] = useState('');
     const [feedback, setFeedback] = useState('');
 
     const handleProceed = () => {
         if (option === 'break') {
+            logout(); // Log out before routing so GuestGuard allows access
             router.push('/profile/deactivate/success');
         } else {
             router.push('/profile/deactivate/confirm');

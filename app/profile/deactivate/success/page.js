@@ -1,26 +1,31 @@
 'use client';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
-import AuthGuard from '@/components/auth/AuthGuard';
+import GuestGuard from '@/components/auth/GuestGuard';
 
 export default function DeactivatedPage() {
     const { logout } = useAuth();
     const router = useRouter();
 
+    useEffect(() => {
+        // Automatically log out when landing on this page
+        logout();
+    }, [logout]);
+
     const handleReturnHome = (e) => {
         e.preventDefault();
-        logout();
         router.push('/');
     };
 
     return (
-        <AuthGuard>
+        <GuestGuard>
         <main className={styles.page}>
             <header className={styles.header}>
                 <Link href="/" className={styles.logo}>GroupBuy</Link>
-                <Link href="#" className={styles.helpLink}>Help Center</Link>
+                <Link href="/support" className={styles.helpLink}>Help Center</Link>
             </header>
             <div className={styles.container}>
                 <div className={styles.icon}><span className="material-symbols-outlined" style={{ fontSize: '3rem' }}>dark_mode</span></div>
@@ -32,11 +37,11 @@ export default function DeactivatedPage() {
                 </div>
                 <button onClick={handleReturnHome} className={styles.homeBtn}>Return to Home →</button>
                 <div className={styles.footerLinks}>
-                    <a href="#">HELP CENTER</a><Link href="/privacy">PRIVACY POLICY</Link><Link href="/terms">TERMS OF SERVICE</Link>
+                    <Link href="/support">HELP CENTER</Link><Link href="/privacy">PRIVACY POLICY</Link><Link href="/terms">TERMS OF SERVICE</Link>
                 </div>
                 <p className={styles.copyright}>© 2026 GroupBuy. All rights reserved.</p>
             </div>
         </main>
-        </AuthGuard>
+        </GuestGuard>
     );
 }
