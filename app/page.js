@@ -15,7 +15,7 @@ export default function LandingPage() {
             <header className={styles.header}>
                 <div className={styles.logo}>GroupBuy</div>
                 <nav className={styles.headerNav}>
-                    <Link href="/how-it-works" className={styles.navLink}>How it works</Link>
+                    <Link href="/how-it-works-2" className={styles.navLink}>How it works</Link>
                     <Link href="/impact" className={styles.navLink}>Our Impact</Link>
                 </nav>
             </header>
