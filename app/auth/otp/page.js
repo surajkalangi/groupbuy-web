@@ -125,7 +125,7 @@ function OTPContent() {
                     </form>
 
                     <p className={styles.helpText}>
-                        Having trouble? <a href="#" className={styles.helpLink}>Contact Support</a>
+                        Having trouble? <Link href="/support" className={styles.helpLink}>Contact Support</Link>
                     </p>
                 </div>
 

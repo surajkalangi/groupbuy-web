@@ -191,7 +191,7 @@ export default function HowItWorks2Page() {
                         <Link href={isLoggedIn ? '/clans/browse' : '/auth/verify'} className={styles.ctaPrimary}>
                             {isLoggedIn ? 'Browse Clans' : 'Get Started'}
                         </Link>
-                        <Link href="#" className={styles.ctaSecondary}>Contact Support</Link>
+                        <Link href="/support" className={styles.ctaSecondary}>Contact Support</Link>
                     </div>
                 </section>
             </main>
@@ -204,7 +204,7 @@ export default function HowItWorks2Page() {
                         <Link href="/terms" className={styles.footerLink}>Terms of Service</Link>
                         <Link href="/privacy" className={styles.footerLink}>Privacy Policy</Link>
                         <Link href="/guidelines" className={styles.footerLink}>Community Guidelines</Link>
-                        <a href="mailto:support@groupbuy.local" className={styles.footerLink}>Contact Us</a>
+                        <Link href="/support" className={styles.footerLink}>Contact Us</Link>
                     </div>
                     <span className={styles.footerCopyright}>© 2026 GroupBuy. Hyperlocal Group Buying.</span>
                 </div>
