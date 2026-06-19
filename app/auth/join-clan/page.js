@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function JoinClanPage() {
     const router = useRouter();
@@ -25,6 +26,7 @@ export default function JoinClanPage() {
     };
 
     return (
+        <AuthGuard>
         <div className={styles.page}>
             {/* Decorative blobs */}
             <div className={styles.blobTopRight} />
@@ -109,5 +111,6 @@ export default function JoinClanPage() {
                 </div>
             </main>
         </div>
+        </AuthGuard>
     );
 }

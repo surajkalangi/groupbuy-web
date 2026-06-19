@@ -25,7 +25,7 @@ export default function DeactivatedPage() {
         <main className={styles.page}>
             <header className={styles.header}>
                 <Link href="/" className={styles.logo}>GroupBuy</Link>
-                <Link href="/support" className={styles.helpLink}>Help Center</Link>
+                <Link href="/help" className={styles.helpLink}>Help Center</Link>
             </header>
             <div className={styles.container}>
                 <div className={styles.icon}><span className="material-symbols-outlined" style={{ fontSize: '3rem' }}>dark_mode</span></div>
@@ -37,7 +37,7 @@ export default function DeactivatedPage() {
                 </div>
                 <button onClick={handleReturnHome} className={styles.homeBtn}>Return to Home →</button>
                 <div className={styles.footerLinks}>
-                    <Link href="/support">HELP CENTER</Link><Link href="/privacy">PRIVACY POLICY</Link><Link href="/terms">TERMS OF SERVICE</Link>
+                    <Link href="/help">HELP CENTER</Link><Link href="/privacy">PRIVACY POLICY</Link><Link href="/terms">TERMS OF SERVICE</Link>
                 </div>
                 <p className={styles.copyright}>© 2026 GroupBuy. All rights reserved.</p>
             </div>

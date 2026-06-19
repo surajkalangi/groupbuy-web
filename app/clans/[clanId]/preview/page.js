@@ -44,7 +44,7 @@ export default function ClanPreviewPage() {
 
     const handleJoinClan = () => {
         if (isGuest) {
-            router.push('/');
+            router.push('/auth/verify');
             return;
         }
         if (isOpenJoin) {
@@ -107,7 +107,7 @@ export default function ClanPreviewPage() {
                             </Link>
                         ) : (
                             <button onClick={handleJoinClan} className={styles.joinBtn}>
-                                Join this Clan →
+                                {isGuest ? 'Sign up to Join →' : 'Join this Clan →'}
                             </button>
                         )}
                         <div className={styles.avatarStack}>
@@ -173,7 +173,7 @@ export default function ClanPreviewPage() {
                                 <span className={styles.lockedBadge}>MEMBERS ONLY</span>
                                 <p className={styles.lockedText}>Exclusive deals are available for clan members.</p>
                                 <button onClick={handleJoinClan} className={styles.unlockBtn}>
-                                    Join Clan to Unlock
+                                    {isGuest ? 'Sign up to Unlock' : 'Join Clan to Unlock'}
                                 </button>
                                 <span className={styles.lockedCount}>
                                     🔒 {hiddenPrivateCount} exclusive deal{hiddenPrivateCount > 1 ? 's' : ''} for members
@@ -201,7 +201,9 @@ export default function ClanPreviewPage() {
                     ) : isMemberOfClan ? (
                         <Link href={`/clans/${clan.id}`} className={styles.ctaPrimary}>Go to Clan</Link>
                     ) : (
-                        <button onClick={handleJoinClan} className={styles.ctaPrimary}>Join Clan Now</button>
+                        <button onClick={handleJoinClan} className={styles.ctaPrimary}>
+                            {isGuest ? 'Sign up to Join' : 'Join Clan Now'}
+                        </button>
                     )}
                     <Link href="/how-it-works" className={styles.ctaSecondary}>Learn More</Link>
                 </div>

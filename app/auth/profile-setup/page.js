@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import AuthGuard from '@/components/auth/AuthGuard';
 import styles from './page.module.css';
 
 const CITIES = ['Bengaluru', 'Mumbai', 'Delhi NCR', 'Hyderabad', 'Pune', 'Chennai', 'Kolkata', 'Others'];
 
 export default function ProfileSetupPage() {
-    const { isLoggedIn, isGuest } = useAuth();
+    const { isLoggedIn } = useAuth();
     const router = useRouter();
     const [photo, setPhoto] = useState(null);
     const [form, setForm] = useState({
@@ -20,15 +21,6 @@ export default function ProfileSetupPage() {
         locality: '',
     });
     const [errors, setErrors] = useState({});
-
-    // Redirect to home if accessed by a guest
-    useEffect(() => {
-        if (isGuest) {
-            router.replace('/auth/verify');
-        }
-    }, [isGuest, router]);
-
-    if (isGuest) return null;
 
     const handlePhotoChange = (e) => {
         const file = e.target.files[0];
@@ -53,6 +45,7 @@ export default function ProfileSetupPage() {
     };
 
     return (
+        <AuthGuard>
         <div className={styles.page}>
             {/* Top brand bar */}
             <header className={styles.topBar}>
@@ -163,5 +156,6 @@ export default function ProfileSetupPage() {
                 </div>
             </main>
         </div>
+        </AuthGuard>
     );
 }
