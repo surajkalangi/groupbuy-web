@@ -84,6 +84,12 @@ export default function ClanPreviewPage() {
             {/* ── Hero Section ── */}
             <section className={styles.hero}>
                 <div className={styles.heroContent}>
+                    {isGuest && (
+                        <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>auto_awesome</span>
+                            You've been invited by a neighbor to join this community.
+                        </div>
+                    )}
                     <span className={styles.verifiedBadge}>
                         <span className="material-symbols-outlined" style={{ fontSize: '0.75rem', fontVariationSettings: "'FILL' 1" }}>verified</span>
                         VERIFIED COMMUNITY
