@@ -35,7 +35,7 @@ export default function ImpactPage() {
                         <span className={styles.heroTitleAccent}>Communities that care.</span>
                     </h1>
                     <p className={styles.heroDesc}>
-                        When we buy together, we don't just save money. We reduce our carbon footprint, empower local artisans, and strengthen the bonds of our neighborhoods.
+                        When we buy together, we don't just save money. We reduce our carbon footprint, empower local artisans, and strengthen the bonds of our communities.
                     </p>
                 </section>
 
@@ -102,7 +102,7 @@ export default function ImpactPage() {
                                 We are shifting the paradigm of e-commerce. Instead of food sitting in warehouses or traveling thousands of miles, GroupBuy connects your community directly to the source. Produce is harvested only after a Pitch is fully backed, ensuring zero food waste and maximum freshness.
                             </p>
                             <div className={styles.storyQuote}>
-                                "Since partnering with GroupBuy communities, we've eliminated our retail overhead. We know exactly how much to harvest, and it goes straight to the neighborhood."
+                                "Since partnering with GroupBuy communities, we've eliminated our retail overhead. We know exactly how much to harvest, and it goes straight to the community."
                             </div>
                             <div className={styles.storyAuthor}>
                                 <strong>Rajesh K.</strong>
@@ -118,17 +118,17 @@ export default function ImpactPage() {
                         <div className={styles.storyImageWrap}>
                             <img 
                                 src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1200" 
-                                alt="Neighbors gathering" 
+                                alt="Community members gathering" 
                                 className={styles.storyImage} 
                             />
                         </div>
                         <div className={styles.storyText}>
                             <h2 className={styles.storyTitle}>Rebuilding the Commons.</h2>
                             <p className={styles.storyDesc}>
-                                Modern living has isolated us. GroupBuy isn't just about saving money; it's about giving neighbors a reason to interact. When you pick up your order from the society clubhouse, you meet the people you share walls with.
+                                Modern living has isolated us. GroupBuy isn't just about saving money; it's about giving people in your circle a reason to interact. When you pick up your order from the designated hub, you connect with the people you share your community with.
                             </p>
                             <div className={styles.storyQuote}>
-                                "I've lived in my apartment for 3 years, but I only started knowing my neighbors after we started coordinating our weekly organic fruit orders."
+                                "I've been in my apartment for 3 years, but I only started knowing my community after we started coordinating our weekly organic fruit orders."
                             </div>
                             <div className={styles.storyAuthor}>
                                 <strong>Priya S.</strong>
@@ -153,7 +153,7 @@ export default function ImpactPage() {
             {/* ── Footer ── */}
             <footer className={styles.footer}>
                 <div className={styles.footerLeft}>
-                    © 2026 GroupBuy. Editorial Hyperlocalism.
+                    © 2026 GroupBuy. Community Commerce.
                 </div>
                 <div className={styles.footerRight}>
                     <Link href="/terms">Terms</Link>

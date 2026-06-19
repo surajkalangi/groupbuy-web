@@ -15,7 +15,7 @@ export default function GuidelinesPage() {
                 <section className={styles.section}>
                     <h2 className={styles.sectionTitle}>Built on Trust and Density</h2>
                     <p className={styles.text}>
-                        GroupBuy is not a faceless e-commerce app; it is a digital commons for your physical neighborhood. Our model relies heavily on the trust, density, and cooperation of neighbors. To keep things running smoothly, we ask all members to adhere to these guidelines.
+                        GroupBuy is not a faceless e-commerce app; it is a digital commons for your trusted community. Our model relies heavily on the trust, cooperation, and collective strength of its members. To keep things running smoothly, we ask all members to adhere to these guidelines.
                     </p>
                 </section>
 
@@ -36,12 +36,12 @@ export default function GuidelinesPage() {
                 <section className={styles.section}>
                     <h2 className={styles.sectionTitle}>3. Respect the Clan Leads</h2>
                     <p className={styles.text}>
-                        Clan Leads are your neighbors stepping up to organize better living for everyone. Treat them with respect, patience, and kindness.
+                        Clan Leads are community members stepping up to organize better living for everyone. Treat them with respect, patience, and kindness.
                     </p>
                 </section>
             </main>
             <footer className={styles.footer}>
-                © 2026 GroupBuy. Editorial Hyperlocalism.
+                © 2026 GroupBuy. Community Commerce.
             </footer>
         </div>
     );

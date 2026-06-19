@@ -23,7 +23,7 @@ export default function LandingPage() {
             {/* Hero Section */}
             <section className={styles.hero}>
                 <div className={styles.heroContent}>
-                    <div className={styles.tagLabel}>EDITORIAL HYPERLOCALISM</div>
+                    <div className={styles.tagLabel}>COMMUNITY COMMERCE</div>
                     <h1 className={styles.headline}>
                         Save More,<br />
                         <span className={styles.italicGreen}>Together</span>
@@ -41,7 +41,7 @@ export default function LandingPage() {
                             <div className={styles.avatar} style={{ backgroundImage: 'url(https://i.pravatar.cc/150?img=12)' }}></div>
                         </div>
                         <span className={styles.socialText}>
-                            Joined by <strong>1,200+</strong> neighbors this week
+                            Joined by <strong>1,200+</strong> members this week
                         </span>
                     </div>
                 </div>
@@ -78,7 +78,7 @@ export default function LandingPage() {
                 <div className={styles.valuePropsGrid}>
                     <div className={styles.valueCard}>
                         <div className={styles.iconCircle}><span className="material-symbols-outlined">groups</span></div>
-                        <h3>Pool with neighbors</h3>
+                        <h3>Pool with your community</h3>
                         <p>Combine orders for groceries, utilities, or gadgets. Larger orders mean lower prices for everyone in the commons.</p>
                     </div>
                     <div className={styles.valueCard}>
@@ -122,7 +122,7 @@ export default function LandingPage() {
             {/* Footer */}
             <footer className={styles.footer}>
                 <div className={styles.footerLeft}>
-                    © 2026 GroupBuy. Editorial Hyperlocalism. v1.0.2
+                    © 2026 GroupBuy. Community Commerce. v1.0.2
                 </div>
                 <div className={styles.footerRight}>
                     <Link href="/terms">Terms of Service</Link>

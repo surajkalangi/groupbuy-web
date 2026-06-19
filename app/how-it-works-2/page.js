@@ -9,7 +9,7 @@ const STEPS = [
     {
         num: '01',
         title: 'Join a Clan',
-        desc: 'Search for your apartment complex or office. Join your neighbors in a verified local Clan.',
+        desc: 'Find your apartment complex, office, or friend group. Join your community in a verified Clan.',
     },
     {
         num: '02',
@@ -61,12 +61,12 @@ export default function HowItWorks2Page() {
                 <section className={styles.hero}>
                     <div className={styles.heroInner}>
                         <div className={styles.heroText}>
-                            <span className={styles.heroBadge}>Hyperlocal Commerce</span>
+                            <span className={styles.heroBadge}>Community Commerce</span>
                             <h1 className={styles.heroTitle}>
                                 How <span className={styles.heroTitleAccent}>GroupBuy</span> Works
                             </h1>
                             <p className={styles.heroDesc}>
-                                Unlock wholesale prices by pooling orders with your neighbors. GroupBuy connects local clans to premium artisans, making high-quality living affordable for everyone.
+                                Unlock better prices by pooling orders with your community. GroupBuy connects trusted circles to premium products and services, making quality living affordable for everyone.
                             </p>
                         </div>
                         <div className={styles.heroImageWrap}>
@@ -74,7 +74,7 @@ export default function HowItWorks2Page() {
                                 <img
                                     className={styles.heroImage}
                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuClc1hTg9mdC4-D1PiGiXswhBimMD22kJ7PGyJOQWxtndMtTqbSG4kG2tjV9e4-mKy2dKG5UFPF1dfppGroPD6S3AKW4ySBDLIzYXs5zmd-6e-P2P2zYWoahDnXieEQb4bMjI0EaHmuUqnkQhwhfzzfTXcYxsQEJKw7xeNYb_BUxenvDCNsI3zUVacBaqO68ZaVZIfdtt89rGNBGPCeutj-K5PIIT8k-Z8UUmykk5T9YTxyDgHD8dQLlM_oEuoJZE98GjCWTh1u7z4C"
-                                    alt="A vibrant community market scene with neighbors sharing fresh produce"
+                                    alt="A vibrant community gathering with shared goods"
                                 />
                             </div>
                             <div className={styles.collectiveCard}>
@@ -82,7 +82,7 @@ export default function HowItWorks2Page() {
                                     <span className={`material-symbols-outlined ${styles.collectiveCardIcon}`}>handshake</span>
                                     <span className={styles.collectiveCardTitle}>Collective Power</span>
                                 </div>
-                                <p className={styles.collectiveCardDesc}>Join 450+ neighbors in the Prestige Shantiniketan Clan saving 25% monthly.</p>
+                                <p className={styles.collectiveCardDesc}>Join 450+ members in the Prestige Shantiniketan Clan saving 25% monthly.</p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@ export default function HowItWorks2Page() {
                                 </div>
                                 <h3 className={styles.bentoLargeTitle}>Strength in Numbers</h3>
                                 <p className={styles.bentoLargeDesc}>
-                                    When you buy a single crate of Alphonso mangoes, you pay retail. When 50 families in your apartment complex buy together, you get farm-gate prices. We facilitate this handshake at a hyperlocal level.
+                                    When you buy a single crate of Alphonso mangoes, you pay retail. When 50 families in your community buy together, you get wholesale prices. We facilitate this collective handshake.
                                 </p>
                             </div>
                             <div className={styles.bentoStats}>
@@ -186,7 +186,7 @@ export default function HowItWorks2Page() {
 
                 {/* ── CTA Section ── */}
                 <section className={styles.ctaSection}>
-                    <h2 className={styles.ctaTitle}>Ready to start saving<br />with your neighbors?</h2>
+                    <h2 className={styles.ctaTitle}>Ready to start saving<br />with your community?</h2>
                     <div className={styles.ctaActions}>
                         <Link href={isLoggedIn ? '/clans/browse' : '/auth/verify'} className={styles.ctaPrimary}>
                             {isLoggedIn ? 'Browse Clans' : 'Get Started'}
@@ -206,7 +206,7 @@ export default function HowItWorks2Page() {
                         <Link href="/guidelines" className={styles.footerLink}>Community Guidelines</Link>
                         <Link href="/support" className={styles.footerLink}>Contact Us</Link>
                     </div>
-                    <span className={styles.footerCopyright}>© 2026 GroupBuy. Hyperlocal Group Buying.</span>
+                    <span className={styles.footerCopyright}>© 2026 GroupBuy. Community Commerce.</span>
                 </div>
             </footer>
         </div>

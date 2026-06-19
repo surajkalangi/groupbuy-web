@@ -57,7 +57,7 @@ export default function CreateClan() {
                     <div className={styles.headerSection}>
                         <h1 className={styles.title}>Create a new Clan</h1>
                         <p className={styles.subtitle}>
-                            Establish your local commerce hub. Invite neighbors or colleagues to unlock collective bargaining power.
+                            Establish your community commerce hub. Invite your trusted circle to unlock collective purchasing power.
                         </p>
                     </div>
 

@@ -65,7 +65,7 @@ export default function HomeFeed() {
                         <div>
                             <h1 className={styles.title}>Home Feed</h1>
                             <p className={styles.subtitle}>
-                                Hyperlocal collective buying for your neighborhood. Join a pitch to unlock wholesale prices.
+                                Collective buying with your trusted community. Join a pitch to unlock better prices.
                             </p>
                         </div>
                         <div className={styles.viewControls}>
@@ -130,7 +130,7 @@ export default function HomeFeed() {
 
                     {/* Footer */}
                     <footer className={styles.footer}>
-                        <p>© 2026 GROUPBUY. EDITORIAL HYPERLOCALISM. V1.0.2</p>
+                        <p>© 2026 GROUPBUY. COMMUNITY COMMERCE. V1.0.2</p>
                         <div className={styles.footerLinks}>
                             <Link href="/terms">Terms of Service</Link>
                             <Link href="/privacy">Privacy Policy</Link>

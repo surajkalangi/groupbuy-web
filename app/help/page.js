@@ -49,7 +49,7 @@ export default function HelpCenterPage() {
                                 <span className="material-symbols-outlined">storefront</span>
                             </div>
                             <h3 className={styles.topicTitle}>For Clan Leads</h3>
-                            <p className={styles.topicDesc}>Resources for hosting pitches, managing payouts, and coordinating with your local neighbors.</p>
+                            <p className={styles.topicDesc}>Resources for hosting pitches, managing payouts, and coordinating with your community.</p>
                         </Link>
 
                         <Link href="#" className={styles.topicCard}>
@@ -57,7 +57,7 @@ export default function HelpCenterPage() {
                                 <span className="material-symbols-outlined">security</span>
                             </div>
                             <h3 className={styles.topicTitle}>Trust & Safety</h3>
-                            <p className={styles.topicDesc}>Information on our reputation system, neighborhood verification, and community guidelines.</p>
+                            <p className={styles.topicDesc}>Information on our reputation system, community verification, and community guidelines.</p>
                         </Link>
                     </div>
                 </section>
@@ -82,7 +82,7 @@ export default function HelpCenterPage() {
                 {/* Contact Banner */}
                 <div className={styles.contactBanner}>
                     <h2>Still need help?</h2>
-                    <p>If you can't find the answer you're looking for, our neighborhood support team is ready to assist you.</p>
+                    <p>If you can't find the answer you're looking for, our support team is ready to assist you.</p>
                     <Link href="/support" className={styles.contactBtn}>
                         Contact Support
                         <span className="material-symbols-outlined">arrow_forward</span>
@@ -91,7 +91,7 @@ export default function HelpCenterPage() {
             </main>
 
             <footer className={styles.footer}>
-                © 2026 GroupBuy. Editorial Hyperlocalism.
+                © 2026 GroupBuy. Community Commerce.
             </footer>
         </div>
     );

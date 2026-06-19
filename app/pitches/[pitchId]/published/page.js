@@ -11,10 +11,10 @@ import styles from './page.module.css';
 import AuthGuard from '@/components/auth/AuthGuard';
 
 const NEXT_STEPS = [
-    { icon: 'group_add', title: 'Neighbors Join', desc: 'Your pitch is now visible to clan members. They can join with one tap.' },
-    { icon: 'flag', title: 'Goal Reached', desc: 'Once enough neighbors commit, the deal is locked in at wholesale price.' },
+    { icon: 'group_add', title: 'Members Join', desc: 'Your pitch is now visible to clan members. They can join with one tap.' },
+    { icon: 'flag', title: 'Goal Reached', desc: 'Once enough members commit, the deal is locked in at wholesale price.' },
     { icon: 'shopping_cart', title: 'Order Placed', desc: 'The host (you!) places the bulk order with the supplier.' },
-    { icon: 'inventory_2', title: 'Local Pickup', desc: 'Items arrive at the designated hub. Neighbors pick up their share.' },
+    { icon: 'inventory_2', title: 'Pickup', desc: 'Items arrive at the designated hub. Members pick up their share.' },
 ];
 
 export default function PublishSuccessPage() {
@@ -41,7 +41,7 @@ export default function PublishSuccessPage() {
                         </div>
                         <h1 className={styles.successTitle}>Your Pitch is Live! 🚀</h1>
                         <p className={styles.successSub}>
-                            Great job, Host! Your neighborhood group-buy is now active and ready for participants.
+                            Great job, Host! Your community group-buy is now active and ready for participants.
                         </p>
                     </div>
 

@@ -15,7 +15,7 @@ export default function TermsPage() {
                 <section className={styles.section}>
                     <h2 className={styles.sectionTitle}>1. Welcome to GroupBuy</h2>
                     <p className={styles.text}>
-                        These Terms of Service ("Terms") govern your use of the GroupBuy platform, an editorial hyperlocal group-buying service. By accessing or using our platform, you agree to be bound by these Terms and our Privacy Policy.
+                        These Terms of Service ("Terms") govern your use of the GroupBuy platform, a community-driven group-buying service. By accessing or using our platform, you agree to be bound by these Terms and our Privacy Policy.
                     </p>
                 </section>
 
@@ -46,7 +46,7 @@ export default function TermsPage() {
                 </section>
             </main>
             <footer className={styles.footer}>
-                © 2026 GroupBuy. Editorial Hyperlocalism.
+                © 2026 GroupBuy. Community Commerce.
             </footer>
         </div>
     );

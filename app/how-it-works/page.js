@@ -10,7 +10,7 @@ const JOURNEY_STEPS = [
         num: '01',
         icon: 'group_add',
         title: 'Join Your Community',
-        desc: 'Find your apartment, office, or neighborhood Clan. Accept an invite or browse nearby communities to get started.',
+        desc: 'Find your apartment complex, office, or friend group. Accept an invite or browse communities to get started.',
     },
     {
         num: '02',
@@ -22,7 +22,7 @@ const JOURNEY_STEPS = [
         num: '03',
         icon: 'handshake',
         title: 'Commit & Pool',
-        desc: 'Tap "I\'m In" to join a pitch. You only pay when enough neighbors commit and the deal reaches its threshold.',
+        desc: 'Tap "I\'m In" to join a pitch. You only pay when enough members commit and the deal reaches its threshold.',
     },
     {
         num: '04',
@@ -43,7 +43,7 @@ const FEATURES = [
         icon: 'groups',
         label: 'Strength in Numbers',
         title: 'Collective Buying Power',
-        desc: 'When 20 neighbors buy together, everyone gets wholesale pricing. The more people join, the lower the cost per unit.',
+        desc: 'When 20 members buy together, everyone gets wholesale pricing. The more people join, the lower the cost per unit.',
         stat: '15-40%',
         statLabel: 'Average savings',
     },
@@ -79,13 +79,13 @@ export default function HowItWorksPage() {
             {/* ── Hero ── */}
             <section className={styles.hero}>
                 <div className={styles.heroOverlay}>
-                    <span className={styles.heroBadge}>HYPERLOCAL COMMERCE</span>
+                    <span className={styles.heroBadge}>COMMUNITY COMMERCE</span>
                     <h1 className={styles.heroTitle}>
                         The Power of<br />
                         <span className={styles.heroAccent}>Buying Together</span>
                     </h1>
                     <p className={styles.heroSub}>
-                        GroupBuy connects neighbors to unlock wholesale prices on everyday essentials.
+                        GroupBuy connects trusted communities to unlock better prices on quality products and services.
                         No middlemen, no markups — just your community pooling together.
                     </p>
                 </div>
@@ -99,7 +99,7 @@ export default function HowItWorksPage() {
                         <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '1.5rem' }}>trending_up</span>
                         <div>
                             <strong className={styles.collectiveTitle}>Collective Power</strong>
-                            <p className={styles.collectiveDesc}>1,200+ neighbors saving together this week</p>
+                            <p className={styles.collectiveDesc}>1,200+ members saving together this week</p>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@ export default function HowItWorksPage() {
             {/* ── CTA ── */}
             <section className={styles.ctaBanner}>
                 <h2 className={styles.ctaTitle}>Ready to save with your community?</h2>
-                <p className={styles.ctaSub}>Join 1,200+ neighbors already saving 15-40% on everyday essentials.</p>
+                <p className={styles.ctaSub}>Join 1,200+ members already saving 15-40% on quality products and services.</p>
                 <div className={styles.ctaActions}>
                     <Link href="/" className={styles.ctaPrimary}>Get Started →</Link>
                     {isLoggedIn && (

@@ -31,7 +31,7 @@ export default function SignedOutPage() {
                         </h1>
                         
                         <p className={styles.subtext}>
-                            Thank you for being a part of the <span className={styles.brandHighlight}>GroupBuy</span> community. We're looking forward to seeing you again for your next neighborhood deal!
+                            Thank you for being a part of the <span className={styles.brandHighlight}>GroupBuy</span> community. We're looking forward to seeing you again for your next group deal!
                         </p>
                     </div>
 
@@ -67,7 +67,7 @@ export default function SignedOutPage() {
                         </div>
                         <div className={styles.trustItem}>
                             <span className="material-symbols-outlined" style={{ fontSize: '0.875rem' }}>public</span>
-                            <span className={styles.trustLabel}>Neighborhood First</span>
+                            <span className={styles.trustLabel}>Community First</span>
                         </div>
                     </div>
                     <p className={styles.copyright}>

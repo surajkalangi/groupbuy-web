@@ -63,7 +63,7 @@ export default function DiscoverPage() {
                             Explore Nearby <span className={styles.headingAccent}>Community Pitches</span>
                         </h1>
                         <p className={styles.subtext}>
-                            Join forces with your neighbors to unlock wholesale prices on premium local essentials. Trust-verified and community-led.
+                            Join forces with your community to unlock better prices on premium essentials. Trust-verified and community-led.
                         </p>
                     </div>
 

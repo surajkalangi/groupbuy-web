@@ -155,7 +155,7 @@ function CreatePitchForm() {
                         <div className={styles.pageHeader}>
                             <h1 className={styles.pageTitle}>Create a new Pitch</h1>
                             <p className={styles.pageSubtitle}>
-                                Initiate a community group buy. Pool orders with your neighbors to unlock wholesale pricing on quality essentials.
+                                Initiate a community group buy. Pool orders with your circle to unlock better pricing on quality products and services.
                             </p>
                         </div>
                     )}

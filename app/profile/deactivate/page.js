@@ -110,7 +110,7 @@ export default function DeactivatePreviewPage() {
                         </div>
                     </div>
                     <div className={styles.impactQuoteWrap}>
-                        <p className={styles.impactQuote}>&quot;Your reputation reflects your contribution to 3 local neighborhoods in Bangalore.&quot;</p>
+                        <p className={styles.impactQuote}>&quot;Your reputation reflects your contribution to 3 communities in Bangalore.&quot;</p>
                     </div>
                 </section>
 

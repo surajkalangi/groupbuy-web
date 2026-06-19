@@ -96,7 +96,7 @@ export default function JoinClanPage() {
                         <div>
                             <h4 className={styles.whyTitle}>Why join a Clan?</h4>
                             <p className={styles.whyText}>
-                                Clans unlock group discounts and exclusive bulk deals shared with your local neighbors.
+                                Clans unlock group discounts and exclusive bulk deals shared with your community.
                             </p>
                         </div>
                     </div>

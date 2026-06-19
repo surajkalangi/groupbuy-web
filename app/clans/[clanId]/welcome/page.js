@@ -62,8 +62,8 @@ export default function WelcomeToClanPage({ params }) {
                             Welcome to the {clan.name} Clan, {userName}!
                         </h1>
                         <p className={styles.subtext}>
-                            You're now part of <span className={styles.neighborCount}>{clan.memberCount} neighbors</span> saving together.
-                            Ready to find your first neighborhood deal?
+                            You're now part of <span className={styles.neighborCount}>{clan.memberCount} members</span> saving together.
+                            Ready to find your first group deal?
                         </p>
 
                         {/* Getting Started Guide */}

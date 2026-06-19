@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata = {
   title: "GroupBuy — Save More, Together",
   description:
-    "Community-driven group buying platform for Indian consumers. Pool with neighbors, save together with secure UPI escrow payments.",
+    "Community-driven group buying platform for Indian consumers. Pool with your trusted circles, save together with secure UPI escrow payments.",
   keywords: [
     "group buying",
     "bulk buying",

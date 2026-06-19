@@ -63,7 +63,7 @@ export default function InviteMembers({ params }) {
                         </div>
                         <h1 className={styles.title}>Clan Created Successfully!</h1>
                         <p className={styles.subtitle}>
-                            Your community is ready. Invite your neighbors to start saving together.
+                            Your community is ready. Invite your circle to start saving together.
                         </p>
                     </div>
 

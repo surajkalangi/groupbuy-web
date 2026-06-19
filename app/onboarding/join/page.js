@@ -82,7 +82,7 @@ export default function JoinClanPrompt() {
                     </div>
                     <div className={styles.infoText}>
                         <h3 className={styles.infoTitle}>Why join a Clan?</h3>
-                        <p className={styles.infoDesc}>Clans unlock group discounts and exclusive bulk deals shared with your local neighbors.</p>
+                        <p className={styles.infoDesc}>Clans unlock group discounts and exclusive bulk deals shared with your community.</p>
                     </div>
                 </div>
 

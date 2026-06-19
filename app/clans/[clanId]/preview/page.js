@@ -87,7 +87,7 @@ export default function ClanPreviewPage() {
                     {isGuest && (
                         <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>auto_awesome</span>
-                            You've been invited by a neighbor to join this community.
+                            You've been invited to join this community.
                         </div>
                     )}
                     <span className={styles.verifiedBadge}>
@@ -158,7 +158,7 @@ export default function ClanPreviewPage() {
                 <div className={styles.pitchesHeader}>
                     <div>
                         <h2 className={styles.sectionTitleDark}>Active in this Clan</h2>
-                        <p className={styles.pitchesSubtitle}>Live opportunities to save with your neighbors.</p>
+                        <p className={styles.pitchesSubtitle}>Live opportunities to save with your community.</p>
                     </div>
                     <Link href={`/clans/${clan.id}`} className={styles.seeAllLink}>
                         See all Pitches
@@ -199,7 +199,7 @@ export default function ClanPreviewPage() {
 
             {/* ── Bottom CTA Banner ── */}
             <section className={styles.ctaBanner}>
-                <h2 className={styles.ctaTitle}>Ready to save with your neighbors at {clan.name.split(' ')[0]}?</h2>
+                <h2 className={styles.ctaTitle}>Ready to save with your community at {clan.name.split(' ')[0]}?</h2>
                 <p className={styles.ctaSub}>Join {clan.memberCount} verified residents today and start getting better products at better prices.</p>
                 <div className={styles.ctaActions}>
                     {joinRequested ? (

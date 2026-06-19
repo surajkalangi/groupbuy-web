@@ -297,7 +297,7 @@ function MyPitchesContent() {
                                 <div className={styles.fyp}>
                                     <div className={styles.fypText}>
                                         <h2 className={styles.fypTitle}>Finding Your People</h2>
-                                        <p className={styles.fypDesc}>Participating in pitches is how you unlock collective purchasing power. Explore your neighborhood&apos;s active pitches to save more on high-quality essentials.</p>
+                                        <p className={styles.fypDesc}>Participating in pitches is how you unlock collective purchasing power. Explore your community&apos;s active pitches to save more on quality products and services.</p>
                                         <button className={styles.fypBtn} onClick={() => router.push('/discover')}>
                                             <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>explore</span>
                                             Explore Community Pitches

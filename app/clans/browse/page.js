@@ -185,7 +185,7 @@ export default function BrowseClans() {
                     {/* ── Map CTA Banner ── */}
                     <section className={styles.mapBanner}>
                         <div className={styles.mapBannerContent}>
-                            <h2 className={styles.mapBannerTitle}>Explore your neighborhood visually</h2>
+                            <h2 className={styles.mapBannerTitle}>Explore communities visually</h2>
                             <p className={styles.mapBannerText}>Switch to Map View to see the most active clans on your street.</p>
                             <button className={styles.mapBannerBtn}>
                                 <span className="material-symbols-outlined">map</span>

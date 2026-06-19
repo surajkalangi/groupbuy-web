@@ -58,7 +58,7 @@ export default function ProfileSetupPage() {
                 <div className={styles.header}>
                     <h1 className={styles.heading}>Complete your profile</h1>
                     <p className={styles.subtext}>
-                        Welcome to the GroupBuy community. Tell us a bit about yourself to start saving together with your neighbors.
+                        Welcome to the GroupBuy community. Tell us a bit about yourself to start saving together with your circle.
                     </p>
                 </div>
 
@@ -141,7 +141,7 @@ export default function ProfileSetupPage() {
                             <div className={styles.trustNote}>
                                 <span className="material-symbols-outlined" style={{ color: 'var(--primary)', marginTop: '2px' }}>security</span>
                                 <p className={styles.trustText}>
-                                    Your location details help us connect you with people in your neighborhood. We never share your private information with third parties.
+                                    Your location details help us connect you with communities near you. We never share your private information with third parties.
                                 </p>
                             </div>
 

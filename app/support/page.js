@@ -138,7 +138,7 @@ export default function SupportPage() {
                             </div>
                             <div>
                                 <h3 className={styles.infoCardTitle}>Community Guidelines</h3>
-                                <p className={styles.infoCardDesc}>Read our rules on trust, timely pickups, and treating your neighbors with respect.</p>
+                                <p className={styles.infoCardDesc}>Read our rules on trust, timely pickups, and treating your community with respect.</p>
                             </div>
                         </Link>
 
@@ -156,7 +156,7 @@ export default function SupportPage() {
             </main>
 
             <footer className={styles.footer}>
-                © 2026 GroupBuy. Editorial Hyperlocalism.
+                © 2026 GroupBuy. Community Commerce.
             </footer>
         </div>
     );

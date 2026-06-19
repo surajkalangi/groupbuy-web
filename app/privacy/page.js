@@ -15,7 +15,7 @@ export default function PrivacyPage() {
                 <section className={styles.section}>
                     <h2 className={styles.sectionTitle}>1. Data We Collect</h2>
                     <p className={styles.text}>
-                        GroupBuy is built on trust and local community. To facilitate hyperlocal group buying, we collect:
+                        GroupBuy is built on trust and community. To facilitate community-driven group buying, we collect:
                     </p>
                     <ul className={styles.list}>
                         <li className={styles.listItem}><strong>Identity & Contact:</strong> Name, phone number, and email address for account creation and delivery updates.</li>
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
                 </section>
             </main>
             <footer className={styles.footer}>
-                © 2026 GroupBuy. Editorial Hyperlocalism.
+                © 2026 GroupBuy. Community Commerce.
             </footer>
         </div>
     );
