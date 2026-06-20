@@ -125,10 +125,10 @@ export default function ImpactPage() {
                         <div className={styles.storyText}>
                             <h2 className={styles.storyTitle}>Rebuilding the Commons.</h2>
                             <p className={styles.storyDesc}>
-                                Modern living has isolated us. GroupBuy isn't just about saving money; it's about giving people in your circle a reason to interact. When you pick up your order from the designated hub, you connect with the people you share your community with.
+                                Modern living has isolated us. GroupBuy isn't just about saving money; it's about giving people in your trusted circle a reason to interact. When you pick up your order from the designated hub, you connect with the people you share your community with.
                             </p>
                             <div className={styles.storyQuote}>
-                                "I've been in my apartment for 3 years, but I only started knowing my community after we started coordinating our weekly organic fruit orders."
+                                "I've been in my apartment complex for 3 years, but I only started knowing my neighbors after we started coordinating our weekly organic fruit orders."
                             </div>
                             <div className={styles.storyAuthor}>
                                 <strong>Priya S.</strong>

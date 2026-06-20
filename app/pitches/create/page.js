@@ -23,6 +23,8 @@ function CreatePitchForm() {
     const [productLink, setProductLink] = useState('');
     const [photos, setPhotos] = useState([null, null, null]);
     const [photoPreviews, setPhotoPreviews] = useState([null, null, null]);
+    const [sellerName, setSellerName] = useState('');
+    const [sellerId, setSellerId] = useState('');
 
     // Step 2 state
     const [minOrder, setMinOrder] = useState('');
@@ -155,7 +157,7 @@ function CreatePitchForm() {
                         <div className={styles.pageHeader}>
                             <h1 className={styles.pageTitle}>Create a new Pitch</h1>
                             <p className={styles.pageSubtitle}>
-                                Initiate a community group buy. Pool orders with your circle to unlock better pricing on quality products and services.
+                                Initiate a community group buy. Pool orders with your trusted circle to unlock better pricing on quality products and services.
                             </p>
                         </div>
                     )}
@@ -245,6 +247,32 @@ function CreatePitchForm() {
                                         onChange={e => setProductLink(e.target.value)}
                                     />
                                 </div>
+                            </section>
+
+                            <section className={styles.field}>
+                                <div className={styles.labelRow}>
+                                    <label className={styles.label}>Seller Details</label>
+                                    <span className={styles.optionalBadge}>OPTIONAL</span>
+                                </div>
+                                <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.5rem', flexDirection: 'column' }}>
+                                    <input
+                                        className={styles.input}
+                                        type="text"
+                                        placeholder="Seller Name (e.g. Columbus Vacations)"
+                                        value={sellerName}
+                                        onChange={e => setSellerName(e.target.value)}
+                                    />
+                                    <input
+                                        className={styles.input}
+                                        type="text"
+                                        placeholder="Identification No. (e.g. GSTIN / FSSAI)"
+                                        value={sellerId}
+                                        onChange={e => setSellerId(e.target.value)}
+                                    />
+                                </div>
+                                <p className={styles.fieldHint} style={{ lineHeight: '1.4', marginTop: '0.5rem' }}>
+                                    <strong>Disclaimer:</strong> Providing seller details is optional (as you may be the producer yourself). However, if no third-party seller is declared, <strong>you (the Host) will be held fully liable</strong> for any issues arising from the product/service, including delays, defects, or damages.
+                                </p>
                             </section>
 
                             {/* Pitcher Tip */}

@@ -11,10 +11,13 @@ const PARTICIPATING_FILTERS = ['ALL', 'ACTIVE', 'READY FOR PICKUP', 'COMPLETED',
 const HOSTING_FILTERS = ['ALL', 'ACTIVE', 'ORDER PLACED', 'READY FOR PICKUP', 'DRAFT', 'COMPLETED', 'EXPIRED'];
 const SAVED_FILTERS = ['ALL', 'ACTIVE', 'ORDER PLACED', 'COMPLETED', 'EXPIRED'];
 
+// Helper to robustly find a pitch
+const getPitch = (id) => mockPitches.find(p => p.id === id) || mockPitches[0];
+
 // Mock "my pitches" entries — participating
 const participatingPitches = [
     {
-        ...mockPitches[0],
+        ...getPitch('pitch-1'),
         myStatus: 'active',
         subtitle: 'Weekly Harvest Delivery',
         progress: { current: 42, goal: 50, pct: 84 },
@@ -22,7 +25,7 @@ const participatingPitches = [
         hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCz9umOT1LFOzjA53RJh5tEcpJAmw9NI1vv2sPwVa8nsdkkC7Vz1fvobnNcCxMb5tDCadgrf-Eo4bSunI_GjECp3rpcyaaP76TNtcEeB8oF8HI2TnZAWG0s2kDE9xFJ4EJvxmzeVMvenl8Vd7johfJNO2L1hDrR5g5t9HDOdO9uSSXJ5-X5wpb94rBlqXvj16nZM2G4lCpwfVHHTD2svkWUiHD4fT2cgeoEkuG4lBpYI2eyFsFWS27AjfnkmW8pW-7RptV3VmiJWAiN',
     },
     {
-        ...mockPitches[2],
+        ...getPitch('pitch-3'),
         clanName: 'Tech Park West',
         myStatus: 'active',
         subtitle: 'Boutique Bakery Batch',
@@ -32,19 +35,37 @@ const participatingPitches = [
         hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAWqt_1DI18gIO24KOi28x5cnH4LXoVbznWkcblOLlPyUcNF42jYxrKeyQ7Q2QFqv9MjJn6XGlrq_TmstJ_OtgWGQSK74YegVmSczJtB6Q_uK2Y3l2ny-2H6jN0vAZHuJDZfGDmhpbIeOrFOJeMq3UrY6lakZpBN7bR3H-NVMDXOC9mHj3ahFbRh1c8KISyI_yRfrWjyOEnHzdDDD8sYikL4Axs_0xyFrBaIscFx8flZY2v9oMMJF_ah74wtw0BXzW8RM78WFyCtBiv',
     },
     {
-        ...mockPitches[1],
+        ...getPitch('pitch-2'),
         myStatus: 'active',
         subtitle: 'Plant-based detergents',
         progress: { current: 4, goal: 10, pct: 40 },
         hostName: 'Rahul Verma',
         hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCMjOUyrqzPmv55DYufWdACwTYtwBWz-OOAQ1W9OGtYhcI-1KY6imGOMvlVagEHQumDjBtNvi0hqrpd2luTISscJoYySI0nmdMb6pSgsQAUF1hjQuJkG5ED6M-JXVDdFq96yE7fgjmde6Y47fYs8NoUrgpjNckOXUeyEEjLXjKT_FwlFEBc7D2yXnZtV5bsO_RSHwiZkuTw4tZpkNhDeHy-OQou3GDDEPJsbJullLYbNpekhVgHlbHiy2yPCEl4tmcoiKXyMWR-bWe6',
     },
+    {
+        ...getPitch('pitch-kedarnath'),
+        myStatus: 'active',
+        subtitle: 'Kedarnath Trip',
+        progress: { current: 2, goal: 10, pct: 20 },
+    },
+    {
+        ...getPitch('pitch-ns-malaysia'),
+        myStatus: 'active',
+        subtitle: 'Network School Malaysia',
+        progress: { current: 1, goal: 5, pct: 20 },
+    },
+    {
+        ...getPitch('pitch-netflix'),
+        myStatus: 'active',
+        subtitle: 'Netflix Premium Subscription Share',
+        progress: { current: 2, goal: 3, pct: 66 },
+    }
 ];
 
 // Mock hosting pitches
 const hostingPitches = [
     {
-        ...mockPitches[0],
+        ...getPitch('pitch-1'),
         id: 'pitch-6',
         title: 'Artisan Veggie Bundle',
         costPerUnit: 100,
@@ -71,7 +92,7 @@ const hostingPitches = [
         draftMessage: 'Complete details to launch this pitch',
     },
     {
-        ...mockPitches[2],
+        ...getPitch('pitch-3'),
         id: 'pitch-7',
         title: 'Spicy Mango Pickle',
         costPerUnit: 250,
@@ -99,7 +120,7 @@ const hostingPitches = [
         draftReady: true,
     },
     {
-        ...mockPitches[3],
+        ...getPitch('pitch-4'),
         id: 'pitch-5',
         title: 'Handcrafted Ceramic Mugs',
         costPerUnit: 350,
@@ -114,7 +135,7 @@ const hostingPitches = [
 // Mock saved pitches
 const savedPitches = [
     {
-        ...mockPitches[0],
+        ...getPitch('pitch-1'),
         savedStatus: 'active',
         timeLeft: '2D 14H LEFT',
         goalPercent: 85,
@@ -122,7 +143,7 @@ const savedPitches = [
         hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCz9umOT1LFOzjA53RJh5tEcpJAmw9NI1vv2sPwVa8nsdkkC7Vz1fvobnNcCxMb5tDCadgrf-Eo4bSunI_GjECp3rpcyaaP76TNtcEeB8oF8HI2TnZAWG0s2kDE9xFJ4EJvxmzeVMvenl8Vd7johfJNO2L1hDrR5g5t9HDOdO9uSSXJ5-X5wpb94rBlqXvj16nZM2G4lCpwfVHHTD2svkWUiHD4fT2cgeoEkuG4lBpYI2eyFsFWS27AjfnkmW8pW-7RptV3VmiJWAiN',
     },
     {
-        ...mockPitches[1],
+        ...getPitch('pitch-2'),
         savedStatus: 'order_placed',
         timeLeft: 'SUCCESSFULLY FUNDED',
         goalPercent: 100,
@@ -130,13 +151,37 @@ const savedPitches = [
         hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCMjOUyrqzPmv55DYufWdACwTYtwBWz-OOAQ1W9OGtYhcI-1KY6imGOMvlVagEHQumDjBtNvi0hqrpd2luTISscJoYySI0nmdMb6pSgsQAUF1hjQuJkG5ED6M-JXVDdFq96yE7fgjmde6Y47fYs8NoUrgpjNckOXUeyEEjLXjKT_FwlFEBc7D2yXnZtV5bsO_RSHwiZkuTw4tZpkNhDeHy-OQou3GDDEPJsbJullLYbNpekhVgHlbHiy2yPCEl4tmcoiKXyMWR-bWe6',
     },
     {
-        ...mockPitches[3],
+        ...getPitch('pitch-4'),
         savedStatus: 'expired',
         timeLeft: 'ENDED 2 DAYS AGO',
         goalPercent: 42,
         hostName: 'Vikram Singh',
         hostAvatar: null,
     },
+    {
+        ...getPitch('pitch-kedarnath'),
+        savedStatus: 'active',
+        timeLeft: '14D LEFT',
+        goalPercent: 20,
+        hostName: 'Priya S.',
+        hostAvatar: null,
+    },
+    {
+        ...getPitch('pitch-ns-malaysia'),
+        savedStatus: 'active',
+        timeLeft: '30D LEFT',
+        goalPercent: 20,
+        hostName: 'Rahul M.',
+        hostAvatar: null,
+    },
+    {
+        ...getPitch('pitch-netflix'),
+        savedStatus: 'active',
+        timeLeft: '10D LEFT',
+        goalPercent: 66,
+        hostName: 'Priya S.',
+        hostAvatar: null,
+    }
 ];
 
 const SUBTITLES = {

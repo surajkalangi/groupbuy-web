@@ -315,6 +315,21 @@ export default function PitchDetail({ params }) {
                                         </span>
                                     </div>
                                 </div>
+                                {/* Seller Authenticity */}
+                                {pitch.pitchPolicies.sellerName && pitch.pitchPolicies.sellerId && (
+                                    <div className={styles.policyItem}>
+                                        <div className={styles.policyIconWrap}>
+                                            <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>verified_user</span>
+                                        </div>
+                                        <div>
+                                            <span className={styles.policyLabel}>Seller Authenticity</span>
+                                            <span className={styles.policyValue}>
+                                                <strong>Name:</strong> {pitch.pitchPolicies.sellerName} <br />
+                                                <strong>ID:</strong> {pitch.pitchPolicies.sellerId}
+                                            </span>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

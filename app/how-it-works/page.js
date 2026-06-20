@@ -10,7 +10,7 @@ const JOURNEY_STEPS = [
         num: '01',
         icon: 'group_add',
         title: 'Join Your Community',
-        desc: 'Find your apartment complex, office, or friend group. Accept an invite or browse communities to get started.',
+        desc: 'Find your apartment complex, office, or friends group. Accept an invite or browse communities to get started.',
     },
     {
         num: '02',

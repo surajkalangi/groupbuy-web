@@ -9,7 +9,7 @@ const STEPS = [
     {
         num: '01',
         title: 'Join a Clan',
-        desc: 'Find your apartment complex, office, or friend group. Join your community in a verified Clan.',
+        desc: 'Find your apartment complex, office, or friends group. Join your community in a verified Clan.',
     },
     {
         num: '02',

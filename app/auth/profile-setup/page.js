@@ -58,7 +58,7 @@ export default function ProfileSetupPage() {
                 <div className={styles.header}>
                     <h1 className={styles.heading}>Complete your profile</h1>
                     <p className={styles.subtext}>
-                        Welcome to the GroupBuy community. Tell us a bit about yourself to start saving together with your circle.
+                        Welcome to the GroupBuy community. Tell us a bit about yourself to start saving together with your social circle.
                     </p>
                 </div>
 
