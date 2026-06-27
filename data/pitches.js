@@ -11,7 +11,7 @@ export const mockPitches = [
         image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80',
         gallery: [
             'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80',
-            'https://images.unsplash.com/photo-1688647030805-4b7128ddb381?w=800&q=80'
+            'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'
         ],
         productLink: '',
         price: 200000,
@@ -50,9 +50,10 @@ export const mockPitches = [
         title: 'Network School Malaysia - July Batch',
         category: 'experience',
         description: 'Join me for a month-long co-living and learning experience at the Network School (ns.com) in Malaysia for the entire month of July. The package includes shared accommodation, daily meals, gym access, and exclusive networking activities. We need 5 members to secure the group rate!',
-        image: 'https://images.unsplash.com/photo-1542281286-9e0a16bb7366?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80',
         gallery: [
-            'https://images.unsplash.com/photo-1542281286-9e0a16bb7366?w=800&q=80',
+            'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80',
+            'https://images.unsplash.com/photo-1577412647305-991150c7d163?w=800&q=80',
             'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&q=80'
         ],
         productLink: 'https://ns.com',

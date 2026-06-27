@@ -826,23 +826,25 @@
     align-items: center;
     justify-content: space-between;
     background-color: var(--surface-container-lowest);
-    border: 1px solid rgba(188, 202, 192, 0.3); /* outline-variant/30 */
+    border: 1px solid var(--outline-variant);
     border-radius: 1rem;
     padding: 0.75rem 1rem;
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: left;
+    min-height: 3rem;
 }
 
 .clanDropdownTrigger:focus {
     outline: none;
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 12%, transparent);
 }
 
 .clanChipsArea {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.375rem;
     align-items: center;
     flex: 1;
 }
@@ -855,13 +857,19 @@
 .clanChip {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
-    color: var(--primary);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.25rem 0.5rem;
+    gap: 0.375rem;
+    background-color: var(--surface-container);
+    color: var(--on-surface);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.3125rem 0.625rem;
     border-radius: 0.5rem;
+    border: 1px solid var(--outline-variant);
+    transition: background 0.15s ease;
+}
+
+.clanChip:hover {
+    background-color: var(--surface-container-high);
 }
 
 .clanMore {
@@ -875,28 +883,52 @@
     margin-top: 0.5rem;
     width: 100%;
     background-color: var(--surface-container-lowest);
-    border: 1px solid rgba(188, 202, 192, 0.2); /* outline-variant/20 */
+    border: 1px solid var(--outline-variant);
     border-radius: 1rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     animation: fadeInUp 0.15s ease both;
 }
 
 .clanDropdownList {
-    padding: 0.5rem;
+    padding: 0.375rem;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.125rem;
+    max-height: 205px; /* Tuned to show 4.5 options to hint at scrolling */
+    overflow-y: auto;
+    /* Custom Scrollbar for better visibility */
+    scrollbar-width: thin;
+    scrollbar-color: var(--outline) transparent;
+}
+
+.clanDropdownList::-webkit-scrollbar {
+    width: 6px;
+}
+
+.clanDropdownList::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 4px 0;
+}
+
+.clanDropdownList::-webkit-scrollbar-thumb {
+    background-color: var(--outline);
+    border-radius: 10px;
+}
+
+.clanDropdownList::-webkit-scrollbar-thumb:hover {
+    background-color: var(--on-surface-variant);
 }
 
 .clanDropdownItem {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem;
-    border-radius: 0.75rem;
+    padding: 0.625rem 0.75rem;
+    border-radius: 0.625rem;
     cursor: pointer;
     transition: background 0.15s ease;
+    border-left: 3px solid transparent;
 }
 
 .clanDropdownItem:hover {
@@ -904,19 +936,19 @@
 }
 
 .clanDropdownItemSelected {
-    background-color: color-mix(in srgb, var(--primary) 5%, transparent);
-    color: var(--primary);
-    font-weight: 700;
+    background-color: color-mix(in srgb, var(--primary) 6%, transparent);
+    border-left-color: var(--primary);
 }
 
 .clanDropdownItemName {
     font-size: 0.875rem;
     color: var(--on-surface);
+    font-weight: 500;
 }
 
 .clanDropdownItemSelected .clanDropdownItemName {
-    color: var(--primary);
-    font-weight: 700;
+    color: var(--on-surface);
+    font-weight: 600;
 }
 
 /* ── Review Card ── */

@@ -403,6 +403,17 @@ function CreatePitchForm() {
                                 />
                                 <div className={styles.radioRow}>
                                     <div className={styles.radioCol}>
+                                        <label className={styles.limitLabel}>VISIBILITY</label>
+                                        {[['public', 'Public'], ['private', 'Private']].map(([val, label]) => (
+                                            <label key={val} className={styles.radioOption}>
+                                                <input type="radio" name="visibility" value={val} checked={visibility === val} onChange={() => setVisibility(val)} className={styles.radioInput} />
+                                                {visibility === val && <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px' }}>radio_button_checked</span>}
+                                                {visibility !== val && <span className="material-symbols-outlined" style={{ color: 'var(--outline)', fontSize: '20px' }}>radio_button_unchecked</span>}
+                                                <span>{label}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                    <div className={styles.radioCol}>
                                         <label className={styles.limitLabel}>PAYMENT MODE</label>
                                         {[['upi', 'UPI Escrow'], ['cod', 'Cash on Delivery']].map(([val, label]) => (
                                             <label key={val} className={styles.radioOption}>
@@ -416,77 +427,63 @@ function CreatePitchForm() {
                                             </label>
                                         ))}
                                     </div>
-                                    <div className={styles.radioCol}>
-                                        <label className={styles.limitLabel}>VISIBILITY</label>
-                                        {[['public', 'Public'], ['private', 'Private']].map(([val, label]) => (
-                                            <label key={val} className={styles.radioOption}>
-                                                <input type="radio" name="visibility" value={val} checked={visibility === val} onChange={() => setVisibility(val)} className={styles.radioInput} />
-                                                {visibility === val && <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px' }}>radio_button_checked</span>}
-                                                {visibility !== val && <span className="material-symbols-outlined" style={{ color: 'var(--outline)', fontSize: '20px' }}>radio_button_unchecked</span>}
-                                                <span>{label}</span>
-                                            </label>
-                                        ))}
-
-                                        {/* Clan Selection Dropdown (visible when Private) */}
-                                        {visibility === 'private' && (
-                                            <div className={styles.clanSelectSection}>
-                                                <label className={styles.limitLabel}>Select Clan(s)</label>
-                                                <div className={styles.clanDropdownWrapper} ref={clanDropdownRef}>
-                                                    <button
-                                                        type="button"
-                                                        className={styles.clanDropdownTrigger}
-                                                        onClick={() => setShowClanDropdown(prev => !prev)}
-                                                    >
-                                                        <div className={styles.clanChipsArea}>
-                                                            {selectedClans.length === 0 && (
-                                                                <span className={styles.clanPlaceholder}>Choose clans...</span>
-                                                            )}
-                                                            {selectedClans.slice(0, 1).map(clanId => {
-                                                                const clan = mockClans.find(c => c.id === clanId);
-                                                                return clan ? (
-                                                                    <span key={clanId} className={styles.clanChip}>
-                                                                        {clan.name}
-                                                                        <span
-                                                                            className="material-symbols-outlined"
-                                                                            style={{ fontSize: '14px', cursor: 'pointer' }}
-                                                                            onClick={(e) => { e.stopPropagation(); removeClan(clanId); }}
-                                                                        >close</span>
-                                                                    </span>
-                                                                ) : null;
-                                                            })}
-                                                            {selectedClans.length > 1 && (
-                                                                <span className={styles.clanMore}>+{selectedClans.length - 1} more</span>
-                                                            )}
-                                                        </div>
-                                                        <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-variant)' }}>unfold_more</span>
-                                                    </button>
-
-                                                    {showClanDropdown && (
-                                                        <div className={styles.clanDropdownMenu}>
-                                                            <div className={styles.clanDropdownList}>
-                                                                {mockClans.map(clan => {
-                                                                    const isSelected = selectedClans.includes(clan.id);
-                                                                    return (
-                                                                        <div
-                                                                            key={clan.id}
-                                                                            className={`${styles.clanDropdownItem} ${isSelected ? styles.clanDropdownItemSelected : ''}`}
-                                                                            onClick={() => toggleClan(clan.id)}
-                                                                        >
-                                                                            <span className={styles.clanDropdownItemName}>{clan.name}</span>
-                                                                            {isSelected && (
-                                                                                <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)' }}>check_circle</span>
-                                                                            )}
-                                                                        </div>
-                                                                    );
-                                                                })}
-                                                            </div>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
                                 </div>
+                                
+                                {/* Clan Selection Dropdown (visible when Private) */}
+                                {visibility === 'private' && (
+                                    <div className={styles.clanSelectSection}>
+                                        <label className={styles.limitLabel}>Select Clan(s)</label>
+                                        <div className={styles.clanDropdownWrapper} ref={clanDropdownRef}>
+                                            <button
+                                                type="button"
+                                                className={styles.clanDropdownTrigger}
+                                                onClick={() => setShowClanDropdown(prev => !prev)}
+                                            >
+                                                <div className={styles.clanChipsArea}>
+                                                    {selectedClans.length === 0 && (
+                                                        <span className={styles.clanPlaceholder}>Choose clans...</span>
+                                                    )}
+                                                    {selectedClans.map(clanId => {
+                                                        const clan = mockClans.find(c => c.id === clanId);
+                                                        return clan ? (
+                                                            <span key={clanId} className={styles.clanChip}>
+                                                                {clan.name}
+                                                                <span
+                                                                    className="material-symbols-outlined"
+                                                                    style={{ fontSize: '14px', cursor: 'pointer' }}
+                                                                    onClick={(e) => { e.stopPropagation(); removeClan(clanId); }}
+                                                                >close</span>
+                                                            </span>
+                                                        ) : null;
+                                                    })}
+                                                </div>
+                                                <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-variant)' }}>unfold_more</span>
+                                            </button>
+
+                                            {showClanDropdown && (
+                                                <div className={styles.clanDropdownMenu}>
+                                                    <div className={styles.clanDropdownList}>
+                                                        {mockClans.map(clan => {
+                                                            const isSelected = selectedClans.includes(clan.id);
+                                                            return (
+                                                                <div
+                                                                    key={clan.id}
+                                                                    className={`${styles.clanDropdownItem} ${isSelected ? styles.clanDropdownItemSelected : ''}`}
+                                                                    onClick={() => toggleClan(clan.id)}
+                                                                >
+                                                                    <span className={styles.clanDropdownItemName}>{clan.name}</span>
+                                                                    {isSelected && (
+                                                                        <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)' }}>check_circle</span>
+                                                                    )}
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Review Summary */}
