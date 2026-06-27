@@ -38,8 +38,8 @@ const defaultUser = {
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-    const [authState, setAuthState] = useState(AUTH_STATES.LOGGED_IN);
-    const [currentUser, setCurrentUser] = useState(defaultUser);
+    const [authState, setAuthState] = useState(AUTH_STATES.GUEST);
+    const [currentUser, setCurrentUser] = useState(null);
     const [isHydrated, setIsHydrated] = useState(false);
     const [pendingRatingPitchId, setPendingRatingPitchId] = useState(null);
 

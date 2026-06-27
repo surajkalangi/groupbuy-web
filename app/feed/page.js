@@ -16,13 +16,6 @@ export default function HomeFeed() {
     const { isLoggedIn, isGuest, triggerRatingModal } = useAuth();
     const [activeFilter, setActiveFilter] = useState('all');
 
-    useEffect(() => {
-        if (isLoggedIn && !sessionStorage.getItem('hasSeenRatingModal')) {
-            triggerRatingModal('pitch-3');
-            sessionStorage.setItem('hasSeenRatingModal', 'true');
-        }
-    }, [isLoggedIn, triggerRatingModal]);
-
     const clanFilters = [
         { id: 'all', label: 'All Clans' },
         ...mockClans.map((c) => ({ id: c.id, label: c.name })),
