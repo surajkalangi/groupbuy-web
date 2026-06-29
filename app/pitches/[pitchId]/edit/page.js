@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { mockPitches } from '@/data/pitches';
 import { mockClans } from '@/data/clans';
@@ -24,7 +24,7 @@ export default function EditPitchPage() {
     const originalCostPerUnit = pitch.costPerUnit || 0;
     const originalMinOrder = pitch.minOrder || 5;
 
-    const [formData, setFormData] = useState({
+    const initialFormData = useMemo(() => ({
         title: pitch.title,
         description: pitch.description || '',
         productLink: pitch.productLink || '',
@@ -45,7 +45,45 @@ export default function EditPitchPage() {
         paymentMode: pitch.paymentMode || 'upi',
         visibility: pitch.visibility || 'public',
         selectedClans: pitch.clanId ? [pitch.clanId] : [],
-    });
+    }), [pitch]);
+
+    const [formData, setFormData] = useState(initialFormData);
+
+    const changedFields = useMemo(() => {
+        const changes = [];
+        const labelMap = {
+            title: 'Title',
+            description: 'Description',
+            productLink: 'Product Link',
+            sellerName: 'Seller Name',
+            sellerId: 'Seller Verification',
+            deadline: 'Deadline',
+            pickupInstructions: 'Pickup Instructions',
+            returnPolicy: 'Return Policy',
+            returnPolicyCustom: 'Custom Return Policy',
+            cancellationFeePercent: 'Cancellation Fee',
+            discussionEnabled: 'Q&A Board',
+            estimatedSavings: 'Estimated Savings',
+            costPerUnit: 'Cost per Unit',
+            minOrder: 'Min. Order Goal',
+            maxCapacity: 'Max Capacity',
+            paymentMode: 'Payment Mode',
+            visibility: 'Visibility'
+        };
+
+        Object.keys(initialFormData).forEach(key => {
+            if (key === 'selectedClans') {
+                const initSet = new Set(initialFormData.selectedClans);
+                const currSet = new Set(formData.selectedClans);
+                if (initSet.size !== currSet.size || [...initSet].some(id => !currSet.has(id))) {
+                    changes.push('Selected Clans');
+                }
+            } else if (formData[key] !== initialFormData[key]) {
+                changes.push(labelMap[key] || key);
+            }
+        });
+        return changes;
+    }, [formData, initialFormData]);
 
     const [showClanDropdown, setShowClanDropdown] = useState(false);
     const clanDropdownRef = useRef(null);
@@ -676,7 +714,7 @@ export default function EditPitchPage() {
             {/* Sticky Action Footer */}
             <div className={styles.stickyFooter}>
                 <div className={styles.stickyInner}>
-                    <button type="button" className={styles.saveBtn} onClick={handleSave}>
+                    <button type="button" className={styles.saveBtn} onClick={handleSave} disabled={changedFields.length === 0}>
                         <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>save</span>
                         Save Changes
                     </button>

@@ -73,6 +73,11 @@ function OTPContent() {
                         Enter it below to secure your community access.
                     </p>
 
+                    <div className={styles.prototypeNotice}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '1.25rem', color: 'var(--primary)' }}>info</span>
+                        <span>This is a prototype. No actual OTP is sent. You can just click <strong>"Verify Code"</strong>.</span>
+                    </div>
+
                     <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
                         {/* OTP Inputs */}
                         <div className={styles.otpRow}>

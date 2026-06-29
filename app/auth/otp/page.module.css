@@ -96,6 +96,21 @@
     font-weight: 700;
 }
 
+.prototypeNotice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--surface-container-high);
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--on-surface-variant);
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 1px dashed rgba(188, 202, 192, 0.4);
+}
+
 .form {
     display: flex;
     flex-direction: column;
