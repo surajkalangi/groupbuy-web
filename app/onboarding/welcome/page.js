@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import AuthGuard from '@/components/auth/AuthGuard';
 import { useAuth } from '@/context/AuthContext';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 export default function WelcomePage() {
@@ -14,9 +15,9 @@ export default function WelcomePage() {
     return (
         <AuthGuard>
             <div className={styles.page}>
-                {/* Top brand bar (transparent for this page to match design) */}
+                {/* Top brand bar */}
                 <header className={styles.topBar}>
-                    <Link href="/feed" className={styles.brandName}>GroupBuy</Link>
+                    <Logo size="md" href="/feed" />
                     <div className={styles.topBarSpacer} />
                 </header>
 
@@ -33,7 +34,7 @@ export default function WelcomePage() {
 
                     <div className={styles.headerText}>
                         <h1 className={styles.heading}>
-                            Welcome to GroupBuy, <span className={styles.nameHighlight}>{firstName}!</span>
+                            Welcome to LetsStack, <span className={styles.nameHighlight}>{firstName}!</span>
                         </h1>
                         <p className={styles.subtext}>
                             Your profile is set. You're now part of our platform where communities pool their buying power to unlock exceptional wholesale savings.
@@ -102,7 +103,7 @@ export default function WelcomePage() {
                     {/* Footer Link */}
                     <div className={styles.footerContainer}>
                         <Link href="/how-it-works-2" className={styles.learnLink}>
-                            Still curious? Learn how GroupBuy works
+                            Still curious? Learn how LetsStack works
                         </Link>
                     </div>
                 </main>

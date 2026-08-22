@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 export default function ImpactPage() {
@@ -13,7 +14,7 @@ export default function ImpactPage() {
         <div className={styles.page}>
             {/* ── Header ── */}
             <header className={styles.header}>
-                <Link href="/" className={styles.logo}>GroupBuy</Link>
+                <Logo size="md" href="/" />
                 <nav className={styles.headerNav}>
                     <Link href="/" className={styles.navLink}>Home</Link>
                     <Link href="/how-it-works-2" className={styles.navLink}>How it works</Link>
@@ -99,10 +100,10 @@ export default function ImpactPage() {
                         <div className={styles.storyText}>
                             <h2 className={styles.storyTitle}>Farm to Community. Directly.</h2>
                             <p className={styles.storyDesc}>
-                                We are shifting the paradigm of e-commerce. Instead of food sitting in warehouses or traveling thousands of miles, GroupBuy connects your community directly to the source. Produce is harvested only after a Pitch is fully backed, ensuring zero food waste and maximum freshness.
+                                We are shifting the paradigm of e-commerce. Instead of food sitting in warehouses or traveling thousands of miles, LetsStack connects your community directly to the source. Produce is harvested only after a Pool is fully backed, ensuring zero food waste and maximum freshness.
                             </p>
                             <div className={styles.storyQuote}>
-                                "Since partnering with GroupBuy communities, we've eliminated our retail overhead. We know exactly how much to harvest, and it goes straight to the community."
+                                "Since partnering with LetsStack communities, we've eliminated our retail overhead. We know exactly how much to harvest, and it goes straight to the community."
                             </div>
                             <div className={styles.storyAuthor}>
                                 <strong>Rajesh K.</strong>
@@ -125,7 +126,7 @@ export default function ImpactPage() {
                         <div className={styles.storyText}>
                             <h2 className={styles.storyTitle}>Rebuilding the Commons.</h2>
                             <p className={styles.storyDesc}>
-                                Modern living has isolated us. GroupBuy isn't just about saving money; it's about giving people in your trusted circle a reason to interact. When you pick up your order from the designated hub, you connect with the people you share your community with.
+                                Modern living has isolated us. LetsStack isn't just about saving money; it's about giving people in your trusted circle a reason to interact. When you pick up your order from the designated hub, you connect with the people you share your community with.
                             </p>
                             <div className={styles.storyQuote}>
                                 "I've been in my apartment complex for 3 years, but I only started knowing my neighbors after we started coordinating our weekly organic fruit orders."
@@ -153,7 +154,7 @@ export default function ImpactPage() {
             {/* ── Footer ── */}
             <footer className={styles.footer}>
                 <div className={styles.footerLeft}>
-                    © 2026 GroupBuy. Community Commerce.
+                    © 2026 LetsStack. Community Commerce.
                 </div>
                 <div className={styles.footerRight}>
                     <Link href="/terms">Terms</Link>

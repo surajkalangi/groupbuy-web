@@ -17,15 +17,16 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "GroupBuy — Save More, Together",
+  title: "LetsStack — Let's Stack. Let's Save Together.",
   description:
-    "Community-driven group buying platform for Indian consumers. Pool with your trusted circles, save together with secure UPI escrow payments.",
+    "LetsStack is a community-driven group buying platform for Indian consumers. Pool orders with your trusted apartment societies, offices, and hobby circles to unlock wholesale discounts.",
   keywords: [
+    "LetsStack",
     "group buying",
     "bulk buying",
-    "community shopping",
+    "community pooling",
     "save money",
-    "UPI",
+    "UPI escrow",
     "India",
   ],
   manifest: "/manifest.json",

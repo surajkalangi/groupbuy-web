@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import GuestGuard from '@/components/auth/GuestGuard';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 export default function LandingPage() {
@@ -13,7 +14,7 @@ export default function LandingPage() {
         <main className={styles.page}>
             {/* Header */}
             <header className={styles.header}>
-                <div className={styles.logo}>GroupBuy</div>
+                <Logo size="md" href="/" />
                 <nav className={styles.headerNav}>
                     <Link href="/how-it-works-2" className={styles.navLink}>How it works</Link>
                     <Link href="/impact" className={styles.navLink}>Our Impact</Link>
@@ -25,11 +26,11 @@ export default function LandingPage() {
                 <div className={styles.heroContent}>
                     <div className={styles.tagLabel}>COMMUNITY COMMERCE</div>
                     <h1 className={styles.headline}>
-                        Save More,<br />
-                        <span className={styles.italicGreen}>Together</span>
+                        Let's Stack.<br />
+                        <span className={styles.italicGreen}>Let's Save Together.</span>
                     </h1>
                     <p className={styles.subtext}>
-                        Join trusted circles in your apartment or office. Buy in bulk, split costs, and unlock wholesale prices on everyday essentials — all with secure UPI payments.
+                        Join trusted circles in your apartment or office. Pool orders, split bulk costs, and unlock direct wholesale prices — all with secure UPI escrow payments.
                     </p>
                     <Link href="/auth/verify" className={styles.signInBtn}>
                         Sign in <span className="material-symbols-outlined">arrow_forward</span>
@@ -122,7 +123,7 @@ export default function LandingPage() {
             {/* Footer */}
             <footer className={styles.footer}>
                 <div className={styles.footerLeft}>
-                    © 2026 GroupBuy. Community Commerce. v1.0.2
+                    © 2026 LetsStack. Community Commerce. v1.0.2
                 </div>
                 <div className={styles.footerRight}>
                     <Link href="/terms">Terms of Service</Link>

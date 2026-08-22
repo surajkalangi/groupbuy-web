@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { globalStore } from '@/utils/store';
+import Logo from '@/components/ui/Logo';
 import styles from './Navbar.module.css';
 
 export default function Navbar({ children, backHref }) {
@@ -38,9 +39,7 @@ export default function Navbar({ children, backHref }) {
                             <span className="material-symbols-outlined">arrow_back</span>
                         </Link>
                     )}
-                    <Link href="/feed" className={styles.logo}>
-                        <span className={styles.logoText}>GroupBuy</span>
-                    </Link>
+                    <Logo size="md" href="/feed" />
 
                     <nav className={styles.desktopNav}>
                         <Link
@@ -53,7 +52,7 @@ export default function Navbar({ children, backHref }) {
                             href="/pitches/my"
                             className={`${styles.navLink} ${pathname.startsWith('/pitches') ? styles.active : ''}`}
                         >
-                            Pitches
+                            Pools
                         </Link>
                         <Link
                             href="/clans/browse"
@@ -78,7 +77,7 @@ export default function Navbar({ children, backHref }) {
                                 <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--on-surface-muted)' }}>search</span>
                                 <input
                                     type="search"
-                                    placeholder="Search pitches, products, or clans..."
+                                    placeholder="Search pools, products, or clans..."
                                     className={styles.inlineSearchInput}
                                 />
                             </div>

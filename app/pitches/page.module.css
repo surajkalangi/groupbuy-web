@@ -149,7 +149,8 @@
 .cardImage {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #ffffff;
 }
 
 .cardImagePlaceholder {
@@ -867,6 +868,31 @@
     ring: 2px solid rgba(5, 150, 105, 0.05);
 }
 
+.savedHostAvatarWrap {
+    position: relative;
+    display: inline-flex;
+}
+
+.savedHostRating {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--secondary, #855300);
+}
+
+.vendorCheck {
+    position: absolute;
+    bottom: -2px;
+    right: -3px;
+    background-color: #ffffff;
+    color: #0284c7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 .savedHostAvatarPlaceholder {
     width: 40px;
     height: 40px;
@@ -909,6 +935,16 @@
 .savedBtnView:hover {
     background: var(--primary);
     color: white;
+}
+
+.savedBtnViewExpired {
+    background: var(--surface-container-high);
+    color: var(--on-surface-variant);
+}
+
+.savedBtnViewExpired:hover {
+    background: var(--surface-container-highest);
+    color: var(--on-surface);
 }
 
 .savedBtnDisabled {
@@ -1496,4 +1532,42 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+}
+
+.topTabs {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-1);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--outline-variant);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-6);
+    width: fit-content;
+}
+
+.topTab {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-5);
+    border: none;
+    background: transparent;
+    color: var(--on-surface-variant);
+    font-family: var(--font-display);
+    font-size: var(--font-sm);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.topTab:hover {
+    color: var(--on-surface);
+}
+
+.topTabActive {
+    background: var(--surface);
+    color: var(--primary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }

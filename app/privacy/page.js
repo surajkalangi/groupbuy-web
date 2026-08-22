@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import Logo from '@/components/ui/Logo';
 import styles from '../legal.module.css';
 
 export default function PrivacyPage() {
     return (
         <div className={styles.page}>
             <header className={styles.header}>
-                <Link href="/" className={styles.logo}>GroupBuy</Link>
+                <Logo size="md" href="/" />
                 <Link href="/" className={styles.navLink}>Back to Home</Link>
             </header>
             <main className={styles.mainContent}>
@@ -15,7 +16,7 @@ export default function PrivacyPage() {
                 <section className={styles.section}>
                     <h2 className={styles.sectionTitle}>1. Data We Collect</h2>
                     <p className={styles.text}>
-                        GroupBuy is built on trust and community. To facilitate community-driven group buying, we collect:
+                        LetsStack is built on trust and community. To facilitate community-driven group buying, we collect:
                     </p>
                     <ul className={styles.list}>
                         <li className={styles.listItem}><strong>Identity & Contact:</strong> Name, phone number, and email address for account creation and delivery updates.</li>
@@ -27,7 +28,7 @@ export default function PrivacyPage() {
                 <section className={styles.section}>
                     <h2 className={styles.sectionTitle}>2. How We Use Your Data</h2>
                     <p className={styles.text}>
-                        Your data is used strictly to provide the GroupBuy service: coordinating bulk orders, notifying you when a Pitch is successful, and informing you when your order is ready for pickup at your community hub.
+                        Your data is used strictly to provide the LetsStack service: coordinating bulk orders, notifying you when a Pool is successful, and informing you when your order is ready for pickup at your community hub.
                     </p>
                 </section>
 
@@ -39,7 +40,7 @@ export default function PrivacyPage() {
                 </section>
             </main>
             <footer className={styles.footer}>
-                © 2026 GroupBuy. Community Commerce.
+                © 2026 LetsStack. Community Commerce.
             </footer>
         </div>
     );

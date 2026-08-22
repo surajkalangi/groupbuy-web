@@ -1187,3 +1187,111 @@
     text-align: center;
     opacity: 0.7;
 }
+
+/* ── Dynamic Visibility Derived Card ── */
+.visibilityDerivedCard {
+    margin-top: 1rem;
+    padding: 1.125rem 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--outline-variant);
+    background-color: var(--surface-container-lowest);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.visibilityDerivedCard[data-type="public"] {
+    background: linear-gradient(135deg, rgba(0, 135, 90, 0.05) 0%, rgba(0, 135, 90, 0.02) 100%);
+    border-color: rgba(0, 135, 90, 0.25);
+}
+
+.visibilityDerivedCard[data-type="restricted"] {
+    background: linear-gradient(135deg, rgba(192, 86, 33, 0.06) 0%, rgba(192, 86, 33, 0.02) 100%);
+    border-color: rgba(192, 86, 33, 0.25);
+}
+
+.visibilityDerivedCard[data-type="unlisted"] {
+    background: var(--surface-container-low);
+    border-color: var(--outline-variant);
+}
+
+.visHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.visTitle {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    flex: 1;
+}
+
+.visBadgePublic {
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(0, 135, 90, 0.14);
+    color: #00704a;
+}
+
+.visBadgeRestricted {
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(192, 86, 33, 0.14);
+    color: #c05621;
+}
+
+.visBadgeUnlisted {
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: var(--surface-container-highest);
+    color: var(--on-surface-variant);
+}
+
+.visDesc {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--on-surface-variant);
+    margin: 0;
+}
+
+.clanDropdownItemMeta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.clanTypeBadgeOpen {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.125rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(0, 135, 90, 0.12);
+    color: #00704a;
+}
+
+.clanTypeBadgeRestricted {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.125rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(192, 86, 33, 0.12);
+    color: #c05621;
+}
+

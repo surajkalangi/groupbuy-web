@@ -29,14 +29,17 @@ export default function DiscoverPage() {
     // All public pitches for discovery
     const publicPitches = mockPitches
         .filter(p => p.visibility === 'public' && (p.status === 'active' || p.status === 'activated'))
-        .map(p => ({
-            ...p,
-            productName: p.title,
-            clanName: mockClans.find(c => c.id === p.clanId)?.name,
-            hostName: p.host?.name || 'Unknown Host',
-            hostRating: p.host?.rating || 4.5,
-            hostAvatar: mockUsers.find(u => u.id === p.hostId)?.avatarUrl || p.host?.avatarUrl,
-        }));
+        .map(p => {
+            const pClanId = p.clanIds?.[0] || p.clanId;
+            return {
+                ...p,
+                productName: p.title,
+                clanName: mockClans.find(c => c.id === pClanId)?.name,
+                hostName: p.host?.name || 'Unknown Host',
+                hostRating: p.host?.rating || 4.5,
+                hostAvatar: mockUsers.find(u => u.id === p.hostId)?.avatarUrl || p.host?.avatarUrl,
+            };
+        });
 
     const filteredPitches = publicPitches.filter(p => {
         // Category filter
@@ -60,7 +63,7 @@ export default function DiscoverPage() {
                     {/* ── Hero Header ── */}
                     <div className={styles.heroHeader}>
                         <h1 className={styles.heading}>
-                            Explore Nearby <span className={styles.headingAccent}>Community Pitches</span>
+                            Explore Nearby <span className={styles.headingAccent}>Community Pools</span>
                         </h1>
                         <p className={styles.subtext}>
                             Join forces with your community to unlock better prices on premium essentials. Trust-verified and community-led.

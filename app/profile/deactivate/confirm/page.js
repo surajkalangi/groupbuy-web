@@ -4,8 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import styles from './page.module.css';
 import AuthGuard from '@/components/auth/AuthGuard';
+import Logo from '@/components/ui/Logo';
+import styles from './page.module.css';
 
 export default function ConfirmDeletePage() {
     const router = useRouter();
@@ -27,7 +28,7 @@ export default function ConfirmDeletePage() {
             {/* Fixed glassmorphic navbar */}
             <nav className={styles.navbar}>
                 <div className={styles.navInner}>
-                    <Link href={isLoggedIn ? '/feed' : '/'} className={styles.logo}>GroupBuy</Link>
+                    <Logo size="md" href={isLoggedIn ? '/feed' : '/'} />
                     <div className={styles.navActions}>
                         <button className={styles.helpBtn}>
                             <span className="material-symbols-outlined">help_outline</span>

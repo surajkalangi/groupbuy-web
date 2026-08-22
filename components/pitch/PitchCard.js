@@ -4,12 +4,17 @@ import Avatar from '@/components/ui/Avatar';
 import ProgressBar from '@/components/ui/ProgressBar';
 import { useState } from 'react';
 import { pluralizeUnit } from '@/utils/pluralize';
+import { mockClans } from '@/data/clans';
 import styles from './PitchCard.module.css';
 import { useAuth } from '@/context/AuthContext';
 
 export default function PitchCard({ pitch, showClanBadge = false }) {
     const { isClanMember } = useAuth();
-    const isMember = isClanMember(pitch.clanId);
+    const pitchClanIds = pitch.clanIds || (pitch.clanId ? [pitch.clanId] : []);
+    const associatedClans = pitchClanIds.map(id => mockClans.find(c => c.id === id)).filter(Boolean);
+    const noClanTagged = pitchClanIds.length === 0;
+    const isDirectLinkOnly = noClanTagged && pitch.visibility === 'private';
+    const isMember = noClanTagged || pitchClanIds.some(id => isClanMember(id));
     const [isSaved, setIsSaved] = useState(pitch.isSaved || false);
 
     const toggleSave = (e) => {
@@ -18,11 +23,15 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
         setIsSaved(!isSaved);
     };
 
-    const urgencyLabel = pitch.daysLeft === 0
-        ? 'Ends Today'
-        : pitch.daysLeft === 1
-            ? 'Ends Tomorrow'
-            : `${pitch.daysLeft} Days Left`;
+    const urgencyLabel = pitch.timeRemaining
+        ? pitch.timeRemaining
+        : pitch.hoursLeft !== undefined
+            ? `${pitch.hoursLeft}h Left`
+            : pitch.daysLeft === 0
+                ? 'Ends Today'
+                : pitch.daysLeft === 1
+                    ? 'Ends Tomorrow'
+                    : `${pitch.daysLeft} Days Left`;
 
     const spotsLeft = pitch.maxCapacity - pitch.committedUnits;
     const isAlmostFull = spotsLeft <= 2 && spotsLeft > 0;
@@ -44,8 +53,18 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                         </svg>
                     </div>
                 )}
-                {showClanBadge && pitch.clanName && (
-                    <span className={styles.clanBadge}>{pitch.clanName}</span>
+                {showClanBadge && (
+                    isDirectLinkOnly ? (
+                        <span className={styles.clanBadge} style={{ background: 'rgba(99, 102, 241, 0.18)', color: 'var(--primary)', fontWeight: 600 }}>
+                            🔗 Direct Pool
+                        </span>
+                    ) : associatedClans.length > 0 ? (
+                        <span className={styles.clanBadge}>
+                            {associatedClans[0].name}{associatedClans.length > 1 ? ` +${associatedClans.length - 1}` : ''}
+                        </span>
+                    ) : pitch.clanName ? (
+                        <span className={styles.clanBadge}>{pitch.clanName}</span>
+                    ) : null
                 )}
                 <span className={`${styles.timeBadge} ${pitch.daysLeft <= 1 ? styles.urgent : ''}`}>
                     ⏱ {urgencyLabel}
@@ -53,7 +72,7 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                 <button 
                     className={`${styles.bookmarkBtn} ${isSaved ? styles.bookmarkBtnActive : ''}`} 
                     onClick={toggleSave}
-                    aria-label={isSaved ? "Remove from saved" : "Save pitch"}
+                    aria-label={isSaved ? "Remove from saved" : "Save pool"}
                 >
                     <span className="material-symbols-outlined" style={isSaved ? { fontVariationSettings: "'FILL' 1" } : {}}>
                         bookmark
@@ -66,13 +85,20 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                 <div className={styles.titleRow}>
                     <h3 className={styles.title}>{pitch.productName || pitch.title}</h3>
                     <span className={styles.price}>
-                        ₹{pitch.costPerUnit}<span className={styles.unit}>/{pitch.unitType}</span>
+                        ₹{Number(pitch.costPerUnit || 0).toLocaleString('en-IN')}<span className={styles.unit}>/{pitch.unitType}</span>
                     </span>
                 </div>
 
                 {(pitch.hostName || pitch.host?.name) && (
                     <div className={styles.hostRow}>
-                        <Avatar name={pitch.hostName || pitch.host?.name} src={pitch.hostAvatar || pitch.host?.avatarUrl} size="sm" />
+                        <div className={styles.hostAvatarWrapper}>
+                            <Avatar name={pitch.hostName || pitch.host?.name} src={pitch.hostAvatar || pitch.host?.avatarUrl} size="sm" />
+                            {(pitch.host?.isVerifiedVendor || pitch.isVerifiedVendor) && (
+                                <span className={styles.vendorCheck} title="Verified Direct Manufacturer / Brand">
+                                    <span className="material-symbols-outlined" style={{ fontSize: '12px', fontVariationSettings: "'FILL' 1" }}>verified</span>
+                                </span>
+                            )}
+                        </div>
                         <span className={styles.hostText}>
                             Host: <strong>{pitch.hostName || pitch.host?.name}</strong>
                         </span>
@@ -107,8 +133,8 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                     {isMember
                         ? (isFull 
                             ? 'Join Waitlist' 
-                            : (isAlmostFull ? `Join Fast - ${spotsLeft} Spot${spotsLeft > 1 ? 's' : ''} Left!` : 'Join Pitch'))
-                        : 'View Pitch Details'}
+                            : (isAlmostFull ? `Join Fast - ${spotsLeft} Spot${spotsLeft > 1 ? 's' : ''} Left!` : 'Join Pool'))
+                        : 'View Pool Details'}
                 </button>
             </div>
         </Link>

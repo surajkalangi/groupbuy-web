@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
 import JoinPitchModal from '@/components/pitch/JoinPitchModal';
 import { mockPitches } from '@/data/pitches';
+import { mockClans } from '@/data/clans';
 import { pluralizeUnit } from '@/utils/pluralize';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
@@ -35,22 +36,49 @@ export default function PitchDetail({ params }) {
     const gallery = pitch.gallery && pitch.gallery.length > 0 ? pitch.gallery : (pitch.image ? [pitch.image] : []);
     const [activeSlide, setActiveSlide] = useState(0);
 
-    const isExpired = pitch.status === 'expired' || (pitch.daysLeft <= 0 && pitch.status === 'active');
+    const isExpired = pitch.status === 'expired' || (pitch.daysLeft < 0 && pitch.status === 'active');
     const isUnsuccessful = isExpired && !goalMet;
     const isActivated = pitch.status === 'activated';
-    const isMemberOfClan = isClanMember(pitch.clanId);
+    
+    // Clan association logic
+    const pitchClanIds = pitch.clanIds || (pitch.clanId ? [pitch.clanId] : []);
+    const pitchClans = pitchClanIds.map(id => mockClans.find(c => c.id === id)).filter(Boolean);
+    const noClanTagged = pitchClanIds.length === 0;
+    const isDirectLinkOnly = noClanTagged && pitch.visibility === 'private';
+    const isMultiClan = pitchClanIds.length > 1;
+    
+    // JSX helper: renders clan names with individual bold styling and natural conjunctions
+    // e.g. <b>Clan A</b>, <b>Clan B</b> and <b>Clan C</b>
+    const formatClanListJsx = (clans) => {
+        if (!clans.length) return null;
+        if (clans.length === 1) return <strong>{clans[0].name}</strong>;
+        return clans.map((c, i) => (
+            <span key={c.id}>
+                {i > 0 && (i === clans.length - 1 ? ' and ' : ', ')}
+                <strong>{c.name}</strong>
+            </span>
+        ));
+    };
+
+    // Viewer-personalized restricted clan detection
+    const viewerRestrictedClans = pitchClans.filter(c => (c.privacy === 'private' || c.privacy === 'approval_required') && isClanMember(c.id));
+    const viewerBelongsToRestrictedClan = viewerRestrictedClans.length > 0;
+    const otherClans = pitchClans.filter(c => !viewerRestrictedClans.some(vc => vc.id === c.id));
+    const allViewerClansAreRestricted = viewerBelongsToRestrictedClan && otherClans.length === 0;
+    const isMemberOfClan = noClanTagged || pitchClanIds.some(id => isClanMember(id));
+    const primaryClanId = pitchClanIds[0] || null;
 
     // Determine CTA state
     const getCtaState = () => {
         if (isGuest) {
             return { label: 'Sign in to Participate', disabled: false, variant: 'active', action: 'sign_in' };
         }
-        if (!isMemberOfClan) {
+        if (!isMemberOfClan && !noClanTagged) {
             return { label: 'Join Clan to Participate', disabled: false, variant: 'active', action: 'join_clan' };
         }
         if (hasJoined) return { label: 'Already Joined', disabled: true, variant: 'joined' };
         if (onWaitlist) return { label: 'On Waitlist', disabled: true, variant: 'waitlist' };
-        if (isUnsuccessful) return { label: 'Pitch Unsuccessful', disabled: true, variant: 'unsuccessful' };
+        if (isUnsuccessful) return { label: 'Pool Unsuccessful', disabled: true, variant: 'unsuccessful' };
         if (isExpired) return { label: 'Expired', disabled: true, variant: 'expired' };
         if (isFull || isActivated) return { label: 'Join Waitlist', disabled: false, variant: 'waitlist', action: 'join_waitlist' };
         return { label: "I'm In", disabled: false, variant: 'active', action: 'join_pitch' };
@@ -63,8 +91,8 @@ export default function PitchDetail({ params }) {
 
     const handleShare = async () => {
         const shareData = {
-            title: `GroupBuy: ${pitch.title}`,
-            text: `Join me on this group buy for ${pitch.title} — ₹${pitch.costPerUnit}/${pitch.unitType}. Only ${spotsLeft} spots left!`,
+            title: `LetsStack: ${pitch.title}`,
+            text: `Join me on this group pool for ${pitch.title} — ₹${pitch.costPerUnit}/${pitch.unitType}. Only ${spotsLeft} spots left!`,
             url: typeof window !== 'undefined' ? window.location.href : '',
         };
         if (navigator.share) {
@@ -117,7 +145,7 @@ export default function PitchDetail({ params }) {
                     {/* Countdown Badge */}
                     <div className={`${styles.countdownBadge} ${isUnsuccessful ? styles.badgeUnsuccessful : ''}`}>
                         <span className="material-symbols-outlined" style={{ fontSize: '16px', fontVariationSettings: "'FILL' 1" }}>{isUnsuccessful ? 'cancel' : 'timer'}</span>
-                        {isUnsuccessful ? 'Unsuccessful' : isExpired ? 'Expired' : pitch.daysLeft > 0 ? `${pitch.daysLeft}d remaining` : 'Ends today'}
+                        {isUnsuccessful ? 'Unsuccessful' : isExpired ? 'Expired' : pitch.timeRemaining || (pitch.hoursLeft !== undefined ? `${pitch.hoursLeft}h remaining` : pitch.daysLeft > 0 ? `${pitch.daysLeft}d remaining` : 'Ends today')}
                     </div>
 
                     {/* Top-Right Action Buttons */}
@@ -167,6 +195,27 @@ export default function PitchDetail({ params }) {
                     {/* Header & Description */}
                     <div className={styles.cardHeader}>
                         <div>
+                            {/* Clan Badges / Direct Link-Only Notice */}
+                            <div className={styles.clanTagsRow}>
+                                {isDirectLinkOnly ? (
+                                    <div className={styles.directPoolBadge}>
+                                        <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>link</span>
+                                        <span>Direct Pool • Private Link Only</span>
+                                    </div>
+                                ) : pitchClans.length > 0 ? (
+                                    pitchClans.map(clan => (
+                                        <button 
+                                            key={clan.id} 
+                                            type="button"
+                                            className={styles.clanTagBadge}
+                                            onClick={() => router.push(`/clans/${clan.id}`)}
+                                        >
+                                            <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>groups</span>
+                                            <span>{clan.name}</span>
+                                        </button>
+                                    ))
+                                ) : null}
+                            </div>
                             <h1 className={styles.pitchTitle}>{pitch.title}</h1>
                         </div>
                         <div className={styles.priceBox}>
@@ -186,14 +235,23 @@ export default function PitchDetail({ params }) {
                                 ) : (
                                     <div className={styles.hostAvatar}>{pitch.host.name.charAt(0)}</div>
                                 )}
-                                <div className={styles.verifiedDot}>
-                                    <span className="material-symbols-outlined" style={{ fontSize: '12px', color: 'white', fontVariationSettings: "'FILL' 1" }}>verified</span>
-                                </div>
+                                {(pitch.host?.isVerifiedVendor || pitch.isVerifiedVendor) && (
+                                    <div className={styles.verifiedDot} title="Verified Direct Brand / Manufacturer">
+                                        <span className="material-symbols-outlined" style={{ fontSize: '12px', color: 'white', fontVariationSettings: "'FILL' 1" }}>verified</span>
+                                    </div>
+                                )}
                             </div>
                             <div>
                                 <div className={styles.hostNameRow}>
                                     <span className={styles.hostName}>{pitch.host.name}</span>
-                                    <span className={styles.verifiedBadge}>VERIFIED HOST</span>
+                                    {pitch.host.isVerifiedVendor ? (
+                                        <span className={styles.verifiedVendorBadge} title="Verified Direct Brand / Manufacturer">
+                                            <span className="material-symbols-outlined" style={{ fontSize: '13px', fontVariationSettings: "'FILL' 1" }}>storefront</span>
+                                            VERIFIED BRAND
+                                        </span>
+                                    ) : (
+                                        <span className={styles.verifiedBadge}>VERIFIED HOST</span>
+                                    )}
                                 </div>
                                 <div className={styles.hostRating}>
                                     <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--secondary)', fontVariationSettings: "'FILL' 1" }}>star</span>
@@ -211,7 +269,7 @@ export default function PitchDetail({ params }) {
                     <div className={styles.progressSection}>
                         <div className={styles.progressTop}>
                             <div>
-                                <span className={styles.progressSubLabel}>Pitch Progress</span>
+                                <span className={styles.progressSubLabel}>Pool Progress</span>
                                 <span className={styles.progressMain}>
                                     {goalMet
                                         ? `${committedUnits} of ${pitch.maxCapacity} filled (Goal Met)`
@@ -261,12 +319,12 @@ export default function PitchDetail({ params }) {
                         </div>
                     </div>
 
-                    {/* Pitch Policies */}
+                    {/* Pool Policies */}
                     {pitch.pitchPolicies && (
                         <div className={styles.policiesCard}>
                             <div className={styles.policiesHeader}>
                                 <span className="material-symbols-outlined" style={{ fontSize: '1.25rem', color: 'var(--primary)' }}>policy</span>
-                                <h3 className={styles.policiesTitle}>Pitch Policies</h3>
+                                <h3 className={styles.policiesTitle}>Pool Policies</h3>
                             </div>
                             <div className={styles.policiesGrid}>
                                 {/* Return Policy */}
@@ -338,9 +396,33 @@ export default function PitchDetail({ params }) {
                     {isMemberOfClan ? (
                         <div className={styles.discussionSection}>
                             <div className={styles.discussionHeader}>
-                                <h3 className={styles.discussionTitle}>Pitch Discussion</h3>
+                                <h3 className={styles.discussionTitle}>Pool Discussion</h3>
                                 <span className={styles.messageBadge}>{pitch.discussion.length} Messages</span>
                             </div>
+                            {/* Community discussion privacy awareness / audience disclosure */}
+                            {isMultiClan && (
+                                viewerBelongsToRestrictedClan ? (
+                                    <div className={styles.multiClanNotice}>
+                                        <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>shield</span>
+                                        <span>
+                                            {allViewerClansAreRestricted ? (
+                                                /* All tagged clans are restricted and user is in all of them */
+                                                <><strong>Privacy Reminder:</strong> This discussion is shared across {formatClanListJsx(pitchClans)} members. Please avoid sharing community-specific details like flat numbers, employee IDs, or internal info.</>
+                                            ) : (
+                                                /* User is in some restricted clans, but other clans also exist */
+                                                <><strong>Privacy Reminder:</strong> You are participating from {formatClanListJsx(viewerRestrictedClans)}, but this discussion is also visible to {formatClanListJsx(otherClans)} members. Please avoid sharing sensitive details like flat numbers, employee IDs, or internal info.</>
+                                            )}
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <div className={styles.multiClanTransparencyPill}>
+                                        <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>groups</span>
+                                        <span>
+                                            Shared discussion across {formatClanListJsx(pitchClans)} clans.
+                                        </span>
+                                    </div>
+                                )
+                            )}
                             <div className={styles.messages}>
                                 {pitch.discussion.map(msg => (
                                     <div key={msg.id} className={`${styles.messageRow} ${msg.isHost ? styles.messageRowHost : ''}`}>
@@ -367,7 +449,7 @@ export default function PitchDetail({ params }) {
                     ) : (
                         <div className={styles.discussionSection}>
                             <div className={styles.discussionHeader}>
-                                <h3 className={styles.discussionTitle}>Pitch Discussion</h3>
+                                <h3 className={styles.discussionTitle}>Pool Discussion</h3>
                                 <span className={styles.messageBadge}>{pitch.discussion.length} Messages</span>
                             </div>
                             <div style={{ padding: '2rem 1rem', textAlign: 'center', background: 'var(--surface-container-lowest)', borderRadius: '1rem', marginTop: '1rem' }}>
@@ -375,7 +457,7 @@ export default function PitchDetail({ params }) {
                                 <p style={{ margin: '0.5rem 0 1rem', color: 'var(--on-surface-variant)' }}>Join clan to see discussion and chat with members.</p>
                                 <button className={styles.viewAllBtn} onClick={() => {
                                     if (isGuest) router.push('/');
-                                    else router.push(`/clans/${pitch.clanId}/preview`);
+                                    else if (primaryClanId) router.push(`/clans/${primaryClanId}/preview`);
                                 }}>Join Clan</button>
                             </div>
                         </div>
@@ -397,7 +479,7 @@ export default function PitchDetail({ params }) {
                                 Joined
                             </span>
                             <button className={styles.leavePitchBtn} onClick={handleLeavePitch}>
-                                Leave Pitch
+                                Leave Pool
                             </button>
                         </div>
                     ) : onWaitlist ? (
@@ -414,7 +496,7 @@ export default function PitchDetail({ params }) {
                         <div className={styles.unsuccessfulMessage}>
                             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>error</span>
                             <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <span style={{fontWeight: '700', fontSize: '14px'}}>Pitch Unsuccessful</span>
+                                <span style={{fontWeight: '700', fontSize: '14px'}}>Pool Unsuccessful</span>
                                 <span style={{fontSize: '12px', color: 'var(--on-surface-variant)'}}>Minimum goal was not met in time.</span>
                             </div>
                         </div>
@@ -427,7 +509,7 @@ export default function PitchDetail({ params }) {
                                 if (ctaState.action === 'sign_in') {
                                     router.push('/');
                                 } else if (ctaState.action === 'join_clan') {
-                                    router.push(`/clans/${pitch.clanId}/preview`);
+                                    if (primaryClanId) router.push(`/clans/${primaryClanId}/preview`);
                                 } else if (ctaState.action === 'join_waitlist') {
                                     setOnWaitlist(true);
                                     setWaitlistCount(prev => prev + 1);

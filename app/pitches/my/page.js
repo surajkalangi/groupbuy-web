@@ -4,7 +4,9 @@ import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
 import AuthGuard from '@/components/auth/AuthGuard';
+import Avatar from '@/components/ui/Avatar';
 import { mockPitches } from '@/data/pitches';
+import { mockClans } from '@/data/clans';
 import styles from '../page.module.css';
 
 const PARTICIPATING_FILTERS = ['ALL', 'ACTIVE', 'READY FOR PICKUP', 'COMPLETED', 'EXPIRED'];
@@ -19,46 +21,45 @@ const participatingPitches = [
     {
         ...getPitch('pitch-1'),
         myStatus: 'active',
-        subtitle: 'Weekly Harvest Delivery',
-        progress: { current: 42, goal: 50, pct: 84 },
-        hostName: 'Anjali Sharma',
-        hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCz9umOT1LFOzjA53RJh5tEcpJAmw9NI1vv2sPwVa8nsdkkC7Vz1fvobnNcCxMb5tDCadgrf-Eo4bSunI_GjECp3rpcyaaP76TNtcEeB8oF8HI2TnZAWG0s2kDE9xFJ4EJvxmzeVMvenl8Vd7johfJNO2L1hDrR5g5t9HDOdO9uSSXJ5-X5wpb94rBlqXvj16nZM2G4lCpwfVHHTD2svkWUiHD4fT2cgeoEkuG4lBpYI2eyFsFWS27AjfnkmW8pW-7RptV3VmiJWAiN',
+        subtitle: 'Fresh Hass Avocados from wholesale market',
+        progress: { current: 18, goal: 24, pct: 75 },
     },
     {
         ...getPitch('pitch-3'),
-        clanName: 'Tech Park West',
         myStatus: 'active',
-        subtitle: 'Boutique Bakery Batch',
+        subtitle: 'Homemade Almond Dark Chocolate Granola Jar',
         isSaved: false,
-        progress: { current: 28, goal: 30, pct: 93 },
-        hostName: 'Arjun Reddy',
-        hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAWqt_1DI18gIO24KOi28x5cnH4LXoVbznWkcblOLlPyUcNF42jYxrKeyQ7Q2QFqv9MjJn6XGlrq_TmstJ_OtgWGQSK74YegVmSczJtB6Q_uK2Y3l2ny-2H6jN0vAZHuJDZfGDmhpbIeOrFOJeMq3UrY6lakZpBN7bR3H-NVMDXOC9mHj3ahFbRh1c8KISyI_yRfrWjyOEnHzdDDD8sYikL4Axs_0xyFrBaIscFx8flZY2v9oMMJF_ah74wtw0BXzW8RM78WFyCtBiv',
+        progress: { current: 3, goal: 10, pct: 30 },
     },
     {
         ...getPitch('pitch-2'),
         myStatus: 'active',
-        subtitle: 'Plant-based detergents',
+        subtitle: 'Artisan Sourdough Loaf (Cold-Fermented)',
         progress: { current: 4, goal: 10, pct: 40 },
-        hostName: 'Rahul Verma',
-        hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCMjOUyrqzPmv55DYufWdACwTYtwBWz-OOAQ1W9OGtYhcI-1KY6imGOMvlVagEHQumDjBtNvi0hqrpd2luTISscJoYySI0nmdMb6pSgsQAUF1hjQuJkG5ED6M-JXVDdFq96yE7fgjmde6Y47fYs8NoUrgpjNckOXUeyEEjLXjKT_FwlFEBc7D2yXnZtV5bsO_RSHwiZkuTw4tZpkNhDeHy-OQou3GDDEPJsbJullLYbNpekhVgHlbHiy2yPCEl4tmcoiKXyMWR-bWe6',
     },
     {
-        ...getPitch('pitch-kedarnath'),
+        ...getPitch('pitch-coorg-plantation-trip'),
         myStatus: 'active',
-        subtitle: 'Kedarnath Trip',
-        progress: { current: 2, goal: 10, pct: 20 },
+        subtitle: 'Coorg Coffee Estate & Tadiandamol Trek Long Weekend',
+        progress: { current: 2, goal: 4, pct: 50 },
     },
     {
-        ...getPitch('pitch-ns-malaysia'),
+        ...getPitch('pitch-ns-kazakhstan'),
         myStatus: 'active',
-        subtitle: 'Network School Malaysia',
+        subtitle: 'Network School Kazakhstan - September Batch',
         progress: { current: 1, goal: 5, pct: 20 },
     },
     {
         ...getPitch('pitch-netflix'),
         myStatus: 'active',
-        subtitle: 'Netflix Premium Subscription Share',
+        subtitle: 'Netflix Premium Subscription Share (4K HDR)',
         progress: { current: 2, goal: 3, pct: 66 },
+    },
+    {
+        ...getPitch('pitch-bg-poker-set'),
+        myStatus: 'expired',
+        subtitle: 'Clay Poker Chip Set (300 Piece Casino Grade)',
+        progress: { current: 2, goal: 4, pct: 50 },
     }
 ];
 
@@ -121,14 +122,32 @@ const hostingPitches = [
     },
     {
         ...getPitch('pitch-4'),
-        id: 'pitch-5',
-        title: 'Handcrafted Ceramic Mugs',
-        costPerUnit: 350,
-        unitType: 'mug',
-        image: '/images/ceramic_mugs.png',
+        id: 'pitch-4',
+        title: 'Wayanad Estate-Direct Single-Origin Spice Box',
+        hostStatus: 'active',
+        subtitle: 'Single-origin spices from Wayanad',
+        costPerUnit: 1200,
+        unitType: 'kit',
+        image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80',
+        progress: { current: 3, goal: 5, pct: 60 },
+        participantAvatars: [
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80',
+            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80',
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80',
+        ],
+        joinedCount: 3,
+    },
+    {
+        ...getPitch('pitch-bg-poker-set'),
+        id: 'pitch-bg-poker-set',
         hostStatus: 'expired',
-        subtitle: 'Rustic, speckled glaze ceramic coffee mugs.',
-        progress: { current: 6, goal: 10, pct: 60 },
+        subtitle: 'Clay Poker Chip Set (300 Piece Casino Grade)',
+        progress: { current: 2, goal: 4, pct: 50 },
+        participantAvatars: [
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80',
+        ],
+        joinedCount: 2,
     },
 ];
 
@@ -137,63 +156,57 @@ const savedPitches = [
     {
         ...getPitch('pitch-1'),
         savedStatus: 'active',
-        timeLeft: '2D 14H LEFT',
-        goalPercent: 85,
-        hostName: 'Anjali Sharma',
-        hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCz9umOT1LFOzjA53RJh5tEcpJAmw9NI1vv2sPwVa8nsdkkC7Vz1fvobnNcCxMb5tDCadgrf-Eo4bSunI_GjECp3rpcyaaP76TNtcEeB8oF8HI2TnZAWG0s2kDE9xFJ4EJvxmzeVMvenl8Vd7johfJNO2L1hDrR5g5t9HDOdO9uSSXJ5-X5wpb94rBlqXvj16nZM2G4lCpwfVHHTD2svkWUiHD4fT2cgeoEkuG4lBpYI2eyFsFWS27AjfnkmW8pW-7RptV3VmiJWAiN',
+        timeLeft: 'ENDS TOMORROW',
+        goalPercent: 75,
     },
     {
         ...getPitch('pitch-2'),
         savedStatus: 'order_placed',
         timeLeft: 'SUCCESSFULLY FUNDED',
         goalPercent: 100,
-        hostName: 'Rahul Verma',
-        hostAvatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCMjOUyrqzPmv55DYufWdACwTYtwBWz-OOAQ1W9OGtYhcI-1KY6imGOMvlVagEHQumDjBtNvi0hqrpd2luTISscJoYySI0nmdMb6pSgsQAUF1hjQuJkG5ED6M-JXVDdFq96yE7fgjmde6Y47fYs8NoUrgpjNckOXUeyEEjLXjKT_FwlFEBc7D2yXnZtV5bsO_RSHwiZkuTw4tZpkNhDeHy-OQou3GDDEPJsbJullLYbNpekhVgHlbHiy2yPCEl4tmcoiKXyMWR-bWe6',
     },
     {
-        ...getPitch('pitch-4'),
-        savedStatus: 'expired',
-        timeLeft: 'ENDED 2 DAYS AGO',
-        goalPercent: 42,
-        hostName: 'Vikram Singh',
-        hostAvatar: null,
-    },
-    {
-        ...getPitch('pitch-kedarnath'),
+        ...getPitch('pitch-gokarna-dandeli-trip'),
         savedStatus: 'active',
-        timeLeft: '14D LEFT',
-        goalPercent: 20,
-        hostName: 'Priya S.',
-        hostAvatar: null,
+        timeLeft: '4D LEFT',
+        goalPercent: 78,
     },
     {
-        ...getPitch('pitch-ns-malaysia'),
+        ...getPitch('pitch-ns-kazakhstan'),
         savedStatus: 'active',
         timeLeft: '30D LEFT',
         goalPercent: 20,
-        hostName: 'Rahul M.',
-        hostAvatar: null,
     },
     {
         ...getPitch('pitch-netflix'),
         savedStatus: 'active',
         timeLeft: '10D LEFT',
         goalPercent: 66,
-        hostName: 'Priya S.',
-        hostAvatar: null,
+    },
+    {
+        ...getPitch('pitch-diwali-mithai'),
+        savedStatus: 'active',
+        timeLeft: '8D LEFT',
+        goalPercent: 60,
+    },
+    {
+        ...getPitch('pitch-bg-poker-set'),
+        savedStatus: 'expired',
+        timeLeft: 'ENDED',
+        goalPercent: 50,
     }
 ];
 
 const SUBTITLES = {
-    participating: "Review and track the community group-buys you're currently participating.",
-    hosting: 'Manage your active community pitches and track group buying progress.',
-    saved: 'Managing your saved community collective buys.',
+    participating: "Review and track the community group-buys you're currently participating in.",
+    hosting: 'Manage your active community pools and track group buying progress.',
+    saved: 'Managing your saved community collective pools.',
 };
 
 const TITLES = {
-    participating: 'My Pitches',
+    participating: 'My Pools',
     hosting: 'Hosting Dashboard',
-    saved: 'My Pitches',
+    saved: 'My Pools',
 };
 
 function BookmarkButton({ initialSaved = true }) {
@@ -209,7 +222,7 @@ function BookmarkButton({ initialSaved = true }) {
         <button 
             className={styles.savedBookmarkBtn} 
             onClick={toggleSave}
-            aria-label={isSaved ? "Remove from saved" : "Save pitch"}
+            aria-label={isSaved ? "Remove from saved" : "Save pool"}
         >
             <span className="material-symbols-outlined" style={isSaved ? { fontVariationSettings: "'FILL' 1", color: "#ffffffe6" } : {}}>
                 bookmark
@@ -235,7 +248,7 @@ function MyPitchesContent() {
     const handleTabChange = (newTab) => {
         setTab(newTab);
         setFilter('ALL');
-        router.push(`/pitches/my?tab=${newTab}`);
+        router.push(`/pitches/my?tab=${newTab}`, { scroll: false });
     };
 
     const filterList = tab === 'hosting' ? HOSTING_FILTERS : tab === 'saved' ? SAVED_FILTERS : PARTICIPATING_FILTERS;
@@ -249,6 +262,31 @@ function MyPitchesContent() {
                     <div className={styles.pageHeader}>
                         <h1 className={styles.pageTitle}>{TITLES[tab]}</h1>
                         <p className={styles.pageSubtitle}>{SUBTITLES[tab]}</p>
+
+                        {/* Top Segmented Tab Switcher */}
+                        <div className={styles.topTabs}>
+                            <button
+                                className={`${styles.topTab} ${tab === 'participating' ? styles.topTabActive : ''}`}
+                                onClick={() => handleTabChange('participating')}
+                            >
+                                <span className="material-symbols-outlined" style={tab === 'participating' ? { fontVariationSettings: "'FILL' 1" } : undefined}>group</span>
+                                Participating
+                            </button>
+                            <button
+                                className={`${styles.topTab} ${tab === 'hosting' ? styles.topTabActive : ''}`}
+                                onClick={() => handleTabChange('hosting')}
+                            >
+                                <span className="material-symbols-outlined" style={tab === 'hosting' ? { fontVariationSettings: "'FILL' 1" } : undefined}>storefront</span>
+                                Hosting
+                            </button>
+                            <button
+                                className={`${styles.topTab} ${tab === 'saved' ? styles.topTabActive : ''}`}
+                                onClick={() => handleTabChange('saved')}
+                            >
+                                <span className="material-symbols-outlined" style={tab === 'saved' ? { fontVariationSettings: "'FILL' 1" } : undefined}>bookmark</span>
+                                Saved
+                            </button>
+                        </div>
                     </div>
 
                     {/* Status Filters */}
@@ -267,23 +305,48 @@ function MyPitchesContent() {
                     {/* ═══ Participating Tab ═══ */}
                     {tab === 'participating' && (() => {
                         const filtered = participatingPitches.filter(p =>
-                            filter === 'ALL' || p.myStatus.toUpperCase() === filter
+                            filter === 'ALL' || (p.myStatus && p.myStatus.toUpperCase() === filter)
                         );
                         return (
                             <>
                                 <div className={styles.savedGrid}>
                                     {filtered.map(p => {
+                                        const isExpired = p.myStatus === 'expired' || p.status === 'expired';
+                                        const isCompleted = p.myStatus === 'completed' || p.status === 'completed';
+                                        const isReadyForPickup = p.myStatus === 'ready_for_pickup' || p.status === 'ready_for_pickup';
+                                        
+                                        const pClanId = p.clanIds?.[0] || p.clanId;
+                                        const clanObj = mockClans.find(c => c.id === pClanId);
+                                        let badgeCls = styles.savedBadgeActive;
+                                        let statusLabel = clanObj ? clanObj.name : (p.clanIds && p.clanIds.length === 0 ? 'DIRECT POOL' : 'ACTIVE');
+                                        if (isExpired) {
+                                            badgeCls = styles.savedBadgeExpired;
+                                            statusLabel = 'EXPIRED';
+                                        } else if (isCompleted) {
+                                            badgeCls = styles.savedBadgeCompleted;
+                                            statusLabel = 'COMPLETED';
+                                        } else if (isReadyForPickup) {
+                                            badgeCls = styles.savedBadgeActive;
+                                            statusLabel = 'READY FOR PICKUP';
+                                        }
+
                                         const goalMet = p.committedUnits >= p.minOrder;
-                                        const progressLabel = goalMet 
-                                            ? `${p.committedUnits}/${p.maxCapacity} FILLED`
-                                            : `${p.committedUnits}/${p.minOrder} TO REACH GOAL`;
-                                        const pct = goalMet 
-                                            ? Math.min(100, (p.committedUnits / p.maxCapacity) * 100) 
-                                            : Math.min(100, (p.committedUnits / p.minOrder) * 100);
+                                        const progressLabel = isExpired
+                                            ? `${p.committedUnits}/${p.minOrder} FILLED (GOAL NOT MET)`
+                                            : goalMet 
+                                                ? `${p.committedUnits}/${p.maxCapacity} FILLED`
+                                                : `${p.committedUnits}/${p.minOrder} TO REACH GOAL`;
+                                        const pct = isExpired
+                                            ? Math.min(100, (p.committedUnits / p.minOrder) * 100)
+                                            : goalMet 
+                                                ? Math.min(100, (p.committedUnits / p.maxCapacity) * 100) 
+                                                : Math.min(100, (p.committedUnits / p.minOrder) * 100);
+                                        const hostDisplayName = p.hostName || p.host?.name || 'Community Host';
+                                        const hostAvatarSrc = p.hostAvatar || p.host?.avatarUrl;
 
                                         return (
-                                        <div key={p.id} className={styles.savedCard}>
-                                            <div className={styles.savedImageWrap}>
+                                        <div key={p.id} className={`${styles.savedCard} ${isExpired ? styles.savedCardExpired : ''} ${isCompleted ? styles.savedCardCompleted : ''}`}>
+                                            <div className={`${styles.savedImageWrap} ${isExpired ? styles.savedImageGrayscale : ''}`}>
                                                 {p.image ? (
                                                     <img src={p.image} alt={p.title} className={styles.savedImage} />
                                                 ) : (
@@ -291,41 +354,59 @@ function MyPitchesContent() {
                                                         <span className="material-symbols-outlined" style={{ fontSize: '3rem', color: 'var(--outline-variant)' }}>image</span>
                                                     </div>
                                                 )}
-                                                <span className={`${styles.savedStatusOverlay} ${styles.savedBadgeActive} ${styles.clanBadgeOverlay}`}>{p.clanName}</span>
+                                                <span className={`${styles.savedStatusOverlay} ${badgeCls} ${!isExpired && !isCompleted && !isReadyForPickup ? styles.clanBadgeOverlay : ''}`}>
+                                                    {statusLabel}
+                                                </span>
                                                 <BookmarkButton initialSaved={p.isSaved !== false} />
                                             </div>
                                             <div className={styles.savedBody}>
                                                 <div className={styles.savedTitleRow}>
                                                     <div className={styles.textClampWrap}>
-                                                        <h3 className={styles.savedTitle}>{p.title}</h3>
-                                                        <p className={styles.savedDesc}>{p.subtitle}</p>
+                                                        <h3 className={`${styles.savedTitle} ${isExpired ? styles.savedTitleMuted : ''}`}>{p.title}</h3>
+                                                        <p className={`${styles.savedDesc} ${isExpired ? styles.savedDescMuted : ''}`}>{p.subtitle}</p>
                                                     </div>
-                                                    <span className={styles.savedPrice}>₹{p.costPerUnit?.toLocaleString('en-IN')}<span className={styles.savedPriceUnit}>/{p.unitType}</span></span>
+                                                    <span className={`${styles.savedPrice} ${isExpired ? styles.savedPriceMuted : ''}`}>
+                                                        ₹{Number(p.costPerUnit || 0).toLocaleString('en-IN')}
+                                                        <span className={styles.savedPriceUnit}>/{p.unitType}</span>
+                                                    </span>
                                                 </div>
                                                 <div className={styles.savedGoalSection}>
                                                     <div className={styles.savedGoalHeader}>
-                                                        <span>PROGRESS</span>
-                                                        <span className={styles.savedGoalPct}>{progressLabel}</span>
+                                                        <span>{isExpired ? 'GOAL NOT MET' : isCompleted ? 'FULLY FUNDED' : 'PROGRESS'}</span>
+                                                        <span className={isExpired ? styles.savedGoalPctMuted : styles.savedGoalPct}>{progressLabel}</span>
                                                     </div>
                                                     <div className={styles.savedGoalTrack}>
-                                                        <div className={styles.savedGoalFill} style={{ width: `${pct}%` }} />
+                                                        <div className={`${styles.savedGoalFill} ${isExpired ? styles.savedGoalFillMuted : ''} ${isCompleted ? styles.hostProgressCompleted : ''}`} style={{ width: `${pct}%` }} />
                                                     </div>
                                                 </div>
                                                 <div className={styles.savedHostRow}>
                                                     <div className={styles.savedHostInfo}>
-                                                        {p.hostAvatar ? (
-                                                            <img src={p.hostAvatar} alt={p.hostName} className={styles.savedHostAvatar} />
-                                                        ) : (
-                                                            <div className={styles.savedHostAvatarPlaceholder}>
-                                                                <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--on-surface-variant)' }}>person</span>
-                                                            </div>
-                                                        )}
+                                                        <div className={styles.savedHostAvatarWrap}>
+                                                            <Avatar 
+                                                                name={hostDisplayName} 
+                                                                src={hostAvatarSrc} 
+                                                                size="sm" 
+                                                                className={isExpired ? styles.savedImageGrayscale : ''} 
+                                                            />
+                                                            {(p.host?.isVerifiedVendor || p.isVerifiedVendor) && (
+                                                                <span className={styles.vendorCheck} title="Verified Direct Manufacturer / Brand">
+                                                                    <span className="material-symbols-outlined" style={{ fontSize: '10px', fontVariationSettings: "'FILL' 1" }}>verified</span>
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                         <div>
                                                             <p className={styles.savedHostLabel}>HOST</p>
-                                                            <p className={styles.savedHostName}>{p.hostName}</p>
+                                                            <p className={`${styles.savedHostName} ${isExpired ? styles.savedTitleMuted : ''}`}>
+                                                                {hostDisplayName}
+                                                                {(p.hostRating || p.host?.rating) && (
+                                                                    <span className={styles.savedHostRating}> · {p.hostRating || p.host?.rating} ★</span>
+                                                                )}
+                                                            </p>
                                                         </div>
                                                     </div>
-                                                    <button className={styles.savedBtnView} onClick={() => router.push(`/pitches/${p.id}`)}>Details</button>
+                                                    <button className={`${styles.savedBtnView} ${isExpired ? styles.savedBtnViewExpired : ''}`} onClick={() => router.push(`/pitches/${p.id}`)}>
+                                                        Details
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -342,10 +423,10 @@ function MyPitchesContent() {
                                 <div className={styles.fyp}>
                                     <div className={styles.fypText}>
                                         <h2 className={styles.fypTitle}>Finding Your People</h2>
-                                        <p className={styles.fypDesc}>Participating in pitches is how you unlock collective purchasing power. Explore your community&apos;s active pitches to save more on quality products and services.</p>
+                                        <p className={styles.fypDesc}>Participating in pools is how you unlock collective purchasing power. Explore your community&apos;s active pools to save more on quality products and services.</p>
                                         <button className={styles.fypBtn} onClick={() => router.push('/discover')}>
                                             <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>explore</span>
-                                            Explore Community Pitches
+                                            Explore Community Pools
                                         </button>
                                     </div>
                                     <div className={styles.fypQuote}>
@@ -363,7 +444,7 @@ function MyPitchesContent() {
                     {tab === 'hosting' && (() => {
                         const filtered = hostingPitches.filter(p => {
                             if (filter === 'ALL') return true;
-                            return p.hostStatus.toUpperCase().replace(/_/g, ' ') === filter;
+                            return p.hostStatus && p.hostStatus.toUpperCase().replace(/_/g, ' ') === filter;
                         });
                         return (
                             <div className={styles.savedGrid}>
@@ -399,7 +480,7 @@ function MyPitchesContent() {
                                                         <p className={`${styles.savedDesc} ${isExpired ? styles.savedDescMuted : ''}`}>{p.subtitle}</p>
                                                     </div>
                                                     <span className={`${styles.savedPrice} ${isExpired || (isDraft && !p.costPerUnit) ? styles.savedPriceMuted : ''}`}>
-                                                        {p.costPerUnit ? `₹${p.costPerUnit.toLocaleString('en-IN')}` : '₹--'}
+                                                        {p.costPerUnit ? `₹${Number(p.costPerUnit).toLocaleString('en-IN')}` : '₹--'}
                                                         <span className={styles.savedPriceUnit}>/{p.unitType}</span>
                                                     </span>
                                                 </div>
@@ -461,7 +542,7 @@ function MyPitchesContent() {
                     {/* ═══ Saved Tab ═══ */}
                     {tab === 'saved' && (() => {
                         const filteredSaved = savedPitches.filter(p =>
-                            filter === 'ALL' || p.savedStatus.toUpperCase().replace(/_/g, ' ') === filter
+                            filter === 'ALL' || (p.savedStatus && p.savedStatus.toUpperCase().replace(/_/g, ' ') === filter)
                         );
                         return (
                             <div className={styles.savedGrid}>
@@ -469,7 +550,6 @@ function MyPitchesContent() {
                                     const isExpired = p.savedStatus === 'expired';
                                     const isCompleted = p.savedStatus === 'completed' || p.savedStatus === 'order_placed';
                                     const statusLabel = p.savedStatus.toUpperCase().replace(/_/g, ' ');
-                                    const statusIcon = isCompleted ? 'check_circle' : isExpired ? 'history' : 'schedule';
                                     const badgeCls = isExpired ? styles.savedBadgeExpired : isCompleted ? styles.savedBadgeCompleted : styles.savedBadgeActive;
 
                                     const goalMet = p.committedUnits >= p.minOrder;
@@ -479,6 +559,8 @@ function MyPitchesContent() {
                                     const pct = goalMet 
                                         ? Math.min(100, (p.committedUnits / p.maxCapacity) * 100) 
                                         : Math.min(100, (p.committedUnits / p.minOrder) * 100);
+                                    const hostDisplayName = p.hostName || p.host?.name || 'Community Host';
+                                    const hostAvatarSrc = p.hostAvatar || p.host?.avatarUrl;
 
                                     return (
                                         <div key={p.id} className={`${styles.savedCard} ${isExpired ? styles.savedCardExpired : ''} ${isCompleted ? styles.savedCardCompleted : ''}`}>
@@ -503,7 +585,7 @@ function MyPitchesContent() {
                                                             </p>
                                                         )}
                                                     </div>
-                                                    <span className={`${styles.savedPrice} ${isExpired ? styles.savedPriceMuted : ''}`}>₹{p.costPerUnit}<span className={styles.savedPriceUnit}>/{p.unitType}</span></span>
+                                                    <span className={`${styles.savedPrice} ${isExpired ? styles.savedPriceMuted : ''}`}>₹{Number(p.costPerUnit || 0).toLocaleString('en-IN')}<span className={styles.savedPriceUnit}>/{p.unitType}</span></span>
                                                 </div>
 
                                                 <div className={styles.savedGoalSection}>
@@ -517,16 +599,27 @@ function MyPitchesContent() {
                                                 </div>
                                                 <div className={styles.savedHostRow}>
                                                     <div className={styles.savedHostInfo}>
-                                                        {p.hostAvatar ? (
-                                                            <img src={p.hostAvatar} alt={p.hostName} className={styles.savedHostAvatar} />
-                                                        ) : (
-                                                            <div className={styles.savedHostAvatarPlaceholder}>
-                                                                <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--on-surface-variant)' }}>person</span>
-                                                            </div>
-                                                        )}
+                                                        <div className={styles.savedHostAvatarWrap}>
+                                                            <Avatar 
+                                                                name={hostDisplayName} 
+                                                                src={hostAvatarSrc} 
+                                                                size="sm" 
+                                                                className={isExpired ? styles.savedImageGrayscale : ''} 
+                                                            />
+                                                            {(p.host?.isVerifiedVendor || p.isVerifiedVendor) && (
+                                                                <span className={styles.vendorCheck} title="Verified Direct Manufacturer / Brand">
+                                                                    <span className="material-symbols-outlined" style={{ fontSize: '10px', fontVariationSettings: "'FILL' 1" }}>verified</span>
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                         <div>
                                                             <p className={styles.savedHostLabel}>HOST</p>
-                                                            <p className={`${styles.savedHostName} ${isExpired ? styles.savedTitleMuted : ''}`}>{p.hostName}</p>
+                                                            <p className={`${styles.savedHostName} ${isExpired ? styles.savedTitleMuted : ''}`}>
+                                                                {hostDisplayName}
+                                                                {(p.hostRating || p.host?.rating) && (
+                                                                    <span className={styles.savedHostRating}> · {p.hostRating || p.host?.rating} ★</span>
+                                                                )}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     {isExpired ? (
@@ -544,7 +637,7 @@ function MyPitchesContent() {
                                 {filteredSaved.length === 0 && (
                                     <div className={styles.emptyState} style={{ gridColumn: '1 / -1' }}>
                                         <span className="material-symbols-outlined" style={{ fontSize: '48px', color: 'var(--outline-variant)' }}>bookmark_border</span>
-                                        <p>No saved pitches found for this filter.</p>
+                                        <p>No saved pools found for this filter.</p>
                                     </div>
                                 )}
                             </div>

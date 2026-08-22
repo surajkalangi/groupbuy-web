@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 38" fill="none">
+  <!-- Stacking Emblem -->
+  <g transform="translate(0, 0)">
+    <!-- Top Block -->
+    <rect x="10" y="1" width="12" height="9.5" rx="3" fill="#00875A"/>
+    
+    <!-- Middle Stacking Arch -->
+    <path d="M8 13.5H24C25.6569 13.5 27 14.8431 27 16.5V22C27 22.8284 26.3284 23.5 25.5 23.5H22C21.1716 23.5 20.5 22.8284 20.5 22V18.5C20.5 17.6716 19.8284 17 19 17H13C12.1716 17 11.5 17.6716 11.5 18.5V22C11.5 22.8284 10.8284 23.5 10 23.5H6.5C5.67157 23.5 5 22.8284 5 22V16.5C5 14.8431 6.34315 13.5 8 13.5Z" fill="#00875A"/>
+    
+    <!-- Bottom Stacking Arch -->
+    <path d="M5 26H27C28.6569 26 30 27.3431 30 29V34.5C30 35.6046 29.1046 36.5 28 36.5H22.5C21.3954 36.5 20.5 35.6046 20.5 34.5V30.5C20.5 29.6716 19.8284 29 19 29H13C12.1716 29 11.5 29.6716 11.5 30.5V34.5C11.5 35.6046 10.6046 36.5 9.5 36.5H4C2.89543 36.5 2 35.6046 2 34.5V29C2 27.3431 3.34315 26 5 26Z" fill="#00875A"/>
+  </g>
+
+  <!-- Typography: LetsStack -->
+  <text x="38" y="27" font-family="Plus Jakarta Sans, Outfit, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="750" fill="#191C1E" letter-spacing="-0.03em">
+    Lets<tspan fill="#00875A">Stack</tspan>
+  </text>
+</svg>

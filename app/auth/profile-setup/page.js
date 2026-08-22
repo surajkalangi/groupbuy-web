@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import AuthGuard from '@/components/auth/AuthGuard';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 const CITIES = ['Bengaluru', 'Mumbai', 'Delhi NCR', 'Hyderabad', 'Pune', 'Chennai', 'Kolkata', 'Others'];
@@ -49,7 +50,7 @@ export default function ProfileSetupPage() {
         <div className={styles.page}>
             {/* Top brand bar */}
             <header className={styles.topBar}>
-                <Link href={isLoggedIn ? '/feed' : '/'} className={styles.brandName}>GroupBuy</Link>
+                <Logo size="md" href={isLoggedIn ? '/feed' : '/'} />
                 <div className={styles.topBarSpacer} />
             </header>
 
@@ -58,7 +59,7 @@ export default function ProfileSetupPage() {
                 <div className={styles.header}>
                     <h1 className={styles.heading}>Complete your profile</h1>
                     <p className={styles.subtext}>
-                        Welcome to the GroupBuy community. Tell us a bit about yourself to start saving together with your social circle.
+                        Welcome to the LetsStack community. Tell us a bit about yourself to start saving together with your social circle.
                     </p>
                 </div>
 

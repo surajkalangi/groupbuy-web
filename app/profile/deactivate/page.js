@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
 import AuthGuard from '@/components/auth/AuthGuard';
+import Logo from '@/components/ui/Logo';
 
 const REASONS = [
     'Moving to a different location',
@@ -39,7 +40,7 @@ export default function DeactivatePreviewPage() {
                     <button onClick={() => router.back()} className={styles.backBtn}>
                         <span className="material-symbols-outlined">arrow_back</span>
                     </button>
-                    <Link href={isLoggedIn ? '/feed' : '/'} className={styles.headerTitle}>GroupBuy</Link>
+                    <Logo size="md" href={isLoggedIn ? '/feed' : '/'} />
                 </div>
             </header>
 

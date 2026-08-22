@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import GuestGuard from '@/components/auth/GuestGuard';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 export default function SignedOutPage() {
@@ -11,7 +12,7 @@ export default function SignedOutPage() {
             <main className={styles.main}>
                 {/* Brand Logo */}
                 <div className={styles.logoWrap}>
-                    <span className={styles.logoText}>GroupBuy</span>
+                    <Logo size="md" href="/" />
                 </div>
 
                 {/* Confirmation Card */}
@@ -31,7 +32,7 @@ export default function SignedOutPage() {
                         </h1>
                         
                         <p className={styles.subtext}>
-                            Thank you for being a part of the <span className={styles.brandHighlight}>GroupBuy</span> community. We're looking forward to seeing you again for your next group deal!
+                            Thank you for being a part of the <span className={styles.brandHighlight}>LetsStack</span> community. We're looking forward to seeing you again for your next group deal!
                         </p>
                     </div>
 
@@ -71,7 +72,7 @@ export default function SignedOutPage() {
                         </div>
                     </div>
                     <p className={styles.copyright}>
-                        © {new Date().getFullYear()} GroupBuy. Built for the community.
+                        © {new Date().getFullYear()} LetsStack. Built for the community.
                     </p>
                 </footer>
             </main>

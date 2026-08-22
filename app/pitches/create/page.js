@@ -36,8 +36,7 @@ function CreatePitchForm() {
     const [deadline, setDeadline] = useState('');
     const [logistics, setLogistics] = useState('');
     const [paymentMode, setPaymentMode] = useState('upi');
-    const [visibility, setVisibility] = useState('public');
-    const [selectedClans, setSelectedClans] = useState([]);
+    const [selectedClans, setSelectedClans] = useState(['clan-1']);
     const [showClanDropdown, setShowClanDropdown] = useState(false);
     const clanDropdownRef = useRef(null);
 
@@ -155,7 +154,7 @@ function CreatePitchForm() {
 
                     {step === 1 && (
                         <div className={styles.pageHeader}>
-                            <h1 className={styles.pageTitle}>Create a new Pitch</h1>
+                            <h1 className={styles.pageTitle}>Create a new Pool</h1>
                             <p className={styles.pageSubtitle}>
                                 Initiate a community group buy. Pool orders with your trusted circle to unlock better pricing on quality products and services.
                             </p>
@@ -200,7 +199,7 @@ function CreatePitchForm() {
                                 <textarea
                                     className={styles.textarea}
                                     rows={5}
-                                    placeholder="Describe the product quality, origin, and why your community needs this pitch..."
+                                    placeholder="Describe the product quality, origin, and why your community needs this pool..."
                                     value={description}
                                     onChange={e => setDescription(e.target.value)}
                                     required
@@ -370,168 +369,235 @@ function CreatePitchForm() {
                     )}
 
                     {/* ── STEP 3 ── */}
-                    {step === 3 && (
-                        <div className={styles.formCanvas}>
-                            {/* Pitch Deadline */}
-                            <div className={styles.sectionCard}>
-                                <div className={styles.sectionCardTitle}>
-                                    <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>schedule</span>
-                                    <span>Pitch Deadline</span>
-                                </div>
-                                <div className={styles.field}>
-                                    <label className={styles.limitLabel}>DEADLINE DATE & TIME</label>
-                                    <div className={styles.dateInputWrap}>
-                                        <input className={styles.input} type="datetime-local" value={deadline} onChange={e => setDeadline(e.target.value)} />
-                                        <span className={`material-symbols-outlined ${styles.dateIcon}`}>calendar_clock</span>
-                                    </div>
-                                </div>
-                            </div>
+                    {step === 3 && (() => {
+                        const selectedClanObjects = selectedClans.map(id => mockClans.find(c => c.id === id)).filter(Boolean);
+                        const openClans = selectedClanObjects.filter(c => c.privacy === 'open');
+                        const restrictedClans = selectedClanObjects.filter(c => c.privacy !== 'open');
+                        
+                        let derivedVisibility = 'unlisted';
+                        if (selectedClanObjects.length === 0) {
+                            derivedVisibility = 'unlisted';
+                        } else if (openClans.length > 0) {
+                            derivedVisibility = 'public';
+                        } else {
+                            derivedVisibility = 'restricted';
+                        }
 
-                            {/* Logistics */}
-                            <div className={styles.sectionCard}>
-                                <div className={styles.sectionCardTitle}>
-                                    <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>local_shipping</span>
-                                    <span>Logistics & Handling</span>
-                                </div>
-                                <label className={styles.limitLabel}>PICKUP/DELIVERY INSTRUCTIONS</label>
-                                <textarea
-                                    className={styles.textarea}
-                                    rows={3}
-                                    placeholder="e.g. Items will be dropped at the main clubhouse lobby by 5 PM Friday..."
-                                    value={logistics}
-                                    onChange={e => setLogistics(e.target.value)}
-                                />
-                                <div className={styles.radioRow}>
-                                    <div className={styles.radioCol}>
-                                        <label className={styles.limitLabel}>VISIBILITY</label>
-                                        {[['public', 'Public'], ['private', 'Private']].map(([val, label]) => (
-                                            <label key={val} className={styles.radioOption}>
-                                                <input type="radio" name="visibility" value={val} checked={visibility === val} onChange={() => setVisibility(val)} className={styles.radioInput} />
-                                                {visibility === val && <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px' }}>radio_button_checked</span>}
-                                                {visibility !== val && <span className="material-symbols-outlined" style={{ color: 'var(--outline)', fontSize: '20px' }}>radio_button_unchecked</span>}
-                                                <span>{label}</span>
-                                            </label>
-                                        ))}
+                        return (
+                            <div className={styles.formCanvas}>
+                                {/* Target Clan(s) & Visibility */}
+                                <div className={styles.sectionCard}>
+                                    <div className={styles.sectionCardTitle}>
+                                        <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>groups</span>
+                                        <span>Target Clan(s) & Visibility</span>
                                     </div>
-                                    <div className={styles.radioCol}>
-                                        <label className={styles.limitLabel}>PAYMENT MODE</label>
-                                        {[['upi', 'UPI Escrow'], ['cod', 'Cash on Delivery']].map(([val, label]) => (
-                                            <label key={val} className={styles.radioOption}>
-                                                <input type="radio" name="paymentMode" value={val} checked={paymentMode === val} onChange={() => setPaymentMode(val)} className={styles.radioInput} />
-                                                {paymentMode === val && <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px' }}>radio_button_checked</span>}
-                                                {paymentMode !== val && <span className="material-symbols-outlined" style={{ color: 'var(--outline)', fontSize: '20px' }}>radio_button_unchecked</span>}
-                                                <span>{label}</span>
-                                                {val === 'upi' && paymentMode === 'upi' && (
-                                                    <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px', marginLeft: 'auto' }}>verified_user</span>
+                                    <label className={styles.limitLabel}>TAG CLAN(S) TO POOL ORDERS</label>
+                                    <p className={styles.fieldHint} style={{ marginTop: '-0.25rem', marginBottom: '0.75rem', lineHeight: '1.4' }}>
+                                        Tag one or more clans to pool demand together. Pool visibility is derived automatically from the clan types you select.
+                                    </p>
+                                    
+                                    <div className={styles.clanDropdownWrapper} ref={clanDropdownRef}>
+                                        <button
+                                            type="button"
+                                            className={styles.clanDropdownTrigger}
+                                            onClick={() => setShowClanDropdown(prev => !prev)}
+                                            id="clan-select-trigger"
+                                        >
+                                            <div className={styles.clanChipsArea}>
+                                                {selectedClans.length === 0 && (
+                                                    <span className={styles.clanPlaceholder}>No clans selected (Direct Link Only)...</span>
                                                 )}
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-                                
-                                {/* Clan Selection Dropdown (visible when Private) */}
-                                {visibility === 'private' && (
-                                    <div className={styles.clanSelectSection}>
-                                        <label className={styles.limitLabel}>Select Clan(s)</label>
-                                        <div className={styles.clanDropdownWrapper} ref={clanDropdownRef}>
-                                            <button
-                                                type="button"
-                                                className={styles.clanDropdownTrigger}
-                                                onClick={() => setShowClanDropdown(prev => !prev)}
-                                            >
-                                                <div className={styles.clanChipsArea}>
-                                                    {selectedClans.length === 0 && (
-                                                        <span className={styles.clanPlaceholder}>Choose clans...</span>
-                                                    )}
-                                                    {selectedClans.map(clanId => {
-                                                        const clan = mockClans.find(c => c.id === clanId);
-                                                        return clan ? (
-                                                            <span key={clanId} className={styles.clanChip}>
-                                                                {clan.name}
-                                                                <span
-                                                                    className="material-symbols-outlined"
-                                                                    style={{ fontSize: '14px', cursor: 'pointer' }}
-                                                                    onClick={(e) => { e.stopPropagation(); removeClan(clanId); }}
-                                                                >close</span>
-                                                            </span>
-                                                        ) : null;
+                                                {selectedClans.map(clanId => {
+                                                    const clan = mockClans.find(c => c.id === clanId);
+                                                    return clan ? (
+                                                        <span key={clanId} className={styles.clanChip}>
+                                                            {clan.name}
+                                                            <span
+                                                                className="material-symbols-outlined"
+                                                                style={{ fontSize: '14px', cursor: 'pointer' }}
+                                                                onClick={(e) => { e.stopPropagation(); removeClan(clanId); }}
+                                                                aria-label={`Remove ${clan.name}`}
+                                                            >close</span>
+                                                        </span>
+                                                    ) : null;
+                                                })}
+                                            </div>
+                                            <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-variant)' }}>unfold_more</span>
+                                        </button>
+
+                                        {showClanDropdown && (
+                                            <div className={styles.clanDropdownMenu}>
+                                                <div className={styles.clanDropdownList}>
+                                                    {mockClans.map(clan => {
+                                                        const isSelected = selectedClans.includes(clan.id);
+                                                        const isOpen = clan.privacy === 'open';
+                                                        return (
+                                                            <div
+                                                                key={clan.id}
+                                                                className={`${styles.clanDropdownItem} ${isSelected ? styles.clanDropdownItemSelected : ''}`}
+                                                                onClick={() => toggleClan(clan.id)}
+                                                            >
+                                                                <div className={styles.clanDropdownItemMeta}>
+                                                                    <span className={styles.clanDropdownItemName}>{clan.name}</span>
+                                                                    <span className={isOpen ? styles.clanTypeBadgeOpen : styles.clanTypeBadgeRestricted}>
+                                                                        {isOpen ? 'Public' : 'Restricted'}
+                                                                    </span>
+                                                                </div>
+                                                                {isSelected && (
+                                                                    <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)' }}>check_circle</span>
+                                                                )}
+                                                            </div>
+                                                        );
                                                     })}
                                                 </div>
-                                                <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-variant)' }}>unfold_more</span>
-                                            </button>
-
-                                            {showClanDropdown && (
-                                                <div className={styles.clanDropdownMenu}>
-                                                    <div className={styles.clanDropdownList}>
-                                                        {mockClans.map(clan => {
-                                                            const isSelected = selectedClans.includes(clan.id);
-                                                            return (
-                                                                <div
-                                                                    key={clan.id}
-                                                                    className={`${styles.clanDropdownItem} ${isSelected ? styles.clanDropdownItemSelected : ''}`}
-                                                                    onClick={() => toggleClan(clan.id)}
-                                                                >
-                                                                    <span className={styles.clanDropdownItemName}>{clan.name}</span>
-                                                                    {isSelected && (
-                                                                        <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)' }}>check_circle</span>
-                                                                    )}
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Review Summary */}
-                            <div className={styles.reviewCard}>
-                                <div className={styles.reviewHeader}>
-                                    <div className={styles.reviewTitleGroup}>
-                                        <span className={styles.reviewTitle}>Review Summary</span>
-                                    </div>
-                                    <button className={styles.previewBtn} type="button" onClick={handlePreview}>
-                                        <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>visibility</span>
-                                        Preview
-                                    </button>
-                                </div>
-                                <div className={styles.reviewBody}>
-                                    <div className={styles.reviewThumb}>
-                                        {photoPreviews[0] ? (
-                                            <img src={photoPreviews[0]} alt="cover" className={styles.reviewThumbImg} />
-                                        ) : (
-                                            <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-muted)' }}>image</span>
+                                            </div>
                                         )}
                                     </div>
-                                    <div className={styles.reviewInfo}>
-                                        <span className={styles.reviewClan}>PRESTIGE LAKESIDE CLAN</span>
-                                        <p className={styles.reviewProduct}>{productName || 'Product Name'}</p>
-                                        <p className={styles.reviewPrice}>₹{costPerUnit || '–'} / {unitType || 'unit'}</p>
+
+                                    {/* Dynamic Visibility Derived Banner */}
+                                    {derivedVisibility === 'public' && (
+                                        <div className={styles.visibilityDerivedCard} data-type="public">
+                                            <div className={styles.visHeader}>
+                                                <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px' }}>public</span>
+                                                <span className={styles.visTitle}>Public Discovery Pool</span>
+                                                <span className={styles.visBadgePublic}>PUBLIC DISCOVERY</span>
+                                            </div>
+                                            <p className={styles.visDesc}>
+                                                Because this pool is tagged to open public clans ({openClans.map(c => c.name).join(', ')}), it will be discoverable across public search, feeds, and the tagged clan hubs.
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    {derivedVisibility === 'restricted' && (
+                                        <div className={styles.visibilityDerivedCard} data-type="restricted">
+                                            <div className={styles.visHeader}>
+                                                <span className="material-symbols-outlined" style={{ color: '#c05621', fontSize: '20px' }}>lock</span>
+                                                <span className={styles.visTitle}>Restricted Community Pool</span>
+                                                <span className={styles.visBadgeRestricted}>RESTRICTED</span>
+                                            </div>
+                                            <p className={styles.visDesc}>
+                                                Tagged strictly to private gated clans ({restrictedClans.map(c => c.name).join(', ')}). Only verified members of these communities can search, view, and participate.
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    {derivedVisibility === 'unlisted' && (
+                                        <div className={styles.visibilityDerivedCard} data-type="unlisted">
+                                            <div className={styles.visHeader}>
+                                                <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-variant)', fontSize: '20px' }}>link</span>
+                                                <span className={styles.visTitle}>Direct Link Only</span>
+                                                <span className={styles.visBadgeUnlisted}>UNLISTED</span>
+                                            </div>
+                                            <p className={styles.visDesc}>
+                                                No clans tagged. This pool will be unlisted and hidden from public search and discovery. Only people with your direct invite link can access it.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Pool Deadline */}
+                                <div className={styles.sectionCard}>
+                                    <div className={styles.sectionCardTitle}>
+                                        <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>schedule</span>
+                                        <span>Pool Deadline</span>
+                                    </div>
+                                    <div className={styles.field}>
+                                        <label className={styles.limitLabel}>DEADLINE DATE & TIME</label>
+                                        <div className={styles.dateInputWrap}>
+                                            <input className={styles.input} type="datetime-local" value={deadline} onChange={e => setDeadline(e.target.value)} />
+                                            <span className={`material-symbols-outlined ${styles.dateIcon}`}>calendar_clock</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className={styles.reviewMeta}>
-                                    <div className={styles.reviewMetaItem}><span className={styles.metaLabel}>GOAL</span><span>Min {minOrder || '–'} {pluralizeUnit(Number(minOrder) || 2, unitType)} · Max {maxCapacity || '–'} {pluralizeUnit(Number(maxCapacity) || 2, unitType)}</span></div>
-                                    <div className={styles.reviewMetaItem}><span className={styles.metaLabel}>DEADLINE</span><span>{deadline ? new Date(deadline).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '–'}</span></div>
-                                    <div className={styles.reviewMetaItem}><span className={styles.metaLabel}>PAYMENT</span><span>{paymentMode === 'upi' ? 'UPI Escrow (Safe)' : 'Cash on Delivery'}</span></div>
-                                    <div className={styles.reviewMetaItem}><span className={styles.metaLabel}>VISIBILITY</span><span>{visibility === 'public' ? 'Public Pitch' : 'Private Pitch'}</span></div>
-                                </div>
-                            </div>
 
-                            {/* Action Buttons */}
-                            <div className={styles.publishActions}>
-                                <button className={styles.publishBtn} onClick={handlePublish} disabled={loading} id="publish-pitch-btn">
-                                    {loading ? 'Publishing…' : 'Publish Pitch'}
-                                </button>
-                                <div className={styles.secondaryActions}>
-                                    <button className={styles.saveDraftBtn} type="button" onClick={handleSaveDraft}>Save as Draft</button>
-                                    <button className={styles.backToStep2} onClick={() => setStep(2)} type="button">Back to Step 2</button>
+                                {/* Logistics & Payment */}
+                                <div className={styles.sectionCard}>
+                                    <div className={styles.sectionCardTitle}>
+                                        <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>local_shipping</span>
+                                        <span>Logistics & Payment</span>
+                                    </div>
+                                    <label className={styles.limitLabel}>PICKUP/DELIVERY INSTRUCTIONS</label>
+                                    <textarea
+                                        className={styles.textarea}
+                                        rows={3}
+                                        placeholder="e.g. Items will be dropped at the main clubhouse lobby by 5 PM Friday..."
+                                        value={logistics}
+                                        onChange={e => setLogistics(e.target.value)}
+                                    />
+                                    <div style={{ marginTop: '1rem' }}>
+                                        <label className={styles.limitLabel}>PAYMENT MODE</label>
+                                        <div className={styles.radioRow}>
+                                            {[['upi', 'UPI Escrow (Safe)'], ['cod', 'Cash on Delivery']].map(([val, label]) => (
+                                                <label key={val} className={styles.radioOption} style={{ flex: 1 }}>
+                                                    <input type="radio" name="paymentMode" value={val} checked={paymentMode === val} onChange={() => setPaymentMode(val)} className={styles.radioInput} />
+                                                    {paymentMode === val && <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px' }}>radio_button_checked</span>}
+                                                    {paymentMode !== val && <span className="material-symbols-outlined" style={{ color: 'var(--outline)', fontSize: '20px' }}>radio_button_unchecked</span>}
+                                                    <span>{label}</span>
+                                                    {val === 'upi' && paymentMode === 'upi' && (
+                                                        <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px', marginLeft: 'auto' }}>verified_user</span>
+                                                    )}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
+
+                                {/* Review Summary */}
+                                <div className={styles.reviewCard}>
+                                    <div className={styles.reviewHeader}>
+                                        <div className={styles.reviewTitleGroup}>
+                                            <span className={styles.reviewTitle}>Review Summary</span>
+                                        </div>
+                                        <button className={styles.previewBtn} type="button" onClick={handlePreview}>
+                                            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>visibility</span>
+                                            Preview
+                                        </button>
+                                    </div>
+                                    <div className={styles.reviewBody}>
+                                        <div className={styles.reviewThumb}>
+                                            {photoPreviews[0] ? (
+                                                <img src={photoPreviews[0]} alt="cover" className={styles.reviewThumbImg} />
+                                            ) : (
+                                                <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-muted)' }}>image</span>
+                                            )}
+                                        </div>
+                                        <div className={styles.reviewInfo}>
+                                            <span className={styles.reviewClan}>
+                                                {selectedClanObjects.length > 0 ? selectedClanObjects.map(c => c.name.toUpperCase()).join(' · ') : 'DIRECT LINK ONLY'}
+                                            </span>
+                                            <p className={styles.reviewProduct}>{productName || 'Product Name'}</p>
+                                            <p className={styles.reviewPrice}>₹{costPerUnit || '–'} / {unitType || 'unit'}</p>
+                                        </div>
+                                    </div>
+                                    <div className={styles.reviewMeta}>
+                                        <div className={styles.reviewMetaItem}><span className={styles.metaLabel}>GOAL</span><span>Min {minOrder || '–'} {pluralizeUnit(Number(minOrder) || 2, unitType)} · Max {maxCapacity || '–'} {pluralizeUnit(Number(maxCapacity) || 2, unitType)}</span></div>
+                                        <div className={styles.reviewMetaItem}><span className={styles.metaLabel}>DEADLINE</span><span>{deadline ? new Date(deadline).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '–'}</span></div>
+                                        <div className={styles.reviewMetaItem}><span className={styles.metaLabel}>PAYMENT</span><span>{paymentMode === 'upi' ? 'UPI Escrow (Safe)' : 'Cash on Delivery'}</span></div>
+                                        <div className={styles.reviewMetaItem}>
+                                            <span className={styles.metaLabel}>VISIBILITY</span>
+                                            <span>
+                                                {derivedVisibility === 'public' && 'Public Discovery'}
+                                                {derivedVisibility === 'restricted' && 'Restricted to Clan'}
+                                                {derivedVisibility === 'unlisted' && 'Direct Link Only'}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Action Buttons */}
+                                <div className={styles.publishActions}>
+                                    <button className={styles.publishBtn} onClick={handlePublish} disabled={loading} id="publish-pitch-btn">
+                                        {loading ? 'Publishing…' : 'Publish Pool'}
+                                    </button>
+                                    <div className={styles.secondaryActions}>
+                                        <button className={styles.saveDraftBtn} type="button" onClick={handleSaveDraft}>Save as Draft</button>
+                                        <button className={styles.backToStep2} onClick={() => setStep(2)} type="button">Back to Step 2</button>
+                                    </div>
+                                </div>
+                                <p className={styles.terms}>By publishing, you agree to the LetsStack Community Guidelines and Escrow Terms.</p>
                             </div>
-                            <p className={styles.terms}>By publishing, you agree to the GroupBuy Community Guidelines and Escrow Terms.</p>
-                        </div>
-                    )}
+                        );
+                    })()}
                 </div>
             </main>
             <BottomNav />

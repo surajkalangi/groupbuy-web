@@ -1,12 +1,13 @@
 'use client';
 import Link from 'next/link';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 export default function HelpCenterPage() {
     return (
         <div className={styles.page}>
             <header className={styles.header}>
-                <Link href="/" className={styles.logo}>GroupBuy</Link>
+                <Logo size="md" href="/" />
                 <Link href="/support" className={styles.navLink}>Contact Support</Link>
             </header>
 
@@ -33,7 +34,7 @@ export default function HelpCenterPage() {
                                 <span className="material-symbols-outlined">rocket_launch</span>
                             </div>
                             <h3 className={styles.topicTitle}>Getting Started</h3>
-                            <p className={styles.topicDesc}>Learn how to join a clan, browse local pitches, and make your first group purchase.</p>
+                            <p className={styles.topicDesc}>Learn how to join a clan, browse local pools, and make your first group purchase.</p>
                         </Link>
                         
                         <Link href="#" className={styles.topicCard}>
@@ -49,7 +50,7 @@ export default function HelpCenterPage() {
                                 <span className="material-symbols-outlined">storefront</span>
                             </div>
                             <h3 className={styles.topicTitle}>For Clan Leads</h3>
-                            <p className={styles.topicDesc}>Resources for hosting pitches, managing payouts, and coordinating with your community.</p>
+                            <p className={styles.topicDesc}>Resources for hosting pools, managing payouts, and coordinating with your community.</p>
                         </Link>
 
                         <Link href="#" className={styles.topicCard}>
@@ -66,8 +67,8 @@ export default function HelpCenterPage() {
                 <section className={styles.faqSection}>
                     <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
                     <div className={styles.faqItem}>
-                        <h4 className={styles.faqQuestion}>What happens if a pitch doesn't reach its goal?</h4>
-                        <p className={styles.faqAnswer}>If a pitch expires before reaching its minimum order quantity (MOQ), the group buy is canceled, and all participants are fully refunded automatically within 3-5 business days. No one is charged if the community goal isn't met.</p>
+                        <h4 className={styles.faqQuestion}>What happens if a pool doesn't reach its goal?</h4>
+                        <p className={styles.faqAnswer}>If a pool expires before reaching its minimum order quantity (MOQ), the group buy is canceled, and all participants are fully refunded automatically within 3-5 business days. No one is charged if the community goal isn't met.</p>
                     </div>
                     <div className={styles.faqItem}>
                         <h4 className={styles.faqQuestion}>How do I pick up my order?</h4>
@@ -91,7 +92,7 @@ export default function HelpCenterPage() {
             </main>
 
             <footer className={styles.footer}>
-                © 2026 GroupBuy. Community Commerce.
+                © 2026 LetsStack. Community Commerce.
             </footer>
         </div>
     );

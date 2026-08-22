@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 import AuthGuard from '@/components/auth/AuthGuard';
 
@@ -42,14 +43,14 @@ export default function EditProfilePage() {
                 <button onClick={() => router.back()} className={styles.backBtn}>
                     <span className="material-symbols-outlined">arrow_back</span>
                 </button>
-                <Link href={isLoggedIn ? '/feed' : '/'} className={styles.headerTitle}>GroupBuy</Link>
+                <Logo size="md" href={isLoggedIn ? '/feed' : '/'} />
             </header>
 
             <div className={styles.container}>
                 {/* Editorial Header */}
                 <div className={styles.editorialHeader}>
                     <h1 className={styles.heading}>Edit Profile</h1>
-                    <p className={styles.subtext}>Update your personal details and locality details for the GroupBuy network.</p>
+                    <p className={styles.subtext}>Update your personal details and locality details for the LetsStack network.</p>
                 </div>
 
                 {/* Form Card */}
@@ -191,7 +192,7 @@ export default function EditProfilePage() {
                 <div className={styles.dangerZone}>
                     <div className={styles.dangerText}>
                         <h3 className={styles.dangerTitle}>Account Management</h3>
-                        <p className={styles.dangerDesc}>Need to temporarily deactivate or permanently delete your GroupBuy profile data?</p>
+                        <p className={styles.dangerDesc}>Need to temporarily deactivate or permanently delete your LetsStack profile data?</p>
                     </div>
                     <Link href="/profile/deactivate" className={styles.deactivateBtn}>Deactivate</Link>
                 </div>

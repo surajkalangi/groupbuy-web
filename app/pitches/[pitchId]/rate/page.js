@@ -178,7 +178,7 @@ export default function RatePage({ params }) {
                             {submitting ? 'Submitting…' : 'Submit Rating'}
                             {!submitting && <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>arrow_forward</span>}
                         </button>
-                        <p className={styles.footnote}>Your feedback helps the GroupBuy community grow stronger.</p>
+                        <p className={styles.footnote}>Your feedback helps the LetsStack community grow stronger.</p>
                     </div>
                 </div>
             </div>

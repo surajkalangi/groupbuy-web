@@ -40,7 +40,7 @@ export default function PitchPreviewPage() {
                 <button onClick={() => router.back()} className={styles.closeBtn} aria-label="Close preview">
                     <span className="material-symbols-outlined">close</span>
                 </button>
-                <span className={styles.headerTitle}>Pitch Preview</span>
+                <span className={styles.headerTitle}>Pool Preview</span>
                 <button onClick={() => router.back()} className={styles.closeLink}>Close Preview</button>
             </header>
 
@@ -55,10 +55,10 @@ export default function PitchPreviewPage() {
                     </div>
                     {/* Top-Right Action Buttons */}
                     <div className={styles.heroActionRight}>
-                        <button className={styles.heroIconBtn} title="Share this pitch">
+                        <button className={styles.heroIconBtn} title="Share this pool">
                             <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>share</span>
                         </button>
-                        <button className={styles.heroIconBtn} title="Bookmark this pitch">
+                        <button className={styles.heroIconBtn} title="Save this pool">
                             <span className="material-symbols-outlined" style={{ fontSize: '24px', fontVariationSettings: "'FILL' 0", color: 'inherit' }}>bookmark</span>
                         </button>
                     </div>

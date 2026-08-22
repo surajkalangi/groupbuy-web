@@ -16,10 +16,10 @@ const NOTIFICATIONS = [
         icon: 'rocket_launch',
         iconBg: 'primary',
         title: 'Threshold Met: Organic Alphonso Mangoes',
-        message: "Great news! The 'Prestige Lakeside' clan just hit the 20-box goal. Deal is ON!",
+        message: "Great news! The 'Ravi Dham Complex' clan just hit the 20-box goal. Deal is ON!",
         time: '2m ago',
         read: false,
-        cta: { label: 'View Pitch Details', href: '/pitches/pitch-1' },
+        cta: { label: 'View Pool Details', href: '/pitches/pitch-1' },
     },
     {
         id: 2,
@@ -27,7 +27,7 @@ const NOTIFICATIONS = [
         icon: 'local_shipping',
         iconBg: 'secondary',
         title: 'Ready for Pickup',
-        message: "Your order for 'Premium Cashews' has arrived at B-Block Lobby, Prestige Lakeside.",
+        message: "Your order for 'Premium Cashews' has arrived at B-Block Lobby, Ravi Dham Complex.",
         time: '45m ago',
         read: false,
         cta: { label: 'View Details', href: '/pitches/pitch-2' },
@@ -48,7 +48,7 @@ const NOTIFICATIONS = [
         type: 'clan',
         icon: 'group_add',
         iconBg: 'neutral',
-        title: 'Join Request: Prestige Lakeside Towers',
+        title: 'Join Request: Ravi Dham Complex',
         message: "Amit V. has requested to join your buying clan. Review their community reputation score.",
         time: '3h ago',
         read: true,
@@ -59,11 +59,11 @@ const NOTIFICATIONS = [
         type: 'pitch',
         icon: 'campaign',
         iconBg: 'neutral',
-        title: 'New Pitch: Kolhapuri Jaggery',
-        message: "A new group buy is live in Prestige Lakeside — ₹80/kg premium jaggery. Only 3 spots left!",
+        title: 'New Pool: Kolhapuri Jaggery',
+        message: "A new group pool is live in Ravi Dham Complex — ₹80/kg premium jaggery. Only 3 spots left!",
         time: 'Yesterday',
         read: true,
-        cta: { label: 'Join Group', href: '/pitches/pitch-2' },
+        cta: { label: 'Join Pool', href: '/pitches/pitch-2' },
     },
     {
         id: 5,
@@ -71,14 +71,14 @@ const NOTIFICATIONS = [
         icon: 'verified',
         iconBg: 'neutral',
         title: 'Reputation Milestone!',
-        message: "You've reached 'Trusted Buyer' status. You now get early access to limited-stock pitches.",
+        message: "You've reached 'Trusted Buyer' status. You now get early access to limited-stock pools.",
         time: '2 days ago',
         read: true,
         cta: null,
     },
 ];
 
-const FILTERS = ['All', 'Pitches', 'Clans', 'Delivery'];
+const FILTERS = ['All', 'Pools', 'Clans', 'Delivery'];
 
 export default function ActivityPage() {
     const { triggerRatingModal } = useAuth();
@@ -99,7 +99,7 @@ export default function ActivityPage() {
     const filtered = activeFilter === 'All'
         ? notifications
         : notifications.filter(n => {
-            if (activeFilter === 'Pitches') return n.type === 'pitch';
+            if (activeFilter === 'Pools' || activeFilter === 'Pitches') return n.type === 'pitch';
             if (activeFilter === 'Clans') return n.type === 'clan';
             if (activeFilter === 'Delivery') return n.type === 'delivery';
             return true;

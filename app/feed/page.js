@@ -21,18 +21,28 @@ export default function HomeFeed() {
         ...mockClans.map((c) => ({ id: c.id, label: c.name })),
     ];
 
-    const activePitches = mockPitches.filter((p) => p.status === 'active' || p.status === 'activated');
+    // Feed shows all clan-tagged pitches + unaffiliated public pools.
+    // Excludes only direct link-only pools (no clans + private visibility).
+    const activePitches = mockPitches.filter((p) => {
+        const isStatusOk = p.status === 'active' || p.status === 'activated';
+        const noClanTagged = (!p.clanIds || p.clanIds.length === 0) && !p.clanId;
+        const isDirectLinkOnly = noClanTagged && p.visibility === 'private';
+        return isStatusOk && !isDirectLinkOnly;
+    });
     const filteredPitches = activeFilter === 'all'
         ? activePitches
-        : activePitches.filter((p) => p.clanId === activeFilter);
+        : activePitches.filter((p) => (p.clanIds?.includes(activeFilter) || p.clanId === activeFilter));
 
-    const pitchesWithClan = filteredPitches.map((p) => ({
-        ...p,
-        clanName: mockClans.find((c) => c.id === p.clanId)?.name,
-        hostName: p.host?.name,
-        hostRating: p.host?.rating,
-        hostAvatar: p.host?.avatarUrl,
-    }));
+    const pitchesWithClan = filteredPitches.map((p) => {
+        const pClanId = p.clanIds?.[0] || p.clanId;
+        return {
+            ...p,
+            clanName: mockClans.find((c) => c.id === pClanId)?.name,
+            hostName: p.host?.name,
+            hostRating: p.host?.rating,
+            hostAvatar: p.host?.avatarUrl,
+        };
+    });
 
     return (
         <AuthGuard>
@@ -114,7 +124,7 @@ export default function HomeFeed() {
                     )}
 
                     {/* FAB */}
-                    <Link href="/pitches/create" className={styles.fab} aria-label="Create new pitch">
+                    <Link href="/pitches/create" className={styles.fab} aria-label="Create new pool">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                             <line x1="12" y1="5" x2="12" y2="19" />
                             <line x1="5" y1="12" x2="19" y2="12" />
@@ -123,7 +133,7 @@ export default function HomeFeed() {
 
                     {/* Footer */}
                     <footer className={styles.footer}>
-                        <p>© 2026 GROUPBUY. COMMUNITY COMMERCE. V1.0.2</p>
+                        <p>© 2026 LETSSTACK. COMMUNITY COMMERCE. V1.0.2</p>
                         <div className={styles.footerLinks}>
                             <Link href="/terms">Terms of Service</Link>
                             <Link href="/privacy">Privacy Policy</Link>

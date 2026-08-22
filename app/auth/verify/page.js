@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import GuestGuard from '@/components/auth/GuestGuard';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 export default function MobileSignIn() {
@@ -28,9 +29,9 @@ export default function MobileSignIn() {
                 {/* Branding Header */}
                 <div className={styles.header}>
                     <div className={styles.iconContainer}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '3rem', color: 'var(--primary)' }}>groups</span>
+                        <Logo size="lg" href="/" />
                     </div>
-                    <h1 className={styles.title}>Sign in to GroupBuy</h1>
+                    <h1 className={styles.title}>Sign in to LetsStack</h1>
                     <p className={styles.subtitle}>Enter your phone number to continue</p>
                 </div>
 

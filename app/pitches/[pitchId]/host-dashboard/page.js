@@ -3,6 +3,7 @@
 import { use, useState } from 'react';
 import Link from 'next/link';
 import { mockPitches } from '@/data/pitches';
+import { mockClans } from '@/data/clans';
 import { pluralizeUnit } from '@/utils/pluralize';
 import Navbar from '@/components/layout/Navbar';
 import BottomNav from '@/components/layout/BottomNav';
@@ -37,10 +38,13 @@ function generateParticipants(pitch) {
             }
         }
 
+        const pClanId = pitch.clanIds?.[0] || pitch.clanId;
+        const clanName = mockClans.find(c => c.id === pClanId)?.name || 'Direct Pool';
+
         participants.push({
             id: i + 1,
             name,
-            clan: pitch.clanName,
+            clan: clanName,
             qty,
             payment: 'PAID',
             delivered: (seed + i) % 2 === 0
@@ -320,7 +324,7 @@ export default function HostDashboardPage({ params }) {
                             </div>
                             <div className={styles.escrowNote}>
                                 <span className="material-symbols-outlined" style={{ color: 'var(--primary)', flexShrink: 0 }}>info</span>
-                                <p>Funds are held securely by GroupBuy Escrow and will be released to your linked bank account 24 hours after completion.</p>
+                                <p>Funds are held securely by LetsStack Escrow and will be released to your linked bank account 24 hours after completion.</p>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 const JOURNEY_STEPS = [
@@ -68,7 +69,7 @@ export default function HowItWorksPage() {
                 <button onClick={() => router.back()} className={styles.backBtn} aria-label="Go back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </button>
-                <Link href={isLoggedIn ? '/feed' : '/'} className={styles.logo}>GroupBuy</Link>
+                <Logo size="md" href={isLoggedIn ? '/feed' : '/'} />
                 <div className={styles.headerRight}>
                     {isLoggedIn && (
                         <Link href="/discover" className={styles.headerLink}>Explore</Link>
@@ -82,10 +83,10 @@ export default function HowItWorksPage() {
                     <span className={styles.heroBadge}>COMMUNITY COMMERCE</span>
                     <h1 className={styles.heroTitle}>
                         The Power of<br />
-                        <span className={styles.heroAccent}>Buying Together</span>
+                        <span className={styles.heroAccent}>Stacking Together</span>
                     </h1>
                     <p className={styles.heroSub}>
-                        GroupBuy connects trusted communities to unlock better prices on quality products and services.
+                        LetsStack connects trusted communities to unlock better prices on quality products and services.
                         No middlemen, no markups — just your community pooling together.
                     </p>
                 </div>
@@ -184,19 +185,19 @@ export default function HowItWorksPage() {
                 <div className={styles.ctaActions}>
                     <Link href="/" className={styles.ctaPrimary}>Get Started →</Link>
                     {isLoggedIn && (
-                        <Link href="/discover" className={styles.ctaSecondary}>Explore Pitches</Link>
+                        <Link href="/discover" className={styles.ctaSecondary}>Explore Pools</Link>
                     )}
                 </div>
             </section>
 
             {/* ── Footer ── */}
             <footer className={styles.footer}>
-                <span className={styles.footerBrand}>GroupBuy</span>
+                <span className={styles.footerBrand}>LetsStack</span>
                 <span className={styles.footerTagline}>Empowering communities through collective commerce.</span>
                 <div className={styles.footerLinks}>
-                    <a href="#">PRIVACY</a>
-                    <a href="#">TERMS</a>
-                    <a href="#">SUPPORT</a>
+                    <Link href="/privacy">PRIVACY</Link>
+                    <Link href="/terms">TERMS</Link>
+                    <Link href="/support">SUPPORT</Link>
                 </div>
             </footer>
         </main>

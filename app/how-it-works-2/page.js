@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 const STEPS = [
@@ -42,7 +43,7 @@ export default function HowItWorks2Page() {
             {/* ── Header ── */}
             <div className={styles.headerWrapper}>
                 <header className={styles.header}>
-                    <Link href={isLoggedIn ? '/feed' : '/'} className={styles.logo}>GroupBuy</Link>
+                    <Logo size="md" href={isLoggedIn ? '/feed' : '/'} />
                     <nav className={styles.headerNav}>
                         <Link href={isLoggedIn ? '/feed' : '/'} className={styles.navLink}>Home</Link>
                         <span className={styles.navLinkActive}>How it Works</span>
@@ -63,10 +64,10 @@ export default function HowItWorks2Page() {
                         <div className={styles.heroText}>
                             <span className={styles.heroBadge}>Community Commerce</span>
                             <h1 className={styles.heroTitle}>
-                                How <span className={styles.heroTitleAccent}>GroupBuy</span> Works
+                                How <span className={styles.heroTitleAccent}>LetsStack</span> Works
                             </h1>
                             <p className={styles.heroDesc}>
-                                Unlock better prices by pooling orders with your community. GroupBuy connects trusted circles to premium products and services, making quality living affordable for everyone.
+                                Unlock better prices by pooling orders with your community. LetsStack connects trusted circles to premium products and services, making quality living affordable for everyone.
                             </p>
                         </div>
                         <div className={styles.heroImageWrap}>
@@ -199,14 +200,14 @@ export default function HowItWorks2Page() {
             {/* ── Footer ── */}
             <footer className={styles.footer}>
                 <div className={styles.footerInner}>
-                    <span className={styles.footerBrand}>GroupBuy</span>
+                    <span className={styles.footerBrand}>LetsStack</span>
                     <div className={styles.footerLinks}>
                         <Link href="/terms" className={styles.footerLink}>Terms of Service</Link>
                         <Link href="/privacy" className={styles.footerLink}>Privacy Policy</Link>
                         <Link href="/guidelines" className={styles.footerLink}>Community Guidelines</Link>
                         <Link href="/support" className={styles.footerLink}>Contact Us</Link>
                     </div>
-                    <span className={styles.footerCopyright}>© 2026 GroupBuy. Community Commerce.</span>
+                    <span className={styles.footerCopyright}>© 2026 LetsStack. Community Commerce.</span>
                 </div>
             </footer>
         </div>

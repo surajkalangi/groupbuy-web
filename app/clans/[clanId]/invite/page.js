@@ -12,10 +12,10 @@ import styles from './page.module.css';
 import AuthGuard from '@/components/auth/AuthGuard';
 
 const INITIAL_REQUESTS = [
-    { id: 1, name: 'Rahul Sharma', initials: 'RS', location: 'B-Block, Prestige Lakeside', time: '2 min ago', color: '#4A90D9' },
-    { id: 2, name: 'Priya Nair', initials: 'PN', location: 'A-Block, Prestige Lakeside', time: '8 min ago', color: '#E67E22' },
-    { id: 3, name: 'Arjun Menon', initials: 'AM', location: 'C-Block, Prestige Lakeside', time: '15 min ago', color: '#9B59B6' },
-    { id: 4, name: 'Deepika Reddy', initials: 'DR', location: 'D-Block, Prestige Lakeside', time: '1 hr ago', color: '#1ABC9C' },
+    { id: 1, name: 'Rahul Sharma', initials: 'RS', location: 'B-Block, Ravi Dham Complex', time: '2 min ago', color: '#4A90D9' },
+    { id: 2, name: 'Priya Nair', initials: 'PN', location: 'A-Block, Ravi Dham Complex', time: '8 min ago', color: '#E67E22' },
+    { id: 3, name: 'Arjun Menon', initials: 'AM', location: 'C-Block, Ravi Dham Complex', time: '15 min ago', color: '#9B59B6' },
+    { id: 4, name: 'Deepika Reddy', initials: 'DR', location: 'D-Block, Ravi Dham Complex', time: '1 hr ago', color: '#1ABC9C' },
 ];
 
 export default function InviteMembers({ params }) {
@@ -23,7 +23,7 @@ export default function InviteMembers({ params }) {
     const [copied, setCopied] = useState(false);
     const [requests, setRequests] = useState(INITIAL_REQUESTS);
     const [toast, setToast] = useState(null);
-    const inviteLink = 'groupbuy.app/join/clan-abc123';
+    const inviteLink = 'letsstack.app/join/clan-abc123';
 
     const handleCopy = () => {
         navigator.clipboard?.writeText(`https://${inviteLink}`);

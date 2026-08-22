@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 export default function SupportPage() {
@@ -29,7 +30,7 @@ export default function SupportPage() {
     return (
         <div className={styles.page}>
             <header className={styles.header}>
-                <Link href="/" className={styles.logo}>GroupBuy</Link>
+                <Logo size="md" href="/" />
                 <Link href="/" className={styles.navLink}>Back to Home</Link>
             </header>
 
@@ -148,7 +149,7 @@ export default function SupportPage() {
                             </div>
                             <div>
                                 <h3 className={styles.infoCardTitle}>Email Us</h3>
-                                <p className={styles.infoCardDesc}>Prefer direct email? You can reach our core support team at <strong>support@groupbuy.local</strong>.</p>
+                                <p className={styles.infoCardDesc}>Prefer direct email? You can reach our core support team at <strong>support@letsstack.local</strong>.</p>
                             </div>
                         </div>
                     </div>
@@ -156,7 +157,7 @@ export default function SupportPage() {
             </main>
 
             <footer className={styles.footer}>
-                © 2026 GroupBuy. Community Commerce.
+                © 2026 LetsStack. Community Commerce.
             </footer>
         </div>
     );

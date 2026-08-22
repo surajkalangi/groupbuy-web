@@ -7,6 +7,7 @@ import { useAuth } from '@/context/AuthContext';
 import { mockClans } from '@/data/clans';
 import { mockPitches } from '@/data/pitches';
 import PitchCard from '@/components/pitch/PitchCard';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 
 export default function ClanPreviewPage() {
@@ -22,7 +23,7 @@ export default function ClanPreviewPage() {
                 <div className={styles.notFound}>
                     <h1>Clan not found</h1>
                     <p>This invite link may be expired or invalid.</p>
-                    <Link href={isLoggedIn ? '/feed' : '/'} className={styles.backBtn}>← Back to GroupBuy</Link>
+                    <Link href={isLoggedIn ? '/feed' : '/'} className={styles.backBtn}>← Back to LetsStack</Link>
                 </div>
             </main>
         );
@@ -33,7 +34,7 @@ export default function ClanPreviewPage() {
     const isApprovalRequired = clan.privacy === 'approval_required';
 
     // Determine which pitches to show based on access rules
-    const clanPitches = mockPitches.filter(p => p.clanId === clan.id && (p.status === 'active' || p.status === 'activated'));
+    const clanPitches = mockPitches.filter(p => (p.clanIds?.includes(clan.id) || p.clanId === clan.id) && (p.status === 'active' || p.status === 'activated'));
     const visiblePitches = clanPitches.filter(p => {
         if (isMemberOfClan) return true; // Members see everything
         if (p.visibility === 'public') return true; // Public pitches always visible
@@ -61,7 +62,7 @@ export default function ClanPreviewPage() {
 
     const howItWorksSteps = [
         { icon: 'group_add', title: 'Join Clan', desc: 'Accept the invite and become part of your local tower community.' },
-        { icon: 'local_grocery_store', title: 'Participate', desc: 'Join active pitches for farm-fresh produce and premium bulk goods.' },
+        { icon: 'local_grocery_store', title: 'Participate', desc: 'Join active pools for farm-fresh produce and premium bulk goods.' },
         { icon: 'verified_user', title: 'Secure Pay', desc: 'Complete your purchase instantly via secure UPI integration.' },
         { icon: 'inventory_2', title: 'Pick up', desc: 'Collect your items from the designated local tower hub.' },
     ];
@@ -70,7 +71,7 @@ export default function ClanPreviewPage() {
         <main className={styles.page}>
             {/* ── Header ── */}
             <header className={styles.header}>
-                <Link href={isLoggedIn ? '/feed' : '/'} className={styles.logo}>GroupBuy</Link>
+                <Logo size="md" href={isLoggedIn ? '/feed' : '/'} />
                 <div className={styles.headerRight}>
                     <Link href="/how-it-works" className={styles.headerLink}>About</Link>
                     {isGuest ? (
@@ -161,7 +162,7 @@ export default function ClanPreviewPage() {
                         <p className={styles.pitchesSubtitle}>Live opportunities to save with your community.</p>
                     </div>
                     <Link href={`/clans/${clan.id}`} className={styles.seeAllLink}>
-                        See all Pitches
+                        See all Pools
                         <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>chevron_right</span>
                     </Link>
                 </div>
@@ -192,7 +193,7 @@ export default function ClanPreviewPage() {
                 {visiblePitches.length === 0 && hiddenPrivateCount === 0 && (
                     <div className={styles.emptyPitches}>
                         <span className="material-symbols-outlined" style={{ fontSize: '2.5rem', color: 'var(--on-surface-muted)' }}>storefront</span>
-                        <p>No active pitches right now. Join the clan to be the first!</p>
+                        <p>No active pools right now. Join the clan to be the first!</p>
                     </div>
                 )}
             </section>
@@ -217,7 +218,7 @@ export default function ClanPreviewPage() {
 
             {/* ── Footer ── */}
             <footer className={styles.footer}>
-                <span className={styles.footerBrand}>GroupBuy</span>
+                <span className={styles.footerBrand}>LetsStack</span>
                 <span className={styles.footerTagline}>Empowering communities through collective commerce.</span>
                 <div className={styles.footerLinks}>
                     <a href="#">PRIVACY</a>

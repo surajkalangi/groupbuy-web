@@ -1,8 +1,10 @@
 'use client';
+
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import Logo from '@/components/ui/Logo';
 import styles from './page.module.css';
 import GuestGuard from '@/components/auth/GuestGuard';
 
@@ -24,7 +26,7 @@ export default function DeactivatedPage() {
         <GuestGuard>
         <main className={styles.page}>
             <header className={styles.header}>
-                <Link href="/" className={styles.logo}>GroupBuy</Link>
+                <Logo size="md" href="/" />
                 <Link href="/help" className={styles.helpLink}>Help Center</Link>
             </header>
             <div className={styles.container}>
@@ -39,7 +41,7 @@ export default function DeactivatedPage() {
                 <div className={styles.footerLinks}>
                     <Link href="/help">HELP CENTER</Link><Link href="/privacy">PRIVACY POLICY</Link><Link href="/terms">TERMS OF SERVICE</Link>
                 </div>
-                <p className={styles.copyright}>© 2026 GroupBuy. All rights reserved.</p>
+                <p className={styles.copyright}>© 2026 LetsStack. All rights reserved.</p>
             </div>
         </main>
         </GuestGuard>

@@ -144,7 +144,7 @@ export default function JoinPitchModal({ pitch, spotsLeft, onConfirm, onClose, i
                 <div className={styles.trustLine}>
                     <span className={`material-symbols-outlined ${styles.trustIcon}`} style={{ fontSize: '18px', color: 'var(--primary)', fontVariationSettings: "'FILL' 1" }}>verified_user</span>
                     <span>
-                        Funds are held in <span className={styles.escrowLink}>GroupBuy Escrow</span> via UPI. Your money is only released to the host once delivery is verified by the community.
+                        Funds are held in <span className={styles.escrowLink}>LetsStack Escrow</span> via UPI. Your money is only released to the host once delivery is verified by the community.
                     </span>
                 </div>
             </div>
@@ -153,7 +153,7 @@ export default function JoinPitchModal({ pitch, spotsLeft, onConfirm, onClose, i
             <div className={styles.modalFooter}>
                 {/* Policy consent */}
                 <p className={styles.policyConsent}>
-                    By joining, you agree to the host's pitch policies.
+                    By joining, you agree to the host's pool policies.
                 </p>
 
                 <button className={styles.confirmBtn} onClick={handleConfirm}>

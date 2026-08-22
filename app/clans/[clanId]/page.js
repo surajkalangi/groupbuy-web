@@ -21,7 +21,7 @@ export default function ClanDetail({ params }) {
 
     const clan = mockClans.find(c => c.id === clanId) || mockClans[0];
     const clanPitches = mockPitches
-        .filter((p) => p.clanId === clan.id && (p.status === 'active' || p.status === 'activated'))
+        .filter((p) => (p.clanIds?.includes(clan.id) || p.clanId === clan.id) && (p.status === 'active' || p.status === 'activated'))
         .map((p) => ({
             ...p,
             hostName: p.host?.name,
@@ -38,7 +38,7 @@ export default function ClanDetail({ params }) {
         .slice(0, 3);
 
     const tabs = [
-        { id: 'pitches', label: `Active Pitches (${clanPitches.length})` },
+        { id: 'pitches', label: `Active Pools (${clanPitches.length})` },
         { id: 'members', label: 'Members' },
         { id: 'treasury', label: 'Clan Treasury' },
     ];

@@ -10,12 +10,12 @@ import BottomNav from '@/components/layout/BottomNav';
 import styles from './page.module.css';
 
 const MY_CLANS = [
-    { id: 'clan-1', name: 'Prestige Lakeside Towers', role: 'MOD', icon: 'apartment', iconBg: 'secondary' },
-    { id: 'clan-2', name: 'Tech Park West Foodies', role: 'Member', icon: 'work', iconBg: 'primary' },
+    { id: 'clan-1', name: 'Ravi Dham Complex', role: 'MOD', icon: 'apartment', iconBg: 'secondary' },
+    { id: 'clan-2', name: 'Sathva Knowledge City', role: 'Member', icon: 'work', iconBg: 'primary' },
 ];
 
 const PREFS = [
-    { id: 'notif', icon: 'notifications', label: 'Push Notifications', sub: 'Alerts for new pitch matches', color: '#dcfce7', enabled: true },
+    { id: 'notif', icon: 'notifications', label: 'Push Notifications', sub: 'Alerts for new pool matches', color: '#dcfce7', enabled: true },
     { id: 'email', icon: 'mail', label: 'Email Weekly Recap', sub: 'Savings and community updates', color: '#ffedd5', enabled: false },
     { id: 'public', icon: 'visibility', label: 'Public Profile', sub: 'Allow others to see your reputation', color: '#eff6ff', enabled: true },
 ];
@@ -47,7 +47,7 @@ export default function ProfilePage() {
                             <h1 className={styles.profileName}>Suraj Kalangi</h1>
                             <p className={styles.profileLocation}>
                                 <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>location_on</span>
-                                Prestige Lakeside, Bengaluru
+                                Ravi Dham Complex, Bengaluru
                             </p>
                         </div>
                     </div>
@@ -84,11 +84,11 @@ export default function ProfilePage() {
                     <div className={styles.quickStats}>
                         <div className={styles.statCard}>
                             <span className={styles.statNum} style={{ color: 'var(--primary)' }}>12</span>
-                            <span className={styles.statLabel}>Pitches Joined</span>
+                            <span className={styles.statLabel}>Pools Joined</span>
                         </div>
                         <div className={styles.statCard}>
                             <span className={styles.statNum} style={{ color: 'var(--secondary)' }}>3</span>
-                            <span className={styles.statLabel}>Pitches Hosted</span>
+                            <span className={styles.statLabel}>Pools Hosted</span>
                         </div>
                     </div>
                 </div>
