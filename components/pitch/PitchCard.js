@@ -115,22 +115,26 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                         </div>
 
                         {locMeta && (
-                            <span 
-                                className={
-                                    locMeta.type === 'digital'
-                                        ? styles.proximityBadgeDigital
-                                        : locMeta.type === 'society'
-                                            ? styles.proximityBadgeSociety
-                                            : locMeta.type === 'doorstep'
-                                                ? styles.proximityBadgeDoorstep
-                                                : locMeta.type === 'pan_india'
-                                                    ? styles.proximityBadgeRemote
-                                                    : styles.proximityBadge
-                                }
-                                title={locMeta.tooltip}
-                            >
-                                {locMeta.badgeText}
-                            </span>
+                            <div className={styles.proximityBadgeWrapper} title={locMeta.tooltip}>
+                                <span 
+                                    className={
+                                        locMeta.type === 'digital'
+                                            ? styles.proximityBadgeDigital
+                                            : locMeta.type === 'society'
+                                                ? styles.proximityBadgeSociety
+                                                : locMeta.type === 'doorstep'
+                                                    ? styles.proximityBadgeDoorstep
+                                                    : locMeta.type === 'pan_india'
+                                                        ? styles.proximityBadgeRemote
+                                                        : styles.proximityBadge
+                                    }
+                                >
+                                    {locMeta.badgeText}
+                                </span>
+                                <span className={styles.tooltipPopup}>
+                                    {locMeta.tooltip}
+                                </span>
+                            </div>
                         )}
                     </div>
                 )}

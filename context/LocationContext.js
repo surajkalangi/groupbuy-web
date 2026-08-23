@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { mockClans } from '@/data/clans';
 
 export const POPULAR_CITIES = [
     { id: 'hyderabad', name: 'Hyderabad', icon: 'location_city' },
@@ -297,27 +298,19 @@ export function LocationProvider({ children }) {
         const userCity = userLocation?.city;
         const cityMatches = !poolCity || !userCity || poolCity.toLowerCase() === userCity.toLowerCase();
 
+        const primaryClanId = pool.clanIds?.[0] || pool.clanId;
+        const poolClan = mockClans?.find(c => c.id === primaryClanId);
+        const isSocietyClan = poolClan?.badge?.toUpperCase().includes('SOCIETY') || primaryClanId === 'clan-1' || primaryClanId === 'clan-4';
+
         // 3. User is a joined member of this apartment/society clan
-        if (isMemberOfPoolClan) {
-            if (resolved.isDoorstep) {
-                return {
-                    type: 'doorstep',
-                    badgeText: '🚚 Doorstep',
-                    tooltip: `Doorstep service at your flat in ${resolved.hubName || 'your society'} (You are a clan member)`,
-                    distanceKm: distance,
-                    hubName: resolved.hubName,
-                };
-            }
-            // If member is currently traveling / far away (>35km or another city), show Society badge
-            if (distance === null || distance > 35 || !cityMatches) {
-                return {
-                    type: 'society',
-                    badgeText: '🏠 Your Society',
-                    tooltip: `Hosted in your joined clan (${resolved.hubName}) • You can participate while traveling`,
-                    distanceKm: distance,
-                    hubName: resolved.hubName,
-                };
-            }
+        if (isMemberOfPoolClan && isSocietyClan) {
+            return {
+                type: 'society',
+                badgeText: '🏠 Your Society',
+                tooltip: `Hosted in your joined society clan (${resolved.hubName || poolClan?.name || 'Society'}) • You can participate while you are away`,
+                distanceKm: distance,
+                hubName: resolved.hubName || poolClan?.name,
+            };
         }
 
         // 4. City-wide Doorstep Delivery (service / vendor pools in user's city)

@@ -109,7 +109,9 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Network School Campus, Malaysia', time: 'July 1st - July 31st' },
+        deliveryType: 'pan_india',
+        isPanIndia: true,
+        pickupInfo: { address: 'Open Pan-India • Online onboarding & group travel coordination from any city in India', deliveryType: 'pan_india', isRemote: true, isPanIndia: true, time: 'September 1st - September 30th' },
         fundingProgress: 20,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -187,7 +189,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'B-Block Lobby, Prestige Lakeside Towers', time: 'Tomorrow evening, 6–8 PM' },
+        pickupInfo: { address: 'B-Block Lobby, Ravidham Complex, Whitefields, Bengaluru', time: 'Tomorrow evening, 6–8 PM' },
         fundingProgress: 75,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -271,7 +273,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Clubhouse Lobby, HSR Sector 5', time: 'August 15, 5–7 PM' },
+        pickupInfo: { address: 'Clubhouse Lobby, Ravidham Complex, Whitefields, Bengaluru', time: 'August 15, 5–7 PM' },
         fundingProgress: 30,
         pitchPolicies: {
             returnPolicy: 'no_returns',
@@ -310,7 +312,7 @@ export const mockPitches = [
         status: 'hidden',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'B-Block Lobby, Prestige Lakeside', time: 'April 10, 5–7 PM' },
+        pickupInfo: { address: 'Clubhouse Lobby, Ravidham Complex, Whitefields, Bengaluru', time: 'April 10, 5–7 PM' },
         fundingProgress: 80,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -384,7 +386,7 @@ export const mockPitches = [
         status: 'activated',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'B-Block Lobby, Prestige Lakeside', time: 'May 16, 10–12 AM' },
+        pickupInfo: { address: 'Clubhouse Lobby, Ravidham Complex, Whitefields, Bengaluru', time: 'May 16, 10–12 AM' },
         fundingProgress: 100,
         pitchPolicies: {
             returnPolicy: 'no_returns',
@@ -421,7 +423,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Vijay Digitals, Mahadevapura Main Rd (delivery to your flat included)', time: 'Within 5 days of goal completion' },
+        pickupInfo: { address: 'Doorstep delivery at your flat in MyHome Tridasa, Tellapur', time: 'Within 5 days of order completion' },
         fundingProgress: 30,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -584,7 +586,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Indiranagar Hub / Direct Delivery to Clan Members', time: 'August 16, 5–7 PM' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Doorstep cold-insulated pouch delivery across Hitec City, Madhapur, Gachibowli & Jubilee Hills', locality: 'Madhapur', city: 'Hyderabad', lat: 17.4483, lng: 78.3915, time: 'Delivered Thursday evening 5–8 PM', isDoorstep: true },
         fundingProgress: 70,
         pitchPolicies: {
             returnPolicy: 'no_returns',
@@ -626,7 +629,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Indiranagar Hub / Direct Delivery', time: 'August 17, 4–6 PM' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Doorstep chilled bottle crate delivery across Hitec City, Kondapur, Madhapur & Tellapur', locality: 'Hitec City', city: 'Hyderabad', lat: 17.4435, lng: 78.3772, time: 'Delivered Friday morning 7–10 AM', isDoorstep: true },
         fundingProgress: 75,
         pitchPolicies: {
             returnPolicy: 'exchange_only',
@@ -708,7 +712,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Indiranagar Hub / Direct Delivery', time: 'August 16, 5–7 PM' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Doorstep fresh cold drop across Tellapur, Gachibowli, Madhapur & Financial District', locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, time: 'Delivered Saturday morning 7–9 AM', isDoorstep: true },
         fundingProgress: 100,
         pitchPolicies: {
             returnPolicy: 'no_returns',
@@ -784,12 +789,13 @@ export const mockPitches = [
         maxCapacity: 12,
         committedUnits: 6,
         waitlistCount: 0,
-        deadline: '2026-08-18T18:00',
-        daysLeft: 5,
+        deadline: '2026-08-16T18:00',
+        daysLeft: 3,
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Indiranagar Hub / Direct Delivery', time: 'August 18, 5–7 PM' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Doorstep courier/van delivery across Hyderabad localities', locality: 'Jubilee Hills', city: 'Hyderabad', lat: 17.4319, lng: 78.4073, time: 'Delivered Saturday 11 AM – 2 PM', isDoorstep: true },
         fundingProgress: 100,
         pitchPolicies: {
             returnPolicy: 'no_returns',
@@ -829,7 +835,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Clubhouse Multipurpose Hall, Prestige Lakeside Towers', time: 'Sundays & Thursdays, 6–7 PM' },
+        pickupInfo: { address: 'Clubhouse Multipurpose Hall, Ravidham Complex', time: 'Sundays & Thursdays, 6–7 PM' },
         fundingProgress: 60,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -870,7 +876,7 @@ export const mockPitches = [
         paymentMode: 'upi',
         visibility: 'private',
         deliveryType: 'doorstep',
-        pickupInfo: { address: 'Direct In-Apartment Service (Brigade Metropolis, Mahadevapura)', locality: 'Mahadevapura', city: 'Bengaluru', lat: 12.9892, lng: 77.7126, time: 'Saturday & Sunday, 9 AM – 6 PM', isDoorstep: true },
+        pickupInfo: { address: 'Direct In-Apartment Service (MyHome Tridasa)', locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, time: 'Saturday & Sunday, 9 AM – 6 PM', isDoorstep: true },
         fundingProgress: 80,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -994,7 +1000,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'Tower A Lobby / Clubhouse, Prestige Lakeside Towers', time: 'Delivered 2 days before Diwali' },
+        pickupInfo: { address: 'Tower A Lobby / Clubhouse, Ravidham Complex, Whitefields, Bengaluru', time: 'Delivered 2 days before Diwali' },
         fundingProgress: 60,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1075,7 +1081,7 @@ export const mockPitches = [
         paymentMode: 'upi',
         visibility: 'private',
         deliveryType: 'doorstep',
-        pickupInfo: { address: 'Doorstep service across Brigade Metropolis apartments', locality: 'Mahadevapura', city: 'Bengaluru', lat: 12.9892, lng: 77.7126, time: 'This Saturday & Sunday (30-min service slot per flat)', isDoorstep: true },
+        pickupInfo: { address: 'Doorstep service across MyHome Tridasa apartments', locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, time: 'This Saturday & Sunday (30-min service slot per flat)', isDoorstep: true },
         fundingProgress: 80,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1119,7 +1125,7 @@ export const mockPitches = [
         paymentMode: 'upi',
         visibility: 'private',
         deliveryType: 'doorstep',
-        pickupInfo: { address: 'Free on-site measurement & installation at Brigade Metropolis', locality: 'Whitefield', city: 'Bengaluru', lat: 12.9698, lng: 77.7499, time: 'Measurement this weekend, installation within 3 days', isDoorstep: true },
+        pickupInfo: { address: 'Free on-site measurement & installation at Ravidham Complex', locality: 'Whitefields', city: 'Bengaluru', lat: 12.9829, lng: 77.7456, time: 'Measurement this weekend, installation within 3 days', isDoorstep: true },
         fundingProgress: 60,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1200,7 +1206,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'Tower A Lobby / Clubhouse, Prestige Lakeside Towers', time: 'Festival morning 6:00 AM – 8:00 AM' },
+        pickupInfo: { address: 'Tower A Lobby / Clubhouse, MyHome Tridasa', time: 'Festival morning 6:00 AM – 8:00 AM' },
         fundingProgress: 73,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1281,7 +1287,7 @@ export const mockPitches = [
         status: 'expired',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Tech Park West / Brigade Metropolis handover or courier', time: 'N/A' },
+        pickupInfo: { address: 'Mindspace social, Hitech City, Hyderabad', time: 'N/A' },
         fundingProgress: 50,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1526,7 +1532,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'Clubhouse / Tower Reception, Brigade Metropolis', time: 'Saturday morning 10:00 AM – 1:00 PM' },
+        pickupInfo: { address: 'Clubhouse / Tower Reception, MyHome Tridasa and Ravidham Complex', time: 'Saturday morning 10:00 AM – 1:00 PM' },
         fundingProgress: 80,
         pitchPolicies: {
             returnPolicy: 'custom',
