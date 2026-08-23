@@ -161,9 +161,26 @@ Users don't switch to a new tool because it's "better." They switch when pain fr
 3. **Let interest find you** — The Pitch model is designed so that hosts never have to hard-sell or cold-outreach. Create, share to your Clan, and let the right audience self-select.
 4. **Trusted circles, not strangers** — The organizing principle is social trust. People buy with those they already know — neighbors, colleagues, friends, family.
 5. **Coordination as a feature** — Every Pitch is inherently a coordination mechanism. If enough people align before the deadline, it happens. The platform handles the logistics of alignment.
-6. **Show the humans** — Every pitch should feel like it's organized by a real person for real people, not an algorithm or a faceless brand.
+6. **Show the humans** — Every pool should feel like it's organized by a real person for real people, not an algorithm or a faceless brand.
 7. **Make it normal** — The platform should normalize collective buying, making it feel like a routine habit rather than an unusual effort. As friction drops, adoption broadens.
-8. **Complement, don't compete** — GroupBuy coexists with WhatsApp and existing group dynamics. It doesn't replace the conversation — it replaces the chaos that follows the conversation.
+8. **Complement, don't compete** — LetsStack coexists with WhatsApp and existing group dynamics. It doesn't replace the conversation — it replaces the chaos that follows the conversation.
+
+---
+
+## 2.6 Clan Security & Stranger Infiltration Prevention
+
+In LetsStack, **Private Clans** (apartment societies, office colleagues, family & friend circles) represent trusted social boundaries. Maintaining absolute privacy and preventing stranger infiltration is vital to user safety and legal compliance.
+
+### 2.6.1 Strict Zero-Access Rule for Pending Members
+* **No Grace Periods:** Prospective members who scan an openly distributed QR code or click a private clan invite link are placed into a `pending_approval` queue.
+* **Strict Zero-Access:** While in `pending_approval` status, the user has **0 visibility** into the clan's active pools, participant lists, prices, photos, or discussion threads. They see only a generic clan header and a "Request Sent — Waiting for Lead Approval" state. This eliminates data leakage to unauthorized outsiders or infiltrators.
+
+### 2.6.2 Best Practices & Safeguards for Clan Leads
+Clan Leads are equipped with lightweight, powerful administrative tools:
+1. **Identity & Verification Badges:** Clan leads can review applicant profiles, verification notes (e.g. Flat/Tower number or corporate email domain), and mutual contact endorsements before granting approval.
+2. **Dynamic Invite Links with Expiry:** Clan leads can generate time-limited (e.g. 48 hours) or max-use (e.g. 20 joins) invite links for specific onboarding campaigns (e.g., apartment annual general meetings).
+3. **Instant Link Revocation:** If an invite link or QR code is leaked to public forums or unauthorized third parties, the clan lead can revoke and regenerate the invite token in 1 tap, instantly invalidating previous links.
+4. **1-Tap Member Removal & Blacklisting:** Suspicious or disruptive accounts can be removed immediately by clan leads, automatically revoking access to all private clan pools.
 
 ---
 
@@ -317,32 +334,28 @@ Users don't switch to a new tool because it's "better." They switch when pain fr
 
 ### Journey 3: Host Creates a Pitch
 
-**Actor:** Host (any Clan member)  
-**Goal:** Create a group buying deal for their Clan.
+### Journey 3: Host Creates a Pool (3-Step Wizard)
+
+**Actor:** Host (logged-in member)  
+**Goal:** Propose a collective group buying deal for their trusted clans or communities.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      PITCH CREATION                             │
+│                      POOL CREATION WIZARD                       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐  │
-│  │  "New     │───▶│ Product  │───▶│ Pricing  │───▶│ Rules &  │  │
-│  │  Pitch"   │    │ Details  │    │  & Split │    │ Deadline │  │
-│  │  Button   │    │  Entry   │    │  Setup   │    │  Setup   │  │
-│  └──────────┘    └──────────┘    └──────────┘    └──────────┘  │
-│                                                       │         │
-│                                                       ▼         │
-│                                            ┌────────────────┐   │
-│                                            │  Visibility &  │   │
-│                                            │  Publish       │   │
-│                                            └────────────────┘   │
-│                                                       │         │
-│                                                       ▼         │
-│                                            ┌────────────────┐   │
-│                                            │  Pitch Live!   │   │
-│                                            │  Notifications │   │
-│                                            │  Sent to Clan  │   │
-│                                            └────────────────┘   │
+│  ┌──────────────┐      ┌──────────────┐      ┌───────────────┐  │
+│  │   Step 1     │─────▶│   Step 2     │─────▶│    Step 3     │  │
+│  │ Product Info │      │ Price & Qty  │      │ Rules & Clans │  │
+│  │  & Seller    │      │ (Goal & Cap) │      │ (Visibility)  │  │
+│  └──────────────┘      └──────────────┘      └───────────────┘  │
+│                                                      │          │
+│                                                      ▼          │
+│                                             ┌────────────────┐  │
+│                                             │   Pool Live!   │  │
+│                                             │ Notifications  │  │
+│                                             │ Sent to Clans  │  │
+│                                             └────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -350,37 +363,97 @@ Users don't switch to a new tool because it's "better." They switch when pain fr
 
 | Step | Screen | Action | System Response |
 |------|--------|--------|-----------------|
-| 1 | Clan Feed | Host taps "+" or "New Pitch" | Opens pitch creation form |
-| 2 | Product Details | Host enters: product name, description, optional photo, optional product link | Fields validated |
-| 3 | Pricing Setup | Host enters: total cost (₹), unit name (kg/piece/box), cost per unit (₹), quantity available | Auto-calculates split display (e.g., "₹50/kg") |
-| 4 | Rules & Deadline | Host sets: minimum units (≥2), maximum units, deadline (date + time), pickup/delivery instructions | Countdown auto-calculated |
-| 5 | Visibility | Host selects: Private (specific Clans) or Public | Controls who can see the pitch |
-| 6 | Review & Publish | Host reviews summary and taps "Publish Pitch" | Pitch goes live; push notification sent to all Clan members |
+| **1** | **Product & Media** | Host enters: Product Name, Description, Photos (16:9 ratio), optional Product URL, optional Seller / Vendor Info (e.g., Aquaguard, MuscleBlaze). | Form validates required fields; generates high-quality preview thumbnails. |
+| **2** | **Pricing & Capacity** | Host enters: Minimum Order (Goal threshold), Maximum Capacity, Unit Type (kg, box, kit, bottle), Cost per unit (₹). | Real-time preview renders total goal cost, per-unit economics, and auto-pluralized labels (e.g., "5 boxes minimum"). |
+| **3** | **Rules, Clans & Visibility** | Host selects: Target Clan(s) (restricted strictly to clans the host belongs to), Pool Deadline (date & time), Pickup/Delivery Instructions, Escrow Payment Mode. | System derives and renders **Pool Visibility** (Public Discovery vs Private Clan Pool vs Direct Link Only) and reviews summary. |
+| **Publish** | **Review & Publish** | Host reviews summary and taps "Publish Pool". | Pool is activated; published to tagged clan hubs; notification dispatched to clan members. |
 
-**Pitch Data Model (MVP):**
+**Host Clan Selection Enforcement (Backend & Frontend):**
+* **Frontend:** The clan selector in Step 3 queries `currentUser.joinedClans` and exclusively populates clans the host has active membership in.
+* **Backend API (`POST /api/pools`):** Validates that all requested `clanIds` are a strict subset of the authenticated user's joined clans (`payload.clanIds ⊆ host.joinedClanIds`). If a host attempts to tag an unjoined clan, the API rejects the request with `403 Forbidden: Host must be a member of all targeted clans`.
 
-| Field | Type | Required | Example |
-|-------|------|----------|---------|
-| Product Name | Text | Yes | "Alphonso Mangoes (Ratnagiri)" |
-| Description | Text | Yes | "Premium Ratnagiri Alphonso, Box of 24" |
-| Photo | Image | No | [uploaded image] |
-| Product Link | URL | No | amazon.in/dp/... |
-| Total Cost | Number (₹) | Yes | 2400 |
-| Unit Name | Text | Yes | "box" |
-| Cost Per Unit | Number (₹) | Yes | 600 |
-| Total Units | Number | Yes | 4 |
-| Min Units | Number | Yes | 3 |
-| Max Units | Number | Yes | 4 |
-| Deadline | DateTime | Yes | 2026-03-25 18:00 |
-| Pickup Instructions | Text | Yes | "Pickup from B-Block lobby, 6–8 PM" |
-| Visibility | Enum | Yes | Private (Clan-only) |
-| Payment Mode | Enum | Yes | UPI Escrow / Cash on Delivery |
+**Pool Data Model (MVP):**
 
-**Edge Cases:**
-- New users limited to 1 pitch/week (fraud prevention).
-- Host can optionally exclude themselves from participation.
-- Host can edit pitch details only before the first participant joins.
-- Pitch auto-expires if deadline passes and threshold is not met.
+| Field | Type | Required | Example | Description |
+|-------|------|----------|---------|-------------|
+| `id` | String | Yes | `"pitch-1"` | Unique pool identifier |
+| `title` | Text | Yes | `"Alphonso Mangoes (Ratnagiri)"` | Clear, benefit-driven title |
+| `description` | Text | Yes | `"Direct farm-sourced Ratnagiri mangoes..."` | Sourcing details and specs |
+| `image` | String (URL) | Yes | `"/images/farm-mango-crates.jpg"` | 16:9 landscape product photo |
+| `photos` | Array<URL> | No | `["/img1.jpg", "/img2.jpg"]` | Additional gallery images |
+| `productLink` | URL | No | `"https://seller.com/deal"` | Reference link |
+| `sellerName` | Text | No | `"Ratnagiri Orchards Co."` | Optional seller name |
+| `verifiedVendor` | Boolean | No | `true` | Enables Blue Checkmark badge |
+| `unitPrice` | Number (₹) | Yes | `600` | Per-unit price |
+| `unit` | Text | Yes | `"crate"` | Unit label (box, kit, litre) |
+| `minParticipants` | Number | Yes | `10` | Minimum Goal threshold |
+| `maxParticipants` | Number | Yes | `25` | Maximum capacity limit |
+| `clanIds` | Array<ID> | Yes | `["clan-1", "clan-2"]` | Tagged host clans |
+| `visibility` | Enum | Yes | `'public'` \| `'restricted'` \| `'unlisted'` | Derived via Union of Access |
+| `deadline` | DateTime | Yes | `"2026-08-30T18:00:00Z"` | Expiry timestamp |
+| `pickupPoint` | Text | Yes | `"Clubhouse Lobby / Gate 2"` | Physical collection instructions |
+| `geoCoordinates` | Object | No | `{ lat: 17.4435, lng: 78.3772 }` | Pickup hub coordinates for proximity filtering |
+| `poolPolicies` | Object | Yes | `{ returnPolicy: 'exchange_only', quitPolicy: 'standard' }` | Return & cancellation rules |
+| `status` | Enum | Yes | `'active'` \| `'activated'` \| `'expired'` \| `'completed'` | Pool lifecycle state |
+
+---
+
+## 3.4 Geolocation Proximity Engine for Public Clan Pools
+
+For public and city-wide clans (e.g., *West Hyderabad Collective*, *Festive & Seasonal Collective*), physical bulk goods (farm produce, bakery items, bulk appliances) require convenient local pickup.
+
+### 3.4.1 Haversine Proximity Calculation
+* Every pool with physical pickup includes designated hub coordinates (`lat`, `lng`).
+* When a user browses public feeds or searches for deals, the platform calculates the geographic distance between the user's saved/detected location and the pool's pickup hub:
+  $$d = 2R \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta \phi}{2}\right) + \cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta \lambda}{2}\right)}\right)$$
+* **Card Indicator:** Displays proximity badge on pool cards (e.g., `📍 2.4 km from your location • Gachibowli Hub`).
+
+### 3.4.2 Proximity Filter Chips
+* Users can filter public discovery feeds using distance radius chips:
+  - **Nearby (Within 5 km)**: Hyper-local apartment and neighborhood pools.
+  - **City Hubs (Within 15 km)**: Metro-wide community bulk orders.
+  - **All Public Deals**: All open city pools.
+  - **Remote / Pan-India**: Digital subscriptions, Kickstarter board games, or delivered goods with no geographic constraint.
+
+---
+
+## 3.5 Demand Aggregation, MOQ Unlocking & B2B/B2C Sourcing Mechanics
+
+LetsStack turns fragmented individual demand into structured, high-volume collective purchasing power:
+
+1. **Unlocking Wholesale Minimum Order Quantities (MOQs):**
+   - Direct manufacturers and farm cooperatives often require large minimum orders (e.g. 50 crates of mangoes, 20 solar inverters, or 30 corporate health packages).
+   - An individual buyer cannot meet the MOQ alone. Through LetsStack, a host creates a Pool setting the MOQ as the `Minimum Order (Goal)`.
+2. **Tiered Price Unlocking (Dynamic Group Discounts):**
+   - As more participants join, higher volume thresholds unlock deeper bulk discounts (e.g., 10 units = 15% off; 25 units = 30% off).
+3. **Manufacturer & Direct-to-Consumer (D2C) Sourcing:**
+   - Eliminates retail middleman margins. The host sources directly from the factory/farm gate, passing the 20–40% wholesale discount directly to clan members.
+
+---
+
+## 3.6 Pool Visuals, Content Standards, Expired Pool Governance & Vendor Verification
+
+### 3.6.1 Pool Card Image Dimensions & Aspect Ratio Standards
+* **Fixed 16:9 Landscape Aspect Ratio:** To ensure responsive visual consistency across mobile feeds and desktop bento grids, all pool cards use a standard 16:9 ratio with CSS `object-fit: cover`.
+* **Prevention of Image Distortion:** Uploaded photos are cropped cleanly without vertical stretching or squishing. Minimum recommended upload resolution: `800 × 450 px` (WebP or optimized JPEG under 500 KB).
+
+### 3.6.2 Content Tone & Purpose Guidelines
+* **Pool Title:** Must be concise, clear, and feature the core product/service name plus quantity/tier (e.g., *"Alphonso Mangoes (Ratnagiri) — Direct Farm Crate"*, *"Aquaguard Geneus Water Purifier — Annual Maintenance Bulk Package"*). Clickbait and all-caps titles are restricted.
+* **Pool Description:** Must be transparent, helpful, and community-centric. It should clearly outline:
+  1. Product specifications & brand/source credibility.
+  2. The bulk savings rationale (how and why the price is discounted).
+  3. Fulfillment timeline and pickup protocol.
+* **Return & Quit Policy Clarity:** Must transparently state return terms (`no_returns`, `exchange_only`, or `full_refund_24h`) and quit rules before commitments are made.
+
+### 3.6.3 Verified Vendor vs. Host Sourcing Disclaimers
+* **Verified Vendor Badge (Blue Checkmark):** When a pool is officially organized or fulfilled directly by an authorized brand, distributor, or registered vendor (e.g., Aquaguard, MuscleBlaze, Lenskart), a **Verified Partner / Blue Tick Badge** is rendered alongside the seller's name.
+* **Host Sourcing Liability Disclaimer:** When a pool is organized by an individual community host (peer-to-peer), a subtle disclaimer informs participants: *"Organized by community host {Host Name}. Sourced independently on behalf of clan members."*
+
+### 3.6.4 Expired Pool Lifecycle & Archival Governance
+* **Automatic Discovery Filtering:** As soon as a pool's deadline passes, it is automatically removed from active feeds (Home Feed, Global Search, Discover, and Clan Active tabs).
+* **New Joins & Payments Disabled:** Tapping an expired pool displays a gray "Pool Expired / Closed" badge with disabled action buttons.
+* **Unsuccessful Threshold Trigger:** If the deadline passes without meeting the Minimum Order Goal, all escrow mandates are instantly canceled and zero charges occur.
+* **Read-Only Archival:** Expired and completed pools remain permanently accessible in read-only mode under **"My Pools > History"** for accounting, reputation scoring, and repeat pool cloning.
 
 ---
 

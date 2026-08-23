@@ -1278,10 +1278,27 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 0.125rem 0.45rem;
+    padding: 0.125rem 0.5rem;
     border-radius: 999px;
     background: rgba(0, 135, 90, 0.12);
     color: #00704a;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.clanTypeBadgePrivate {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(30, 64, 175, 0.1);
+    color: #1e40af;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
 }
 
 .clanTypeBadgeRestricted {
@@ -1289,9 +1306,12 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 0.125rem 0.45rem;
+    padding: 0.125rem 0.5rem;
     border-radius: 999px;
-    background: rgba(192, 86, 33, 0.12);
-    color: #c05621;
+    background: rgba(30, 64, 175, 0.1);
+    color: #1e40af;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
 }
 

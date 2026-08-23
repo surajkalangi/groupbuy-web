@@ -9,9 +9,11 @@ import { mockPitches } from '@/data/pitches';
 import { pluralizeUnit } from '@/utils/pluralize';
 import styles from './page.module.css';
 import AuthGuard from '@/components/auth/AuthGuard';
+import { useAuth } from '@/context/AuthContext';
 
 function CreatePitchForm() {
     const router = useRouter();
+    const { currentUser } = useAuth();
     const searchParams = useSearchParams();
     const draftId = searchParams.get('draftId');
     const [step, setStep] = useState(1);
@@ -370,9 +372,15 @@ function CreatePitchForm() {
 
                     {/* ── STEP 3 ── */}
                     {step === 3 && (() => {
+                        const activeUserId = currentUser?.id || 'user-1';
+                        // Restrict available clans in dropdown strictly to clans the host belongs to
+                        const hostClans = mockClans.filter(c => 
+                            c.members?.includes(activeUserId) || currentUser?.clans?.includes(c.id)
+                        );
+
                         const selectedClanObjects = selectedClans.map(id => mockClans.find(c => c.id === id)).filter(Boolean);
                         const openClans = selectedClanObjects.filter(c => c.privacy === 'open');
-                        const restrictedClans = selectedClanObjects.filter(c => c.privacy !== 'open');
+                        const privateClans = selectedClanObjects.filter(c => c.privacy !== 'open');
                         
                         let derivedVisibility = 'unlisted';
                         if (selectedClanObjects.length === 0) {
@@ -393,7 +401,7 @@ function CreatePitchForm() {
                                     </div>
                                     <label className={styles.limitLabel}>TAG CLAN(S) TO POOL ORDERS</label>
                                     <p className={styles.fieldHint} style={{ marginTop: '-0.25rem', marginBottom: '0.75rem', lineHeight: '1.4' }}>
-                                        Tag one or more clans to pool demand together. Pool visibility is derived automatically from the clan types you select.
+                                        Select from your joined clans to pool demand together. Pool visibility is derived automatically from the clan types you select.
                                     </p>
                                     
                                     <div className={styles.clanDropdownWrapper} ref={clanDropdownRef}>
@@ -428,27 +436,36 @@ function CreatePitchForm() {
                                         {showClanDropdown && (
                                             <div className={styles.clanDropdownMenu}>
                                                 <div className={styles.clanDropdownList}>
-                                                    {mockClans.map(clan => {
-                                                        const isSelected = selectedClans.includes(clan.id);
-                                                        const isOpen = clan.privacy === 'open';
-                                                        return (
-                                                            <div
-                                                                key={clan.id}
-                                                                className={`${styles.clanDropdownItem} ${isSelected ? styles.clanDropdownItemSelected : ''}`}
-                                                                onClick={() => toggleClan(clan.id)}
-                                                            >
-                                                                <div className={styles.clanDropdownItemMeta}>
-                                                                    <span className={styles.clanDropdownItemName}>{clan.name}</span>
-                                                                    <span className={isOpen ? styles.clanTypeBadgeOpen : styles.clanTypeBadgeRestricted}>
-                                                                        {isOpen ? 'Public' : 'Restricted'}
-                                                                    </span>
+                                                    {hostClans.length === 0 ? (
+                                                        <div className={styles.clanDropdownEmpty} style={{ padding: '0.75rem 1rem', fontSize: '0.85rem', color: 'var(--on-surface-variant)' }}>
+                                                            You haven&apos;t joined any clans yet.
+                                                        </div>
+                                                    ) : (
+                                                        hostClans.map(clan => {
+                                                            const isSelected = selectedClans.includes(clan.id);
+                                                            const isOpen = clan.privacy === 'open';
+                                                            return (
+                                                                <div
+                                                                    key={clan.id}
+                                                                    className={`${styles.clanDropdownItem} ${isSelected ? styles.clanDropdownItemSelected : ''}`}
+                                                                    onClick={() => toggleClan(clan.id)}
+                                                                >
+                                                                    <div className={styles.clanDropdownItemMeta}>
+                                                                        <span className={styles.clanDropdownItemName}>{clan.name}</span>
+                                                                        <span className={isOpen ? styles.clanTypeBadgeOpen : styles.clanTypeBadgePrivate}>
+                                                                            <span className="material-symbols-outlined" style={{ fontSize: '11px' }}>
+                                                                                {isOpen ? 'public' : 'lock'}
+                                                                            </span>
+                                                                            {isOpen ? 'Public' : 'Private'}
+                                                                        </span>
+                                                                    </div>
+                                                                    {isSelected && (
+                                                                        <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)' }}>check_circle</span>
+                                                                    )}
                                                                 </div>
-                                                                {isSelected && (
-                                                                    <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)' }}>check_circle</span>
-                                                                )}
-                                                            </div>
-                                                        );
-                                                    })}
+                                                            );
+                                                        })
+                                                    )}
                                                 </div>
                                             </div>
                                         )}
@@ -463,7 +480,7 @@ function CreatePitchForm() {
                                                 <span className={styles.visBadgePublic}>PUBLIC DISCOVERY</span>
                                             </div>
                                             <p className={styles.visDesc}>
-                                                Because this pool is tagged to open public clans ({openClans.map(c => c.name).join(', ')}), it will be discoverable across public search, feeds, and the tagged clan hubs.
+                                                Because this pool is tagged to public clans ({openClans.map(c => c.name).join(', ')}), it will be discoverable across public search, feeds, and the tagged clan hubs.
                                             </p>
                                         </div>
                                     )}
@@ -471,12 +488,12 @@ function CreatePitchForm() {
                                     {derivedVisibility === 'restricted' && (
                                         <div className={styles.visibilityDerivedCard} data-type="restricted">
                                             <div className={styles.visHeader}>
-                                                <span className="material-symbols-outlined" style={{ color: '#c05621', fontSize: '20px' }}>lock</span>
-                                                <span className={styles.visTitle}>Restricted Community Pool</span>
-                                                <span className={styles.visBadgeRestricted}>RESTRICTED</span>
+                                                <span className="material-symbols-outlined" style={{ color: '#1e40af', fontSize: '20px' }}>lock</span>
+                                                <span className={styles.visTitle}>Private Clan Pool</span>
+                                                <span className={styles.visBadgeRestricted}>PRIVATE CLANS ONLY</span>
                                             </div>
                                             <p className={styles.visDesc}>
-                                                Tagged strictly to private gated clans ({restrictedClans.map(c => c.name).join(', ')}). Only verified members of these communities can search, view, and participate.
+                                                Tagged strictly to your private clans ({privateClans.map(c => c.name).join(', ')}). Only verified members of these communities will be able to search, view, and participate.
                                             </p>
                                         </div>
                                     )}
