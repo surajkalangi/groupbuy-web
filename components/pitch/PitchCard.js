@@ -103,18 +103,28 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                                     </span>
                                 )}
                             </div>
-                            <span className={styles.hostText}>
+                            <span className={styles.hostText} title={pitch.hostName || pitch.host?.name}>
                                 Host: <strong>{pitch.hostName || pitch.host?.name}</strong>
                             </span>
                             {(pitch.hostRating || pitch.host?.rating) && (
-                                <span className={styles.hostRating}>{pitch.hostRating || pitch.host?.rating} ★</span>
+                                <span className={styles.hostRatingBadge} title={`Host rating: ${pitch.hostRating || pitch.host?.rating} ★`}>
+                                    ★ {pitch.hostRating || pitch.host?.rating}
+                                </span>
                             )}
                         </div>
 
                         {locMeta && (
                             <span 
-                                className={locMeta.isRemote ? styles.proximityBadgeRemote : styles.proximityBadge}
-                                title={locMeta.isRemote ? "Delivered across India" : `Pickup at ${locMeta.hubName} (${locMeta.distanceText})`}
+                                className={
+                                    locMeta.type === 'digital'
+                                        ? styles.proximityBadgeDigital
+                                        : locMeta.type === 'doorstep'
+                                            ? styles.proximityBadgeDoorstep
+                                            : locMeta.type === 'pan_india'
+                                                ? styles.proximityBadgeRemote
+                                                : styles.proximityBadge
+                                }
+                                title={locMeta.tooltip}
                             >
                                 {locMeta.badgeText}
                             </span>

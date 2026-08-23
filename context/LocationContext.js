@@ -209,33 +209,40 @@ export function LocationProvider({ children }) {
     }, [updateLocation]);
 
     /**
-     * Helper to extract lat/lng & locality from pool
+     * Helper to extract lat/lng, locality & delivery metadata from pool
      */
     const resolvePoolCoordinates = useCallback((pool) => {
         if (!pool) return null;
-        if (pool.isPanIndia || pool.pickupInfo?.isRemote || pool.category === 'digital') {
-            return { isRemote: true };
+        
+        const isDigital = pool.category === 'digital' || pool.category === 'software' || pool.deliveryType === 'digital' || pool.isDigitalDelivery === true || pool.pickupInfo?.isDigital === true;
+        const isPanIndia = pool.isPanIndia === true || pool.deliveryType === 'pan_india' || pool.pickupInfo?.deliveryType === 'pan_india';
+        
+        if (isPanIndia) {
+            return { isPanIndia: true, isDigital: false, isRemote: true };
         }
 
+        const isDoorstep = pool.deliveryType === 'doorstep' || pool.deliveryScope === 'city' || pool.pickupInfo?.isDoorstep === true;
         let lat = pool.pickupInfo?.lat || pool.geoCoordinates?.lat;
         let lng = pool.pickupInfo?.lng || pool.geoCoordinates?.lng;
         let hubName = pool.pickupInfo?.locality || pool.geoCoordinates?.locality;
+        let city = pool.pickupInfo?.city || pool.geoCoordinates?.city;
 
-        if (!lat || !lng) {
+        if (!lat || !lng || !hubName) {
             const primaryClanId = pool.clanIds?.[0] || pool.clanId;
             const clanGeo = CLAN_COORDINATES[primaryClanId];
             if (clanGeo) {
-                lat = clanGeo.lat;
-                lng = clanGeo.lng;
+                lat = lat || clanGeo.lat;
+                lng = lng || clanGeo.lng;
                 hubName = hubName || clanGeo.locality || clanGeo.hubName;
+                city = city || clanGeo.city;
             }
         }
 
         if (lat && lng) {
-            return { lat, lng, hubName, isRemote: false };
+            return { lat, lng, hubName, city, isDoorstep, isDigital, isPanIndia: false, isRemote: false };
         }
 
-        return null;
+        return { hubName, city, isDoorstep, isDigital, isPanIndia: false, isRemote: false };
     }, []);
 
     /**
@@ -244,33 +251,85 @@ export function LocationProvider({ children }) {
     const getPoolDistance = useCallback((pool) => {
         if (!pool) return null;
         const resolved = resolvePoolCoordinates(pool);
-        if (!resolved || resolved.isRemote) return null;
+        if (!resolved || resolved.isPanIndia || !resolved.lat || !resolved.lng) return null;
         
         if (!userLocation?.lat || !userLocation?.lng) return null;
         return calculateDistanceKm(userLocation.lat, userLocation.lng, resolved.lat, resolved.lng);
     }, [userLocation, resolvePoolCoordinates]);
 
     /**
-     * Comprehensive pool location metadata for UI badges
+     * Comprehensive pool location metadata for UI badges & tooltips
      */
     const getPoolLocationMeta = useCallback((pool) => {
         if (!pool) return null;
         const resolved = resolvePoolCoordinates(pool);
-        if (resolved?.isRemote) {
-            return { isRemote: true, badgeText: '📦 Pan-India Delivery', distanceKm: null };
+        if (!resolved) return null;
+
+        // 1. Digital products & shared digital subscription pools
+        if (resolved.isDigital) {
+            const clanGeo = CLAN_COORDINATES[pool.clanIds?.[0] || pool.clanId];
+            const hub = resolved.hubName || clanGeo?.locality;
+            return {
+                type: 'digital',
+                badgeText: '💻 Digital',
+                tooltip: hub 
+                    ? `Digitally delivered • Shared with members of ${hub}`
+                    : 'Digitally delivered via instant message / email',
+                distanceKm: null,
+                hubName: hub || 'Digital Delivery',
+            };
+        }
+
+        // 2. Pan-India courier / Speed Post delivery
+        if (resolved.isPanIndia) {
+            return {
+                type: 'pan_india',
+                badgeText: '📦 Pan-India',
+                tooltip: 'Dispatched via courier across India',
+                distanceKm: null,
+            };
         }
 
         const distance = getPoolDistance(pool);
-        if (distance === null) return null;
+        const poolCity = resolved.city || pool.pickupInfo?.city;
+        const userCity = userLocation?.city;
+        const cityMatches = !poolCity || !userCity || poolCity.toLowerCase() === userCity.toLowerCase();
 
-        const hub = resolved?.hubName || pool.pickupInfo?.locality || userLocation?.city || 'Local Hub';
-        return {
-            isRemote: false,
-            distanceKm: distance,
-            distanceText: `${distance} km away`,
-            hubName: hub,
-            badgeText: `📍 ${distance} km • ${hub}`,
-        };
+        // 3. City-wide Doorstep Delivery
+        if (resolved.isDoorstep && cityMatches) {
+            return {
+                type: 'doorstep',
+                badgeText: '🚚 Doorstep',
+                tooltip: `Doorstep delivery available across ${poolCity || userCity || 'your city'}`,
+                distanceKm: distance,
+                hubName: resolved.hubName,
+            };
+        }
+
+        // 4. Local Pickup Hub with calculated distance
+        if (distance !== null) {
+            return {
+                type: 'local',
+                badgeText: `📍 ${distance} km`,
+                tooltip: `Pickup at ${resolved.hubName || 'Local Hub'} (${distance} km away)`,
+                distanceKm: distance,
+                hubName: resolved.hubName,
+            };
+        }
+
+        // 5. Fallback when locality is known
+        const hub = resolved.hubName || pool.pickupInfo?.locality;
+        if (hub) {
+            return {
+                type: 'hub',
+                badgeText: `📍 ${hub}`,
+                tooltip: `Pickup hub in ${hub}${poolCity ? `, ${poolCity}` : ''}`,
+                distanceKm: null,
+                hubName: hub,
+            };
+        }
+
+        return null;
     }, [getPoolDistance, resolvePoolCoordinates, userLocation]);
 
     /**
@@ -280,21 +339,36 @@ export function LocationProvider({ children }) {
         if (!pool) return false;
         
         const resolved = resolvePoolCoordinates(pool);
-        const isRemote = resolved?.isRemote || pool.isPanIndia || pool.pickupInfo?.isRemote || pool.category === 'digital';
+        const isPanIndia = resolved?.isPanIndia === true;
+        const isDigital = resolved?.isDigital === true;
         
         // 'all' includes everything
         if (targetRadius === 'all') return true;
         
-        // 'remote' shows only Pan-India/Remote pools
-        if (targetRadius === 'remote') return isRemote;
+        // 'remote' shows Pan-India dispatched and digital pools
+        if (targetRadius === 'remote') return isPanIndia || isDigital;
 
         // Specific numerical radius (e.g. 5, 15, 30 km)
-        if (isRemote) return false; // Numerical radius only matches physical proximity
+        if (isPanIndia) return false; // Pan-India items filtered out when specific distance is chosen
+
+        // Digital pools in clan circles pass if their base clan is within range or same city
+        if (isDigital) {
+            const dist = getPoolDistance(pool);
+            if (dist === null) return true;
+            return dist <= Number(targetRadius);
+        }
+
+        // If pool is Doorstep delivery in the same city, include it
+        const poolCity = resolved?.city || pool.pickupInfo?.city;
+        const userCity = userLocation?.city;
+        if (resolved?.isDoorstep && poolCity && userCity && poolCity.toLowerCase() === userCity.toLowerCase()) {
+            return true;
+        }
 
         const dist = getPoolDistance(pool);
         if (dist === null) return true; // If no geo coordinates available, keep in feed
         return dist <= Number(targetRadius);
-    }, [proximityRadius, getPoolDistance, resolvePoolCoordinates]);
+    }, [proximityRadius, getPoolDistance, resolvePoolCoordinates, userLocation]);
 
     const value = {
         userLocation,
