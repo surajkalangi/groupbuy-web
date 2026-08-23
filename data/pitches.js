@@ -869,7 +869,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'Direct In-Apartment Service (Brigade Metropolis, Mahadevapura)', time: 'Saturday & Sunday, 9 AM – 6 PM' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Direct In-Apartment Service (Brigade Metropolis, Mahadevapura)', locality: 'Mahadevapura', city: 'Bengaluru', lat: 12.9892, lng: 77.7126, time: 'Saturday & Sunday, 9 AM – 6 PM', isDoorstep: true },
         fundingProgress: 80,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1073,7 +1074,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'Doorstep service across Brigade Metropolis apartments', time: 'This Saturday & Sunday (30-min service slot per flat)' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Doorstep service across Brigade Metropolis apartments', locality: 'Mahadevapura', city: 'Bengaluru', lat: 12.9892, lng: 77.7126, time: 'This Saturday & Sunday (30-min service slot per flat)', isDoorstep: true },
         fundingProgress: 80,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1116,7 +1118,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'Free on-site measurement & installation at Brigade Metropolis', time: 'Measurement this weekend, installation within 3 days' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Free on-site measurement & installation at Brigade Metropolis', locality: 'Whitefield', city: 'Bengaluru', lat: 12.9698, lng: 77.7499, time: 'Measurement this weekend, installation within 3 days', isDoorstep: true },
         fundingProgress: 60,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1605,7 +1608,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Pallet drop & assembly at HSR Sector 6 hub or direct doorstep tempo delivery', time: 'This Saturday 2:00 PM' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Direct doorstep tempo delivery & free 10-minute on-site assembly across HSR / Koramangala', locality: 'HSR Layout', city: 'Bengaluru', lat: 12.9121, lng: 77.6446, time: 'This Saturday 2:00 PM', isDoorstep: true },
         fundingProgress: 64,
         pitchPolicies: {
             returnPolicy: 'custom',

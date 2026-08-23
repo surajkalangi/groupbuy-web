@@ -7,6 +7,7 @@ import BottomNav from '@/components/layout/BottomNav';
 import PitchCard from '@/components/pitch/PitchCard';
 import DistanceDropdown from '@/components/location/DistanceDropdown';
 import { useLocation } from '@/context/LocationContext';
+import { useAuth } from '@/context/AuthContext';
 import { mockPitches } from '@/data/pitches';
 import { mockClans } from '@/data/clans';
 import { mockUsers } from '@/data/users';
@@ -24,7 +25,8 @@ const CATEGORIES = [
 const SORT_OPTIONS = ['Trending', 'Ending Soon', 'Most Funded', 'Newest'];
 
 export default function DiscoverPage() {
-    const { isPoolInRadius } = useLocation();
+    const { isClanMember } = useAuth();
+    const { isPoolInRadius, proximityRadius } = useLocation();
     const [activeCategory, setActiveCategory] = useState('all');
     const [activeSort, setActiveSort] = useState('Trending');
     const [searchQuery, setSearchQuery] = useState('');
@@ -38,9 +40,9 @@ export default function DiscoverPage() {
                 ...p,
                 productName: p.title,
                 clanName: mockClans.find(c => c.id === pClanId)?.name,
-                hostName: p.host?.name || 'Unknown Host',
-                hostRating: p.host?.rating || 4.5,
-                hostAvatar: mockUsers.find(u => u.id === p.hostId)?.avatarUrl || p.host?.avatarUrl,
+                hostName: p.host?.name,
+                hostRating: p.host?.rating,
+                hostAvatar: p.host?.avatarUrl,
             };
         });
 
@@ -55,8 +57,10 @@ export default function DiscoverPage() {
             const matchClan = p.clanName?.toLowerCase().includes(q);
             if (!matchTitle && !matchDesc && !matchClan) return false;
         }
-        // Geolocation Proximity filter
-        return isPoolInRadius(p);
+        // Geolocation Proximity filter (exempts user's joined society/private clans)
+        const pClanIds = p.clanIds || (p.clanId ? [p.clanId] : []);
+        const isMember = pClanIds.some(id => isClanMember(id));
+        return isPoolInRadius(p, proximityRadius, { isMemberOfPoolClan: isMember });
     });
 
     // Nearby clans preview

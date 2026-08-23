@@ -70,10 +70,10 @@ export const CITY_HUBS = [
 
 export const CLAN_COORDINATES = {
     'clan-1': { locality: 'Whitefield', city: 'Bengaluru', lat: 12.9698, lng: 77.7499, hubName: 'Ravi Dham Complex' },
-    'clan-2': { locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, hubName: 'MyHome Tridasa Hub' },
-    'clan-3': { locality: 'Madhapur', city: 'Hyderabad', lat: 17.4483, lng: 78.3915, hubName: 'West Hyderabad Hub' },
-    'clan-4': { locality: 'Hitec City', city: 'Hyderabad', lat: 17.4435, lng: 78.3772, hubName: 'Cyber Pearl Hub' },
-    'clan-5': { locality: 'Knowledge City', city: 'Hyderabad', lat: 17.4390, lng: 78.3780, hubName: 'Sathva Hub' },
+    'clan-2': { locality: 'Madhapur', city: 'Hyderabad', lat: 17.4390, lng: 78.3780, hubName: 'Sathva Knowledge City' },
+    'clan-3': { locality: 'Jubilee Hills', city: 'Hyderabad', lat: 17.4319, lng: 78.4073, hubName: 'West Hyderabad Collective' },
+    'clan-4': { locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, hubName: 'MyHome Tridasa' },
+    'clan-5': { locality: 'HSR Layout', city: 'Bengaluru', lat: 12.9121, lng: 77.6446, hubName: 'HSR Startup Founders' },
     'clan-6': { locality: 'Gachibowli', city: 'Hyderabad', lat: 17.4190, lng: 78.3490, hubName: 'Prestige High Fields' },
     'clan-7': { locality: 'Hyderabad', city: 'Hyderabad', lat: 17.4435, lng: 78.3772, hubName: 'Garlapati Family' },
     'clan-8': { locality: 'Madhapur', city: 'Hyderabad', lat: 17.4483, lng: 78.3915, hubName: 'Board Games Guild' },
@@ -260,10 +260,12 @@ export function LocationProvider({ children }) {
     /**
      * Comprehensive pool location metadata for UI badges & tooltips
      */
-    const getPoolLocationMeta = useCallback((pool) => {
+    const getPoolLocationMeta = useCallback((pool, options = {}) => {
         if (!pool) return null;
         const resolved = resolvePoolCoordinates(pool);
         if (!resolved) return null;
+
+        const { isMemberOfPoolClan = false } = options;
 
         // 1. Digital products & shared digital subscription pools
         if (resolved.isDigital) {
@@ -295,7 +297,30 @@ export function LocationProvider({ children }) {
         const userCity = userLocation?.city;
         const cityMatches = !poolCity || !userCity || poolCity.toLowerCase() === userCity.toLowerCase();
 
-        // 3. City-wide Doorstep Delivery
+        // 3. User is a joined member of this apartment/society clan
+        if (isMemberOfPoolClan) {
+            if (resolved.isDoorstep) {
+                return {
+                    type: 'doorstep',
+                    badgeText: '🚚 Doorstep',
+                    tooltip: `Doorstep service at your flat in ${resolved.hubName || 'your society'} (You are a clan member)`,
+                    distanceKm: distance,
+                    hubName: resolved.hubName,
+                };
+            }
+            // If member is currently traveling / far away (>35km or another city), show Society badge
+            if (distance === null || distance > 35 || !cityMatches) {
+                return {
+                    type: 'society',
+                    badgeText: '🏠 Your Society',
+                    tooltip: `Hosted in your joined clan (${resolved.hubName}) • You can participate while traveling`,
+                    distanceKm: distance,
+                    hubName: resolved.hubName,
+                };
+            }
+        }
+
+        // 4. City-wide Doorstep Delivery (service / vendor pools in user's city)
         if (resolved.isDoorstep && cityMatches) {
             return {
                 type: 'doorstep',
@@ -306,7 +331,7 @@ export function LocationProvider({ children }) {
             };
         }
 
-        // 4. Local Pickup Hub with calculated distance
+        // 5. Local Pickup Hub with calculated distance
         if (distance !== null) {
             return {
                 type: 'local',
@@ -317,7 +342,7 @@ export function LocationProvider({ children }) {
             };
         }
 
-        // 5. Fallback when locality is known
+        // 6. Fallback when locality is known
         const hub = resolved.hubName || pool.pickupInfo?.locality;
         if (hub) {
             return {
@@ -335,9 +360,14 @@ export function LocationProvider({ children }) {
     /**
      * Check if a pool passes the active radius filter
      */
-    const isPoolInRadius = useCallback((pool, targetRadius = proximityRadius) => {
+    const isPoolInRadius = useCallback((pool, targetRadius = proximityRadius, options = {}) => {
         if (!pool) return false;
         
+        // Joined clan pools are ALWAYS visible to clan members, even if traveling
+        if (options.isMemberOfPoolClan) {
+            return true;
+        }
+
         const resolved = resolvePoolCoordinates(pool);
         const isPanIndia = resolved?.isPanIndia === true;
         const isDigital = resolved?.isDigital === true;

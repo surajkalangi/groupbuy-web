@@ -12,12 +12,13 @@ import { useLocation } from '@/context/LocationContext';
 export default function PitchCard({ pitch, showClanBadge = false }) {
     const { isClanMember } = useAuth();
     const { getPoolLocationMeta } = useLocation();
-    const locMeta = getPoolLocationMeta(pitch);
     const pitchClanIds = pitch.clanIds || (pitch.clanId ? [pitch.clanId] : []);
+    const isMemberOfPoolClan = pitchClanIds.some(id => isClanMember(id));
+    const locMeta = getPoolLocationMeta(pitch, { isMemberOfPoolClan });
     const associatedClans = pitchClanIds.map(id => mockClans.find(c => c.id === id)).filter(Boolean);
     const noClanTagged = pitchClanIds.length === 0;
     const isDirectLinkOnly = noClanTagged && pitch.visibility === 'private';
-    const isMember = noClanTagged || pitchClanIds.some(id => isClanMember(id));
+    const isMember = noClanTagged || isMemberOfPoolClan;
     const [isSaved, setIsSaved] = useState(pitch.isSaved || false);
 
     const toggleSave = (e) => {
@@ -118,11 +119,13 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                                 className={
                                     locMeta.type === 'digital'
                                         ? styles.proximityBadgeDigital
-                                        : locMeta.type === 'doorstep'
-                                            ? styles.proximityBadgeDoorstep
-                                            : locMeta.type === 'pan_india'
-                                                ? styles.proximityBadgeRemote
-                                                : styles.proximityBadge
+                                        : locMeta.type === 'society'
+                                            ? styles.proximityBadgeSociety
+                                            : locMeta.type === 'doorstep'
+                                                ? styles.proximityBadgeDoorstep
+                                                : locMeta.type === 'pan_india'
+                                                    ? styles.proximityBadgeRemote
+                                                    : styles.proximityBadge
                                 }
                                 title={locMeta.tooltip}
                             >

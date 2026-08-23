@@ -145,6 +145,22 @@
     margin-left: auto;
 }
 
+.proximityBadgeSociety {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #9a3412;
+    background: #fff7ed;
+    border: 1px solid #ffedd5;
+    border-radius: 999px;
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
 .proximityBadgeDoorstep {
     display: inline-flex;
     align-items: center;

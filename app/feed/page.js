@@ -15,8 +15,8 @@ import { mockClans } from '@/data/clans';
 import styles from './page.module.css';
 
 export default function HomeFeed() {
-    const { isLoggedIn, isGuest, triggerRatingModal } = useAuth();
-    const { isPoolInRadius } = useLocation();
+    const { isLoggedIn, isGuest, triggerRatingModal, isClanMember } = useAuth();
+    const { isPoolInRadius, proximityRadius } = useLocation();
     const [activeFilter, setActiveFilter] = useState('all');
 
     const clanFilters = [
@@ -38,8 +38,10 @@ export default function HomeFeed() {
         if (activeFilter !== 'all' && (!p.clanIds?.includes(activeFilter) && p.clanId !== activeFilter)) {
             return false;
         }
-        // Geolocation Proximity filter
-        return isPoolInRadius(p);
+        // Geolocation Proximity filter (exempts user's joined society/private clans)
+        const pClanIds = p.clanIds || (p.clanId ? [p.clanId] : []);
+        const isMember = pClanIds.some((id) => isClanMember(id));
+        return isPoolInRadius(p, proximityRadius, { isMemberOfPoolClan: isMember });
     });
 
     const pitchesWithClan = filteredPitches.map((p) => {
