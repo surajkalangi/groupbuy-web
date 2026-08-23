@@ -42,6 +42,39 @@ function CreatePitchForm() {
     const [showClanDropdown, setShowClanDropdown] = useState(false);
     const clanDropdownRef = useRef(null);
 
+    // Geolocation & Pickup Point State
+    const [pickupLandmark, setPickupLandmark] = useState('');
+    const [pickupLocality, setPickupLocality] = useState('Hitec City');
+    const [pickupCity, setPickupCity] = useState('Hyderabad');
+    const [geoLat, setGeoLat] = useState(17.4435);
+    const [geoLng, setGeoLng] = useState(78.3772);
+    const [isRemoteDelivery, setIsRemoteDelivery] = useState(false);
+    const [isDetectingGeo, setIsDetectingGeo] = useState(false);
+    const [geoStatusMsg, setGeoStatusMsg] = useState('');
+
+    const handleDetectGps = () => {
+        if (typeof window === 'undefined' || !navigator.geolocation) {
+            setGeoStatusMsg('Geolocation not supported by browser');
+            return;
+        }
+        setIsDetectingGeo(true);
+        setGeoStatusMsg('');
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                const { latitude, longitude } = pos.coords;
+                setGeoLat(latitude);
+                setGeoLng(longitude);
+                setIsDetectingGeo(false);
+                setGeoStatusMsg(`✓ GPS Coordinates Locked: (${latitude.toFixed(4)}°, ${longitude.toFixed(4)}°)`);
+            },
+            (err) => {
+                setIsDetectingGeo(false);
+                setGeoStatusMsg('GPS permission denied. Please select your locality preset.');
+            },
+            { enableHighAccuracy: true, timeout: 8000 }
+        );
+    };
+
     // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -527,11 +560,122 @@ function CreatePitchForm() {
                                     </div>
                                 </div>
 
+                                {/* Pickup Hub & Geolocation */}
+                                <div className={styles.sectionCard}>
+                                    <div className={styles.sectionCardTitle}>
+                                        <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>near_me</span>
+                                        <span>Pickup Point & Geolocation Hub</span>
+                                    </div>
+                                    
+                                    <div style={{ marginBottom: '0.75rem' }}>
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.875rem', fontWeight: '600' }}>
+                                            <input 
+                                                type="checkbox" 
+                                                checked={isRemoteDelivery} 
+                                                onChange={e => setIsRemoteDelivery(e.target.checked)} 
+                                                style={{ width: '16px', height: '16px', accentColor: 'var(--primary)' }}
+                                            />
+                                            <span>📦 Pan-India / Remote Delivery (No physical pickup hub needed)</span>
+                                        </label>
+                                    </div>
+
+                                    {!isRemoteDelivery && (
+                                        <div className={styles.geoPickerBox}>
+                                            <div className={styles.geoDetectRow}>
+                                                <div>
+                                                    <label className={styles.limitLabel} style={{ marginBottom: '0.15rem' }}>PHYSICAL PICKUP HUB LOCATION</label>
+                                                    <p className={styles.fieldHint} style={{ margin: 0 }}>
+                                                        Used by the Geolocation Proximity Engine to filter nearby members.
+                                                    </p>
+                                                </div>
+                                                <button 
+                                                    type="button" 
+                                                    className={styles.geoDetectBtn}
+                                                    onClick={handleDetectGps}
+                                                >
+                                                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                                                        {isDetectingGeo ? 'sync' : 'my_location'}
+                                                    </span>
+                                                    {isDetectingGeo ? 'Detecting GPS...' : 'Use Current Device GPS'}
+                                                </button>
+                                            </div>
+
+                                            {geoStatusMsg && (
+                                                <div className={styles.geoCoordsNote}>
+                                                    <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>pin_drop</span>
+                                                    <span>{geoStatusMsg}</span>
+                                                </div>
+                                            )}
+
+                                            <div className={styles.field} style={{ marginTop: '0.5rem' }}>
+                                                <label className={styles.limitLabel}>PICKUP LANDMARK / SPECIFIC ADDRESS</label>
+                                                <input 
+                                                    className={styles.input} 
+                                                    type="text" 
+                                                    placeholder="e.g. Main Gate / Clubhouse, Inorbit Mall pickup point" 
+                                                    value={pickupLandmark} 
+                                                    onChange={e => setPickupLandmark(e.target.value)} 
+                                                />
+                                            </div>
+
+                                            <div className={styles.field}>
+                                                <label className={styles.limitLabel}>NEIGHBORHOOD HUB (PROXIMITY ANCHOR)</label>
+                                                <select
+                                                    className={styles.select}
+                                                    value={pickupLocality}
+                                                    onChange={(e) => {
+                                                        const targetVal = e.target.value;
+                                                        const presets = [
+                                                            { name: 'Hitec City', city: 'Hyderabad', lat: 17.4435, lng: 78.3772 },
+                                                            { name: 'Gachibowli', city: 'Hyderabad', lat: 17.4401, lng: 78.3489 },
+                                                            { name: 'Madhapur', city: 'Hyderabad', lat: 17.4483, lng: 78.3915 },
+                                                            { name: 'Jubilee Hills', city: 'Hyderabad', lat: 17.4319, lng: 78.4073 },
+                                                            { name: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914 },
+                                                            { name: 'Whitefield', city: 'Bengaluru', lat: 12.9698, lng: 77.7499 },
+                                                            { name: 'HSR Layout', city: 'Bengaluru', lat: 12.9121, lng: 77.6446 },
+                                                            { name: 'Indiranagar', city: 'Bengaluru', lat: 12.9784, lng: 77.6408 },
+                                                            { name: 'Koramangala', city: 'Bengaluru', lat: 12.9352, lng: 77.6245 },
+                                                            { name: 'Bandra Kurla Complex (BKC)', city: 'Mumbai', lat: 19.0664, lng: 72.8687 },
+                                                            { name: 'Powai (Hiranandani)', city: 'Mumbai', lat: 19.1176, lng: 72.9060 },
+                                                        ];
+                                                        const found = presets.find(p => p.name === targetVal);
+                                                        if (found) {
+                                                            setPickupLocality(found.name);
+                                                            setPickupCity(found.city);
+                                                            setGeoLat(found.lat);
+                                                            setGeoLng(found.lng);
+                                                            setGeoStatusMsg(`Locality set to ${found.name}, ${found.city}`);
+                                                        }
+                                                    }}
+                                                >
+                                                    <optgroup label="Hyderabad">
+                                                        <option value="Hitec City">Hitec City (Madhapur / Cyberabad)</option>
+                                                        <option value="Gachibowli">Gachibowli (Financial District)</option>
+                                                        <option value="Madhapur">Madhapur (Metro / Inorbit Hub)</option>
+                                                        <option value="Jubilee Hills">Jubilee Hills / Road 36</option>
+                                                        <option value="Tellapur">Tellapur (MyHome Tridasa Hub)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Bengaluru">
+                                                        <option value="Whitefield">Whitefield (Prestige Lakeside / Forum)</option>
+                                                        <option value="HSR Layout">HSR Layout (Sectors 1-7 Hub)</option>
+                                                        <option value="Indiranagar">Indiranagar (100ft Road Hub)</option>
+                                                        <option value="Koramangala">Koramangala (Sony World Hub)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Mumbai">
+                                                        <option value="Bandra Kurla Complex (BKC)">Bandra Kurla Complex (BKC)</option>
+                                                        <option value="Powai (Hiranandani)">Powai (Hiranandani Hub)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
                                 {/* Logistics & Payment */}
                                 <div className={styles.sectionCard}>
                                     <div className={styles.sectionCardTitle}>
                                         <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>local_shipping</span>
-                                        <span>Logistics & Payment</span>
+                                        <span>Fulfillment Logistics & Payment</span>
                                     </div>
                                     <label className={styles.limitLabel}>PICKUP/DELIVERY INSTRUCTIONS</label>
                                     <textarea

@@ -8,12 +8,15 @@ import Navbar from '@/components/layout/Navbar';
 import navStyles from '@/components/layout/Navbar.module.css';
 import BottomNav from '@/components/layout/BottomNav';
 import PitchCard from '@/components/pitch/PitchCard';
+import DistanceDropdown from '@/components/location/DistanceDropdown';
+import { useLocation } from '@/context/LocationContext';
 import { mockPitches } from '@/data/pitches';
 import { mockClans } from '@/data/clans';
 import styles from './page.module.css';
 
 export default function HomeFeed() {
     const { isLoggedIn, isGuest, triggerRatingModal } = useAuth();
+    const { isPoolInRadius } = useLocation();
     const [activeFilter, setActiveFilter] = useState('all');
 
     const clanFilters = [
@@ -29,9 +32,15 @@ export default function HomeFeed() {
         const isDirectLinkOnly = noClanTagged && p.visibility === 'private';
         return isStatusOk && !isDirectLinkOnly;
     });
-    const filteredPitches = activeFilter === 'all'
-        ? activePitches
-        : activePitches.filter((p) => (p.clanIds?.includes(activeFilter) || p.clanId === activeFilter));
+
+    const filteredPitches = activePitches.filter((p) => {
+        // Clan filter
+        if (activeFilter !== 'all' && (!p.clanIds?.includes(activeFilter) && p.clanId !== activeFilter)) {
+            return false;
+        }
+        // Geolocation Proximity filter
+        return isPoolInRadius(p);
+    });
 
     const pitchesWithClan = filteredPitches.map((p) => {
         const pClanId = p.clanIds?.[0] || p.clanId;
@@ -68,16 +77,11 @@ export default function HomeFeed() {
                         <div>
                             <h1 className={styles.title}>Home Feed</h1>
                             <p className={styles.subtitle}>
-                                Collective buying with your trusted community. Join a pitch to unlock better prices.
+                                Collective buying with your trusted community. Join a pool to unlock better prices.
                             </p>
                         </div>
                         <div className={styles.viewControls}>
-                            <button className={styles.viewBtn} aria-label="Filter">
-                                <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>filter_list</span>
-                            </button>
-                            <button className={styles.viewBtn} aria-label="Grid view">
-                                <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>grid_view</span>
-                            </button>
+                            <DistanceDropdown />
                         </div>
                     </div>
 

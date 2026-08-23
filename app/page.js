@@ -49,25 +49,25 @@ export default function LandingPage() {
                 <div className={styles.heroVisuals}>
                     {/* Card 1 */}
                     <div className={`${styles.dealCard} ${styles.card1}`}>
-                        <div className={styles.cardImage1} style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&q=80)' }}>
+                        <div className={styles.cardImage1} style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80)' }}>
                         </div>
                         <div className={styles.cardInfo}>
-                            <div className={styles.cardTag1}>ORGANIC CLAN</div>
+                            <div className={styles.cardTag1}>NEW PARENTS CIRCLE</div>
                             <div className={styles.cardRow}>
-                                <div className={styles.cardTitle}>Farm Fresh Box</div>
-                                <div className={styles.cardSave}>Save 40%</div>
+                                <div className={styles.cardTitle}>Diaper Mega Carton (180s)</div>
+                                <div className={styles.cardSave}>Save 42%</div>
                             </div>
                         </div>
                     </div>
                     {/* Card 2 */}
                     <div className={`${styles.dealCard} ${styles.card2}`}>
-                        <div className={styles.cardImage2} style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1558002038-1055907df827?w=600&q=80)' }}>
+                        <div className={styles.cardImage2} style={{ backgroundImage: 'url(/images/mosquito-mesh-sliding.jpg)' }}>
                         </div>
                         <div className={styles.cardInfo}>
-                            <div className={styles.cardTag2}>TECH POOL</div>
+                            <div className={styles.cardTag2}>SOCIETY LIVING CLAN</div>
                             <div className={styles.cardRow}>
-                                <div className={styles.cardTitle}>Smart Systems</div>
-                                <div className={styles.cardSave}>Save 25%</div>
+                                <div className={styles.cardTitle}>Mosquito Mesh & Blinds</div>
+                                <div className={styles.cardSave}>Save 45%</div>
                             </div>
                         </div>
                     </div>

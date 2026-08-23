@@ -1,0 +1,154 @@
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.4rem 0.65rem;
+    background: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.leftGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.locationPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.65rem;
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: 8px;
+    color: var(--on-surface);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.locationPill:hover {
+    border-color: var(--primary);
+    background: var(--surface-container-high);
+}
+
+.pinIcon {
+    color: var(--primary);
+    font-size: 17px;
+}
+
+.chevronIcon {
+    color: var(--on-surface-variant);
+    font-size: 16px;
+    margin-left: 0.1rem;
+}
+
+.gpsTag {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #0284c7;
+    background: rgba(2, 132, 199, 0.1);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.rightGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.selectWrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: 8px;
+    padding: 0 0.5rem 0 0.65rem;
+    height: 32px;
+    gap: 0.35rem;
+    transition: all 0.15s ease;
+}
+
+.selectWrapper:hover,
+.selectWrapper:focus-within {
+    border-color: var(--primary);
+    background: var(--surface-container-high);
+}
+
+.selectIcon {
+    color: var(--primary);
+    font-size: 16px;
+    pointer-events: none;
+}
+
+.selectArrow {
+    color: var(--on-surface-variant);
+    font-size: 16px;
+    pointer-events: none;
+    margin-left: -0.1rem;
+}
+
+.radiusSelect {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding-right: 0.25rem;
+    outline: none;
+}
+
+.radiusSelect option {
+    background: var(--surface);
+    color: var(--on-surface);
+    font-size: 0.875rem;
+}
+
+.filteredBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: rgba(0, 135, 90, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.clearBtn {
+    background: none;
+    border: none;
+    color: var(--on-surface-variant);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.1rem 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.clearBtn:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.08);
+}

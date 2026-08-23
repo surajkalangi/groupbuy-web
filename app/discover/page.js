@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
 import BottomNav from '@/components/layout/BottomNav';
 import PitchCard from '@/components/pitch/PitchCard';
+import DistanceDropdown from '@/components/location/DistanceDropdown';
+import { useLocation } from '@/context/LocationContext';
 import { mockPitches } from '@/data/pitches';
 import { mockClans } from '@/data/clans';
 import { mockUsers } from '@/data/users';
@@ -22,6 +24,7 @@ const CATEGORIES = [
 const SORT_OPTIONS = ['Trending', 'Ending Soon', 'Most Funded', 'Newest'];
 
 export default function DiscoverPage() {
+    const { isPoolInRadius } = useLocation();
     const [activeCategory, setActiveCategory] = useState('all');
     const [activeSort, setActiveSort] = useState('Trending');
     const [searchQuery, setSearchQuery] = useState('');
@@ -47,9 +50,13 @@ export default function DiscoverPage() {
         // Search filter
         if (searchQuery) {
             const q = searchQuery.toLowerCase();
-            return p.title.toLowerCase().includes(q) || p.description?.toLowerCase().includes(q);
+            const matchTitle = p.title?.toLowerCase().includes(q);
+            const matchDesc = p.description?.toLowerCase().includes(q);
+            const matchClan = p.clanName?.toLowerCase().includes(q);
+            if (!matchTitle && !matchDesc && !matchClan) return false;
         }
-        return true;
+        // Geolocation Proximity filter
+        return isPoolInRadius(p);
     });
 
     // Nearby clans preview
@@ -98,22 +105,25 @@ export default function DiscoverPage() {
                         ))}
                     </div>
 
-                    {/* ── Sort ── */}
+                    {/* ── Sort & Distance Controls ── */}
                     <div className={styles.sortRow}>
                         <span className={styles.resultCount}>
                             {filteredPitches.length} {filteredPitches.length === 1 ? 'pitch' : 'pitches'} found
                             {activeCategory !== 'all' && ` in ${CATEGORIES.find(c => c.id === activeCategory)?.label}`}
                         </span>
-                        <div className={styles.sortTabs}>
-                            {SORT_OPTIONS.map(s => (
-                                <button
-                                    key={s}
-                                    className={`${styles.sortTab} ${activeSort === s ? styles.sortActive : ''}`}
-                                    onClick={() => setActiveSort(s)}
-                                >
-                                    {s}
-                                </button>
-                            ))}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+                            <DistanceDropdown />
+                            <div className={styles.sortTabs}>
+                                {SORT_OPTIONS.map(s => (
+                                    <button
+                                        key={s}
+                                        className={`${styles.sortTab} ${activeSort === s ? styles.sortActive : ''}`}
+                                        onClick={() => setActiveSort(s)}
+                                    >
+                                        {s}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 

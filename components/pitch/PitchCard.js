@@ -7,9 +7,12 @@ import { pluralizeUnit } from '@/utils/pluralize';
 import { mockClans } from '@/data/clans';
 import styles from './PitchCard.module.css';
 import { useAuth } from '@/context/AuthContext';
+import { useLocation } from '@/context/LocationContext';
 
 export default function PitchCard({ pitch, showClanBadge = false }) {
     const { isClanMember } = useAuth();
+    const { getPoolLocationMeta } = useLocation();
+    const locMeta = getPoolLocationMeta(pitch);
     const pitchClanIds = pitch.clanIds || (pitch.clanId ? [pitch.clanId] : []);
     const associatedClans = pitchClanIds.map(id => mockClans.find(c => c.id === id)).filter(Boolean);
     const noClanTagged = pitchClanIds.length === 0;
@@ -90,20 +93,31 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                 </div>
 
                 {(pitch.hostName || pitch.host?.name) && (
-                    <div className={styles.hostRow}>
-                        <div className={styles.hostAvatarWrapper}>
-                            <Avatar name={pitch.hostName || pitch.host?.name} src={pitch.hostAvatar || pitch.host?.avatarUrl} size="sm" />
-                            {(pitch.host?.isVerifiedVendor || pitch.isVerifiedVendor) && (
-                                <span className={styles.vendorCheck} title="Verified Direct Manufacturer / Brand">
-                                    <span className="material-symbols-outlined" style={{ fontSize: '12px', fontVariationSettings: "'FILL' 1" }}>verified</span>
-                                </span>
+                    <div className={styles.locationMetaRow}>
+                        <div className={styles.hostRow}>
+                            <div className={styles.hostAvatarWrapper}>
+                                <Avatar name={pitch.hostName || pitch.host?.name} src={pitch.hostAvatar || pitch.host?.avatarUrl} size="sm" />
+                                {(pitch.host?.isVerifiedVendor || pitch.isVerifiedVendor) && (
+                                    <span className={styles.vendorCheck} title="Verified Direct Manufacturer / Brand">
+                                        <span className="material-symbols-outlined" style={{ fontSize: '12px', fontVariationSettings: "'FILL' 1" }}>verified</span>
+                                    </span>
+                                )}
+                            </div>
+                            <span className={styles.hostText}>
+                                Host: <strong>{pitch.hostName || pitch.host?.name}</strong>
+                            </span>
+                            {(pitch.hostRating || pitch.host?.rating) && (
+                                <span className={styles.hostRating}>{pitch.hostRating || pitch.host?.rating} ★</span>
                             )}
                         </div>
-                        <span className={styles.hostText}>
-                            Host: <strong>{pitch.hostName || pitch.host?.name}</strong>
-                        </span>
-                        {(pitch.hostRating || pitch.host?.rating) && (
-                            <span className={styles.hostRating}>{pitch.hostRating || pitch.host?.rating} ★</span>
+
+                        {locMeta && (
+                            <span 
+                                className={locMeta.isRemote ? styles.proximityBadgeRemote : styles.proximityBadge}
+                                title={locMeta.isRemote ? "Delivered across India" : `Pickup at ${locMeta.hubName} (${locMeta.distanceText})`}
+                            >
+                                {locMeta.badgeText}
+                            </span>
                         )}
                     </div>
                 )}

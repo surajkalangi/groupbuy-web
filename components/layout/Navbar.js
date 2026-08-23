@@ -5,10 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { globalStore } from '@/utils/store';
 import Logo from '@/components/ui/Logo';
+import { useLocation } from '@/context/LocationContext';
 import styles from './Navbar.module.css';
 
 export default function Navbar({ children, backHref }) {
     const pathname = usePathname();
+    const { userLocation, openLocationModal } = useLocation();
     const [hasUnread, setHasUnread] = useState(true);
 
     useEffect(() => {
@@ -86,6 +88,19 @@ export default function Navbar({ children, backHref }) {
                 )}
 
                 <div className={styles.actions}>
+                    {/* Location selector */}
+                    <button 
+                        type="button" 
+                        className={styles.navLocationBtn} 
+                        onClick={openLocationModal}
+                        title="Change your pickup location hub"
+                    >
+                        <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)' }}>
+                            {userLocation?.isGps ? 'my_location' : 'location_on'}
+                        </span>
+                        <span>{userLocation?.name || 'Set Location'}</span>
+                    </button>
+
                     {/* Mobile search icon */}
                     {pathname !== '/discover' && (
                         <Link href="/search" className={`${styles.iconBtn} ${styles.mobileSearchIcon}`} aria-label="Search">
