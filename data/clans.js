@@ -163,7 +163,7 @@ export const mockClans = [
     },
     {
         id: 'clan-dogs',
-        name: 'Society Pet & Dog Parents',
+        name: 'Dogs & Pets Parents',
         location: 'Gachibowli & Indiranagar',
         description: 'Local dog and pet parents pooling for 20kg breeder food sacks (Royal Canin / Farmina), chewable tick & flea tablets, and joint weekend mobile grooming sessions.',
         coverImage: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80',
@@ -179,7 +179,7 @@ export const mockClans = [
     },
     {
         id: 'clan-newtocity',
-        name: 'New Flat Setup & Flatmates Hub',
+        name: 'New Flat Setup Collective',
         location: 'Hitec City, Madhapur & HSR Layout',
         description: 'For folks moving into new rental flats. We pool orders for essential kitchen appliances, orthopedic mattresses, and move-in deep cleaning to save on setup costs.',
         coverImage: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80',
@@ -195,7 +195,7 @@ export const mockClans = [
     },
     {
         id: 'clan-fitness',
-        name: 'Gym & Fitness Nutrition Group',
+        name: 'Gym & Fitness',
         location: 'Jubilee Hills & HSR Layout',
         description: 'Gym-goers pooling for 100% whey protein isolate, weekly crates of cage-free brown eggs, and cast iron weights at wholesale stockist rates.',
         coverImage: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&q=80',
@@ -224,21 +224,5 @@ export const mockClans = [
         members: ['user-1', 'user-3'],
         moderators: ['user-3'],
         createdAt: '2024-04-18',
-    },
-    {
-        id: 'clan-bakers',
-        name: 'Home Bakers & Gourmet Foodies',
-        location: 'Whitefield & Madhapur',
-        description: 'Home bakers and food creators pooling for bulk Callebaut Belgian dark chocolate slabs, bourbon vanilla beans, and baking supplies directly from wholesale importers.',
-        coverImage: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80',
-        privacy: 'open',
-        inviteCode: 'home-bakers-hyd-blr',
-        memberCount: 320,
-        activePitchCount: 2,
-        createdBy: 'user-2',
-        badge: 'BAKING & GOURMET',
-        members: ['user-1', 'user-2', 'user-5'],
-        moderators: ['user-2'],
-        createdAt: '2024-04-25',
     },
 ];

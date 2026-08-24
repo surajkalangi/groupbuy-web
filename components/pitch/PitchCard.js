@@ -9,6 +9,43 @@ import styles from './PitchCard.module.css';
 import { useAuth } from '@/context/AuthContext';
 import { useLocation } from '@/context/LocationContext';
 
+function formatCompactPrice(price) {
+    const num = Number(price) || 0;
+    if (num >= 100000) {
+        const val = num / 100000;
+        return (val % 1 === 0 ? val.toFixed(0) : val.toFixed(1)) + 'L';
+    }
+    if (num >= 10000) {
+        const val = num / 1000;
+        return (val % 1 === 0 ? val.toFixed(0) : val.toFixed(1)) + 'K';
+    }
+    return num.toLocaleString('en-IN');
+}
+
+function formatShortUnit(unitType) {
+    if (!unitType) return 'unit';
+    const clean = String(unitType).trim().toLowerCase();
+    const map = {
+        'subscription': 'sub',
+        'participant': 'person',
+        'membership': 'slot',
+        'consultation': 'session',
+        'flat combo': 'flat',
+        '3hr ceremony slot': 'slot',
+        '20kg pair (10kg x 2)': 'pair',
+        '5-meter string': '5m pack',
+        'bridal floral set': 'set',
+        'pair in gift box': 'pair',
+        '1kg bag': 'kg',
+        '2.5kg block': '2.5kg',
+        '5 lbs tub': 'tub',
+        'mat + strap': 'piece',
+    };
+    if (map[clean]) return map[clean];
+    if (clean.length > 8) return clean.slice(0, 7) + '…';
+    return clean;
+}
+
 export default function PitchCard({ pitch, showClanBadge = false }) {
     const { isClanMember } = useAuth();
     const { getPoolLocationMeta } = useLocation();
@@ -120,9 +157,14 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
             <div className={styles.content}>
                 <div className={styles.titleRow}>
                     <h3 className={styles.title}>{pitch.productName || pitch.title}</h3>
-                    <span className={styles.price}>
-                        ₹{Number(pitch.costPerUnit || 0).toLocaleString('en-IN')}<span className={styles.unit}>/{pitch.unitType}</span>
-                    </span>
+                    <div className={styles.priceContainer}>
+                        <span className={styles.priceAmount}>
+                            ₹{formatCompactPrice(pitch.costPerUnit || pitch.price || 0)}
+                        </span>
+                        <span className={styles.priceUnit} title={`per ${pitch.unitType || 'unit'}`}>
+                            /{formatShortUnit(pitch.unitType)}
+                        </span>
+                    </div>
                 </div>
 
                 {(pitch.hostName || pitch.host?.name) && (

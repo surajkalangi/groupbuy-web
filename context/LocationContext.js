@@ -201,17 +201,25 @@ export function LocationProvider({ children }) {
     }, [updateLocation]);
 
     /**
-     * Helper to extract lat/lng, locality & delivery metadata from pool
+     * Resolve geolocation anchor for a pool
      */
     const resolvePoolCoordinates = useCallback((pool) => {
         if (!pool) return null;
         
-        const isDigital = pool.category === 'digital' || pool.category === 'software' || pool.deliveryType === 'digital' || pool.isDigitalDelivery === true || pool.pickupInfo?.isDigital === true;
-        const isPanIndia = pool.isPanIndia === true || pool.deliveryType === 'pan_india' || pool.pickupInfo?.deliveryType === 'pan_india';
+        const isRemote = pool.isRemote === true || pool.deliveryType === 'remote' || pool.pickupInfo?.isRemote === true || pool.id === 'pitch-ns-kazakhstan';
+        const isDigital = !isRemote && (pool.category === 'digital' || pool.category === 'software' || pool.deliveryType === 'digital' || pool.isDigitalDelivery === true || pool.pickupInfo?.isDigital === true);
+        const isPanIndia = !isRemote && !isDigital && (pool.isPanIndia === true || pool.deliveryType === 'pan_india' || pool.pickupInfo?.deliveryType === 'pan_india' || pool.pickupInfo?.isPanIndia === true);
         
-        if (isPanIndia) {
-            return { isPanIndia: true, isDigital: false, isRemote: true };
+        if (isRemote) {
+            return { isRemote: true, isPanIndia: false, isDigital: false };
         }
+        if (isDigital) {
+            return { isDigital: true, isPanIndia: false, isRemote: false, hubName: pool.pickupInfo?.locality || 'Digital Delivery' };
+        }
+        if (isPanIndia) {
+            return { isPanIndia: true, isDigital: false, isRemote: false };
+        }
+
         const isDoorstep = pool.deliveryType === 'doorstep' || pool.deliveryScope === 'city' || pool.pickupInfo?.isDoorstep === true || Boolean(pool.pickupInfo?.doorstepLocations?.length);
         const doorstepLocations = pool.pickupInfo?.doorstepLocations || pool.doorstepLocations || [];
         let lat = pool.pickupInfo?.lat || pool.geoCoordinates?.lat;
@@ -231,10 +239,10 @@ export function LocationProvider({ children }) {
         }
 
         if (lat && lng) {
-            return { lat, lng, hubName, city, isDoorstep, doorstepLocations, isDigital, isPanIndia: false, isRemote: false };
+            return { lat, lng, hubName, city, isDoorstep, doorstepLocations, isDigital: false, isPanIndia: false, isRemote: false };
         }
 
-        return { hubName, city, isDoorstep, doorstepLocations, isDigital, isPanIndia: false, isRemote: false };
+        return { hubName, city, isDoorstep, doorstepLocations, isDigital: false, isPanIndia: false, isRemote: false };
     }, []);
 
     /**
@@ -243,7 +251,7 @@ export function LocationProvider({ children }) {
     const getPoolDistance = useCallback((pool) => {
         if (!pool) return null;
         const resolved = resolvePoolCoordinates(pool);
-        if (!resolved || resolved.isPanIndia || !resolved.lat || !resolved.lng) return null;
+        if (!resolved || resolved.isPanIndia || resolved.isRemote || !resolved.lat || !resolved.lng) return null;
         
         if (!userLocation?.lat || !userLocation?.lng) return null;
         return calculateDistanceKm(userLocation.lat, userLocation.lng, resolved.lat, resolved.lng);
@@ -259,22 +267,30 @@ export function LocationProvider({ children }) {
 
         const { isMemberOfPoolClan = false } = options;
 
-        // 1. Digital products & shared digital subscription pools
+        // 1. Remote / Global Activities & Programs
+        if (resolved.isRemote) {
+            return {
+                type: 'remote',
+                badgeText: '🌐 Remote',
+                tooltip: 'Remote / Global Program • Open to participants anywhere',
+                distanceKm: null,
+                hubName: 'Remote / Global',
+            };
+        }
+
+        // 2. Digital products & shared digital subscriptions
         if (resolved.isDigital) {
-            const clanGeo = CLAN_COORDINATES[pool.clanIds?.[0] || pool.clanId];
-            const hub = resolved.hubName || clanGeo?.locality;
+            const hub = resolved.hubName;
             return {
                 type: 'digital',
                 badgeText: '💻 Digital',
-                tooltip: hub 
-                    ? `Digitally delivered • Shared with members of ${hub}`
-                    : 'Digitally delivered via instant message / email',
+                tooltip: 'Digitally delivered software license / cloud access',
                 distanceKm: null,
                 hubName: hub || 'Digital Delivery',
             };
         }
 
-        // 2. Pan-India courier / Speed Post delivery
+        // 3. Pan-India physical courier delivery
         if (resolved.isPanIndia) {
             return {
                 type: 'pan_india',
@@ -301,7 +317,7 @@ export function LocationProvider({ children }) {
         const isSocietyClan = Boolean(societyClan);
         const societyName = societyClan?.name || resolved.hubName || 'Society';
 
-        // 3. User is a joined member of this apartment/society clan
+        // 4. User is a joined member of this apartment/society clan
         if (isMemberOfPoolClan && isSocietyClan) {
             const isUserNearby = distance !== null && distance <= 25 && cityMatches;
             // When user is within their society / home area and service is doorstep, Doorstep badge takes preference
@@ -326,7 +342,7 @@ export function LocationProvider({ children }) {
             };
         }
 
-        // 4. City/Locality-wide Doorstep Delivery (service / vendor pools in user's city)
+        // 5. City/Locality-wide Doorstep Delivery (service / vendor pools in user's city)
         if (resolved.isDoorstep && cityMatches && matchesDoorstepLocality) {
             const tooltipText = doorstepLocs.length > 0
                 ? `Doorstep delivery available in ${userLocality || poolCity} (Zones: ${doorstepLocs.slice(0, 3).join(', ')}${doorstepLocs.length > 3 ? ` +${doorstepLocs.length - 3} more` : ''})`
@@ -340,7 +356,7 @@ export function LocationProvider({ children }) {
             };
         }
 
-        // 5. Local Pickup Hub with calculated distance
+        // 6. Local Pickup Hub with calculated distance
         if (distance !== null) {
             return {
                 type: 'local',
@@ -351,7 +367,7 @@ export function LocationProvider({ children }) {
             };
         }
 
-        // 6. Fallback when locality is known
+        // 7. Fallback when locality is known
         const hub = resolved.hubName || pool.pickupInfo?.locality;
         if (hub) {
             return {
@@ -372,17 +388,36 @@ export function LocationProvider({ children }) {
     const isPoolInRadius = useCallback((pool, targetRadius = proximityRadius, options = {}) => {
         if (!pool) return false;
         
-        // Joined clan pools are ALWAYS visible to clan members, even if traveling
-        if (options.isMemberOfPoolClan) {
+        const poolClanIds = pool.clanIds || (pool.clanId ? [pool.clanId] : []);
+        const isSocietyClan = poolClanIds.some(id => id === 'clan-1' || id === 'clan-4');
+        
+        // Exemption from distance radius dropping is ONLY for joined society clans
+        if (options.isMemberOfPoolClan && isSocietyClan) {
             return true;
         }
 
         const resolved = resolvePoolCoordinates(pool);
-        if (!resolved) return true;
+        if (!resolved) return false;
 
-        // Digital or Pan-India pools are available globally
-        if (resolved.isDigital || resolved.isPanIndia) {
-            return true;
+        // 'all' includes everything
+        if (targetRadius === 'all') return true;
+        
+        // 'remote' shows Pan-India dispatched, remote programs, and digital pools
+        if (targetRadius === 'remote') {
+            return resolved.isRemote || resolved.isDigital || resolved.isPanIndia;
+        }
+
+        // Specific numerical radius (e.g. 5, 15, 30 km):
+        // Exclude Pan-India courier & Remote activities from local radius filters
+        if (resolved.isPanIndia || resolved.isRemote) {
+            return false;
+        }
+
+        // Digital pools pass if base locality distance <= targetRadius
+        if (resolved.isDigital) {
+            const dist = getPoolDistance(pool);
+            if (dist === null) return true;
+            return dist <= Number(targetRadius);
         }
 
         const poolCity = resolved.city || pool.pickupInfo?.city;
@@ -394,32 +429,16 @@ export function LocationProvider({ children }) {
             ? doorstepLocs.some(loc => userLocality && (loc.toLowerCase().includes(userLocality.toLowerCase()) || userLocality.toLowerCase().includes(loc.toLowerCase())))
             : true;
 
-        // If it's doorstep delivery in user's matching city/locality, show it
+        // If it's doorstep delivery in user's matching city & locality
         if (resolved.isDoorstep && cityMatches && matchesDoorstepLocality) {
-            return true;
-        }
-
-        const isPanIndia = resolved?.isPanIndia === true;
-        const isDigital = resolved?.isDigital === true;
-        
-        // 'all' includes everything
-        if (targetRadius === 'all') return true;
-        
-        // 'remote' shows Pan-India dispatched and digital pools
-        if (targetRadius === 'remote') return isPanIndia || isDigital;
-
-        // Specific numerical radius (e.g. 5, 15, 30 km)
-        if (isPanIndia) return false; // Pan-India items filtered out when specific distance is chosen
-
-        // Digital pools in clan circles pass if their base clan is within range or same city
-        if (isDigital) {
             const dist = getPoolDistance(pool);
             if (dist === null) return true;
             return dist <= Number(targetRadius);
         }
 
+        // Physical pickup pool
         const dist = getPoolDistance(pool);
-        if (dist === null) return true; // If no geo coordinates available, keep in feed
+        if (dist === null) return false; // Filter out if no geo coordinates match local radius
         return dist <= Number(targetRadius);
     }, [proximityRadius, getPoolDistance, resolvePoolCoordinates, userLocation]);
 

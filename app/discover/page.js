@@ -14,12 +14,15 @@ import { mockUsers } from '@/data/users';
 import styles from './page.module.css';
 
 const CATEGORIES = [
-    { id: 'all', label: 'All', icon: 'apps' },
-    { id: 'produce', label: 'Fresh Produce', icon: 'eco' },
-    { id: 'bakery', label: 'Bakery', icon: 'bakery_dining' },
-    { id: 'spices', label: 'Spices & Pantry', icon: 'lunch_dining' },
-    { id: 'electronics', label: 'Electronics', icon: 'devices' },
-    { id: 'home', label: 'Home & Living', icon: 'chair' },
+    { id: 'all', label: 'All Pools', icon: 'apps' },
+    { id: 'home', label: 'Home Setup & Solar', icon: 'solar_power' },
+    { id: 'wedding', label: 'Weddings & Events', icon: 'celebration' },
+    { id: 'fitness', label: 'Gym & Fitness', icon: 'fitness_center' },
+    { id: 'service', label: 'Home Services', icon: 'cleaning_services' },
+    { id: 'baby', label: 'Baby & Parenting', icon: 'child_care' },
+    { id: 'pets', label: 'Dog & Pet Care', icon: 'pets' },
+    { id: 'digital', label: 'Digital Subscriptions', icon: 'devices' },
+    { id: 'experience', label: 'Travel & Trips', icon: 'flight' },
 ];
 
 const SORT_OPTIONS = ['Trending', 'Ending Soon', 'Most Funded', 'Newest'];
@@ -31,9 +34,23 @@ export default function DiscoverPage() {
     const [activeSort, setActiveSort] = useState('Trending');
     const [searchQuery, setSearchQuery] = useState('');
 
-    // All public pitches for discovery
+    // All public pitches for discovery: only pools tagged to at least one open/public clan
     const publicPitches = mockPitches
-        .filter(p => p.visibility === 'public' && (p.status === 'active' || p.status === 'activated'))
+        .filter(p => {
+            if (p.status !== 'active' && p.status !== 'activated') return false;
+            if (p.visibility === 'private' || p.visibility === 'restricted' || p.visibility === 'unlisted') return false;
+            
+            const pClanIds = p.clanIds || (p.clanId ? [p.clanId] : []);
+            if (pClanIds.length === 0) return p.visibility === 'public';
+            
+            // Check if any tagged clan is an open/public clan
+            const hasOpenClan = pClanIds.some(id => {
+                const clan = mockClans.find(c => c.id === id);
+                return clan && clan.privacy === 'open';
+            });
+            
+            return hasOpenClan;
+        })
         .map(p => {
             const pClanId = p.clanIds?.[0] || p.clanId;
             return {
@@ -48,7 +65,12 @@ export default function DiscoverPage() {
 
     const filteredPitches = publicPitches.filter(p => {
         // Category filter
-        if (activeCategory !== 'all' && p.category !== activeCategory) return false;
+        if (activeCategory !== 'all') {
+            if (activeCategory === 'home' && p.category !== 'home' && p.category !== 'electronics' && p.category !== 'solar') return false;
+            else if (activeCategory === 'wedding' && p.category !== 'wedding' && p.category !== 'gifts') return false;
+            else if (activeCategory === 'service' && p.category !== 'service' && p.category !== 'cleaning' && p.category !== 'pest_control') return false;
+            else if (activeCategory !== 'home' && activeCategory !== 'wedding' && activeCategory !== 'service' && p.category !== activeCategory) return false;
+        }
         // Search filter
         if (searchQuery) {
             const q = searchQuery.toLowerCase();
@@ -57,7 +79,7 @@ export default function DiscoverPage() {
             const matchClan = p.clanName?.toLowerCase().includes(q);
             if (!matchTitle && !matchDesc && !matchClan) return false;
         }
-        // Geolocation Proximity filter (exempts user's joined society/private clans)
+        // Geolocation Proximity filter
         const pClanIds = p.clanIds || (p.clanId ? [p.clanId] : []);
         const isMember = pClanIds.some(id => isClanMember(id));
         return isPoolInRadius(p, proximityRadius, { isMemberOfPoolClan: isMember });

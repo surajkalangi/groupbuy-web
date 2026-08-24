@@ -11,35 +11,55 @@ import styles from './page.module.css';
 import AuthGuard from '@/components/auth/AuthGuard';
 import { useAuth } from '@/context/AuthContext';
 
-const CATEGORIES = [
-    { id: 'groceries', label: '🌾 Farm Produce & Groceries' },
-    { id: 'home', label: '🏠 Home Setup & Utilities' },
-    { id: 'fitness', label: '💪 Gym & Fitness Nutrition' },
-    { id: 'baby', label: '👶 Baby & Parenting' },
-    { id: 'pets', label: '🐾 Pets & Dog Care' },
-    { id: 'wedding', label: '💍 Weddings & Traditional Gifts' },
-    { id: 'gourmet', label: '🧁 Gourmet & Home Bakers' },
-    { id: 'service', label: '🛠️ Home Services & Deep Cleaning' },
-    { id: 'digital', label: '💻 Digital Subscriptions & Software' },
-    { id: 'travel', label: '✈️ Group Trips & Experiences' },
+const HIGH_VALUE_CATEGORIES = [
+    { id: 'home', label: 'Home Setup & Appliances', icon: 'chair', desc: 'Orthopedic mattresses, RO purifiers, balcony blinds & furniture' },
+    { id: 'wedding', label: 'Weddings & Event Services', icon: 'celebration', desc: 'Mehndi artists, Nadaswaram troupes, return gifts & bridal sets' },
+    { id: 'fitness', label: 'Gym & Fitness Hardware', icon: 'fitness_center', desc: 'Hex dumbbells, massage guns, yoga mats & power racks' },
+    { id: 'service', label: 'Home Services & Deep Cleaning', icon: 'cleaning_services', desc: 'Move-in deep cleaning, pest control & AC maintenance' },
+    { id: 'baby', label: 'Baby & Childcare Essentials', icon: 'child_care', desc: 'Safety kits, premium strollers, babyproofing & gear' },
+    { id: 'pets', label: 'Dog & Pet Supplies', icon: 'pets', desc: 'Breeder kibble sacks, tick treatments & mobile grooming' },
+    { id: 'digital', label: 'Digital Subscriptions & Cloud', icon: 'devices', desc: '4K streaming slots, software licenses & developer tools' },
+    { id: 'travel', label: 'Travel, Treks & Retreats', icon: 'flight', desc: 'Colleague roadtrips, adventure tours & learning batches' },
+    { id: 'solar', label: 'Rooftop Solar & Energy', icon: 'solar_power', desc: 'Gated community & villa grid-tied bifacial solar setups' },
+    { id: 'gourmet', label: 'Gourmet & Specialty Pantry', icon: 'bakery_dining', desc: 'Single-origin spices, organic honey & festive sweets' },
 ];
 
-const LOCALITY_PRESETS = [
-    { name: 'Hitec City', city: 'Hyderabad', lat: 17.4435, lng: 78.3772 },
-    { name: 'Gachibowli', city: 'Hyderabad', lat: 17.4401, lng: 78.3489 },
-    { name: 'Madhapur', city: 'Hyderabad', lat: 17.4483, lng: 78.3915 },
-    { name: 'Jubilee Hills', city: 'Hyderabad', lat: 17.4319, lng: 78.4073 },
-    { name: 'Banjara Hills', city: 'Hyderabad', lat: 17.4156, lng: 78.4354 },
-    { name: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914 },
-    { name: 'Kondapur', city: 'Hyderabad', lat: 17.4699, lng: 78.3578 },
-    { name: 'Financial District', city: 'Hyderabad', lat: 17.4190, lng: 78.3490 },
-    { name: 'Whitefield', city: 'Bengaluru', lat: 12.9698, lng: 77.7499 },
-    { name: 'HSR Layout', city: 'Bengaluru', lat: 12.9121, lng: 77.6446 },
-    { name: 'Indiranagar', city: 'Bengaluru', lat: 12.9784, lng: 77.6408 },
-    { name: 'Koramangala', city: 'Bengaluru', lat: 12.9352, lng: 77.6245 },
-    { name: 'Bandra Kurla Complex (BKC)', city: 'Mumbai', lat: 19.0664, lng: 72.8687 },
-    { name: 'Powai (Hiranandani)', city: 'Mumbai', lat: 19.1176, lng: 72.9060 },
+const POPULAR_CITIES = [
+    { name: 'Hyderabad', icon: 'location_city' },
+    { name: 'Bengaluru', icon: 'apartment' },
+    { name: 'Mumbai', icon: 'domain' },
+    { name: 'Delhi NCR', icon: 'holiday_village' },
+    { name: 'Pune', icon: 'corporate_fare' },
+    { name: 'Chennai', icon: 'location_city' },
 ];
+
+const CITY_LOCALITY_MAP = {
+    'Hyderabad': [
+        'Hitec City', 'Gachibowli', 'Madhapur', 'Tellapur', 'Jubilee Hills',
+        'Banjara Hills', 'Kondapur', 'Financial District', 'Nallagandla',
+        'Kokapet', 'Manikonda', 'Kukatpally', 'Secunderabad'
+    ],
+    'Bengaluru': [
+        'HSR Layout', 'Whitefield', 'Indiranagar', 'Koramangala', 'Bellandur',
+        'Sarjapur Road', 'Electronic City', 'JP Nagar', 'Marathahalli',
+        'Malleshwaram', 'Hebbal', 'Bannerghatta Road'
+    ],
+    'Mumbai': [
+        'Bandra Kurla Complex (BKC)', 'Powai', 'Andheri West', 'Juhu',
+        'Lower Parel', 'Worli', 'Thane West', 'Navi Mumbai', 'Borivali'
+    ],
+    'Delhi NCR': [
+        'Gurugram Cyber City', 'Golf Course Road', 'DLF Phase 5',
+        'Noida Sector 62', 'South Extension', 'Vasant Kunj', 'Indirapuram'
+    ],
+    'Pune': [
+        'Koregaon Park', 'Baner', 'Hinjewadi IT Park', 'Viman Nagar',
+        'Kalyani Nagar', 'Wakad', 'Aundh', 'Kothrud'
+    ],
+    'Chennai': [
+        'OMR IT Corridor', 'Adyar', 'Anna Nagar', 'T. Nagar', 'Velachery', 'Besant Nagar'
+    ]
+};
 
 function CreatePitchForm() {
     const router = useRouter();
@@ -51,7 +71,7 @@ function CreatePitchForm() {
 
     // ── Step 1: Product & Sourcing Details ──
     const [productName, setProductName] = useState('');
-    const [category, setCategory] = useState('groceries');
+    const [category, setCategory] = useState('home');
     const [description, setDescription] = useState('');
     const [productLink, setProductLink] = useState('');
     const [photos, setPhotos] = useState([null, null, null]);
@@ -59,7 +79,6 @@ function CreatePitchForm() {
     const [retailPrice, setRetailPrice] = useState('');
     const [sellerName, setSellerName] = useState('');
     const [sellerId, setSellerId] = useState('');
-    const [isVerifiedVendor, setIsVerifiedVendor] = useState(false);
 
     // ── Step 2: Pricing & Capacity Economics ──
     const [minOrder, setMinOrder] = useState('');
@@ -70,7 +89,8 @@ function CreatePitchForm() {
     // ── Step 3: Rules, Delivery Logistics & Policies ──
     const [deadline, setDeadline] = useState('');
     const [deliveryType, setDeliveryType] = useState('pickup'); // 'pickup' | 'doorstep' | 'pan_india' | 'digital'
-    const [doorstepScope, setDoorstepScope] = useState('localities'); // 'localities' | 'city'
+    const [doorstepScope, setDoorstepScope] = useState('localities');
+    const [activeDoorstepCity, setActiveDoorstepCity] = useState('Hyderabad');
     const [doorstepLocations, setDoorstepLocations] = useState(['Hitec City', 'Gachibowli', 'Madhapur', 'Tellapur']);
     const [customLocalityInput, setCustomLocalityInput] = useState('');
 
@@ -109,14 +129,39 @@ function CreatePitchForm() {
                 setGeoLat(latitude);
                 setGeoLng(longitude);
                 setIsDetectingGeo(false);
-                setGeoStatusMsg(`✓ GPS Locked: (${latitude.toFixed(4)}°, ${longitude.toFixed(4)}°)`);
+                setGeoStatusMsg(`✓ GPS Coordinates Locked: (${latitude.toFixed(4)}°, ${longitude.toFixed(4)}°)`);
             },
             () => {
                 setIsDetectingGeo(false);
-                setGeoStatusMsg('GPS permission denied. Please choose your locality preset.');
+                setGeoStatusMsg('GPS permission unavailable. Please enter pickup address above.');
             },
             { enableHighAccuracy: true, timeout: 8000 }
         );
+    };
+
+    const toggleDoorstepLocation = (loc) => {
+        setDoorstepLocations(prev => 
+            prev.includes(loc) ? prev.filter(l => l !== loc) : [...prev, loc]
+        );
+    };
+
+    const selectAllCityLocalities = () => {
+        const cityLocs = CITY_LOCALITY_MAP[activeDoorstepCity] || [];
+        setDoorstepLocations(prev => Array.from(new Set([...prev, ...cityLocs])));
+    };
+
+    const clearDoorstepLocations = () => {
+        setDoorstepLocations([]);
+    };
+
+    const addCustomDoorstepLocation = (e) => {
+        e?.preventDefault?.();
+        if (!customLocalityInput.trim()) return;
+        const clean = customLocalityInput.trim();
+        if (!doorstepLocations.includes(clean)) {
+            setDoorstepLocations(prev => [...prev, clean]);
+        }
+        setCustomLocalityInput('');
     };
 
     // Close dropdown when clicking outside
@@ -138,52 +183,75 @@ function CreatePitchForm() {
                 if (draftId === 'host-draft-1') {
                     draft = {
                         title: 'A2 Desi Milk Subscription',
-                        category: 'groceries',
-                        description: 'Farm-fresh A2 milk sourced directly from free-grazing Gir cows. Untouched by hands, unadulterated, and delivered to your doorstep every morning.',
-                        unitType: 'Litre',
-                        costPerUnit: 85,
+                        category: 'home',
+                        description: 'Farm-fresh raw Gir cow A2 milk sourced daily from local organic dairy.',
+                        price: 90,
+                        costPerUnit: 90,
+                        unitType: 'litre',
+                        maxCapacity: 50,
                         minOrder: 10,
-                        maxCapacity: 25,
+                        deadline: '2026-08-28T18:00',
+                        paymentMode: 'upi',
                         deliveryType: 'doorstep',
-                        pickupInfo: { address: 'Doorstep morning milk delivery', locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, time: 'Daily 6:30 AM', isDoorstep: true, doorstepLocations: ['Tellapur', 'Gachibowli', 'Madhapur'] }
-                    };
-                } else if (draftId === 'host-draft-2') {
-                    draft = {
-                        title: 'Cold Pressed Oil',
-                        category: 'groceries',
-                        description: 'Authentic wood-pressed oil. Pure and unrefined.',
-                        unitType: 'Litre',
-                        costPerUnit: 185,
-                        minOrder: 8,
-                        maxCapacity: 20,
-                        image: '/images/wood_pressed_oil.png'
+                        doorstepLocations: ['Hitec City', 'Gachibowli', 'Madhapur', 'Tellapur'],
+                        pickupInfo: {
+                            address: 'Ravidham Complex, Main Gate / Daily Morning Milk Drop',
+                            locality: 'Hitec City',
+                            city: 'Hyderabad',
+                            lat: 17.4435,
+                            lng: 78.3772,
+                            time: 'Daily morning 6:30 AM – 7:30 AM',
+                        },
+                        clanIds: ['clan-1'],
                     };
                 }
             }
             if (draft) {
-                setProductName(draft.title || '');
-                setCategory(draft.category || 'groceries');
+                setProductName(draft.title || draft.productName || '');
+                setCategory(draft.category || 'home');
                 setDescription(draft.description || '');
-                setMinOrder(draft.minOrder?.toString() || '');
-                setMaxCapacity(draft.maxCapacity?.toString() || '');
-                setCostPerUnit(draft.costPerUnit?.toString() || '');
-                setUnitType(draft.unitType || '');
-                if (draft.image) {
-                    const newPreviews = [...photoPreviews];
-                    newPreviews[0] = draft.image;
-                    setPhotoPreviews(newPreviews);
-                }
-                if (draft.clanId) {
-                    setSelectedClans([draft.clanId]);
-                }
-                if (draft.deliveryType) setDeliveryType(draft.deliveryType);
+                setCostPerUnit(draft.costPerUnit || draft.price || '');
+                setUnitType(draft.unitType || draft.unit || '');
+                setMinOrder(draft.minOrder || '');
+                setMaxCapacity(draft.maxCapacity || '');
+                setDeadline(draft.deadline || '');
+                if (draft.clanIds) setSelectedClans(draft.clanIds);
                 if (draft.pickupInfo?.address) setPickupAddress(draft.pickupInfo.address);
                 if (draft.pickupInfo?.locality) setPickupLocality(draft.pickupInfo.locality);
                 if (draft.pickupInfo?.city) setPickupCity(draft.pickupInfo.city);
-                if (draft.pickupInfo?.doorstepLocations) setDoorstepLocations(draft.pickupInfo.doorstepLocations);
+                if (draft.pickupInfo?.lat) setGeoLat(draft.pickupInfo.lat);
+                if (draft.pickupInfo?.lng) setGeoLng(draft.pickupInfo.lng);
+                if (draft.doorstepLocations) setDoorstepLocations(draft.doorstepLocations);
             }
         }
     }, [draftId]);
+
+    const handlePhotoChange = (index, e) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const nextPhotos = [...photos];
+            nextPhotos[index] = file;
+            setPhotos(nextPhotos);
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const nextPreviews = [...photoPreviews];
+                nextPreviews[index] = reader.result;
+                setPhotoPreviews(nextPreviews);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const removePhoto = (index) => {
+        const nextPhotos = [...photos];
+        nextPhotos[index] = null;
+        setPhotos(nextPhotos);
+
+        const nextPreviews = [...photoPreviews];
+        nextPreviews[index] = null;
+        setPhotoPreviews(nextPreviews);
+    };
 
     const toggleClan = (clanId) => {
         setSelectedClans(prev =>
@@ -195,77 +263,57 @@ function CreatePitchForm() {
         setSelectedClans(prev => prev.filter(id => id !== clanId));
     };
 
-    const toggleDoorstepLocation = (locName) => {
-        setDoorstepLocations(prev =>
-            prev.includes(locName) ? prev.filter(l => l !== locName) : [...prev, locName]
-        );
-    };
-
-    const addCustomDoorstepLocation = (e) => {
-        e?.preventDefault();
-        const trimmed = customLocalityInput.trim();
-        if (trimmed && !doorstepLocations.includes(trimmed)) {
-            setDoorstepLocations(prev => [...prev, trimmed]);
-            setCustomLocalityInput('');
-        }
-    };
-
-    const removeDoorstepLocation = (locName) => {
-        setDoorstepLocations(prev => prev.filter(l => l !== locName));
-    };
-
     const stepProgress = { 1: 33, 2: 66, 3: 100 };
 
-    const handlePhotoChange = (index, e) => {
-        const file = e.target.files[0];
-        if (!file || !file.type.startsWith('image/')) return;
-        const newPhotos = [...photos];
-        newPhotos[index] = file;
-        setPhotos(newPhotos);
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const newPreviews = [...photoPreviews];
-            newPreviews[index] = reader.result;
-            setPhotoPreviews(newPreviews);
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const removePhoto = (index) => {
-        const newPhotos = [...photos];
-        newPhotos[index] = null;
-        setPhotos(newPhotos);
-        const newPreviews = [...photoPreviews];
-        newPreviews[index] = null;
-        setPhotoPreviews(newPreviews);
-    };
-
     const compileDraftPayload = () => {
+        const selectedClanObjects = selectedClans.map(id => mockClans.find(c => c.id === id)).filter(Boolean);
+        const openClans = selectedClanObjects.filter(c => c.privacy === 'open');
+        let derivedVisibility = 'unlisted';
+        if (selectedClanObjects.length === 0) {
+            derivedVisibility = 'unlisted';
+        } else if (openClans.length > 0) {
+            derivedVisibility = 'public';
+        } else {
+            derivedVisibility = 'restricted';
+        }
+
         return {
-            title: productName || 'Untitled Pool',
+            id: draftId || `pitch-user-${Date.now()}`,
+            title: productName,
+            productName,
             category,
             description,
             productLink,
             price: Number(costPerUnit) || 0,
             costPerUnit: Number(costPerUnit) || 0,
             retailPrice: Number(retailPrice) || 0,
+            totalUnits: Number(maxCapacity) || 0,
+            minOrder: Number(minOrder) || 1,
+            maxCapacity: Number(maxCapacity) || 1,
+            unit: unitType || 'unit',
             unitType: unitType || 'unit',
-            minOrder: Number(minOrder) || 5,
-            maxCapacity: Number(maxCapacity) || 20,
-            deadline: deadline || new Date(Date.now() + 5 * 86400000).toISOString(),
+            committedUnits: 0,
+            waitlistCount: 0,
+            deadline,
+            status: 'active',
+            visibility: derivedVisibility,
             deliveryType,
-            isDoorstep: deliveryType === 'doorstep',
+            doorstepScope,
             doorstepLocations: deliveryType === 'doorstep' ? doorstepLocations : [],
+            isDoorstep: deliveryType === 'doorstep',
+            isPanIndia: deliveryType === 'pan_india',
+            isDigital: deliveryType === 'digital',
             pickupInfo: {
-                address: pickupAddress || `${pickupLocality} Hub Gate`,
+                address: pickupAddress || `${pickupLocality || 'Central'} Community Hub`,
                 locality: pickupLocality,
                 city: pickupCity,
                 lat: geoLat,
                 lng: geoLng,
                 time: pickupTiming,
-                isDoorstep: deliveryType === 'doorstep',
-                doorstepLocations: deliveryType === 'doorstep' ? doorstepLocations : [],
                 deliveryType,
+                doorstepLocations: deliveryType === 'doorstep' ? doorstepLocations : [],
+                isDoorstep: deliveryType === 'doorstep',
+                isPanIndia: deliveryType === 'pan_india',
             },
             pitchPolicies: {
                 returnPolicy,
@@ -274,17 +322,16 @@ function CreatePitchForm() {
                 platformFeePercent: 0,
                 sellerName: sellerName || currentUser?.name || 'Community Host Sourcing',
                 sellerId,
-                isVerifiedVendor,
             },
             paymentMode,
             hostParticipates,
             clanIds: selectedClans,
             photos: photoPreviews.filter(Boolean),
-            image: photoPreviews[0] || '/images/farm-mango-crates.jpg',
+            image: photoPreviews[0] || '/images/split-inverter-ac.jpg',
             host: {
                 name: currentUser?.name || 'You (Host)',
                 rating: currentUser?.rating || 5.0,
-                isVerifiedVendor,
+                isVerifiedVendor: currentUser?.isVerifiedVendor || false,
             },
         };
     };
@@ -300,26 +347,9 @@ function CreatePitchForm() {
         }, 900);
     };
 
-    const handlePreview = () => {
-        const payload = compileDraftPayload();
-        if (typeof window !== 'undefined') {
-            sessionStorage.setItem('letsstack_draft_pitch', JSON.stringify(payload));
-        }
-        router.push('/pitches/create/preview');
-    };
-
-    const handleSaveDraft = () => {
-        const payload = compileDraftPayload();
-        if (typeof window !== 'undefined') {
-            sessionStorage.setItem('letsstack_draft_pitch', JSON.stringify(payload));
-        }
-        router.push('/pitches/create/draft-saved');
-    };
-
     const photoSlotIcons = ['add_a_photo', 'add', 'image'];
     const photoSlotLabels = ['COVER PHOTO (16:9)', 'PHOTO 2', 'PHOTO 3'];
 
-    // Calculate dynamic savings %
     const unitPriceNum = Number(costPerUnit) || 0;
     const retailPriceNum = Number(retailPrice) || 0;
     const savingsPercent = retailPriceNum > unitPriceNum && unitPriceNum > 0
@@ -336,7 +366,7 @@ function CreatePitchForm() {
                         <div className={styles.pageHeader}>
                             <h1 className={styles.pageTitle}>Create a new Pool</h1>
                             <p className={styles.pageSubtitle}>
-                                Initiate a community group buy. Pool orders with your trusted circle to unlock better pricing on quality products and services.
+                                Initiate a community group buy. Pool high-margin demand with your trusted circle to unlock direct wholesale pricing.
                             </p>
                         </div>
                     )}
@@ -367,7 +397,7 @@ function CreatePitchForm() {
                                 <input
                                     className={styles.input}
                                     type="text"
-                                    placeholder="e.g. Alphonso Mangoes (5kg Crate) / Split AC Jet Wash Combo"
+                                    placeholder="e.g. Daikin 1.5T 5-Star Split AC / Bridal Mehndi Studio Package"
                                     value={productName}
                                     onChange={e => setProductName(e.target.value)}
                                     required
@@ -375,16 +405,32 @@ function CreatePitchForm() {
                             </section>
 
                             <section className={styles.field}>
-                                <label className={styles.label}>Category *</label>
-                                <select
-                                    className={styles.select}
-                                    value={category}
-                                    onChange={e => setCategory(e.target.value)}
-                                >
-                                    {CATEGORIES.map(cat => (
-                                        <option key={cat.id} value={cat.id}>{cat.label}</option>
-                                    ))}
-                                </select>
+                                <label className={styles.label}>Select Category *</label>
+                                <div className={styles.categoryGrid}>
+                                    {HIGH_VALUE_CATEGORIES.map(cat => {
+                                        const isSelected = category === cat.id;
+                                        return (
+                                            <div
+                                                key={cat.id}
+                                                className={`${styles.categoryCard} ${isSelected ? styles.categoryCardActive : ''}`}
+                                                onClick={() => setCategory(cat.id)}
+                                            >
+                                                <span className={`material-symbols-outlined ${styles.categoryCardIcon}`}>
+                                                    {cat.icon}
+                                                </span>
+                                                <div className={styles.categoryCardContent}>
+                                                    <div className={styles.categoryCardTitle}>{cat.label}</div>
+                                                    <p className={styles.categoryCardDesc}>{cat.desc}</p>
+                                                </div>
+                                                {isSelected && (
+                                                    <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '18px' }}>
+                                                        check_circle
+                                                    </span>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </section>
 
                             <section className={styles.field}>
@@ -392,7 +438,7 @@ function CreatePitchForm() {
                                 <textarea
                                     className={styles.textarea}
                                     rows={5}
-                                    placeholder="Describe product quality, origin, why group buying unlocks wholesale prices, and fulfillment specifics..."
+                                    placeholder="Describe product specs, direct manufacturer/artisan origin, why pooling unlocks wholesale pricing, and warranty details..."
                                     value={description}
                                     onChange={e => setDescription(e.target.value)}
                                     required
@@ -421,7 +467,6 @@ function CreatePitchForm() {
                                         </div>
                                     ))}
                                 </div>
-                                <p className={styles.photoHint}>Clean, photorealistic product photos build trust and drive faster clan commitments.</p>
                             </section>
 
                             <section className={styles.field}>
@@ -434,7 +479,7 @@ function CreatePitchForm() {
                                     <input
                                         className={styles.inputPlain}
                                         type="url"
-                                        placeholder="https://seller.com/product-specs"
+                                        placeholder="https://brand.com/product-specifications"
                                         value={productLink}
                                         onChange={e => setProductLink(e.target.value)}
                                     />
@@ -451,14 +496,16 @@ function CreatePitchForm() {
                                     <input
                                         className={styles.inputPlain}
                                         type="number"
-                                        placeholder="e.g. 1200 (Used to calculate community savings %)"
+                                        placeholder="e.g. 45000"
                                         value={retailPrice}
                                         onChange={e => setRetailPrice(e.target.value)}
+                                        min="0"
                                     />
                                 </div>
+                                <p className={styles.fieldHint}>Used to calculate savings percentage unlocked for pool members.</p>
                             </section>
 
-                            {/* Seller & Verification Details */}
+                            {/* Seller & Sourcing Details */}
                             <div className={styles.sectionCard}>
                                 <div className={styles.sectionCardTitle}>
                                     <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>store</span>
@@ -468,41 +515,16 @@ function CreatePitchForm() {
                                     <input
                                         className={styles.input}
                                         type="text"
-                                        placeholder="Seller / Sourcing Entity Name (e.g. Ratnagiri Orchards Direct Co.)"
+                                        placeholder="Seller / Sourcing Entity Name (e.g. Daikin Authorised Regional Distributor)"
                                         value={sellerName}
                                         onChange={e => setSellerName(e.target.value)}
                                     />
                                     <input
                                         className={styles.input}
                                         type="text"
-                                        placeholder="Business Registration No. (GSTIN / FSSAI / Trade License)"
+                                        placeholder="Business Registration No. (GSTIN / Trade License)"
                                         value={sellerId}
                                         onChange={e => setSellerId(e.target.value)}
-                                    />
-                                </div>
-
-                                <div
-                                    className={styles.verifiedVendorToggle}
-                                    onClick={() => setIsVerifiedVendor(prev => !prev)}
-                                >
-                                    <div className={styles.verifiedVendorMeta}>
-                                        <span className="material-symbols-outlined" style={{ color: isVerifiedVendor ? '#2563eb' : 'var(--on-surface-variant)', fontSize: '22px' }}>
-                                            {isVerifiedVendor ? 'verified' : 'verified_user'}
-                                        </span>
-                                        <div>
-                                            <div style={{ fontSize: '0.875rem', fontWeight: '700', color: 'var(--on-surface)' }}>
-                                                Verified Brand / Distributor Pool
-                                            </div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)' }}>
-                                                Enables Verified Partner blue badge on pool card & detail view.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input
-                                        type="checkbox"
-                                        checked={isVerifiedVendor}
-                                        onChange={e => setIsVerifiedVendor(e.target.checked)}
-                                        style={{ width: '18px', height: '18px', accentColor: '#2563eb' }}
                                     />
                                 </div>
                             </div>
@@ -822,14 +844,45 @@ function CreatePitchForm() {
                                         <div className={styles.doorstepZoneBox}>
                                             <div className={styles.sectionCardTitle} style={{ fontSize: '0.875rem' }}>
                                                 <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '18px' }}>map</span>
-                                                <span>Serviced Doorstep Localities & Zones</span>
+                                                <span>Serviced Doorstep Localities & Delivery Zones</span>
                                             </div>
                                             <p className={styles.fieldHint} style={{ margin: 0 }}>
-                                                Select all neighborhood zones where you/your vendor provide doorstep drop or on-site installation:
+                                                Select all city regions and neighborhood zones where you or your vendor provide doorstep delivery or on-site service:
                                             </p>
 
+                                            {/* 1. City Tabs */}
+                                            <label className={styles.limitLabel} style={{ marginTop: '0.35rem' }}>1. SELECT CITY / METRO REGION</label>
+                                            <div className={styles.cityPillsRow}>
+                                                {POPULAR_CITIES.map(c => (
+                                                    <button
+                                                        key={c.name}
+                                                        type="button"
+                                                        className={`${styles.cityPillBtn} ${activeDoorstepCity === c.name ? styles.cityPillBtnActive : ''}`}
+                                                        onClick={() => setActiveDoorstepCity(c.name)}
+                                                    >
+                                                        <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>{c.icon}</span>
+                                                        {c.name}
+                                                    </button>
+                                                ))}
+                                            </div>
+
+                                            {/* 2. Popular Localities in Selected City */}
+                                            <div className={styles.zoneActionRow}>
+                                                <label className={styles.limitLabel} style={{ margin: 0 }}>
+                                                    2. POPULAR LOCALITIES IN {activeDoorstepCity.toUpperCase()}
+                                                </label>
+                                                <div className={styles.zoneActionLinks}>
+                                                    <button type="button" className={styles.zoneActionBtn} onClick={selectAllCityLocalities}>
+                                                        Select All in {activeDoorstepCity}
+                                                    </button>
+                                                    <button type="button" className={styles.zoneActionBtn} onClick={clearDoorstepLocations}>
+                                                        Clear All
+                                                    </button>
+                                                </div>
+                                            </div>
+
                                             <div className={styles.geoLocalityChips}>
-                                                {activeCityLocalities.map(loc => {
+                                                {(CITY_LOCALITY_MAP[activeDoorstepCity] || []).map(loc => {
                                                     const isChecked = doorstepLocations.includes(loc);
                                                     return (
                                                         <button
@@ -844,28 +897,33 @@ function CreatePitchForm() {
                                                 })}
                                             </div>
 
-                                            <div className={styles.doorstepAddRow}>
+                                            {/* 3. Mini Search & Add Bar */}
+                                            <div className={styles.doorstepAddRow} style={{ marginTop: '0.5rem' }}>
                                                 <input
                                                     className={styles.input}
                                                     type="text"
-                                                    placeholder="Add custom locality (e.g. Financial District, Whitefield Sector 2)"
+                                                    placeholder={`Search or add custom locality in ${activeDoorstepCity} (e.g. Kokapet, Bellandur)...`}
                                                     value={customLocalityInput}
                                                     onChange={e => setCustomLocalityInput(e.target.value)}
                                                     onKeyDown={e => { if (e.key === 'Enter') addCustomDoorstepLocation(e); }}
                                                 />
                                                 <button type="button" className={styles.doorstepAddBtn} onClick={addCustomDoorstepLocation}>
+                                                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>add</span>
                                                     Add Zone
                                                 </button>
                                             </div>
 
+                                            {/* 4. Active Selected Zones Tray */}
                                             {doorstepLocations.length > 0 && (
-                                                <div>
-                                                    <label className={styles.limitLabel} style={{ fontSize: '0.6875rem' }}>ACTIVE DOORSTEP ZONES ({doorstepLocations.length})</label>
+                                                <div style={{ marginTop: '0.5rem' }}>
+                                                    <label className={styles.limitLabel} style={{ fontSize: '0.6875rem' }}>
+                                                        SELECTED SERVICED LOCALITIES ({doorstepLocations.length})
+                                                    </label>
                                                     <div className={styles.selectedZonesArea}>
                                                         {doorstepLocations.map(loc => (
                                                             <span key={loc} className={styles.selectedZoneChip}>
                                                                 📍 {loc}
-                                                                <button type="button" className={styles.removeZoneBtn} onClick={() => removeDoorstepLocation(loc)}>
+                                                                <button type="button" className={styles.removeZoneBtn} onClick={() => toggleDoorstepLocation(loc)}>
                                                                     <span className="material-symbols-outlined" style={{ fontSize: '13px' }}>close</span>
                                                                 </button>
                                                             </span>
@@ -876,14 +934,16 @@ function CreatePitchForm() {
                                         </div>
                                     )}
 
-                                    {/* Physical Hub & Coordinates (Required for Pickup & Doorstep) */}
+                                    {/* Physical Hub & Pickup Information */}
                                     {(deliveryType === 'pickup' || deliveryType === 'doorstep') && (
                                         <div className={styles.geoPickerBox}>
                                             <div className={styles.geoDetectRow}>
                                                 <div>
-                                                    <label className={styles.limitLabel} style={{ marginBottom: '0.15rem' }}>PHYSICAL HUB & GEOLOCATION ANCHOR</label>
+                                                    <label className={styles.limitLabel} style={{ marginBottom: '0.15rem' }}>
+                                                        {deliveryType === 'doorstep' ? 'SERVICE BASE HUB / DISPATCH POINT' : 'PICKUP HUB & HANDOVER LOCATION'}
+                                                    </label>
                                                     <p className={styles.fieldHint} style={{ margin: 0 }}>
-                                                        Used by the Geolocation Proximity Engine to compute distance from participants.
+                                                        Used to compute proximity and distances for nearby participants.
                                                     </p>
                                                 </div>
                                                 <button 
@@ -906,18 +966,20 @@ function CreatePitchForm() {
                                             )}
 
                                             <div className={styles.field}>
-                                                <label className={styles.limitLabel}>PICKUP HUB LANDMARK / ADDRESS *</label>
+                                                <label className={styles.limitLabel}>
+                                                    {deliveryType === 'doorstep' ? 'DISPATCH / STORE LANDMARK ADDRESS *' : 'PICKUP HUB LANDMARK / ADDRESS *'}
+                                                </label>
                                                 <input 
                                                     className={styles.input} 
                                                     type="text" 
-                                                    placeholder="e.g. Main Clubhouse Lobby / Gate 2, DLF CyberCity" 
+                                                    placeholder="e.g. Main Clubhouse Lobby / Gate 2, DLF CyberCity, Madhapur" 
                                                     value={pickupAddress} 
                                                     onChange={e => setPickupAddress(e.target.value)} 
                                                 />
                                             </div>
 
                                             <div className={styles.field}>
-                                                <label className={styles.limitLabel}>PICKUP / DELIVERY TIMING WINDOW</label>
+                                                <label className={styles.limitLabel}>PICKUP / SERVICE TIMING WINDOW</label>
                                                 <input 
                                                     className={styles.input} 
                                                     type="text" 
@@ -925,68 +987,6 @@ function CreatePitchForm() {
                                                     value={pickupTiming} 
                                                     onChange={e => setPickupTiming(e.target.value)} 
                                                 />
-                                            </div>
-
-                                            <div className={styles.field}>
-                                                <label className={styles.limitLabel}>NEIGHBORHOOD HUB PRESET</label>
-                                                <select
-                                                    className={styles.select}
-                                                    value={pickupLocality}
-                                                    onChange={(e) => {
-                                                        const targetVal = e.target.value;
-                                                        const found = LOCALITY_PRESETS.find(p => p.name === targetVal);
-                                                        if (found) {
-                                                            setPickupLocality(found.name);
-                                                            setPickupCity(found.city);
-                                                            setGeoLat(found.lat);
-                                                            setGeoLng(found.lng);
-                                                            setGeoStatusMsg(`Locality set to ${found.name}, ${found.city}`);
-                                                        }
-                                                    }}
-                                                >
-                                                    <optgroup label="Hyderabad">
-                                                        <option value="Hitec City">Hitec City (Madhapur / Cyberabad)</option>
-                                                        <option value="Gachibowli">Gachibowli (Financial District)</option>
-                                                        <option value="Madhapur">Madhapur (Metro / Inorbit Hub)</option>
-                                                        <option value="Jubilee Hills">Jubilee Hills / Road 36</option>
-                                                        <option value="Banjara Hills">Banjara Hills (Road 12 Hub)</option>
-                                                        <option value="Tellapur">Tellapur (MyHome Tridasa Hub)</option>
-                                                        <option value="Kondapur">Kondapur (Botanical Garden Hub)</option>
-                                                    </optgroup>
-                                                    <optgroup label="Bengaluru">
-                                                        <option value="Whitefield">Whitefield (Prestige Lakeside / Forum)</option>
-                                                        <option value="HSR Layout">HSR Layout (Sectors 1-7 Hub)</option>
-                                                        <option value="Indiranagar">Indiranagar (100ft Road Hub)</option>
-                                                        <option value="Koramangala">Koramangala (Sony World Hub)</option>
-                                                    </optgroup>
-                                                    <optgroup label="Mumbai">
-                                                        <option value="Bandra Kurla Complex (BKC)">Bandra Kurla Complex (BKC)</option>
-                                                        <option value="Powai (Hiranandani)">Powai (Hiranandani Hub)</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-
-                                            <div className={styles.coordInputsRow}>
-                                                <div className={styles.field}>
-                                                    <label className={styles.limitLabel}>LATITUDE</label>
-                                                    <input
-                                                        className={styles.input}
-                                                        type="number"
-                                                        step="0.0001"
-                                                        value={geoLat}
-                                                        onChange={e => setGeoLat(parseFloat(e.target.value) || 0)}
-                                                    />
-                                                </div>
-                                                <div className={styles.field}>
-                                                    <label className={styles.limitLabel}>LONGITUDE</label>
-                                                    <input
-                                                        className={styles.input}
-                                                        type="number"
-                                                        step="0.0001"
-                                                        value={geoLng}
-                                                        onChange={e => setGeoLng(parseFloat(e.target.value) || 0)}
-                                                    />
-                                                </div>
                                             </div>
                                         </div>
                                     )}
