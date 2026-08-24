@@ -1697,7 +1697,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'Doorstep technician measurement and installation across gated societies', time: 'Scheduled over upcoming Saturday & Sunday' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'Doorstep technician measurement and installation across MyHome Tridasa, Ravi Dham Complex & gated societies', locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, time: 'Scheduled over upcoming Saturday & Sunday', isDoorstep: true },
         fundingProgress: 58,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1779,7 +1780,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Central distribution point or direct courier delivery for orders of 4+ boxes', time: 'Next Tuesday after bulk mandi lot packaging' },
+        pickupInfo: { address: 'Society Clubhouse / Central distribution point. Direct doorstep courier delivery for orders of 4+ boxes', time: 'Next Tuesday after bulk mandi lot packaging' },
         fundingProgress: 56,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -1820,7 +1821,8 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'private',
-        pickupInfo: { address: 'On-site rooftop survey, mounting structure fabrication & installation at your villa', time: 'Site surveys this weekend; complete installation & net-metering within 21 days' },
+        deliveryType: 'doorstep',
+        pickupInfo: { address: 'On-site rooftop survey, mounting structure fabrication & installation at your villa', locality: 'Whitefield', city: 'Bengaluru', lat: 12.9698, lng: 77.7499, time: 'Site surveys this weekend; complete installation & net-metering within 21 days', isDoorstep: true },
         fundingProgress: 62,
         pitchPolicies: {
             returnPolicy: 'custom',
