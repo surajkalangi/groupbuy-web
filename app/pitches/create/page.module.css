@@ -1388,4 +1388,229 @@
     gap: 0.25rem;
 }
 
+/* ── Delivery Mode Grid ── */
+.deliveryModeGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+    .deliveryModeGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.deliveryModeCard {
+    background: var(--surface-container-lowest, #ffffff);
+    border: 1.5px solid var(--outline-variant);
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
+}
+
+.deliveryModeCard:hover {
+    border-color: var(--primary);
+    background: var(--surface-container-low);
+}
+
+.deliveryModeCardActive {
+    border-color: var(--primary);
+    background: rgba(0, 135, 90, 0.05);
+    box-shadow: 0 0 0 1px var(--primary);
+}
+
+.deliveryModeCardTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.deliveryModeIcon {
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.deliveryModeTitle {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.deliveryModeDesc {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    line-height: 1.35;
+    margin: 0;
+}
+
+/* ── Doorstep Zone Section ── */
+.doorstepZoneBox {
+    background: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.doorstepAddRow {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.doorstepAddBtn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: background 0.2s;
+}
+
+.doorstepAddBtn:hover {
+    background: var(--primary-container, #00704a);
+}
+
+.selectedZonesArea {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+}
+
+.selectedZoneChip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(0, 135, 90, 0.12);
+    color: #00704a;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 135, 90, 0.25);
+}
+
+.removeZoneBtn {
+    border: none;
+    background: none;
+    color: #00704a;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+/* ── Policy Selector ── */
+.policyGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    .policyGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.policyCard {
+    background: var(--surface-container-lowest, #ffffff);
+    border: 1.5px solid var(--outline-variant);
+    border-radius: 12px;
+    padding: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.policyCard:hover {
+    border-color: var(--primary);
+}
+
+.policyCardActive {
+    border-color: var(--primary);
+    background: rgba(0, 135, 90, 0.05);
+    box-shadow: 0 0 0 1px var(--primary);
+}
+
+.policyCardTitle {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.policyCardDesc {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    line-height: 1.35;
+    margin: 0;
+}
+
+/* ── Coordinates Row ── */
+.coordInputsRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+/* ── Savings Badge ── */
+.savingsPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #047857;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* ── Verified Partner Toggle ── */
+.verifiedVendorToggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    background: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.verifiedVendorMeta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+
 

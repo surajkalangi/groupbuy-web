@@ -87,21 +87,14 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                             </span>
                             {associatedClans.length > 1 && (
                                 <div className={styles.clanTooltipPopup}>
-                                    <div className={styles.clanTooltipHeader}>Shared across {associatedClans.length} Clans:</div>
-                                    <ul className={styles.clanTooltipList}>
-                                        {associatedClans.map(c => {
-                                            const isUserInClan = isClanMember(c.id);
-                                            const privacyLabel = c.privacy === 'private' ? 'Private' : (c.privacy === 'approval_required' || c.badge?.toUpperCase().includes('SOCIETY')) ? 'Restricted' : 'Public';
-                                            return (
-                                                <li key={c.id} className={`${styles.clanTooltipItem} ${isUserInClan ? styles.clanTooltipItemMember : ''}`}>
-                                                    <span className={styles.clanTooltipDot}></span>
-                                                    <span className={styles.clanTooltipName}>{c.name}</span>
-                                                    <span className={styles.clanTooltipTag}>{privacyLabel}</span>
-                                                    {isUserInClan && <span className={styles.clanTooltipJoined}>✓ Joined</span>}
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
+                                    <div className={styles.clanTooltipHeader}>Shared with:</div>
+                                    <div className={styles.clanTooltipList}>
+                                        {associatedClans.map(c => (
+                                            <div key={c.id} className={styles.clanTooltipItem}>
+                                                • {c.name}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>

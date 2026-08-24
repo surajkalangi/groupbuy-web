@@ -69,22 +69,13 @@ export const CITY_HUBS = [
     { id: 'chd-panchkula', name: 'Panchkula Sector 5', city: 'Chandigarh', state: 'Haryana', lat: 30.6942, lng: 76.8606 },
 ];
 
+// Only physical society/office clans with fixed premises have default coordinates.
+// Hobby, interest, and affinity pools define their own definitive pickup point/hub coordinates.
 export const CLAN_COORDINATES = {
     'clan-1': { locality: 'Whitefield', city: 'Bengaluru', lat: 12.9698, lng: 77.7499, hubName: 'Ravi Dham Complex' },
     'clan-2': { locality: 'Madhapur', city: 'Hyderabad', lat: 17.4390, lng: 78.3780, hubName: 'Sathva Knowledge City' },
-    'clan-3': { locality: 'Jubilee Hills', city: 'Hyderabad', lat: 17.4319, lng: 78.4073, hubName: 'West Hyderabad Collective' },
     'clan-4': { locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, hubName: 'MyHome Tridasa' },
-    'clan-5': { locality: 'HSR Layout', city: 'Bengaluru', lat: 12.9121, lng: 77.6446, hubName: 'HSR Startup Founders' },
-    'clan-6': { locality: 'Gachibowli', city: 'Hyderabad', lat: 17.4190, lng: 78.3490, hubName: 'Prestige High Fields' },
-    'clan-7': { locality: 'Hyderabad', city: 'Hyderabad', lat: 17.4435, lng: 78.3772, hubName: 'Garlapati Family' },
-    'clan-8': { locality: 'Madhapur', city: 'Hyderabad', lat: 17.4483, lng: 78.3915, hubName: 'Board Games Guild' },
-    'clan-9': { locality: 'Jubilee Hills', city: 'Hyderabad', lat: 17.4319, lng: 78.4073, hubName: 'Festive Collective' },
-    'clan-parents': { locality: 'Hitec City', city: 'Hyderabad', lat: 17.4435, lng: 78.3772, hubName: 'Hitec City Parenting Hub' },
-    'clan-dogs': { locality: 'Gachibowli', city: 'Hyderabad', lat: 17.4401, lng: 78.3489, hubName: 'Gachibowli Pet Hub' },
-    'clan-newtocity': { locality: 'Madhapur', city: 'Hyderabad', lat: 17.4483, lng: 78.3915, hubName: 'Madhapur Relocation Hub' },
-    'clan-fitness': { locality: 'Jubilee Hills', city: 'Hyderabad', lat: 17.4319, lng: 78.4073, hubName: 'Jubilee Hills Iron Hub' },
-    'clan-wedding': { locality: 'Banjara Hills', city: 'Hyderabad', lat: 17.4156, lng: 78.4354, hubName: 'Banjara Hills Wedding Hub' },
-    'clan-bakers': { locality: 'Whitefield', city: 'Bengaluru', lat: 12.9698, lng: 77.7499, hubName: 'Whitefield Gourmet Hub' },
+    'clan-5': { locality: 'HSR Layout', city: 'Bengaluru', lat: 12.9121, lng: 77.6446, hubName: 'HSR Startup Hub' },
 };
 
 export const DEFAULT_USER_LOCATION = CITY_HUBS[0]; // Hitec City, Hyderabad
@@ -221,8 +212,8 @@ export function LocationProvider({ children }) {
         if (isPanIndia) {
             return { isPanIndia: true, isDigital: false, isRemote: true };
         }
-
-        const isDoorstep = pool.deliveryType === 'doorstep' || pool.deliveryScope === 'city' || pool.pickupInfo?.isDoorstep === true;
+        const isDoorstep = pool.deliveryType === 'doorstep' || pool.deliveryScope === 'city' || pool.pickupInfo?.isDoorstep === true || Boolean(pool.pickupInfo?.doorstepLocations?.length);
+        const doorstepLocations = pool.pickupInfo?.doorstepLocations || pool.doorstepLocations || [];
         let lat = pool.pickupInfo?.lat || pool.geoCoordinates?.lat;
         let lng = pool.pickupInfo?.lng || pool.geoCoordinates?.lng;
         let hubName = pool.pickupInfo?.locality || pool.geoCoordinates?.locality;
@@ -240,10 +231,10 @@ export function LocationProvider({ children }) {
         }
 
         if (lat && lng) {
-            return { lat, lng, hubName, city, isDoorstep, isDigital, isPanIndia: false, isRemote: false };
+            return { lat, lng, hubName, city, isDoorstep, doorstepLocations, isDigital, isPanIndia: false, isRemote: false };
         }
 
-        return { hubName, city, isDoorstep, isDigital, isPanIndia: false, isRemote: false };
+        return { hubName, city, isDoorstep, doorstepLocations, isDigital, isPanIndia: false, isRemote: false };
     }, []);
 
     /**
@@ -296,7 +287,12 @@ export function LocationProvider({ children }) {
         const distance = getPoolDistance(pool);
         const poolCity = resolved.city || pool.pickupInfo?.city;
         const userCity = userLocation?.city;
+        const userLocality = userLocation?.name;
         const cityMatches = !poolCity || !userCity || poolCity.toLowerCase() === userCity.toLowerCase();
+        const doorstepLocs = resolved.doorstepLocations || [];
+        const matchesDoorstepLocality = doorstepLocs.length > 0
+            ? doorstepLocs.some(loc => userLocality && (loc.toLowerCase().includes(userLocality.toLowerCase()) || userLocality.toLowerCase().includes(loc.toLowerCase())))
+            : true;
 
         const poolClanIds = pool.clanIds || (pool.clanId ? [pool.clanId] : []);
         const societyClan = poolClanIds
@@ -313,7 +309,7 @@ export function LocationProvider({ children }) {
                 return {
                     type: 'doorstep',
                     badgeText: '🚚 Doorstep',
-                    tooltip: `Doorstep service at your flat in ${societyName} (You are a clan member)`,
+                    tooltip: `Doorstep service at your flat in ${societyName}`,
                     distanceKm: distance,
                     hubName: societyName,
                 };
@@ -324,18 +320,21 @@ export function LocationProvider({ children }) {
             return {
                 type: 'society',
                 badgeText: '🏠 Your Society',
-                tooltip: `Hosted in your joined society clan (${societyName})${awaySuffix}`,
+                tooltip: `Hosted in your society clan (${societyName})${awaySuffix}`,
                 distanceKm: distance,
                 hubName: societyName,
             };
         }
 
-        // 4. City-wide Doorstep Delivery (service / vendor pools in user's city)
-        if (resolved.isDoorstep && cityMatches) {
+        // 4. City/Locality-wide Doorstep Delivery (service / vendor pools in user's city)
+        if (resolved.isDoorstep && cityMatches && matchesDoorstepLocality) {
+            const tooltipText = doorstepLocs.length > 0
+                ? `Doorstep delivery available in ${userLocality || poolCity} (Zones: ${doorstepLocs.slice(0, 3).join(', ')}${doorstepLocs.length > 3 ? ` +${doorstepLocs.length - 3} more` : ''})`
+                : `Doorstep delivery available across ${poolCity || userCity || 'your city'}`;
             return {
                 type: 'doorstep',
                 badgeText: '🚚 Doorstep',
-                tooltip: `Doorstep delivery available across ${poolCity || userCity || 'your city'}`,
+                tooltip: tooltipText,
                 distanceKm: distance,
                 hubName: resolved.hubName,
             };
@@ -379,6 +378,27 @@ export function LocationProvider({ children }) {
         }
 
         const resolved = resolvePoolCoordinates(pool);
+        if (!resolved) return true;
+
+        // Digital or Pan-India pools are available globally
+        if (resolved.isDigital || resolved.isPanIndia) {
+            return true;
+        }
+
+        const poolCity = resolved.city || pool.pickupInfo?.city;
+        const userCity = userLocation?.city;
+        const userLocality = userLocation?.name;
+        const cityMatches = !poolCity || !userCity || poolCity.toLowerCase() === userCity.toLowerCase();
+        const doorstepLocs = resolved.doorstepLocations || [];
+        const matchesDoorstepLocality = doorstepLocs.length > 0
+            ? doorstepLocs.some(loc => userLocality && (loc.toLowerCase().includes(userLocality.toLowerCase()) || userLocality.toLowerCase().includes(loc.toLowerCase())))
+            : true;
+
+        // If it's doorstep delivery in user's matching city/locality, show it
+        if (resolved.isDoorstep && cityMatches && matchesDoorstepLocality) {
+            return true;
+        }
+
         const isPanIndia = resolved?.isPanIndia === true;
         const isDigital = resolved?.isDigital === true;
         
@@ -396,13 +416,6 @@ export function LocationProvider({ children }) {
             const dist = getPoolDistance(pool);
             if (dist === null) return true;
             return dist <= Number(targetRadius);
-        }
-
-        // If pool is Doorstep delivery in the same city, include it
-        const poolCity = resolved?.city || pool.pickupInfo?.city;
-        const userCity = userLocation?.city;
-        if (resolved?.isDoorstep && poolCity && userCity && poolCity.toLowerCase() === userCity.toLowerCase()) {
-            return true;
         }
 
         const dist = getPoolDistance(pool);

@@ -1,192 +1,334 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import AuthGuard from '@/components/auth/AuthGuard';
+import { useAuth } from '@/context/AuthContext';
+import { pluralizeUnit } from '@/utils/pluralize';
 
 export default function PitchPreviewPage() {
     const router = useRouter();
+    const { currentUser } = useAuth();
+    const [previewData, setPreviewData] = useState(null);
 
-    // In a real app, this data would come from a store/context populated by the create flow
-    const previewData = {
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const rawDraft = sessionStorage.getItem('letsstack_draft_pitch');
+            if (rawDraft) {
+                try {
+                    const parsed = JSON.parse(rawDraft);
+                    setPreviewData(parsed);
+                } catch (e) {
+                    console.error('Error parsing draft preview:', e);
+                }
+            }
+        }
+    }, []);
+
+    // Fallback if accessed without prior create step
+    const data = previewData || {
         title: 'Heritage Monsoon Mangoes (5kg Box)',
+        category: 'groceries',
         description: 'Premium Alphonso mangoes sourced directly from Ratnagiri farms. Each box contains hand-picked, naturally ripened mangoes with no chemical treatment. Perfect for the community to enjoy the best of the season at wholesale prices.',
-        image: '/images/mango-hero.png',
+        image: '/images/farm-mango-crates.jpg',
         price: 600,
+        costPerUnit: 600,
+        retailPrice: 950,
         unitType: 'box',
         maxCapacity: 20,
         minOrder: 5,
         committedUnits: 0,
         deadline: '2026-10-24T18:00',
-        payment: 'UPI Escrow',
-        visibility: 'Public',
-        host: { name: 'Aditya Sharma', reputation: 4.9 },
-        categories: ['HERITAGE COLLECTION', 'LIMITED BATCH'],
+        paymentMode: 'upi',
+        deliveryType: 'pickup',
+        doorstepLocations: ['Hitec City', 'Gachibowli', 'Madhapur', 'Tellapur'],
+        pickupInfo: {
+            address: 'Society Clubhouse Main Gate / Tower B Lobby',
+            locality: 'Hitec City',
+            city: 'Hyderabad',
+            lat: 17.4435,
+            lng: 78.3772,
+            time: 'Saturday 10:00 AM – 1:00 PM',
+        },
+        pitchPolicies: {
+            returnPolicy: 'instant_rejection_at_delivery',
+            returnPolicyCustom: 'Instant inspection at pickup handover. Zero fee if canceled before threshold is locked.',
+            cancellationFeePercent: 0,
+            sellerName: 'Ratnagiri Orchards Direct Co.',
+            isVerifiedVendor: true,
+        },
+        host: { name: currentUser?.name || 'Suraj Kalangi', rating: 4.8, isVerifiedVendor: true },
     };
 
     const handlePublish = () => {
+        if (typeof window !== 'undefined') {
+            sessionStorage.setItem('letsstack_published_pitch', JSON.stringify(data));
+        }
         router.push('/pitches/pitch-1/published');
     };
 
     const handleSaveDraft = () => {
+        if (typeof window !== 'undefined') {
+            sessionStorage.setItem('letsstack_draft_pitch', JSON.stringify(data));
+        }
         router.push('/pitches/create/draft-saved');
+    };
+
+    const unitPrice = data.costPerUnit || data.price || 0;
+    const retailPrice = data.retailPrice || 0;
+    const savingsPercent = retailPrice > unitPrice && unitPrice > 0
+        ? Math.round(((retailPrice - unitPrice) / retailPrice) * 100)
+        : null;
+
+    const returnPolicyLabels = {
+        instant_rejection_at_delivery: 'Instant Inspection & Handover Rejection',
+        '7_days_replacement': '7-Day Replacement Guarantee',
+        no_returns: 'No Returns / Final Sale (Perishables)',
+        custom: 'Custom Host / Vendor Terms',
     };
 
     return (
         <AuthGuard>
-        <main className={styles.page}>
-            {/* ── Header ── */}
-            <header className={styles.header}>
-                <button onClick={() => router.back()} className={styles.closeBtn} aria-label="Close preview">
-                    <span className="material-symbols-outlined">close</span>
-                </button>
-                <span className={styles.headerTitle}>Pool Preview</span>
-                <button onClick={() => router.back()} className={styles.closeLink}>Close Preview</button>
-            </header>
-
-            <div className={styles.container}>
-                {/* ── Product Image ── */}
-                <div className={styles.imageSection}>
-                    <img src={previewData.image} alt={previewData.title} className={styles.productImage} />
-                    {/* Countdown Badge */}
-                    <div className={styles.countdownBadge}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '16px', fontVariationSettings: "'FILL' 1" }}>timer</span>
-                        Ends in 3d
-                    </div>
-                    {/* Top-Right Action Buttons */}
-                    <div className={styles.heroActionRight}>
-                        <button className={styles.heroIconBtn} title="Share this pool">
-                            <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>share</span>
-                        </button>
-                        <button className={styles.heroIconBtn} title="Save this pool">
-                            <span className="material-symbols-outlined" style={{ fontSize: '24px', fontVariationSettings: "'FILL' 0", color: 'inherit' }}>bookmark</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div className={styles.detailCard}>
-                    {/* ── Header & Description ── */}
-                    <div className={styles.cardHeader}>
-                        <div>
-                            <h1 className={styles.pitchTitle}>{previewData.title}</h1>
-                        </div>
-                        <div className={styles.priceBox}>
-                            <div className={styles.price}>₹{previewData.price}</div>
-                            <div className={styles.priceUnit}>per {previewData.unitType}</div>
-                        </div>
-                    </div>
-                    <p className={styles.pitchDescTop}>{previewData.description}</p>
-
-                {/* ── Host Info ── */}
-                <div className={styles.hostCard}>
-                    <div className={styles.hostLeft}>
-                        <div className={styles.hostAvatarWrap}>
-                            <div className={styles.hostAvatar}>{previewData.host.name.charAt(0)}</div>
-                            <div className={styles.verifiedDot}>
-                                <span className="material-symbols-outlined" style={{ fontSize: '12px', color: 'white', fontVariationSettings: "'FILL' 1" }}>verified</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div className={styles.hostNameRow}>
-                                <span className={styles.hostName}>{previewData.host.name}</span>
-                                <span className={styles.verifiedBadge}>VERIFIED HOST</span>
-                            </div>
-                            <div className={styles.hostRating}>
-                                <span className={styles.ratingVal}>New Host</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button className={styles.viewClanBtn} aria-label="View Host Profile">
-                        <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>chevron_right</span>
+            <main className={styles.page}>
+                {/* ── Header ── */}
+                <header className={styles.header}>
+                    <button onClick={() => router.back()} className={styles.closeBtn} aria-label="Close preview" type="button">
+                        <span className="material-symbols-outlined">close</span>
                     </button>
-                </div>
+                    <span className={styles.headerTitle}>Pool Live Preview</span>
+                    <button onClick={() => router.back()} className={styles.closeLink} type="button">Back to Edit</button>
+                </header>
 
-                {/* ── Progress ── */}
-                <div className={styles.progressSection}>
-                    <div className={styles.progressTop}>
-                        <div>
-                            <span className={styles.progressSubLabel}>Pitch Progress</span>
-                            <span className={styles.progressMain}>
-                                0 of {previewData.minOrder || 5} to reach goal
-                            </span>
+                <div className={styles.container}>
+                    {/* ── Product Image ── */}
+                    <div className={styles.imageSection}>
+                        <img
+                            src={data.image || data.photos?.[0] || '/images/farm-mango-crates.jpg'}
+                            alt={data.title}
+                            className={styles.productImage}
+                        />
+                        {/* Countdown Badge */}
+                        <div className={styles.countdownBadge}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '16px', fontVariationSettings: "'FILL' 1" }}>timer</span>
+                            Active Deal • Open for commitments
+                        </div>
+                        {/* Top-Right Action Buttons */}
+                        <div className={styles.heroActionRight}>
+                            <button className={styles.heroIconBtn} title="Share this pool" type="button">
+                                <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>share</span>
+                            </button>
+                            <button className={styles.heroIconBtn} title="Save this pool" type="button">
+                                <span className="material-symbols-outlined" style={{ fontSize: '24px', fontVariationSettings: "'FILL' 0", color: 'inherit' }}>bookmark</span>
+                            </button>
                         </div>
                     </div>
-                    <div className={styles.progressTrack}>
-                        <div className={styles.progressFill} style={{ width: `0%` }} />
-                    </div>
-                    <p className={styles.urgencyNote}>
-                        Waiting for first participant to join!
-                    </p>
-                </div>
 
-                {/* ── Pickup Info ── */}
-                <div className={styles.pickupCard}>
-                    <div className={styles.pickupIcon}>
-                        <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>location_on</span>
-                    </div>
-                    <div>
-                        <h4 className={styles.pickupTitle}>Pickup Info</h4>
-                        <p className={styles.pickupAddr}>
-                            Sector 1, HSR Layout, Bengaluru<br />
-                            <strong>Friday, 4:00 PM - 7:00 PM</strong>
-                        </p>
-                    </div>
-                </div>
+                    <div className={styles.detailCard}>
+                        {/* ── Header & Description ── */}
+                        <div className={styles.cardHeader}>
+                            <div>
+                                <h1 className={styles.pitchTitle}>{data.title}</h1>
+                                {savingsPercent !== null && (
+                                    <div style={{ marginTop: '0.35rem' }}>
+                                        <span style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '0.25rem',
+                                            padding: '0.2rem 0.55rem',
+                                            borderRadius: '999px',
+                                            background: 'rgba(16, 185, 129, 0.15)',
+                                            color: '#047857',
+                                            fontSize: '0.75rem',
+                                            fontWeight: '700'
+                                        }}>
+                                            🏷️ Save {savingsPercent}% vs Retail MRP (₹{retailPrice})
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+                            <div className={styles.priceBox}>
+                                <div className={styles.price}>₹{unitPrice.toLocaleString('en-IN')}</div>
+                                <div className={styles.priceUnit}>per {data.unitType}</div>
+                            </div>
+                        </div>
+                        <p className={styles.pitchDescTop}>{data.description}</p>
 
-                {/* ── Pitch Policies ── */}
-                <div className={styles.policiesCard}>
-                    <div className={styles.policiesHeader}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '1.25rem', color: 'var(--primary)' }}>policy</span>
-                        <h3 className={styles.policiesTitle}>Pitch Policies</h3>
-                    </div>
-                    <div className={styles.policiesGrid}>
-                        <div className={styles.policyItem}>
-                            <div className={styles.policyIconWrap}>
-                                <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>assignment_return</span>
+                        {/* ── Host Info ── */}
+                        <div className={styles.hostCard}>
+                            <div className={styles.hostLeft}>
+                                <div className={styles.hostAvatarWrap}>
+                                    <div className={styles.hostAvatar}>
+                                        {data.host?.name?.charAt(0) || 'H'}
+                                    </div>
+                                    <div className={styles.verifiedDot}>
+                                        <span className="material-symbols-outlined" style={{ fontSize: '12px', color: 'white', fontVariationSettings: "'FILL' 1" }}>
+                                            {data.pitchPolicies?.isVerifiedVendor ? 'verified' : 'check'}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className={styles.hostNameRow}>
+                                        <span className={styles.hostName}>{data.host?.name || 'You (Host)'}</span>
+                                        {data.pitchPolicies?.isVerifiedVendor ? (
+                                            <span className={styles.verifiedBadge} style={{ background: '#2563eb', color: 'white' }}>
+                                                ✓ VERIFIED PARTNER
+                                            </span>
+                                        ) : (
+                                            <span className={styles.verifiedBadge}>COMMUNITY HOST</span>
+                                        )}
+                                    </div>
+                                    <div className={styles.hostRating}>
+                                        <span className={styles.ratingVal}>⭐ {data.host?.rating || '5.0'} Rating</span>
+                                        {data.pitchPolicies?.sellerName && (
+                                            <span style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', marginLeft: '0.5rem' }}>
+                                                • Sourced via {data.pitchPolicies.sellerName}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* ── Progress Goal ── */}
+                        <div className={styles.progressSection}>
+                            <div className={styles.progressTop}>
+                                <div>
+                                    <span className={styles.progressSubLabel}>Pool Progress</span>
+                                    <span className={styles.progressMain}>
+                                        0 of {data.minOrder || 5} {pluralizeUnit(Number(data.minOrder) || 2, data.unitType)} to reach goal
+                                    </span>
+                                </div>
+                                <span style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--primary)' }}>
+                                    Cap: {data.maxCapacity} {pluralizeUnit(Number(data.maxCapacity) || 2, data.unitType)}
+                                </span>
+                            </div>
+                            <div className={styles.progressTrack}>
+                                <div className={styles.progressFill} style={{ width: `0%` }} />
+                            </div>
+                            <p className={styles.urgencyNote}>
+                                Target Goal: ₹{((Number(data.minOrder) || 5) * unitPrice).toLocaleString('en-IN')} held in safe escrow.
+                            </p>
+                        </div>
+
+                        {/* ── Fulfillment & Delivery Card ── */}
+                        <div className={styles.pickupCard}>
+                            <div className={styles.pickupIcon}>
+                                <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>
+                                    {data.deliveryType === 'doorstep' ? 'doorbell' : data.deliveryType === 'pan_india' ? 'package_2' : data.deliveryType === 'digital' ? 'devices' : 'location_on'}
+                                </span>
                             </div>
                             <div>
-                                <span className={styles.policyLabel}>Return Policy</span>
-                                <span className={styles.policyValue}>Exchange Only — Within 24h of pickup</span>
+                                <h4 className={styles.pickupTitle}>
+                                    {data.deliveryType === 'doorstep' && '🚚 Doorstep Delivery'}
+                                    {data.deliveryType === 'pickup' && '📍 Community Pickup Point'}
+                                    {data.deliveryType === 'pan_india' && '📦 Pan-India Courier Delivery'}
+                                    {data.deliveryType === 'digital' && '💻 Digital / Cloud Access'}
+                                </h4>
+
+                                {data.deliveryType === 'doorstep' && (
+                                    <div>
+                                        <p className={styles.pickupAddr}>
+                                            Direct delivery to flat / doorstep across designated localities.
+                                        </p>
+                                        {data.doorstepLocations?.length > 0 && (
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginTop: '0.35rem' }}>
+                                                {data.doorstepLocations.map(loc => (
+                                                    <span key={loc} style={{
+                                                        padding: '0.15rem 0.5rem',
+                                                        borderRadius: '999px',
+                                                        background: 'rgba(0, 135, 90, 0.12)',
+                                                        color: '#00704a',
+                                                        fontSize: '0.7rem',
+                                                        fontWeight: '600',
+                                                    }}>
+                                                        📍 {loc}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {data.deliveryType === 'pickup' && (
+                                    <p className={styles.pickupAddr}>
+                                        {data.pickupInfo?.address || 'Community Clubhouse / Gate Drop'}<br />
+                                        <strong>{data.pickupInfo?.time || 'Scheduled pickup slot'}</strong> • {data.pickupInfo?.locality}, {data.pickupInfo?.city}
+                                    </p>
+                                )}
+
+                                {data.deliveryType === 'pan_india' && (
+                                    <p className={styles.pickupAddr}>
+                                        Dispatched via courier across all states in India. Tracking link shared upon dispatch.
+                                    </p>
+                                )}
+
+                                {data.deliveryType === 'digital' && (
+                                    <p className={styles.pickupAddr}>
+                                        Instant activation license or invite delivered via email / secure app notification.
+                                    </p>
+                                )}
                             </div>
                         </div>
-                        <div className={styles.policyItem}>
-                            <div className={styles.policyIconWrap}>
-                                <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>exit_to_app</span>
+
+                        {/* ── Pitch Policies (PRD Section 3.6.2) ── */}
+                        <div className={styles.policiesCard}>
+                            <div className={styles.policiesHeader}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '1.25rem', color: 'var(--primary)' }}>policy</span>
+                                <h3 className={styles.policiesTitle}>Pool Policies & Buyer Protection</h3>
                             </div>
-                            <div>
-                                <span className={styles.policyLabel}>Quit / Drop Rules</span>
-                                <span className={styles.policyValue}>Free exit before threshold • No quit after order placed</span>
+                            <div className={styles.policiesGrid}>
+                                <div className={styles.policyItem}>
+                                    <div className={styles.policyIconWrap}>
+                                        <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>assignment_return</span>
+                                    </div>
+                                    <div>
+                                        <span className={styles.policyLabel}>Return Policy</span>
+                                        <span className={styles.policyValue}>
+                                            {returnPolicyLabels[data.pitchPolicies?.returnPolicy] || 'Inspection & Return Guaranteed'}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className={styles.policyItem}>
+                                    <div className={styles.policyIconWrap}>
+                                        <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>lock</span>
+                                    </div>
+                                    <div>
+                                        <span className={styles.policyLabel}>Payment Escrow</span>
+                                        <span className={styles.policyValue}>
+                                            {data.paymentMode === 'upi' ? 'UPI Escrow Protected' : 'Cash on Delivery'}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {data.pitchPolicies?.returnPolicyCustom && (
+                                    <div className={styles.policyItem} style={{ gridColumn: '1 / -1' }}>
+                                        <div className={styles.policyIconWrap}>
+                                            <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>notes</span>
+                                        </div>
+                                        <div>
+                                            <span className={styles.policyLabel}>Specific Terms</span>
+                                            <span className={styles.policyValue}>{data.pitchPolicies.returnPolicyCustom}</span>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
+                        </div>
+
+                        {/* ── Action Buttons ── */}
+                        <div className={styles.actions}>
+                            <button className={styles.editBtn} onClick={() => router.back()} type="button">
+                                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>edit</span>
+                                Back to Edit
+                            </button>
+                            <button className={styles.publishBtn} onClick={handlePublish} type="button">
+                                Publish Pool Now 🚀
+                            </button>
                         </div>
                     </div>
                 </div>
-
-                </div> {/* End detailCard */}
-
-                {/* ── Legal Note ── */}
-                <p className={styles.legalNote}>
-                    By publishing, you agree to fulfill orders once the minimum target is reached.
-                    Funds are held in escrow for buyer safety.
-                </p>
-
-                {/* ── Action Bar ── */}
-                <div className={styles.actionBar}>
-                    <button onClick={() => router.back()} className={styles.editBtn}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>edit</span>
-                        Back to Edit
-                    </button>
-                    <button onClick={handlePublish} className={styles.publishBtn}>
-                        Publish Now
-                        <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>rocket_launch</span>
-                    </button>
-                </div>
-
-                {/* Save as Draft */}
-                <button onClick={handleSaveDraft} className={styles.draftBtn}>
-                    Save as Draft
-                </button>
-            </div>
-        </main>
+            </main>
         </AuthGuard>
     );
 }
