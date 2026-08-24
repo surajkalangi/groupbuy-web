@@ -76,6 +76,7 @@ export const CLAN_COORDINATES = {
     'clan-2': { locality: 'Madhapur', city: 'Hyderabad', lat: 17.4390, lng: 78.3780, hubName: 'Sathva Knowledge City' },
     'clan-4': { locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, hubName: 'MyHome Tridasa' },
     'clan-5': { locality: 'HSR Layout', city: 'Bengaluru', lat: 12.9121, lng: 77.6446, hubName: 'HSR Startup Hub' },
+    'clan-villas': { locality: 'Shankarpally Road', city: 'Hyderabad', lat: 17.4485, lng: 78.1322, hubName: 'Greenfield Meadows Villa County' },
 };
 
 export const DEFAULT_USER_LOCATION = CITY_HUBS[0]; // Hitec City, Hyderabad
@@ -313,7 +314,7 @@ export function LocationProvider({ children }) {
         const poolClanIds = pool.clanIds || (pool.clanId ? [pool.clanId] : []);
         const societyClan = poolClanIds
             .map(id => mockClans?.find(c => c.id === id))
-            .find(c => c && (c.badge?.toUpperCase().includes('SOCIETY') || c.id === 'clan-1' || c.id === 'clan-4'));
+            .find(c => c && (c.badge?.toUpperCase().includes('SOCIETY') || c.badge?.toUpperCase().includes('VILLA') || c.id === 'clan-1' || c.id === 'clan-4' || c.id === 'clan-villas'));
         const isSocietyClan = Boolean(societyClan);
         const societyName = societyClan?.name || resolved.hubName || 'Society';
 
@@ -325,7 +326,7 @@ export function LocationProvider({ children }) {
                 return {
                     type: 'doorstep',
                     badgeText: '🚚 Doorstep',
-                    tooltip: `Doorstep service at your flat in ${societyName}`,
+                    tooltip: `Doorstep service at your home in ${societyName}`,
                     distanceKm: distance,
                     hubName: societyName,
                 };
@@ -336,7 +337,7 @@ export function LocationProvider({ children }) {
             return {
                 type: 'society',
                 badgeText: '🏠 Your Society',
-                tooltip: `Hosted in your society clan (${societyName})${awaySuffix}`,
+                tooltip: `Hosted in your community (${societyName})${awaySuffix}`,
                 distanceKm: distance,
                 hubName: societyName,
             };
@@ -389,7 +390,7 @@ export function LocationProvider({ children }) {
         if (!pool) return false;
         
         const poolClanIds = pool.clanIds || (pool.clanId ? [pool.clanId] : []);
-        const isSocietyClan = poolClanIds.some(id => id === 'clan-1' || id === 'clan-4');
+        const isSocietyClan = poolClanIds.some(id => id === 'clan-1' || id === 'clan-4' || id === 'clan-villas');
         
         // Exemption from distance radius dropping is ONLY for joined society clans
         if (options.isMemberOfPoolClan && isSocietyClan) {
