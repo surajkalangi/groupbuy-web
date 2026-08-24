@@ -111,7 +111,7 @@ export const mockPitches = [
         visibility: 'public',
         deliveryType: 'pan_india',
         isPanIndia: true,
-        pickupInfo: { address: 'Open Pan-India • Online onboarding & group travel coordination from any city in India', deliveryType: 'pan_india', isRemote: true, isPanIndia: true, time: 'September 1st - September 30th' },
+        pickupInfo: { address: 'Open Pan-India • Online onboarding & group travel coordination from any city in India, to Network School, Kazakhstan', deliveryType: 'pan_india', isPanIndia: true, time: 'September 1st - September 30th' },
         fundingProgress: 20,
         pitchPolicies: {
             returnPolicy: 'custom',

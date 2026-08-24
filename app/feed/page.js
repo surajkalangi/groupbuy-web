@@ -19,6 +19,46 @@ export default function HomeFeed() {
     const { isPoolInRadius, proximityRadius } = useLocation();
     const [activeFilter, setActiveFilter] = useState('all');
 
+    // Restore selected clan filter from URL query or sessionStorage on mount & popstate
+    useEffect(() => {
+        const syncClanFilterFromLocation = () => {
+            const params = new URLSearchParams(window.location.search);
+            const clanFromUrl = params.get('clan');
+            if (clanFromUrl) {
+                setActiveFilter(clanFromUrl);
+                sessionStorage.setItem('groupbuy_feed_clan', clanFromUrl);
+            } else {
+                const savedClan = sessionStorage.getItem('groupbuy_feed_clan');
+                if (savedClan && savedClan !== 'all') {
+                    setActiveFilter(savedClan);
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('clan', savedClan);
+                    window.history.replaceState({}, '', url.toString());
+                } else {
+                    setActiveFilter('all');
+                }
+            }
+        };
+
+        syncClanFilterFromLocation();
+        window.addEventListener('popstate', syncClanFilterFromLocation);
+        return () => window.removeEventListener('popstate', syncClanFilterFromLocation);
+    }, []);
+
+    const handleFilterChange = (filterId) => {
+        setActiveFilter(filterId);
+        if (typeof window !== 'undefined') {
+            sessionStorage.setItem('groupbuy_feed_clan', filterId);
+            const url = new URL(window.location.href);
+            if (filterId === 'all') {
+                url.searchParams.delete('clan');
+            } else {
+                url.searchParams.set('clan', filterId);
+            }
+            window.history.replaceState({}, '', url.toString());
+        }
+    };
+
     const clanFilters = [
         { id: 'all', label: 'All Clans' },
         ...mockClans.map((c) => ({ id: c.id, label: c.name })),
@@ -93,7 +133,7 @@ export default function HomeFeed() {
                             <button
                                 key={filter.id}
                                 className={`${styles.filterChip} ${activeFilter === filter.id ? styles.activeChip : ''}`}
-                                onClick={() => setActiveFilter(filter.id)}
+                                onClick={() => handleFilterChange(filter.id)}
                             >
                                 {activeFilter === filter.id && filter.id !== 'all' && (
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">

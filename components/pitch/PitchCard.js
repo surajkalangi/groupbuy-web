@@ -21,6 +21,24 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
     const isMember = noClanTagged || isMemberOfPoolClan;
     const [isSaved, setIsSaved] = useState(pitch.isSaved || false);
 
+    // Score clan exclusivity/trust: Private (3) > Restricted / Society (2) > Public (1)
+    const getClanPrivacyScore = (clan) => {
+        if (!clan) return 0;
+        if (clan.privacy === 'private') return 3;
+        if (clan.privacy === 'approval_required' || clan.badge?.toUpperCase().includes('SOCIETY') || clan.id === 'clan-1' || clan.id === 'clan-4') return 2;
+        return 1;
+    };
+
+    // Prioritize member clans first, sorted by privacy exclusivity
+    const memberClans = associatedClans.filter(c => isClanMember(c.id)).sort((a, b) => getClanPrivacyScore(b) - getClanPrivacyScore(a));
+    const nonMemberClans = associatedClans.filter(c => !isClanMember(c.id)).sort((a, b) => getClanPrivacyScore(b) - getClanPrivacyScore(a));
+
+    const primaryDisplayClan = memberClans.length > 0 
+        ? memberClans[0] 
+        : (nonMemberClans.length > 0 ? nonMemberClans[0] : associatedClans[0]);
+
+    const otherClansCount = associatedClans.length - 1;
+
     const toggleSave = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -63,9 +81,30 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                             🔗 Direct Pool
                         </span>
                     ) : associatedClans.length > 0 ? (
-                        <span className={styles.clanBadge}>
-                            {associatedClans[0].name}{associatedClans.length > 1 ? ` +${associatedClans.length - 1}` : ''}
-                        </span>
+                        <div className={styles.clanBadgeWrapper}>
+                            <span className={styles.clanBadge}>
+                                {primaryDisplayClan?.name || 'Clan'}{otherClansCount > 0 ? ` +${otherClansCount}` : ''}
+                            </span>
+                            {associatedClans.length > 1 && (
+                                <div className={styles.clanTooltipPopup}>
+                                    <div className={styles.clanTooltipHeader}>Shared across {associatedClans.length} Clans:</div>
+                                    <ul className={styles.clanTooltipList}>
+                                        {associatedClans.map(c => {
+                                            const isUserInClan = isClanMember(c.id);
+                                            const privacyLabel = c.privacy === 'private' ? 'Private' : (c.privacy === 'approval_required' || c.badge?.toUpperCase().includes('SOCIETY')) ? 'Restricted' : 'Public';
+                                            return (
+                                                <li key={c.id} className={`${styles.clanTooltipItem} ${isUserInClan ? styles.clanTooltipItemMember : ''}`}>
+                                                    <span className={styles.clanTooltipDot}></span>
+                                                    <span className={styles.clanTooltipName}>{c.name}</span>
+                                                    <span className={styles.clanTooltipTag}>{privacyLabel}</span>
+                                                    {isUserInClan && <span className={styles.clanTooltipJoined}>✓ Joined</span>}
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
                     ) : pitch.clanName ? (
                         <span className={styles.clanBadge}>{pitch.clanName}</span>
                     ) : null

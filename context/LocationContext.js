@@ -307,10 +307,24 @@ export function LocationProvider({ children }) {
 
         // 3. User is a joined member of this apartment/society clan
         if (isMemberOfPoolClan && isSocietyClan) {
+            const isUserNearby = distance !== null && distance <= 25 && cityMatches;
+            // When user is within their society / home area and service is doorstep, Doorstep badge takes preference
+            if (resolved.isDoorstep && isUserNearby) {
+                return {
+                    type: 'doorstep',
+                    badgeText: '🚚 Doorstep',
+                    tooltip: `Doorstep service at your flat in ${societyName} (You are a clan member)`,
+                    distanceKm: distance,
+                    hubName: societyName,
+                };
+            }
+
+            // When user is away / traveling or for society clubhouse drops, show 'Your Society'
+            const awaySuffix = !isUserNearby ? ' • You can participate while you are away' : '';
             return {
                 type: 'society',
                 badgeText: '🏠 Your Society',
-                tooltip: `Hosted in your joined society clan (${societyName}) • You can participate while you are away`,
+                tooltip: `Hosted in your joined society clan (${societyName})${awaySuffix}`,
                 distanceKm: distance,
                 hubName: societyName,
             };
