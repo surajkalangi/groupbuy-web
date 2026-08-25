@@ -134,7 +134,7 @@ export default function DiscoverPage() {
                     {/* ── Sort & Distance Controls ── */}
                     <div className={styles.sortRow}>
                         <span className={styles.resultCount}>
-                            {filteredPitches.length} {filteredPitches.length === 1 ? 'pitch' : 'pitches'} found
+                            {filteredPitches.length} {filteredPitches.length === 1 ? 'pool' : 'pools'} found
                             {activeCategory !== 'all' && ` in ${CATEGORIES.find(c => c.id === activeCategory)?.label}`}
                         </span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
@@ -163,7 +163,7 @@ export default function DiscoverPage() {
                     ) : (
                         <div className={styles.emptyState}>
                             <span className="material-symbols-outlined" style={{ fontSize: '3rem', color: 'var(--on-surface-muted)' }}>search_off</span>
-                            <h3 className={styles.emptyTitle}>No pitches found</h3>
+                            <h3 className={styles.emptyTitle}>No pools found</h3>
                             <p className={styles.emptyText}>Try adjusting your search or explore different categories.</p>
                         </div>
                     )}
@@ -179,7 +179,7 @@ export default function DiscoverPage() {
                                     </div>
                                     <div>
                                         <span className={styles.clanMiniName}>{clan.name}</span>
-                                        <span className={styles.clanMiniMeta}>{clan.memberCount} members · {clan.activePitchCount} pitches</span>
+                                        <span className={styles.clanMiniMeta}>{clan.memberCount} members · {clan.activePitchCount} pools</span>
                                     </div>
                                     <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--on-surface-muted)' }}>chevron_right</span>
                                 </Link>
@@ -188,7 +188,7 @@ export default function DiscoverPage() {
                     </div>
 
                     {/* ── FAB ── */}
-                    <Link href="/pitches/create" className={styles.fab} aria-label="Create new pitch">
+                    <Link href="/pools/create" className={styles.fab} aria-label="Create new pool">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                             <line x1="12" y1="5" x2="12" y2="19" />
                             <line x1="5" y1="12" x2="19" y2="12" />

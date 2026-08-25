@@ -73,7 +73,7 @@ export default function WelcomeToClanPage({ params }) {
                                     <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>shopping_basket</span>
                                 </div>
                                 <div>
-                                    <h3 className={styles.guideTitle}>Browse Pitches</h3>
+                                    <h3 className={styles.guideTitle}>Browse Pools</h3>
                                     <p className={styles.guideText}>Check out the 'Fresh Harvest' and 'Health' deals below.</p>
                                 </div>
                             </div>

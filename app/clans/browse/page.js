@@ -172,7 +172,7 @@ export default function BrowseClans() {
                                             </div>
                                             <div className={styles.statDivider} />
                                             <div className={styles.publicStat}>
-                                                <span className={styles.statLabel}>Daily Pitches</span>
+                                                <span className={styles.statLabel}>Daily Pools</span>
                                                 <span className={styles.statValue}>{clan.activePitchCount || 5}</span>
                                             </div>
                                         </div>

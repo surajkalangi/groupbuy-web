@@ -98,7 +98,7 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
     const goalMet = pitch.committedUnits >= pitch.minOrder;
 
     return (
-        <Link href={`/pitches/${pitch.id}`} className={styles.card}>
+        <Link href={`/pools/${pitch.id}`} className={styles.card}>
             {/* Product Image */}
             <div className={styles.imageWrap}>
                 {(pitch.image || pitch.images?.[0]) ? (

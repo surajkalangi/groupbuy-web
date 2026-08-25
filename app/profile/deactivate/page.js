@@ -68,7 +68,7 @@ export default function DeactivatePreviewPage() {
                             </div>
                         </div>
                         <h3 className={styles.optionTitle}>Take a Break</h3>
-                        <p className={styles.optionDesc}>Your profile and pitches will be hidden from the community. You can return anytime just by logging back in.</p>
+                        <p className={styles.optionDesc}>Your profile and pools will be hidden from the community. You can return anytime just by logging back in.</p>
                     </button>
 
                     {/* Permanent Deletion */}
@@ -107,7 +107,7 @@ export default function DeactivatePreviewPage() {
                         </div>
                         <div className={styles.impactStat}>
                             <span className={styles.impactNum}>0</span>
-                            <span className={styles.impactLabel}>Active Pitches</span>
+                            <span className={styles.impactLabel}>Active Pools</span>
                         </div>
                     </div>
                     <div className={styles.impactQuoteWrap}>

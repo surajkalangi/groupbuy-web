@@ -109,7 +109,7 @@ export default function HomeFeed() {
                         </svg>
                         <input
                             type="search"
-                            placeholder="Search for pitches, products, or clans..."
+                            placeholder="Search for pools, products, or clans..."
                             className={styles.searchInput}
                         />
                     </div>
@@ -159,18 +159,18 @@ export default function HomeFeed() {
                     ) : (
                         <div className={styles.emptyState}>
                             <div className={styles.emptyIcon}>📦</div>
-                            <h3 className={styles.emptyTitle}>No active pitches yet</h3>
+                            <h3 className={styles.emptyTitle}>No active pools yet</h3>
                             <p className={styles.emptyText}>
-                                Create the first pitch in your Clan and start saving together!
+                                Create the first pool in your Clan and start saving together!
                             </p>
-                            <Link href="/pitches/create" className={styles.emptyBtn}>
-                                + Create a Pitch
+                            <Link href="/pools/create" className={styles.emptyBtn}>
+                                + Create a Pool
                             </Link>
                         </div>
                     )}
 
                     {/* FAB */}
-                    <Link href="/pitches/create" className={styles.fab} aria-label="Create new pool">
+                    <Link href="/pools/create" className={styles.fab} aria-label="Create new pool">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                             <line x1="12" y1="5" x2="12" y2="19" />
                             <line x1="5" y1="12" x2="19" y2="12" />

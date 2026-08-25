@@ -70,7 +70,7 @@ export default function ConfirmDeletePage() {
                             {/* Text */}
                             <div className={styles.optionText}>
                                 <h3 className={styles.optionTitle}>Take a Break (Deactivate)</h3>
-                                <p className={styles.optionDesc}>Your profile, clan memberships, and pitches will be hidden from everyone. You can return and reactivate everything whenever you&apos;re ready.</p>
+                                <p className={styles.optionDesc}>Your profile, clan memberships, and pools will be hidden from everyone. You can return and reactivate everything whenever you&apos;re ready.</p>
                             </div>
 
                             {/* Radio indicator */}

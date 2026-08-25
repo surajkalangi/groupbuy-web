@@ -19,7 +19,7 @@ const NOTIFICATIONS = [
         message: "Great news! The 'Ravi Dham Complex' clan just hit the 20-box goal. Deal is ON!",
         time: '2m ago',
         read: false,
-        cta: { label: 'View Pool Details', href: '/pitches/pitch-1' },
+        cta: { label: 'View Pool Details', href: '/pools/pitch-1' },
     },
     {
         id: 2,
@@ -30,7 +30,7 @@ const NOTIFICATIONS = [
         message: "Your order for 'Premium Cashews' has arrived at B-Block Lobby, Ravi Dham Complex.",
         time: '45m ago',
         read: false,
-        cta: { label: 'View Details', href: '/pitches/pitch-2' },
+        cta: { label: 'View Details', href: '/pools/pitch-2' },
     },
     {
         id: 99,
@@ -63,7 +63,7 @@ const NOTIFICATIONS = [
         message: "A new group pool is live in Ravi Dham Complex — ₹80/kg premium jaggery. Only 3 spots left!",
         time: 'Yesterday',
         read: true,
-        cta: { label: 'Join Pool', href: '/pitches/pitch-2' },
+        cta: { label: 'Join Pool', href: '/pools/pitch-2' },
     },
     {
         id: 5,

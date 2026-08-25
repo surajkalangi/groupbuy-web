@@ -12,8 +12,8 @@ const navItems = [
     },
     {
         label: 'Pools',
-        href: '/pitches/my',
-        matchPrefix: '/pitches',
+        href: '/pools/my',
+        matchPrefix: '/pools',
         icon: 'campaign',
     },
     {

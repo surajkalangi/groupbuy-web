@@ -57,7 +57,7 @@ export default function ClanPreviewPage() {
     };
 
     const handleViewPitch = (pitchId) => {
-        router.push(`/pitches/${pitchId}`);
+        router.push(`/pools/${pitchId}`);
     };
 
     const howItWorksSteps = [

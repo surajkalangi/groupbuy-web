@@ -45,7 +45,7 @@ export default function AuthGuard({ children, redirect = false }) {
                     </div>
                     <h2 className={styles.title}>Sign in to continue</h2>
                     <p className={styles.subtitle}>
-                        This page is only available to signed-in users. Create an account or sign in to access your feed, pitches, and community.
+                        This page is only available to signed-in users. Create an account or sign in to access your feed, pools, and community.
                     </p>
                     <Link href="/auth/verify" className={styles.signInBtn}>
                         Sign In

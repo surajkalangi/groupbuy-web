@@ -1,0 +1,300 @@
+/* Layout & Background */
+.page {
+    min-height: 100vh;
+    background: var(--surface);
+}
+
+.main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 5rem var(--space-4) var(--space-10);
+}
+
+/* Header Text */
+.header {
+    text-align: center;
+    margin-bottom: var(--space-4);
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    margin-bottom: var(--space-2);
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--on-surface-variant);
+}
+
+/* The Main Card */
+.card {
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-xl);
+    padding: 1.75rem var(--space-8);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+}
+
+/* Pitch Info Row */
+.pitchInfoRow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    margin-bottom: 1.75rem;
+}
+
+.pitchImage {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-md);
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.pitchDetails {
+    flex: 1;
+}
+
+.eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--secondary);
+    margin-bottom: 0.25rem;
+}
+
+.pitchTitle {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    margin-bottom: 0.125rem;
+}
+
+.pitchQty {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+}
+
+.totalBlock {
+    text-align: right;
+}
+
+.totalEyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-surface-variant);
+    margin-bottom: 0.25rem;
+}
+
+.totalAmount {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* Escrow Trust Guarantee Box */
+.escrowBox {
+    display: flex;
+    gap: var(--space-3);
+    background: rgba(0, 105, 72, 0.05); /* very light primary */
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    margin-bottom: 1.75rem;
+    align-items: flex-start;
+}
+
+.escrowIconWrap {
+    color: var(--on-primary);
+    background: var(--primary);
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.escrowIconWrap span {
+    font-size: 1.25rem;
+}
+
+.escrowTitle {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.escrowText {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    line-height: 1.5;
+}
+
+.escrowText strong {
+    color: var(--on-surface);
+}
+
+/* UPI Selector */
+.upiSection {
+    margin-bottom: 1.75rem;
+}
+
+.upiHeading {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    margin-bottom: var(--space-4);
+}
+
+.upiGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+}
+
+.upiBtn {
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--surface-container-low);
+    background-color: var(--surface-container-lowest);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-2) var(--space-6) var(--space-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.upiBtn:hover {
+    background: var(--surface-container-low);
+}
+
+.activeUpi {
+    background: var(--surface);
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(0, 105, 72, 0.08);
+}
+
+.upiAppIconBox {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.fakeLogo {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.fakeLogo span {
+    font-size: 1.125rem;
+}
+
+.upiAppName {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--on-surface);
+}
+
+.activeDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    position: absolute;
+    bottom: var(--space-3);
+}
+
+
+
+
+
+/* CTA */
+.ctaBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    background: var(--primary);
+    color: var(--on-primary);
+    padding: var(--space-4) var(--space-6);
+    border-radius: 999px;
+    border: none;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 105, 72, 0.25);
+    transition: all 0.2s;
+}
+
+.ctaBtn span {
+    font-size: 1.25rem;
+}
+
+.ctaBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 105, 72, 0.35);
+}
+
+.ctaBtn:active {
+    transform: translateY(0);
+}
+
+/* Footer Badges */
+.securityFooter {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+    opacity: 0.7;
+}
+
+.secBadge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--on-surface-variant);
+}
+
+.secBadge span {
+    font-size: 1.125rem;
+}

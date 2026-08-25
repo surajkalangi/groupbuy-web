@@ -14,7 +14,7 @@ const STEPS = [
     },
     {
         num: '02',
-        title: 'Pick a Pitch',
+        title: 'Pick a Pool',
         desc: 'Browse curated bulk deals—from seasonal fruits to artisan sourdough—vetted for quality.',
     },
     {

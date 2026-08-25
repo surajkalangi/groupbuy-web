@@ -16,14 +16,14 @@ const JOURNEY_STEPS = [
     {
         num: '02',
         icon: 'campaign',
-        title: 'Discover Pitches',
-        desc: 'Browse active group-buy pitches for everything from farm-fresh produce to premium electronics — all at wholesale prices.',
+        title: 'Discover Pools',
+        desc: 'Browse active group-buy pools for everything from farm-fresh produce to premium electronics — all at wholesale prices.',
     },
     {
         num: '03',
         icon: 'handshake',
         title: 'Commit & Pool',
-        desc: 'Tap "I\'m In" to join a pitch. You only pay when enough members commit and the deal reaches its threshold.',
+        desc: 'Tap "I\'m In" to join a pool. You only pay when enough members commit and the deal reaches its threshold.',
     },
     {
         num: '04',

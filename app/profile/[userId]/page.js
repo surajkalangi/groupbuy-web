@@ -72,11 +72,11 @@ export default function PublicProfilePage({ params }) {
                     <div className={styles.quickStats}>
                         <div className={styles.statCard}>
                             <span className={styles.statNum} style={{ color: 'var(--primary)' }}>12</span>
-                            <span className={styles.statLabel}>Pitches Joined</span>
+                            <span className={styles.statLabel}>Pools Joined</span>
                         </div>
                         <div className={styles.statCard}>
                             <span className={styles.statNum} style={{ color: 'var(--secondary)' }}>{user.hostedPitches || 0}</span>
-                            <span className={styles.statLabel}>Pitches Hosted</span>
+                            <span className={styles.statLabel}>Pools Hosted</span>
                         </div>
                     </div>
                 </div>

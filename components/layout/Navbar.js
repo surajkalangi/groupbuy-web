@@ -51,8 +51,8 @@ export default function Navbar({ children, backHref }) {
                             Home
                         </Link>
                         <Link
-                            href="/pitches/my"
-                            className={`${styles.navLink} ${pathname.startsWith('/pitches') ? styles.active : ''}`}
+                            href="/pools/my"
+                            className={`${styles.navLink} ${pathname.startsWith('/pools') || pathname.startsWith('/pitches') ? styles.active : ''}`}
                         >
                             Pools
                         </Link>
