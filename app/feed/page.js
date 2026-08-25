@@ -73,11 +73,11 @@ export default function HomeFeed() {
         return isStatusOk && !isDirectLinkOnly;
     });
 
-    const filteredPitches = activePitches.filter((p) => {
-        // Clan filter
-        if (activeFilter !== 'all' && (!p.clanIds?.includes(activeFilter) && p.clanId !== activeFilter)) {
-            return false;
-        }
+    const clanFilteredPitches = activeFilter === 'all'
+        ? activePitches
+        : activePitches.filter((p) => p.clanIds?.includes(activeFilter) || p.clanId === activeFilter);
+
+    const filteredPitches = clanFilteredPitches.filter((p) => {
         // Geolocation Proximity filter (exempts user's joined society/private clans)
         const pClanIds = p.clanIds || (p.clanId ? [p.clanId] : []);
         const isMember = pClanIds.some((id) => isClanMember(id));
@@ -123,7 +123,7 @@ export default function HomeFeed() {
                             </p>
                         </div>
                         <div className={styles.viewControls}>
-                            <DistanceDropdown />
+                            <DistanceDropdown basePitches={clanFilteredPitches} />
                         </div>
                     </div>
 

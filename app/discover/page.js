@@ -138,7 +138,7 @@ export default function DiscoverPage() {
                             {activeCategory !== 'all' && ` in ${CATEGORIES.find(c => c.id === activeCategory)?.label}`}
                         </span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
-                            <DistanceDropdown />
+                            <DistanceDropdown basePitches={publicPitches} />
                             <div className={styles.sortTabs}>
                                 {SORT_OPTIONS.map(s => (
                                     <button

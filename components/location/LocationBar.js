@@ -5,7 +5,7 @@ import { useLocation } from '@/context/LocationContext';
 import DistanceSliderModal from './DistanceSliderModal';
 import styles from './LocationBar.module.css';
 
-export default function LocationBar({ matchCount = null }) {
+export default function LocationBar({ matchCount = null, basePitches = null }) {
     const {
         userLocation,
         proximityRadius,
@@ -86,6 +86,7 @@ export default function LocationBar({ matchCount = null }) {
             <DistanceSliderModal
                 isOpen={isDistanceModalOpen}
                 onClose={() => setIsDistanceModalOpen(false)}
+                basePitches={basePitches}
             />
         </>
     );

@@ -1,7 +1,7 @@
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(15, 23, 42, 0.65);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 1050;
@@ -107,6 +107,7 @@
     overflow-y: auto;
 }
 
+/* Active Highlight Box */
 .highlightBox {
     background: linear-gradient(135deg, var(--surface-container-low) 0%, var(--surface-container) 100%);
     border: 1.5px solid var(--primary-container);
@@ -171,11 +172,12 @@
     opacity: 0.9;
 }
 
+/* Slider Section */
 .sliderSection {
     background: var(--surface-container-lowest);
     border: 1px solid var(--outline-variant);
     border-radius: 1rem;
-    padding: var(--space-4) var(--space-5);
+    padding: var(--space-4) var(--space-5) var(--space-5) var(--space-5);
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
@@ -196,7 +198,7 @@
 }
 
 .sliderKmDisplay {
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 800;
     color: var(--primary);
 }
@@ -218,7 +220,8 @@
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
-    z-index: 2;
+    z-index: 3;
+    margin: 0;
 }
 
 .sliderInput::-webkit-slider-thumb {
@@ -231,11 +234,12 @@
     border: 3px solid #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     cursor: pointer;
-    transition: transform 0.1s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .sliderInput::-webkit-slider-thumb:hover {
     transform: scale(1.15);
+    box-shadow: 0 3px 12px rgba(5, 150, 105, 0.4);
 }
 
 .sliderTrackFill {
@@ -247,92 +251,133 @@
     z-index: 1;
 }
 
-.ticksRow {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 4px;
+/* Track Tick Pips */
+.trackTicksContainer {
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    pointer-events: none;
+    z-index: 2;
 }
 
-.tickLabel {
+.trackTickPip {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--outline);
+    top: 1px;
+    transform: translateX(-50%);
+    transition: background 0.15s ease;
+}
+
+.trackTickPipPassed {
+    background: #ffffff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Precisely Aligned Tick Labels */
+.ticksRow {
+    position: relative;
+    width: 100%;
+    height: 24px;
+    margin-top: 4px;
+}
+
+.tickLabelBtn {
+    position: absolute;
+    top: 0;
+    background: transparent;
+    border: none;
+    padding: 2px 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+
+.tickLabelText {
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--on-surface-variant);
-    cursor: pointer;
-    padding: 2px 6px;
-    border-radius: 4px;
-    transition: all 0.15s;
+    transition: color 0.15s, transform 0.15s;
+    white-space: nowrap;
 }
 
-.tickLabel:hover {
-    background: var(--surface-container);
+.tickLabelBtn:hover .tickLabelText {
     color: var(--primary);
+    transform: translateY(-1px);
 }
 
-.presetSection {
+.tickLabelActive .tickLabelText {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+/* Options Section */
+.optionsSection {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
 }
 
-.presetGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: var(--space-2);
-}
-
-.presetBtn {
+.modeCard {
     background: var(--surface-container-lowest);
     border: 1.5px solid var(--outline-variant);
-    border-radius: 0.75rem;
-    padding: var(--space-3);
+    border-radius: 0.875rem;
+    padding: var(--space-3) var(--space-4);
     text-align: left;
     cursor: pointer;
     transition: all 0.15s ease;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
 }
 
-.presetBtn:hover {
+.modeCard:hover {
     border-color: var(--primary);
     background: var(--surface-container-low);
 }
 
-.presetBtnActive {
+.modeCardActive {
     border-color: var(--primary);
     background: var(--primary-container);
 }
 
-.presetTop {
+.modeCardHeader {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--space-1);
+    gap: var(--space-2);
 }
 
-.presetLabel {
-    font-size: 0.8125rem;
+.modeCardTitle {
+    font-size: 0.875rem;
     font-weight: 700;
     color: var(--on-surface);
 }
 
-.presetBtnActive .presetLabel {
+.modeCardActive .modeCardTitle {
     color: var(--on-primary-container);
 }
 
-.presetDesc {
-    font-size: 0.6875rem;
+.modeCardDesc {
+    font-size: 0.75rem;
     color: var(--on-surface-muted);
+    padding-left: 28px;
+    line-height: 1.35;
 }
 
-.presetBtnActive .presetDesc {
+.modeCardActive .modeCardDesc {
     color: var(--on-primary-container);
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
+/* Society Exemption Callout */
 .exemptionCallout {
     background: rgba(16, 185, 129, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.25);
     border-radius: 0.75rem;
     padding: var(--space-3) var(--space-4);
     display: flex;
@@ -343,6 +388,7 @@
     line-height: 1.4;
 }
 
+/* Footer */
 .footer {
     display: flex;
     align-items: center;
@@ -357,7 +403,7 @@
     background: transparent;
     border: 1px solid var(--outline-variant);
     color: var(--on-surface-variant);
-    padding: 0.625rem 1rem;
+    padding: 0.625rem 1.125rem;
     border-radius: 0.75rem;
     font-size: 0.875rem;
     font-weight: 600;
@@ -398,8 +444,5 @@
     .overlay {
         align-items: flex-end;
         padding: 0;
-    }
-    .presetGrid {
-        grid-template-columns: repeat(2, 1fr);
     }
 }

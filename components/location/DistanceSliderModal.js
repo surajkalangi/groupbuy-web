@@ -4,17 +4,18 @@ import { useState, useEffect } from 'react';
 import { useLocation } from '@/context/LocationContext';
 import { useAuth } from '@/context/AuthContext';
 import { mockPitches } from '@/data/pitches';
+import { mockClans } from '@/data/clans';
 import styles from './DistanceSliderModal.module.css';
 
-const PRESETS = [
-    { value: 5, label: '5 km', desc: 'Society & Walking' },
-    { value: 15, label: '15 km', desc: 'Neighborhood' },
-    { value: 30, label: '30 km', desc: 'Citywide' },
-    { value: 'remote', label: '🌐 Remote / Pan-India', desc: 'Delivered anywhere' },
-    { value: 'all', label: 'All Deals', desc: 'No distance limit' },
+const MILESTONES = [
+    { value: 1, label: '1 km' },
+    { value: 5, label: '5 km' },
+    { value: 15, label: '15 km' },
+    { value: 30, label: '30 km' },
+    { value: 50, label: '50 km' },
 ];
 
-export default function DistanceSliderModal({ isOpen, onClose }) {
+export default function DistanceSliderModal({ isOpen, onClose, basePitches = null }) {
     const {
         userLocation,
         proximityRadius,
@@ -39,12 +40,29 @@ export default function DistanceSliderModal({ isOpen, onClose }) {
     const isAll = tempRadius === 'all';
     const sliderValue = typeof tempRadius === 'number' ? tempRadius : (isRemote ? 50 : 30);
 
-    // Calculate live matching pools count for preview
-    const matchingCount = mockPitches.filter(p => {
+    // Calculate live matching pools count for preview considering the base pools (Discover public-only, Feed clan-filtered, etc.)
+    const poolsToFilter = basePitches || mockPitches;
+    const matchingCount = poolsToFilter.filter(p => {
         const poolClanIds = p.clanIds || (p.clanId ? [p.clanId] : []);
         const isMemberOfPoolClan = poolClanIds.some(id => isClanMember(id));
         return isPoolInRadius(p, tempRadius, { isMemberOfPoolClan });
     }).length;
+
+    // Check if user is member of at least one society/apartment/villa clan
+    const joinedSocietyClans = mockClans.filter(c => {
+        const isSociety = (
+            c.badge === 'SOCIETY' ||
+            c.badge === 'VILLA' ||
+            c.badge === 'GATED COMMUNITY' ||
+            c.name.toLowerCase().includes('complex') ||
+            c.name.toLowerCase().includes('villa') ||
+            c.name.toLowerCase().includes('society') ||
+            c.name.toLowerCase().includes('apartments')
+        );
+        return isSociety && isClanMember(c.id);
+    });
+    const isMemberOfSocietyClan = joinedSocietyClans.length > 0;
+    const societyNames = joinedSocietyClans.map(c => c.name).join(', ');
 
     const handleApply = () => {
         setProximityRadius(tempRadius);
@@ -114,10 +132,10 @@ export default function DistanceSliderModal({ isOpen, onClose }) {
                         </div>
                     </div>
 
-                    {/* Interactive Slider Bar */}
+                    {/* Interactive Range Slider (1 km to 50 km) */}
                     <div className={styles.sliderSection}>
                         <div className={styles.sliderHeader}>
-                            <span className={styles.sliderLabel}>SLIDER: ADJUST MAXIMUM RADIUS</span>
+                            <span className={styles.sliderLabel}>INTERACTIVE DISTANCE RANGE SLIDER</span>
                             <span className={styles.sliderKmDisplay}>
                                 {isRemote || isAll ? 'Custom Km' : `${tempRadius} km`}
                             </span>
@@ -126,7 +144,7 @@ export default function DistanceSliderModal({ isOpen, onClose }) {
                         <div className={styles.sliderWrapper}>
                             <input
                                 type="range"
-                                min="2"
+                                min="1"
                                 max="50"
                                 step="1"
                                 value={sliderValue}
@@ -136,56 +154,101 @@ export default function DistanceSliderModal({ isOpen, onClose }) {
                             />
                             <div
                                 className={styles.sliderTrackFill}
-                                style={{ width: `${((sliderValue - 2) / (50 - 2)) * 100}%` }}
+                                style={{ width: `${((sliderValue - 1) / (50 - 1)) * 100}%` }}
                             />
+
+                            {/* Milestone Pips on the track */}
+                            <div className={styles.trackTicksContainer}>
+                                {MILESTONES.map(m => {
+                                    const pct = ((m.value - 1) / (50 - 1)) * 100;
+                                    const isPassed = sliderValue >= m.value && !isRemote && !isAll;
+                                    return (
+                                        <div
+                                            key={m.value}
+                                            className={`${styles.trackTickPip} ${isPassed ? styles.trackTickPipPassed : ''}`}
+                                            style={{ left: `${pct}%` }}
+                                        />
+                                    );
+                                })}
+                            </div>
                         </div>
 
-                        {/* Tick labels below slider */}
+                        {/* Precisely Aligned Milestone Labels below slider */}
                         <div className={styles.ticksRow}>
-                            <span className={styles.tickLabel} onClick={() => setTempRadius(5)}>5 km</span>
-                            <span className={styles.tickLabel} onClick={() => setTempRadius(15)}>15 km</span>
-                            <span className={styles.tickLabel} onClick={() => setTempRadius(30)}>30 km</span>
-                            <span className={styles.tickLabel} onClick={() => setTempRadius(50)}>50 km</span>
-                        </div>
-                    </div>
-
-                    {/* Quick Preset Buttons */}
-                    <div className={styles.presetSection}>
-                        <span className={styles.sliderLabel}>OR SELECT A QUICK PRESET</span>
-                        <div className={styles.presetGrid}>
-                            {PRESETS.map(p => {
-                                const isSelected = tempRadius === p.value;
+                            {MILESTONES.map(m => {
+                                const pct = ((m.value - 1) / (50 - 1)) * 100;
+                                const isSelected = tempRadius === m.value;
                                 return (
                                     <button
-                                        key={String(p.value)}
+                                        key={m.value}
                                         type="button"
-                                        className={`${styles.presetBtn} ${isSelected ? styles.presetBtnActive : ''}`}
-                                        onClick={() => setTempRadius(p.value)}
+                                        className={`${styles.tickLabelBtn} ${isSelected ? styles.tickLabelActive : ''}`}
+                                        style={{
+                                            left: `${pct}%`,
+                                            transform: m.value === 1 ? 'translateX(0%)' : m.value === 50 ? 'translateX(-100%)' : 'translateX(-50%)'
+                                        }}
+                                        onClick={() => setTempRadius(m.value)}
+                                        title={`Set distance to ${m.label}`}
                                     >
-                                        <div className={styles.presetTop}>
-                                            <span className={styles.presetLabel}>{p.label}</span>
-                                            {isSelected && (
-                                                <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--primary)' }}>
-                                                    check_circle
-                                                </span>
-                                            )}
-                                        </div>
-                                        <span className={styles.presetDesc}>{p.desc}</span>
+                                        <span className={styles.tickLabelText}>{m.label}</span>
                                     </button>
                                 );
                             })}
                         </div>
                     </div>
 
-                    {/* Society & Villa Clan Exemption Callout */}
-                    <div className={styles.exemptionCallout}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#047857' }}>
-                            home_work
-                        </span>
-                        <span>
-                            <strong>Society Exemption:</strong> Pools hosted inside your joined societies & villa clans (like Ravi Dham or Dates Villa) will always remain visible to you regardless of distance.
-                        </span>
+                    {/* Quick Options: Remote / Pan-India & All Deals */}
+                    <div className={styles.optionsSection}>
+                        <button
+                            type="button"
+                            className={`${styles.modeCard} ${isRemote ? styles.modeCardActive : ''}`}
+                            onClick={() => setTempRadius(isRemote ? 'all' : 'remote')}
+                        >
+                            <div className={styles.modeCardHeader}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '20px', color: isRemote ? 'var(--primary)' : 'var(--on-surface-variant)' }}>
+                                    language
+                                </span>
+                                <span className={styles.modeCardTitle}>🌐 Remote & Pan-India</span>
+                                {isRemote && (
+                                    <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)', marginLeft: 'auto' }}>
+                                        check_circle
+                                    </span>
+                                )}
+                            </div>
+                            <span className={styles.modeCardDesc}>Courier delivery, digital tools & remote services without distance limits</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`${styles.modeCard} ${isAll ? styles.modeCardActive : ''}`}
+                            onClick={() => setTempRadius('all')}
+                        >
+                            <div className={styles.modeCardHeader}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '20px', color: isAll ? 'var(--primary)' : 'var(--on-surface-variant)' }}>
+                                    explore
+                                </span>
+                                <span className={styles.modeCardTitle}>All Deals (No Filter)</span>
+                                {isAll && (
+                                    <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)', marginLeft: 'auto' }}>
+                                        check_circle
+                                    </span>
+                                )}
+                            </div>
+                            <span className={styles.modeCardDesc}>Show all active community pools without any distance filtering</span>
+                        </button>
                     </div>
+
+                    {/* Society & Villa Clan Exemption Callout — Shown ONLY if member of at least one society clan */}
+                    {isMemberOfSocietyClan && (
+                        <div className={styles.exemptionCallout}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#047857', flexShrink: 0 }}>
+                                home_work
+                            </span>
+                            <span>
+                                <strong>Society Exemption:</strong> Pools hosted inside your joined societies &amp; gated clans{societyNames ? ` (${societyNames})` : ''} will always remain visible to you regardless of distance.
+                            </span>
+                        </div>
+                    )}
                 </div>
 
                 {/* Footer Action Buttons */}

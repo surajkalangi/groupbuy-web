@@ -5,7 +5,7 @@ import { useLocation } from '@/context/LocationContext';
 import DistanceSliderModal from './DistanceSliderModal';
 import styles from './DistanceDropdown.module.css';
 
-export default function DistanceDropdown({ className = '' }) {
+export default function DistanceDropdown({ className = '', basePitches = null }) {
     const { proximityRadius, setProximityRadius } = useLocation();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -56,6 +56,7 @@ export default function DistanceDropdown({ className = '' }) {
             <DistanceSliderModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
+                basePitches={basePitches}
             />
         </>
     );
