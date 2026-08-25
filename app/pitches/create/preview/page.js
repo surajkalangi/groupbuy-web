@@ -214,7 +214,7 @@ export default function PitchPreviewPage() {
                         <div className={styles.pickupCard}>
                             <div className={styles.pickupIcon}>
                                 <span className="material-symbols-outlined" style={{ color: 'var(--primary)' }}>
-                                    {data.deliveryType === 'doorstep' ? 'doorbell' : data.deliveryType === 'pan_india' ? 'package_2' : data.deliveryType === 'digital' ? 'devices' : 'location_on'}
+                                    {data.deliveryType === 'doorstep' ? 'doorbell' : data.deliveryType === 'pan_india' ? 'package_2' : (data.deliveryType === 'digital' || data.deliveryType === 'remote') ? 'language' : 'location_on'}
                                 </span>
                             </div>
                             <div>
@@ -222,7 +222,7 @@ export default function PitchPreviewPage() {
                                     {data.deliveryType === 'doorstep' && '🚚 Doorstep Delivery'}
                                     {data.deliveryType === 'pickup' && '📍 Community Pickup Point'}
                                     {data.deliveryType === 'pan_india' && '📦 Pan-India Courier Delivery'}
-                                    {data.deliveryType === 'digital' && '💻 Digital / Cloud Access'}
+                                    {(data.deliveryType === 'digital' || data.deliveryType === 'remote') && '🌐 Remote / Digital Delivery'}
                                 </h4>
 
                                 {data.deliveryType === 'doorstep' && (
@@ -262,9 +262,9 @@ export default function PitchPreviewPage() {
                                     </p>
                                 )}
 
-                                {data.deliveryType === 'digital' && (
+                                {(data.deliveryType === 'digital' || data.deliveryType === 'remote') && (
                                     <p className={styles.pickupAddr}>
-                                        Instant activation license or invite delivered via email / secure app notification.
+                                        Remote activity access, cohort session links, or instant digital activation keys delivered upon pool completion.
                                     </p>
                                 )}
                             </div>

@@ -76,7 +76,7 @@ export const CLAN_COORDINATES = {
     'clan-2': { locality: 'Madhapur', city: 'Hyderabad', lat: 17.4390, lng: 78.3780, hubName: 'Sathva Knowledge City' },
     'clan-4': { locality: 'Tellapur', city: 'Hyderabad', lat: 17.4812, lng: 78.2914, hubName: 'MyHome Tridasa' },
     'clan-5': { locality: 'HSR Layout', city: 'Bengaluru', lat: 12.9121, lng: 77.6446, hubName: 'HSR Startup Hub' },
-    'clan-villas': { locality: 'Shankarpally Road', city: 'Hyderabad', lat: 17.4485, lng: 78.1322, hubName: 'Greenfield Meadows Villa County' },
+    'clan-villas': { locality: 'Shankarpally Road', city: 'Hyderabad', lat: 17.4485, lng: 78.1322, hubName: 'Dates Villa County' },
 };
 
 export const DEFAULT_USER_LOCATION = CITY_HUBS[0]; // Hitec City, Hyderabad
@@ -207,15 +207,11 @@ export function LocationProvider({ children }) {
     const resolvePoolCoordinates = useCallback((pool) => {
         if (!pool) return null;
         
-        const isRemote = pool.isRemote === true || pool.deliveryType === 'remote' || pool.pickupInfo?.isRemote === true || pool.id === 'pitch-ns-kazakhstan';
-        const isDigital = !isRemote && (pool.category === 'digital' || pool.category === 'software' || pool.deliveryType === 'digital' || pool.isDigitalDelivery === true || pool.pickupInfo?.isDigital === true);
-        const isPanIndia = !isRemote && !isDigital && (pool.isPanIndia === true || pool.deliveryType === 'pan_india' || pool.pickupInfo?.deliveryType === 'pan_india' || pool.pickupInfo?.isPanIndia === true);
+        const isRemote = pool.isRemote === true || pool.deliveryType === 'remote' || pool.deliveryType === 'digital' || pool.category === 'digital' || pool.category === 'software' || pool.isDigitalDelivery === true || pool.pickupInfo?.isRemote === true || pool.pickupInfo?.isDigital === true || pool.id === 'pitch-ns-kazakhstan';
+        const isPanIndia = !isRemote && (pool.isPanIndia === true || pool.deliveryType === 'pan_india' || pool.pickupInfo?.deliveryType === 'pan_india' || pool.pickupInfo?.isPanIndia === true);
         
         if (isRemote) {
             return { isRemote: true, isPanIndia: false, isDigital: false };
-        }
-        if (isDigital) {
-            return { isDigital: true, isPanIndia: false, isRemote: false, hubName: pool.pickupInfo?.locality || 'Digital Delivery' };
         }
         if (isPanIndia) {
             return { isPanIndia: true, isDigital: false, isRemote: false };
@@ -268,36 +264,25 @@ export function LocationProvider({ children }) {
 
         const { isMemberOfPoolClan = false } = options;
 
-        // 1. Remote / Global Activities & Programs
+        // 1. Remote & Digital Programs, Subscriptions & Activities (Accessible from anywhere)
         if (resolved.isRemote) {
             return {
                 type: 'remote',
                 badgeText: '🌐 Remote',
-                tooltip: 'Remote / Global Program • Open to participants anywhere',
+                tooltip: 'Remotely deliverable • Accessible from anywhere without distance limits',
                 distanceKm: null,
-                hubName: 'Remote / Global',
+                hubName: 'Remote / Digital',
             };
         }
 
-        // 2. Digital products & shared digital subscriptions
-        if (resolved.isDigital) {
-            const hub = resolved.hubName;
-            return {
-                type: 'digital',
-                badgeText: '💻 Digital',
-                tooltip: 'Digitally delivered software license / cloud access',
-                distanceKm: null,
-                hubName: hub || 'Digital Delivery',
-            };
-        }
-
-        // 3. Pan-India physical courier delivery
+        // 2. Pan-India physical courier delivery
         if (resolved.isPanIndia) {
             return {
                 type: 'pan_india',
                 badgeText: '📦 Pan-India',
                 tooltip: 'Dispatched via courier across India',
                 distanceKm: null,
+                hubName: 'Pan-India Courier',
             };
         }
 
@@ -405,20 +390,13 @@ export function LocationProvider({ children }) {
         
         // 'remote' shows Pan-India dispatched, remote programs, and digital pools
         if (targetRadius === 'remote') {
-            return resolved.isRemote || resolved.isDigital || resolved.isPanIndia;
+            return resolved.isRemote || resolved.isPanIndia;
         }
 
         // Specific numerical radius (e.g. 5, 15, 30 km):
-        // Exclude Pan-India courier & Remote activities from local radius filters
+        // Exclude Pan-India courier & Remote/Digital from local radius filters
         if (resolved.isPanIndia || resolved.isRemote) {
             return false;
-        }
-
-        // Digital pools pass if base locality distance <= targetRadius
-        if (resolved.isDigital) {
-            const dist = getPoolDistance(pool);
-            if (dist === null) return true;
-            return dist <= Number(targetRadius);
         }
 
         const poolCity = resolved.city || pool.pickupInfo?.city;

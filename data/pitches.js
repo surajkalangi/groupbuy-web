@@ -2184,7 +2184,7 @@ export const mockPitches = [
     },
     {
         id: 'pitch-newcity-ac-servicing',
-        clanIds: ['clan-newtocity', 'clan-1', 'clan-4'],
+        clanIds: ['clan-newtocity', 'clan-4'],
         hostId: 'user-4',
         host: { name: 'Karthik M.', rating: 4.9, pitchesHosted: 7, avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&q=80', isVerifiedVendor: false },
         title: 'Pre-Summer AC Deep Foam Jet-Wash & Gas Leak Check (Per Split AC Unit)',

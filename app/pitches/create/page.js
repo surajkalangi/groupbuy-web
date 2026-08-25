@@ -302,7 +302,8 @@ function CreatePitchForm() {
             doorstepLocations: deliveryType === 'doorstep' ? doorstepLocations : [],
             isDoorstep: deliveryType === 'doorstep',
             isPanIndia: deliveryType === 'pan_india',
-            isDigital: deliveryType === 'digital',
+            isRemote: deliveryType === 'remote' || deliveryType === 'digital',
+            isDigital: deliveryType === 'remote' || deliveryType === 'digital',
             pickupInfo: {
                 address: pickupAddress || `${pickupLocality || 'Central'} Community Hub`,
                 locality: pickupLocality,
@@ -314,6 +315,7 @@ function CreatePitchForm() {
                 doorstepLocations: deliveryType === 'doorstep' ? doorstepLocations : [],
                 isDoorstep: deliveryType === 'doorstep',
                 isPanIndia: deliveryType === 'pan_india',
+                isRemote: deliveryType === 'remote' || deliveryType === 'digital',
             },
             pitchPolicies: {
                 returnPolicy,
@@ -638,11 +640,6 @@ function CreatePitchForm() {
                             derivedVisibility = 'restricted';
                         }
 
-                        // Localities list for active city presets
-                        const activeCityLocalities = LOCALITY_PRESETS
-                            .filter(p => p.city.toLowerCase() === pickupCity.toLowerCase())
-                            .map(p => p.name);
-
                         return (
                             <div className={styles.formCanvas}>
                                 {/* 1. Target Clan(s) & Visibility Engine */}
@@ -827,15 +824,15 @@ function CreatePitchForm() {
                                         </div>
 
                                         <div
-                                            className={`${styles.deliveryModeCard} ${deliveryType === 'digital' ? styles.deliveryModeCardActive : ''}`}
-                                            onClick={() => setDeliveryType('digital')}
+                                            className={`${styles.deliveryModeCard} ${(deliveryType === 'remote' || deliveryType === 'digital') ? styles.deliveryModeCardActive : ''}`}
+                                            onClick={() => setDeliveryType('remote')}
                                         >
                                             <div className={styles.deliveryModeCardTop}>
-                                                <span className={`material-symbols-outlined ${styles.deliveryModeIcon}`}>devices</span>
-                                                {deliveryType === 'digital' && <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px' }}>check_circle</span>}
+                                                <span className={`material-symbols-outlined ${styles.deliveryModeIcon}`}>language</span>
+                                                {(deliveryType === 'remote' || deliveryType === 'digital') && <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '20px' }}>check_circle</span>}
                                             </div>
-                                            <span className={styles.deliveryModeTitle}>💻 Digital Delivery</span>
-                                            <p className={styles.deliveryModeDesc}>Instant cloud invites, license keys, or subscriptions delivered digitally.</p>
+                                            <span className={styles.deliveryModeTitle}>🌐 Remote / Digital</span>
+                                            <p className={styles.deliveryModeDesc}>Remote activities, cohort batches, cloud subscriptions, or digital license keys (accessible from anywhere).</p>
                                         </div>
                                     </div>
 
@@ -1126,7 +1123,7 @@ function CreatePitchForm() {
                                                 {deliveryType === 'pickup' && `📍 Pickup (${pickupLocality})`}
                                                 {deliveryType === 'doorstep' && `🚚 Doorstep (${doorstepLocations.length} Zones)`}
                                                 {deliveryType === 'pan_india' && '📦 Pan-India Courier'}
-                                                {deliveryType === 'digital' && '💻 Digital Cloud'}
+                                                {(deliveryType === 'remote' || deliveryType === 'digital') && '🌐 Remote / Digital'}
                                             </span>
                                         </div>
                                         <div className={styles.reviewMetaItem}>

@@ -192,15 +192,13 @@ export default function PitchCard({ pitch, showClanBadge = false }) {
                             <div className={styles.proximityBadgeWrapper} title={locMeta.tooltip}>
                                 <span 
                                     className={
-                                        locMeta.type === 'digital'
-                                            ? styles.proximityBadgeDigital
+                                        (locMeta.type === 'remote' || locMeta.type === 'digital' || locMeta.type === 'pan_india')
+                                            ? styles.proximityBadgeRemote
                                             : locMeta.type === 'society'
                                                 ? styles.proximityBadgeSociety
                                                 : locMeta.type === 'doorstep'
                                                     ? styles.proximityBadgeDoorstep
-                                                    : locMeta.type === 'pan_india'
-                                                        ? styles.proximityBadgeRemote
-                                                        : styles.proximityBadge
+                                                    : styles.proximityBadge
                                     }
                                 >
                                     {locMeta.badgeText}
