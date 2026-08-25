@@ -129,7 +129,7 @@ export default function SupportPage() {
                             </div>
                             <div>
                                 <h3 className={styles.infoCardTitle}>Contact your Clan Lead first</h3>
-                                <p className={styles.infoCardDesc}>For issues regarding missing items, delayed pickups, or local coordination, your Clan Lead is the fastest way to get help. You can message them directly from the pitch page.</p>
+                                <p className={styles.infoCardDesc}>For issues regarding missing items, delayed pickups, or local coordination, your Clan Lead is the fastest way to get help. You can message them directly from the pool page.</p>
                             </div>
                         </div>
 

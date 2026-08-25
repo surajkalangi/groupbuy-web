@@ -157,7 +157,6 @@ Users don't switch to a new tool because it's "better." They switch when pain fr
 ### Platform Principles
 
 1. **Savings first** — The primary value is always cost savings through pooled purchasing power. Everything else is built on this foundation.
-2. **Eliminate friction, not effort** — The host still needs to organize a good pitch. The platform removes the friction of finding interested people, collecting commitments, and managing payments — not the intentionality of hosting.
 3. **Let interest find you** — The Pitch model is designed so that hosts never have to hard-sell or cold-outreach. Create, share to your Clan, and let the right audience self-select.
 4. **Trusted circles, not strangers** — The organizing principle is social trust. People buy with those they already know — neighbors, colleagues, friends, family.
 5. **Coordination as a feature** — Every Pitch is inherently a coordination mechanism. If enough people align before the deadline, it happens. The platform handles the logistics of alignment.
@@ -181,6 +180,84 @@ Clan Leads are equipped with lightweight, powerful administrative tools:
 2. **Dynamic Invite Links with Expiry:** Clan leads can generate time-limited (e.g. 48 hours) or max-use (e.g. 20 joins) invite links for specific onboarding campaigns (e.g., apartment annual general meetings).
 3. **Instant Link Revocation:** If an invite link or QR code is leaked to public forums or unauthorized third parties, the clan lead can revoke and regenerate the invite token in 1 tap, instantly invalidating previous links.
 4. **1-Tap Member Removal & Blacklisting:** Suspicious or disruptive accounts can be removed immediately by clan leads, automatically revoking access to all private clan pools.
+
+---
+
+## 2.7 Strategic Product Thesis: High-Margin, High-Ticket Demand Aggregation vs. Low-Margin FMCG Groceries
+
+### 2.7.1 Why LetsStack Focuses on High-Margin & High-Ticket Sourcing
+Traditional group-buying platforms in India that focused on low-ticket groceries (vegetables, fruits, daily dairy milk, bread, FMCG) suffered from severe unit economic degradation:
+- **Thin Vendor Margins:** Daily produce and FMCG have wafer-thin distributor margins (4–8%), leaving zero room for meaningful bulk discounts without subsidized logistics.
+- **High Perishability & Delivery Friction:** Daily produce requires hyper-local cold chain and daily morning fulfillment runs, resulting in high customer dissatisfaction when 1–2 items are bruised.
+- **Intense Quick-Commerce Saturation:** Quick commerce (Blinkit, Zepto, Instamart) delivers low-ticket groceries in 10 minutes, making users unwilling to wait 3–5 days to save ₹20 on tomatoes.
+
+**LetsStack's Strategic Positioning:**  
+LetsStack aggregates demand for **high-margin, high-ticket, fragmented services and products** where collective buying creates **massive, undeniable price advantages** (15% to 60% savings) that justify waiting 3–7 days for bulk dispatch or on-site service booking:
+
+| Target High-Margin Category | Fragmented Demand Problem | LetsStack Collective Sourcing Solution |
+|---|---|---|
+| **Home Infrastructure & Major Appliances** | Individual homeowners pay full MRP (₹45k+) for ACs, RO purifiers, and balcony pigeon/mosquito nets with expensive standalone installation. | Direct distributor wholesale lots (4–10 units) with bundled free master technician installation and bulk copper piping. |
+| **Rooftop Solar Systems** | Villa and gated society homeowners face fragmented ₹2.5L+ quotes from local solar EPC installers. | 5-villa collective procurement unlocks tier-1 bifacial panels, net-metering liaison, and 25-year manufacturer warranty at ₹1.75L/unit. |
+| **Weddings & Auspicious Events** | Mehndi artists, Nadaswaram troupes, and handloom weavers charge hefty peak-season surge fees for single events. | 5–10 wedding event bulk booking allows master artisan studios to optimize their seasonal schedule, offering 40–50% savings to brides and families. |
+| **Gym Hardware & Recovery Tech** | Premium fitness gear (hex dumbbells, percussion massage guns, Olympic barbell racks) mark up 300% in retail fitness showrooms. | Direct OEM factory carton orders split among fitness clan members at ₹1,850/massage gun (retail ₹4,500). |
+| **Move-In Services & Deep Cleaning** | New flat buyers and tenants pay steep individual rates for deep cleaning, sofa sanitization, and Bayer pest control. | Apartment or society cluster bookings where technicians service 5–10 flats consecutively on the same weekend. |
+| **Pet Parent Sacks & Vet Drives** | Premium imported dog kibble (Farmina/Royal Canin 12kg) and annual 7-in-1 vaccinations cost a premium per pet. | Breeder master-sack splits and licensed on-site society vaccination camps. |
+| **Digital Software & Cloud Subscriptions** | Family and developer tiers for streaming, cloud storage, and AI tools go under-utilized individually. | 4-5 trusted friends/colleagues share annual multi-seat slots securely with auto-renew escrow. |
+| **Group Travel, Retreats & Remote Activities** | Chartered 12-seater Urbania tours, heritage estate bungalows, and remote global study programs require group thresholds. | Zero-risk escrow threshold pooling where seats confirm once target headcount is achieved. |
+
+---
+
+## 2.8 Fulfillment & Accessibility Architecture: Dynamic Badge & Proximity Filtering Engine
+
+The platform must clearly communicate to every user whether and how they can participate in a pool based on physical location, courier coverage, society residency, or digital access.
+
+### 2.8.1 Delivery Mode Hierarchy & Badge Priority
+Pools are classified into four delivery modes at creation, and rendered dynamically to the viewing user:
+
+1. **`🌐 Remote / Global Activity` (e.g. Network School Kazakhstan):**
+   - Non-physical program or virtual cohort open to participants anywhere in the world.
+   - Badge: `🌐 Remote` with tooltip *"Remote / Global Program • Open to participants anywhere"*.
+   - **Proximity Behavior:** Always accessible regardless of user GPS or distance radius filters.
+
+2. **`📦 Pan-India Courier` (e.g. Card Sleeves, Handloom Sarees, Brass Gift Sets):**
+   - Physical merchandise shipped via Speed Post or express national couriers.
+   - Badge: `📦 Pan-India` with tooltip *"Dispatched nationwide via courier to your door"*.
+   - **Proximity Behavior:** Always accessible nationwide across all distance radius filters.
+
+3. **`🚚 Doorstep Delivery / On-Site Service` (e.g. AC Installation, Mehndi Artists, Deep Cleaning):**
+   - Host/vendor services specific designated city localities (e.g., Hitec City, Gachibowli, Tellapur, Madhapur, Whitefield).
+   - When the user's active locality matches the pool's serviced zones: Renders **`🚚 Doorstep`** badge (*"Doorstep delivery/service available in your area"*).
+   - Takes priority over pickup distance pills because doorstep fulfillment delivers maximum convenience.
+
+4. **`🏠 Your Society` (e.g. Society Clubhouses, Resident AC pools, Balcony Blinds):**
+   - Pools hosted exclusively within or tagged to the user's joined society clan (e.g., MyHome Tridasa, Ravidham Complex).
+   - If user is away from society premises, renders **`🏠 Your Society`** badge.
+   - **Exemption Rule:** Society pools are **strictly exempt from distance radius dropdown filtering** (5km, 15km, 30km) because the user resides there and will receive goods/services at their home/clubhouse.
+
+5. **`📍 Proximity Distance Badges` (e.g. `📍 2.4 km`, `📍 8.5 km`):**
+   - For local physical meetups, store group visits, and gaming sessions, proximity is calculated dynamically from the pool's pickup coordinate anchor to the user's current or selected locality.
+   - Distance radius filters (5km, 15km, 30km) strictly filter out physical pools outside the user's selected radius (unless the pool is in a joined society clan or is Pan-India/Remote/Digital).
+
+---
+
+## 2.9 Pool Creation UX Architecture
+
+The pool creation wizard (`/pitches/create`) is structured into a frictionless 3-step flow tailored for high-ticket sourcing:
+
+1. **Step 1: Product & High-Value Category Selection:**
+   - Interactive category cards grid highlighting high-margin demand clusters (Home Setup, Weddings, Gym Hardware, Deep Cleaning, Baby, Pets, Digital, Travel, Solar).
+   - Product photo uploader (16:9 aspect ratio) with preview & delete controls.
+   - Seller & brand sourcing metadata (Name, Registration GSTIN) without self-asserted verification checkboxes.
+
+2. **Step 2: Pricing & Capacity Economics:**
+   - Cost per unit vs. estimated retail MRP with live % community savings calculation.
+   - Minimum threshold units (escrow activation target) and maximum capacity caps.
+
+3. **Step 3: Fulfillment, Serviced Zones & Governance:**
+   - **Delivery Mode Selector:** 4 clear cards (Community Pickup, Doorstep Delivery, Pan-India Courier, Digital Delivery).
+   - **Doorstep Zone Multi-Select:** City selector tabs (Hyderabad, Bengaluru, Mumbai, Delhi NCR, Pune, Chennai) -> City locality chips multi-select -> Mini search bar to add custom neighborhood zones -> Active selected chips tray with quick removal.
+   - **Physical Hub & Landmark Anchor:** Clean address / landmark input with duration timing + One-click Device GPS Coordinate Lock.
+   - **Escrow Return Policy Selector:** Standard inspection upon delivery, 7-day replacement, or custom terms.
 
 ---
 
@@ -2086,6 +2163,18 @@ For the MVP frontend implementation, the social graph is simulated with hardcode
 | **Cross-Clan Discussion Privacy & Bolding Rules** | Multi-clan pools share a single unified discussion thread. Members participating from private clans receive a viewer-personalized privacy notice formatted with bolded clan names and unbolded conjunctions (`"This discussion is shared across **{Clan A}**, **{Clan B}**, and **{Clan C}** clans."`). |
 | **Strict Zero-Access on Gated Clans** | Rejection of grace periods; applicants pending approval have zero access to gated clan pools until approved by a clan lead. |
 | **Clan Re-tagging Post-Publish Governance** | Expanding a restricted-only pool to public clans is locked if member discussions have occurred, protecting participant privacy. |
+
+### Version 3.2 Hyperlocal Proximity, Distance Slider & Delivery Badge Architecture (August 2026)
+
+| Architectural Area | Decisions & Implementation Details |
+|:---|:---|
+| **Complete Terminology Migration ('Pool')** | Fully completed migration of all user-facing strings from "Pitch" to **"Pool"** across all platform pages (Create Pool, Join Pool, My Pools, Host Dashboard, Pool Discussion, Rating Modal, Empty States, Onboarding, and Support). |
+| **Consolidated Remote & Digital Badge (`🌐 Remote`)** | Combined 'Digital' and 'Remote' into a single intuitive **`🌐 Remote`** badge on pool cards. Signifies that the product or service is remotely deliverable without physical distance proximity constraints (e.g. cloud subscriptions, software tools, online cohorts, remote travel coordination). |
+| **Universal Distance Badging Guarantee** | Every pool card unconditionally renders a location or delivery badge: `🌐 Remote`, `📦 Pan-India`, `🏠 Your Society`, `🚚 Doorstep`, `📍 X km`, or `📍 Locality, City`. Null or missing badges are eliminated via smart multi-tier coordinate heuristics and intelligent locality extraction from pickup addresses. |
+| **UX Distance Range Slider & Modal** | Replaced rigid `<select>` dropdowns with an interactive, mobile-optimized **Distance Range Slider Modal** (`DistanceSliderModal.js`):<br>• Smooth range slider (1 km to 50 km) with gradient fill and draggable thumb.<br>• Discrete quick-snap preset chips: `5 km` (Society/Walking), `15 km` (Neighborhood), `30 km` (Citywide), `🌐 Remote & Pan-India`, and `All Deals`.<br>• Real-time match count preview dynamically showing matching pools as the slider moves.<br>• One-tap quick reset button when a distance filter is active. |
+| **Society & Villa Clan Distance Exemption** | Pools hosted inside a member's joined residential society or villa clan (e.g. *Ravi Dham Complex*, *Dates Villa County*) are strictly exempted from distance radius filtering. Members always see their community's pools even when traveling or setting a tight local radius. |
+| **Remote Villa Community Clan (`clan-villas`)** | Added *Dates Villa County* clan representing residential-plot and villa layouts located outside city municipal limits facing vendor access friction. Enabled high-value group service pools: *Rooftop Solar & Net-Metering Drive* and *Certified Electrician Collective Service*. |
+| **Wedding Planning & Flat Setup Clan Expansion** | Added high-utility community pools: *Wedding Silver Articles*, *Traditional Catering Drive*, *Decorative Trays*, *Groom's Pagdi Fixing*, *Multi-Purpose Laptop Stands*, and *Seasonal AC Servicing*. |
 
 ---
 

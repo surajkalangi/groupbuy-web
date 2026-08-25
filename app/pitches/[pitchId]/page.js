@@ -150,11 +150,11 @@ export default function PitchDetail({ params }) {
 
                     {/* Top-Right Action Buttons */}
                     <div className={styles.heroActionRight}>
-                        <button className={styles.heroIconBtn} onClick={handleShare} title="Share this pitch">
-                            <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>share</span>
+                        <button className={styles.heroIconBtn} onClick={handleShare} title="Share this pool">
+                            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>share</span>
                         </button>
-                        <button className={styles.heroIconBtn} onClick={handleToggleBookmark} title={isBookmarked ? "Remove bookmark" : "Bookmark this pitch"}>
-                            <span className="material-symbols-outlined" style={isBookmarked ? { fontSize: '24px', fontVariationSettings: "'FILL' 1", color: "#ffffffe6" } : { fontSize: '24px' }}>bookmark</span>
+                        <button className={styles.heroIconBtn} onClick={handleToggleBookmark} title={isBookmarked ? "Remove bookmark" : "Bookmark this pool"}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '20px', fontVariationSettings: isBookmarked ? "'FILL' 1" : "'FILL' 0", color: isBookmarked ? 'var(--primary)' : 'inherit' }}>bookmark</span>
                         </button>
                     </div>
 
@@ -256,7 +256,7 @@ export default function PitchDetail({ params }) {
                                 <div className={styles.hostRating}>
                                     <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--secondary)', fontVariationSettings: "'FILL' 1" }}>star</span>
                                     <span className={styles.ratingVal}>{pitch.host.rating}</span>
-                                    <span className={styles.ratingCount}>({pitch.host.pitchesHosted} pitches hosted)</span>
+                                    <span className={styles.ratingCount}>({pitch.host.pitchesHosted} pools hosted)</span>
                                 </div>
                             </div>
                         </div>

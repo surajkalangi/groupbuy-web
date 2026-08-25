@@ -349,6 +349,22 @@ function CreatePitchForm() {
         }, 900);
     };
 
+    const handlePreview = () => {
+        const payload = compileDraftPayload();
+        if (typeof window !== 'undefined') {
+            sessionStorage.setItem('letsstack_draft_pitch', JSON.stringify(payload));
+        }
+        router.push('/pitches/create/preview');
+    };
+
+    const handleSaveDraft = () => {
+        const payload = compileDraftPayload();
+        if (typeof window !== 'undefined') {
+            sessionStorage.setItem('letsstack_draft_pitch', JSON.stringify(payload));
+        }
+        router.push('/pitches/create/draft-saved');
+    };
+
     const photoSlotIcons = ['add_a_photo', 'add', 'image'];
     const photoSlotLabels = ['COVER PHOTO (16:9)', 'PHOTO 2', 'PHOTO 3'];
 

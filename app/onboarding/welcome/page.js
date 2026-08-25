@@ -79,7 +79,7 @@ export default function WelcomePage() {
                                         <span className={`material-symbols-outlined ${styles.stepIconSecondary}`} style={{ fontVariationSettings: "'FILL' 1" }}>campaign</span>
                                     </div>
                                     <p className={styles.stepDesc}>
-                                        Once in a clan, you can explore active collective buys (Pitches). From farm-fresh mangoes and group travel, to bulk discounts on car purchases, combine your buying power with your community to unlock massive savings you could never get alone.
+                                        Once in a clan, you can explore active collective buys (Pools). From farm-fresh mangoes and group travel, to bulk discounts on car purchases, combine your buying power with your community to unlock massive savings you could never get alone.
                                     </p>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@ export default function WelcomePage() {
                                         <span className={`material-symbols-outlined ${styles.stepIconSmall}`} style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
                                     </div>
                                     <p className={styles.stepDesc}>
-                                        Click <strong>"I'm In"</strong> on a pitch. Once enough members join to hit the wholesale threshold, the deal triggers and everyone saves.
+                                        Click <strong>"I'm In"</strong> on a pool. Once enough members join to hit the wholesale threshold, the deal triggers and everyone saves.
                                     </p>
                                 </div>
                             </div>

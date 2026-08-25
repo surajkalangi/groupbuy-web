@@ -1,45 +1,62 @@
 'use client';
 
+import { useState } from 'react';
 import { useLocation } from '@/context/LocationContext';
+import DistanceSliderModal from './DistanceSliderModal';
 import styles from './DistanceDropdown.module.css';
-
-const OPTIONS = [
-    { value: 'all', label: 'Distance: All Deals', icon: 'near_me' },
-    { value: 5, label: 'Within 5 km', icon: 'near_me' },
-    { value: 15, label: 'Within 15 km', icon: 'near_me' },
-    { value: 30, label: 'Within 30 km (City)', icon: 'near_me' },
-    { value: 'remote', label: 'Pan-India / Remote', icon: 'flight_takeoff' },
-];
 
 export default function DistanceDropdown({ className = '' }) {
     const { proximityRadius, setProximityRadius } = useLocation();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const isFiltered = proximityRadius !== 'all';
-    const activeOption = OPTIONS.find(o => o.value === proximityRadius) || OPTIONS[0];
+    
+    let displayLabel = 'Distance: All Deals';
+    let iconName = 'near_me';
+
+    if (proximityRadius === 'remote') {
+        displayLabel = '🌐 Pan-India / Remote';
+        iconName = 'language';
+    } else if (typeof proximityRadius === 'number') {
+        displayLabel = `Within ${proximityRadius} km`;
+        iconName = 'near_me';
+    }
 
     return (
-        <div className={`${styles.dropdownWrapper} ${isFiltered ? styles.dropdownWrapperActive : ''} ${className}`}>
-            <span className={`material-symbols-outlined ${styles.icon}`}>
-                {proximityRadius === 'remote' ? 'flight_takeoff' : 'near_me'}
-            </span>
-            <span className={styles.label}>{activeOption.label}</span>
-            <span className={`material-symbols-outlined ${styles.arrow}`}>expand_more</span>
-            
-            <select
-                className={styles.nativeSelect}
-                value={proximityRadius}
-                onChange={(e) => {
-                    const val = e.target.value;
-                    setProximityRadius(val === 'all' || val === 'remote' ? val : Number(val));
-                }}
-                aria-label="Filter deals by distance"
-            >
-                {OPTIONS.map(opt => (
-                    <option key={String(opt.value)} value={opt.value}>
-                        {opt.label}
-                    </option>
-                ))}
-            </select>
-        </div>
+        <>
+            <div className={`${styles.filterContainer} ${className}`}>
+                <button
+                    type="button"
+                    className={`${styles.dropdownWrapper} ${isFiltered ? styles.dropdownWrapperActive : ''}`}
+                    onClick={() => setIsModalOpen(true)}
+                    title="Adjust distance proximity radius"
+                >
+                    <span className={`material-symbols-outlined ${styles.icon}`}>
+                        {iconName}
+                    </span>
+                    <span className={styles.label}>{displayLabel}</span>
+                    <span className={`material-symbols-outlined ${styles.arrow}`}>tune</span>
+                </button>
+
+                {isFiltered && (
+                    <button
+                        type="button"
+                        className={styles.quickResetBtn}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setProximityRadius('all');
+                        }}
+                        title="Reset distance to all deals"
+                    >
+                        <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>close</span>
+                    </button>
+                )}
+            </div>
+
+            <DistanceSliderModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
+        </>
     );
 }

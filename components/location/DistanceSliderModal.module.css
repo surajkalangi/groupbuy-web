@@ -1,0 +1,405 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal {
+    background: var(--surface);
+    width: 100%;
+    max-width: 520px;
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) var(--space-6);
+    border-bottom: 1px solid var(--outline-variant);
+    background: var(--surface-container-low);
+}
+
+.headerTitleGroup {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.iconCircle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 0.8125rem;
+    color: var(--on-surface-variant);
+    margin: 2px 0 0 0;
+}
+
+.closeBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+}
+
+.closeBtn:hover {
+    background: var(--surface-container-high);
+    color: var(--on-surface);
+}
+
+.body {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    max-height: calc(85vh - 140px);
+    overflow-y: auto;
+}
+
+.highlightBox {
+    background: linear-gradient(135deg, var(--surface-container-low) 0%, var(--surface-container) 100%);
+    border: 1.5px solid var(--primary-container);
+    border-radius: 1rem;
+    padding: var(--space-4) var(--space-5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+}
+
+.highlightMain {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    flex: 1;
+}
+
+.highlightText {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.highlightValue {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.highlightDesc {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    line-height: 1.35;
+}
+
+.dealCountBadge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: var(--on-primary);
+    padding: var(--space-2) var(--space-3);
+    border-radius: 0.75rem;
+    min-width: 68px;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+    flex-shrink: 0;
+}
+
+.dealCountNum {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.dealCountLabel {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.9;
+}
+
+.sliderSection {
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 1rem;
+    padding: var(--space-4) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.sliderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sliderLabel {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--on-surface-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.sliderKmDisplay {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.sliderWrapper {
+    position: relative;
+    height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.sliderInput {
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface-container-high);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.sliderInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.sliderInput::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.sliderTrackFill {
+    position: absolute;
+    height: 8px;
+    background: linear-gradient(90deg, #10b981 0%, var(--primary) 100%);
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ticksRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px;
+}
+
+.tickLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.tickLabel:hover {
+    background: var(--surface-container);
+    color: var(--primary);
+}
+
+.presetSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.presetGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: var(--space-2);
+}
+
+.presetBtn {
+    background: var(--surface-container-lowest);
+    border: 1.5px solid var(--outline-variant);
+    border-radius: 0.75rem;
+    padding: var(--space-3);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.presetBtn:hover {
+    border-color: var(--primary);
+    background: var(--surface-container-low);
+}
+
+.presetBtnActive {
+    border-color: var(--primary);
+    background: var(--primary-container);
+}
+
+.presetTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-1);
+}
+
+.presetLabel {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.presetBtnActive .presetLabel {
+    color: var(--on-primary-container);
+}
+
+.presetDesc {
+    font-size: 0.6875rem;
+    color: var(--on-surface-muted);
+}
+
+.presetBtnActive .presetDesc {
+    color: var(--on-primary-container);
+    opacity: 0.85;
+}
+
+.exemptionCallout {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 0.75rem;
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: 0.75rem;
+    color: var(--on-surface);
+    line-height: 1.4;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--outline-variant);
+    background: var(--surface-container-low);
+    gap: var(--space-3);
+}
+
+.resetBtn {
+    background: transparent;
+    border: 1px solid var(--outline-variant);
+    color: var(--on-surface-variant);
+    padding: 0.625rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.resetBtn:hover {
+    background: var(--surface-container-high);
+    color: var(--on-surface);
+}
+
+.applyBtn {
+    background: var(--primary);
+    border: none;
+    color: var(--on-primary);
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+    transition: all 0.15s;
+    flex: 1;
+}
+
+.applyBtn:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+    .modal {
+        border-radius: 1.5rem 1.5rem 0 0;
+        max-height: 90vh;
+        margin-top: auto;
+    }
+    .overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+    .presetGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

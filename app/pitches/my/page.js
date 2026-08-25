@@ -90,7 +90,7 @@ const hostingPitches = [
         unitType: 'Litre',
         costPerUnit: null,
         image: null,
-        draftMessage: 'Complete details to launch this pitch',
+        draftMessage: 'Complete details to launch this pool',
     },
     {
         ...getPitch('pitch-3'),
@@ -415,7 +415,7 @@ function MyPitchesContent() {
                                     {filtered.length === 0 && (
                                         <div className={styles.emptyState} style={{ gridColumn: '1 / -1' }}>
                                             <span className="material-symbols-outlined" style={{ fontSize: '48px', color: 'var(--outline-variant)' }}>shopping_bag</span>
-                                            <p>No pitches found for this filter.</p>
+                                            <p>No pools found for this filter.</p>
                                         </div>
                                     )}
                                 </div>
@@ -449,82 +449,104 @@ function MyPitchesContent() {
                         return (
                             <div className={styles.savedGrid}>
                                 {filtered.map(p => {
-                                    const isDraft = p.hostStatus === 'draft';
+                                    const isDraft = p.isDraft;
                                     const isCompleted = p.hostStatus === 'completed';
+                                    const isGoalMet = p.hostStatus === 'goal_met';
+                                    const isActive = p.hostStatus === 'active';
                                     const isExpired = p.hostStatus === 'expired';
 
-                                    // Status badge classes
                                     let badgeCls = styles.savedBadgeActive;
-                                    if (isDraft) badgeCls = styles.hostBadgeDraft;
-                                    else if (isCompleted) badgeCls = styles.hostBadgeCompleted;
-                                    else if (isExpired) badgeCls = styles.savedBadgeExpired;
+                                    let statusLabel = 'ACTIVE';
+                                    if (isDraft) {
+                                        badgeCls = styles.hostBadgeDraft;
+                                        statusLabel = 'DRAFT';
+                                    } else if (isGoalMet) {
+                                        badgeCls = styles.hostBadgeGoalMet;
+                                        statusLabel = 'GOAL REACHED';
+                                    } else if (isCompleted) {
+                                        badgeCls = styles.savedBadgeCompleted;
+                                        statusLabel = 'COMPLETED';
+                                    } else if (isExpired) {
+                                        badgeCls = styles.savedBadgeExpired;
+                                        statusLabel = 'EXPIRED';
+                                    }
+
+                                    const goalMet = p.committedUnits >= p.minOrder;
+                                    const pct = isDraft
+                                        ? 0
+                                        : goalMet
+                                            ? Math.min(100, (p.committedUnits / p.maxCapacity) * 100)
+                                            : Math.min(100, (p.committedUnits / p.minOrder) * 100);
 
                                     return (
-                                        <div key={p.id} className={`${styles.savedCard} ${isDraft && !p.image ? styles.bentoDraft : ''} ${isExpired ? styles.savedCardExpired : ''} ${isDraft && p.image ? styles.bentoDraftReady : ''}`}>
-                                            <div className={`${styles.savedImageWrap} ${isExpired ? styles.savedImageGrayscale : ''} ${isDraft && !p.image ? styles.bentoDraftImgWrap : ''}`}>
+                                        <div key={p.id} className={`${styles.savedCard} ${isExpired ? styles.savedCardExpired : ''} ${isCompleted ? styles.savedCardCompleted : ''}`}>
+                                            <div className={`${styles.savedImageWrap} ${isExpired ? styles.savedImageGrayscale : ''}`}>
                                                 {p.image ? (
                                                     <img src={p.image} alt={p.title} className={styles.savedImage} />
                                                 ) : (
                                                     <div className={styles.savedImagePlaceholder}>
-                                                        <span className="material-symbols-outlined" style={{ fontSize: '3rem', color: 'var(--outline-variant)' }}>image_not_supported</span>
+                                                        <span className="material-symbols-outlined" style={{ fontSize: '3rem', color: 'var(--outline-variant)' }}>image</span>
                                                     </div>
                                                 )}
                                                 <span className={`${styles.savedStatusOverlay} ${badgeCls}`}>
-                                                    {isDraft ? 'DRAFT' : isCompleted ? 'CLOSED' : isExpired ? 'EXPIRED' : p.hostStatus === 'order_placed' ? 'ORDER PLACED' : p.hostStatus === 'ready_for_pickup' ? 'READY FOR PICKUP' : 'ACTIVE'}
+                                                    {statusLabel}
                                                 </span>
                                             </div>
                                             <div className={styles.savedBody}>
                                                 <div className={styles.savedTitleRow}>
                                                     <div className={styles.textClampWrap}>
                                                         <h3 className={`${styles.savedTitle} ${isExpired ? styles.savedTitleMuted : ''}`}>{p.title}</h3>
-                                                        <p className={`${styles.savedDesc} ${isExpired ? styles.savedDescMuted : ''}`}>{p.subtitle}</p>
+                                                        <p className={`${styles.savedDesc} ${isExpired ? styles.savedDescMuted : ''}`}>
+                                                            {isDraft ? p.draftMessage : p.subtitle}
+                                                        </p>
                                                     </div>
-                                                    <span className={`${styles.savedPrice} ${isExpired || (isDraft && !p.costPerUnit) ? styles.savedPriceMuted : ''}`}>
-                                                        {p.costPerUnit ? `₹${Number(p.costPerUnit).toLocaleString('en-IN')}` : '₹--'}
-                                                        <span className={styles.savedPriceUnit}>/{p.unitType}</span>
-                                                    </span>
+                                                    {!isDraft && (
+                                                        <span className={`${styles.savedPrice} ${isExpired ? styles.savedPriceMuted : ''}`}>
+                                                            ₹{Number(p.costPerUnit || 0).toLocaleString('en-IN')}
+                                                            <span className={styles.savedPriceUnit}>/{p.unitType}</span>
+                                                        </span>
+                                                    )}
                                                 </div>
 
-                                                {isDraft && (
-                                                    <>
-                                                        <div className={`${styles.hostDraftNotice} ${p.draftReady ? styles.hostDraftReady : ''}`}>
-                                                            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>{p.draftReady ? 'check_circle' : 'info'}</span>
-                                                            {p.draftMessage}
+                                                {/* Host Progress Track */}
+                                                {!isDraft && (
+                                                    <div className={styles.savedGoalSection}>
+                                                        <div className={styles.savedGoalHeader}>
+                                                            <span>{isGoalMet ? 'ESCROW SECURED' : isCompleted ? 'DELIVERY COMPLETE' : isExpired ? 'GOAL NOT MET' : 'COLLECTIVE PROGRESS'}</span>
+                                                            <span className={isExpired ? styles.savedGoalPctMuted : styles.savedGoalPct}>
+                                                                {isExpired
+                                                                    ? `${p.committedUnits}/${p.minOrder} (EXPIRED)`
+                                                                    : goalMet
+                                                                        ? `${p.committedUnits}/${p.maxCapacity} MAX`
+                                                                        : `${p.committedUnits}/${p.minOrder} GOAL`}
+                                                            </span>
                                                         </div>
-                                                        <button className={styles.hostEditDraftBtn} onClick={() => router.push(`/pitches/create?draftId=${p.id}`)}>Edit Draft</button>
-                                                    </>
+                                                        <div className={styles.savedGoalTrack}>
+                                                            <div
+                                                                className={`${styles.savedGoalFill} ${isGoalMet ? styles.hostProgressGoalMet : ''} ${isCompleted ? styles.hostProgressCompleted : ''} ${isExpired ? styles.savedGoalFillMuted : ''}`}
+                                                                style={{ width: `${pct}%` }}
+                                                            />
+                                                        </div>
+                                                    </div>
                                                 )}
 
-                                                {/* Active / Completed state */}
-                                                {!isDraft && p.progress && (
-                                                    <>
-                                                        <div className={styles.savedGoalSection}>
-                                                            <div className={styles.savedGoalHeader}>
-                                                                <span>{isCompleted ? 'FULLY FUNDED' : isExpired ? 'GOAL NOT MET' : 'PROGRESS'}</span>
-                                                                <span className={isExpired ? styles.savedGoalPctMuted : styles.savedGoalPct}>{p.progress.current}/{p.progress.goal} FILLED</span>
+                                                {/* Host Footer Action */}
+                                                <div className={styles.hostFooterRow}>
+                                                    {isDraft ? (
+                                                        <button className={styles.hostEditDraftBtn} onClick={() => router.push(`/pitches/create?draftId=${p.id}`)}>Edit Draft</button>
+                                                    ) : (
+                                                        <>
+                                                            <div className={styles.hostParticipantsMeta}>
+                                                                <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--primary)' }}>group</span>
+                                                                <span>{p.committedUnits} / {p.maxCapacity} Slots Filled</span>
                                                             </div>
-                                                            <div className={styles.savedGoalTrack}>
-                                                                <div className={`${styles.savedGoalFill} ${isExpired ? styles.savedGoalFillMuted : ''} ${isCompleted ? styles.hostProgressCompleted : ''}`} style={{ width: `${p.progress.pct}%` }} />
-                                                            </div>
-                                                        </div>
-                                                        {/* Footer */}
-                                                        <div className={styles.savedHostRow}>
-                                                            {p.participantAvatars ? (
-                                                                <div className={styles.hostAvatarStack}>
-                                                                    {p.participantAvatars.map((av, i) => (
-                                                                        <img key={i} src={av} alt="" className={styles.hostStackAvatar} />
-                                                                    ))}
-                                                                    <span className={styles.hostJoinedCount}>+{p.joinedCount} joined</span>
-                                                                </div>
-                                                            ) : <span />}
-                                                            {isExpired ? (
+                                                            <div className={styles.hostBtnGroup}>
                                                                 <button className={styles.hostViewBtn} onClick={() => router.push(`/pitches/${p.id}`)}>View Details</button>
-                                                            ) : (
                                                                 <button className={`${styles.savedBtnView} ${isCompleted ? styles.hostManageMuted : ''}`} onClick={() => router.push(`/pitches/${p.id}/host-dashboard`)}>Manage</button>
-                                                            )}
-                                                        </div>
-                                                    </>
-                                                )}
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     );
@@ -532,7 +554,7 @@ function MyPitchesContent() {
                                 {filtered.length === 0 && (
                                     <div className={styles.emptyState} style={{ gridColumn: '1 / -1' }}>
                                         <span className="material-symbols-outlined" style={{ fontSize: '48px', color: 'var(--outline-variant)' }}>storefront</span>
-                                        <p>No hosted pitches found for this filter.</p>
+                                        <p>No hosted pools found for this filter.</p>
                                     </div>
                                 )}
                             </div>

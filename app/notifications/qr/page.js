@@ -39,7 +39,7 @@ export default function QRCodePage() {
                 <div style={{ background: 'var(--surface-container-low)', padding: '1.5rem', borderRadius: '1rem', textAlign: 'left' }}>
                     <h3 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--on-surface-muted)', textTransform: 'uppercase', marginBottom: '1rem' }}>Order Details</h3>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                        <span style={{ color: 'var(--on-surface-variant)' }}>Pitch</span>
+                        <span style={{ color: 'var(--on-surface-variant)' }}>Pool</span>
                         <span style={{ fontWeight: 600 }}>Heritage Monsoon Mangoes</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>

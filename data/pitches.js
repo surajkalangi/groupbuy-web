@@ -466,7 +466,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Muscle Works, Jubilee Hills', time: 'Membership activation within 3 days of goal completion' },
+        pickupInfo: { address: 'Muscle Works Gym, Road No. 36, Jubilee Hills', locality: 'Jubilee Hills', city: 'Hyderabad', lat: 17.4319, lng: 78.4073, time: 'Membership activation within 3 days of goal completion' },
         fundingProgress: 47,
         pitchPolicies: {
             returnPolicy: 'custom',
@@ -673,7 +673,7 @@ export const mockPitches = [
         status: 'active',
         paymentMode: 'upi',
         visibility: 'public',
-        pickupInfo: { address: 'Indiranagar Hub / Direct Delivery', time: 'August 18, 5–7 PM' },
+        pickupInfo: { address: 'Indiranagar Hub / Direct Delivery', locality: 'Indiranagar', city: 'Bengaluru', lat: 12.9784, lng: 77.6408, time: 'August 18, 5–7 PM' },
         fundingProgress: 63,
         pitchPolicies: {
             returnPolicy: 'no_returns',

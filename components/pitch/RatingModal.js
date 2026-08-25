@@ -83,7 +83,7 @@ export default function RatingModal() {
                 <div className={styles.modalHeader}>
                     <div>
                         <span className={styles.eyebrow}>Delivery Confirmed! 🎉</span>
-                        <h1 className={styles.heading}>How was your experience with this pitch?</h1>
+                        <h1 className={styles.heading}>How was your experience with this pool?</h1>
                     </div>
                     <button onClick={dismissRating} className={styles.closeBtn} aria-label="Dismiss">
                         <span className="material-symbols-outlined">close</span>
@@ -112,7 +112,7 @@ export default function RatingModal() {
                             <div className={styles.hostRating}>
                                 <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--secondary)', fontVariationSettings: "'FILL' 1" }}>star</span>
                                 <span className={styles.ratingVal}>{pitch.host?.rating || '4.8'}</span>
-                                <span className={styles.ratingCount}>({pitch.host?.pitchesHosted || 0} pitches hosted)</span>
+                                <span className={styles.ratingCount}>({pitch.host?.pitchesHosted || 0} pools hosted)</span>
                             </div>
                         </div>
                     </div>

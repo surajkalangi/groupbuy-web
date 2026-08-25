@@ -233,13 +233,26 @@ export function LocationProvider({ children }) {
                 hubName = hubName || clanGeo.locality || clanGeo.hubName;
                 city = city || clanGeo.city;
             }
+
+            // Keyword heuristics from pickup address string if coordinates still missing
+            const addr = (pool.pickupInfo?.address || '').toLowerCase();
+            if (!lat || !lng) {
+                if (addr.includes('jubilee hills')) { lat = 17.4319; lng = 78.4073; hubName = hubName || 'Jubilee Hills'; city = city || 'Hyderabad'; }
+                else if (addr.includes('indiranagar')) { lat = 12.9784; lng = 77.6408; hubName = hubName || 'Indiranagar'; city = city || 'Bengaluru'; }
+                else if (addr.includes('whitefield') || addr.includes('ravidham') || addr.includes('ravi dham')) { lat = 12.9698; lng = 77.7499; hubName = hubName || 'Whitefield'; city = city || 'Bengaluru'; }
+                else if (addr.includes('tellapur') || addr.includes('tridasa')) { lat = 17.4812; lng = 78.2914; hubName = hubName || 'Tellapur'; city = city || 'Hyderabad'; }
+                else if (addr.includes('hsr')) { lat = 12.9121; lng = 77.6446; hubName = hubName || 'HSR Layout'; city = city || 'Bengaluru'; }
+                else if (addr.includes('madhapur') || addr.includes('knowledge city')) { lat = 17.4390; lng = 78.3780; hubName = hubName || 'Madhapur'; city = city || 'Hyderabad'; }
+                else if (addr.includes('hitec city') || addr.includes('mindspace')) { lat = 17.4435; lng = 78.3772; hubName = hubName || 'Hitec City'; city = city || 'Hyderabad'; }
+                else if (addr.includes('gachibowli')) { lat = 17.4401; lng = 78.3489; hubName = hubName || 'Gachibowli'; city = city || 'Hyderabad'; }
+            }
         }
 
         if (lat && lng) {
             return { lat, lng, hubName, city, isDoorstep, doorstepLocations, isDigital: false, isPanIndia: false, isRemote: false };
         }
 
-        return { hubName, city, isDoorstep, doorstepLocations, isDigital: false, isPanIndia: false, isRemote: false };
+        return { hubName: hubName || city || 'Local Hub', city, isDoorstep, doorstepLocations, isDigital: false, isPanIndia: false, isRemote: false };
     }, []);
 
     /**
@@ -365,7 +378,15 @@ export function LocationProvider({ children }) {
             };
         }
 
-        return null;
+        // 8. Universal Fallback: ALWAYS return a clean location badge, never null!
+        const fallbackLocation = poolCity || resolved.city || 'Local Pickup';
+        return {
+            type: 'hub',
+            badgeText: `📍 ${fallbackLocation}`,
+            tooltip: pool.pickupInfo?.address || `Pickup hub in ${fallbackLocation}`,
+            distanceKm: null,
+            hubName: fallbackLocation,
+        };
     }, [getPoolDistance, resolvePoolCoordinates, userLocation]);
 
     /**

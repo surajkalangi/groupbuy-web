@@ -75,49 +75,36 @@
     background: var(--surface);
     border: 1px solid var(--outline-variant);
     border-radius: 8px;
-    padding: 0 0.5rem 0 0.65rem;
+    padding: 0 0.65rem;
     height: 32px;
-    gap: 0.35rem;
+    gap: 0.4rem;
+    cursor: pointer;
+    user-select: none;
     transition: all 0.15s ease;
+    font-family: inherit;
 }
 
-.selectWrapper:hover,
-.selectWrapper:focus-within {
+.selectWrapper:hover {
     border-color: var(--primary);
     background: var(--surface-container-high);
 }
 
-.selectIcon {
+.selectWrapperActive {
+    background: rgba(5, 150, 105, 0.08);
+    border-color: var(--primary);
     color: var(--primary);
-    font-size: 16px;
-    pointer-events: none;
 }
 
-.selectArrow {
-    color: var(--on-surface-variant);
-    font-size: 16px;
-    pointer-events: none;
-    margin-left: -0.1rem;
-}
-
-.radiusSelect {
-    appearance: none;
-    -webkit-appearance: none;
-    background: transparent;
-    border: none;
-    color: var(--on-surface);
-    font-family: var(--font-body);
+.radiusSelectText {
     font-size: 0.8125rem;
     font-weight: 600;
-    cursor: pointer;
-    padding-right: 0.25rem;
-    outline: none;
+    color: var(--on-surface);
+    white-space: nowrap;
 }
 
-.radiusSelect option {
-    background: var(--surface);
-    color: var(--on-surface);
-    font-size: 0.875rem;
+.selectWrapperActive .radiusSelectText {
+    color: var(--primary);
+    font-weight: 700;
 }
 
 .filteredBadge {
