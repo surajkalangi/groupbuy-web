@@ -200,39 +200,10 @@ LetsStack aggregates demand for **high-margin, high-ticket, fragmented services 
 | **Rooftop Solar Systems** | Villa and gated society homeowners face fragmented ₹2.5L+ quotes from local solar EPC installers. | 5-villa collective procurement unlocks tier-1 bifacial panels, net-metering liaison, and 25-year manufacturer warranty at ₹1.75L/unit. |
 | **Weddings & Auspicious Events** | Mehndi artists, Nadaswaram troupes, and handloom weavers charge hefty peak-season surge fees for single events. | 5–10 wedding event bulk booking allows master artisan studios to optimize their seasonal schedule, offering 40–50% savings to brides and families. |
 | **Gym Hardware & Recovery Tech** | Premium fitness gear (hex dumbbells, percussion massage guns, Olympic barbell racks) mark up 300% in retail fitness showrooms. | Direct OEM factory carton orders split among fitness clan members at ₹1,850/massage gun (retail ₹4,500). |
-| **Move-In Services & Deep Cleaning** | New flat buyers and tenants pay steep individual rates for deep cleaning, sofa sanitization, and Bayer pest control. | Apartment or society cluster bookings where technicians service 5–10 flats consecutively on the same weekend. |
-| **Pet Parent Sacks & Vet Drives** | Premium imported dog kibble (Farmina/Royal Canin 12kg) and annual 7-in-1 vaccinations cost a premium per pet. | Breeder master-sack splits and licensed on-site society vaccination camps. |
-| **Digital Software & Cloud Subscriptions** | Family and developer tiers for streaming, cloud storage, and AI tools go under-utilized individually. | 4-5 trusted friends/colleagues share annual multi-seat slots securely with auto-renew escrow. |
-| **Group Travel, Retreats & Remote Activities** | Chartered 12-seater Urbania tours, heritage estate bungalows, and remote global study programs require group thresholds. | Zero-risk escrow threshold pooling where seats confirm once target headcount is achieved. |
-
-### 2.7.2 Core Affinity Clan Taxonomy & Sourcing Profiles (Backend & Catalog Standards)
-
-The platform supports specialized community verticals with tailored sourcing economics:
-
-1. **Fitness & Home Gym (`clan-fitness`)**:
-   - *Target Products*: Quick-dial adjustable dumbbells (5–40kg pair with stand), dual-frequency body composition weight scales, standalone GPS smartwatches, rubber-encased cast-iron hex dumbbell pairs, high-density dual-layer 6mm TPE mats, high-torque brushless percussion massage guns.
-   - *Sourcing Route*: Certified foundry clusters (Jalandhar, Ludhiana) and wearable tech OEMs.
-   - *Economics*: 50%–68% savings by eliminating fitness showroom real estate markups.
-
-2. **Toddlers & New Parents (`clan-parents`)**:
-   - *Target Products & Services*: Society-cluster dedicated verified pediatric caretakers & nannies, 3-in-1 convertible solid beechwood high chairs, retractable baby safety gates with childproofing kits, wholesale master diaper cartons, Channapatna non-toxic sensory wooden toy sets, on-site society clubhouse infant CPR & first-aid workshops.
-   - *Sourcing Route*: Accredited Montessori childcare agencies, European beechwood furniture artisans, Begumpet FMCG master distributors, and certified pediatric emergency medical trainers.
-   - *Economics*: 55%–68% savings via shared monthly agency retainers and master carton splits.
-
-3. **New Home & Flat Setup (`clan-newtocity`)**:
-   - *Target Products & Services*: Sectional sofas with integrated recliners, full-length arched floor dressing mirrors, modular steel frame storage wardrobes, 100% thermal blackout heavy linen drapes, digital air fryer + 750W mixer grinder kitchen combos, tri-ply stainless steel induction cookware starter sets, foldable stainless balcony drying racks, pre-filled XXL corduroy bean bags, 300 TC King Glace cotton bedsheet + pillow sets, balcony pigeon safety nets, 6-inch orthopedic HR foam mattresses, move-in deep cleaning combos, mobile foldable laptop desks, and pre-summer split AC foam jet wash servicing.
-   - *Sourcing Route*: Jodhpur & Bengaluru furniture OEM clusters, architectural float glass factories, Surat textile weaving mills, Panipat export clusters, and certified HVAC/cleaning guilds.
-   - *Economics*: 50%–67% savings via direct tempo-van drops and batch technician appointments.
-
-4. **Weddings & Auspicious Events (`clan-wedding`)**:
-   - *Target Products & Services*: Fresh Madurai jasmine flower strings (air cargo), bridal Poola Jada & rose Varmala sets, Pochampally semi-silk return gift sarees, bridal & family mehndi studio artist packages, live hereditary temple Nadaswaram & Thavil 4-artist troupes, solid cast brass peacock Diya return gifts, BIS-hallmarked 999 pure silver coins & Kumkum bowls, authentic pure-ghee Brahmin catering buffets (35–60 guests), handcrafted velvet trousseau display trays, and royal groom Safa & family Pagdi tying master artists.
-   - *Sourcing Route*: Madurai floral cargo mandis, Pochampally handloom weaving societies, Nachiarkoil brass artisans, MMTC-PAMP authorized bullion partners, and master hereditary culinary/turban guilds.
-   - *Economics*: 40%–65% savings by booking studio teams and wholesale lots across consolidated seasonal muhurtham dates.
-
-5. **Pet & Dog Parents (`clan-dogs`)**:
-   - *Target Products & Services*: Breeder master-sack Royal Canin/Farmina dry kibble splits into sealed 5kg food-grade desiccant tubs, and on-site Sunday community dog park vaccination & health check camps.
-   - *Sourcing Route*: Authorized southern pet feed distributors and licensed mobile veterinary surgeons.
-   - *Economics*: 40%–55% savings on monthly pet nutrition and preventive healthcare.
+| **Move-In Services & Deep Cleaning** | New flat buyers and tenants pay steep individual rates for deep cleaning, sofa sanitization, and Bayer pest control. | Apartment or society cluster bookings where technicians service multiple flats consecutively on the same weekend. |
+| **Pet Care & Veterinary Drives** | Premium imported pet nutrition and annual vaccinations cost a premium per pet individually. | Breeder master-sack splits and licensed on-site society vaccination camps. |
+| **Digital Software & Cloud Subscriptions** | Family and developer tiers for streaming, cloud storage, and AI tools go under-utilized individually. | Trusted peer groups share annual multi-seat slots securely with auto-renew escrow. |
+| **Group Travel, Retreats & Remote Activities** | Chartered transport, heritage estate stays, and remote learning cohorts require minimum group thresholds. | Zero-risk escrow threshold pooling where seats confirm once target headcount is achieved. |
 
 ---
 
@@ -540,32 +511,33 @@ LetsStack turns fragmented individual demand into structured, high-volume collec
 ## 3.6 Pool Visuals, Content Standards, Expired Pool Governance & Vendor Verification
 
 ### 3.6.1 Pool Card Image Dimensions, Aspect Ratio & Subject Framing Standards
-* **16:10 / 16:9 Landscape Card Container:** All pool cards across feeds, clan hubs, and bento discovery grids use a responsive landscape container (`aspect-ratio: 16 / 10; object-fit: cover; object-position: center;`). Minimum recommended upload resolution: `1280 × 800 px` (WebP or optimized JPEG under 500 KB).
+* **16:10 / 16:9 Landscape Card Container:** All pool cards across feeds, clan hubs, and discovery grids use a responsive landscape container (`aspect-ratio: 16 / 10; object-fit: cover; object-position: center;`). Minimum recommended upload resolution: `1280 × 800 px` (WebP or optimized JPEG under 500 KB).
 * **Tall & Portrait Subject Framing (Zero-Clipping Rule):**
-  - For vertically oriented products (e.g. full-length arched mirrors, double-tier clothes drying racks, modular storage wardrobes, toddler high chairs), the product must not be cropped at the top or bottom.
-  - Images must be centered and scaled within a 16:10 canvas with matching ambient room/wall/sky tone padding or subtle ambient room background extension, ensuring 100% of the product (head-to-toe) is clearly visible and highlighted without distortion.
+  - When framing vertically oriented products or tall subjects, the main object must not be clipped at the top or bottom.
+  - Images should be centered within the 16:10 canvas with matching ambient background tone padding or room extension, ensuring the entire product remains fully visible and prominent on the pool card.
 * **Visual-to-Deliverable Fidelity & Truthfulness:**
   - The photographic asset attached to a pool must strictly and accurately depict what is provided in the pool's stated title, unit, and description.
-  - Do not show unincluded accessories in the hero image (e.g. if offering a standalone beanbag lounger without an ottoman, the photo must showcase the lounger accurately without portraying an unincluded ottoman, and vice versa).
+  - Hero images must not display unincluded accessories or separate add-on items that are not part of the stated unit deliverable.
 
 ### 3.6.2 Consumer-Friendly Pool Titles & Tone Guidelines
 * **Simple, Relatable Titles for Everyday Consumers:**
-  - Titles must be formatted in plain, easy-to-read language suitable for general consumers rather than industrial engineers or B2B procurement agents.
-  - **No Industrial Codes or Technical Jargon in Titles:** Industrial grade codes (e.g. `SUS304`, `SS304`, `BIA Dual-Frequency`, `16 Bio-Metrics`, `PPG Sensors`, `GNSS`) belong strictly in the product specifications/description, not in the title.
-  - **Minimize Hyphenation (`-`) and Em-Dashes (`—`):** Titles should use natural conversational connectors (e.g. `with`, `and`, commas, or parentheses) instead of excessive hyphenation.
+  - Titles must be formatted in plain, easy-to-read language suitable for general consumers rather than industrial engineers or B2B procurement specialists.
+  - **No Industrial Codes or Technical Jargon in Titles:** Industrial grade codes, internal SKU notations, and obscure technical jargon belong in the product specifications/description, not in the pool title.
+  - **Minimize Hyphenation (`-`) and Em-Dashes (`—`):** Titles should use natural conversational connectors (e.g., `with`, `and`, commas, or parentheses) instead of excessive hyphenation.
 * **Transparent Sourcing Rationale:**
-  - Organizers should clearly articulate the exact sourcing route (direct foundry batches, Surat weaving mills, Panipat export clusters, accredited Montessori childcare agencies), local retail showroom comparisons, and the group buying economic advantage.
+  - Organizers should clearly explain the sourcing route (e.g. direct factory lots, artisan collectives, authorized distributors, or service retainers) and the collective advantage in the pool description.
 
 ### 3.6.3 Strict Separation: Product Specifications vs. Return Policies
-To maintain legal precision and customer trust, product features and return policies must never be commingled:
-* **Product Description (`description`):** Strictly contains product features, manufacturing craftsmanship, dimensions, materials, motor wattage, accessories, certifications, and usage guides.
-* **Return Policy (`pitchPolicies` / `returnPolicyCustom`):** Strictly contains legal return windows (e.g., 7-day transit damage, unboxing defects), manufacturer warranty coverage (e.g., 2-year dial mechanism warranty, 5-year frame warranty), cancellation fees (0% to 10%), and replacement terms.
+To maintain clarity and platform trust, product specifications and return policies must remain distinct:
+* **Product Description (`description`):** Strictly covers product features, materials, dimensions, certifications, craftsmanship, and usage details.
+* **Return Policy (`pitchPolicies` / `returnPolicyCustom`):** Strictly covers legal return windows, manufacturer/service warranty coverage, cancellation terms, and replacement protocols.
 
-### 3.6.4 Economic Realism & Wholesale Feasibility
-* Quoted wholesale pool prices must reflect genuine wholesale OEM unit economics (accounting for raw material minimum costs, assembly, and bulk logistics) while delivering realistic 50–68% group savings over retail MRP.
+### 3.6.4 Economic Feasibility & Pricing Realism
+* Quoted pool prices must reflect realistic wholesale, collective, or volume-negotiated unit economics relative to standard retail or individual pricing.
+* The platform does not enforce arbitrary minimum or maximum group savings percentage boundaries, as viable collective discounts naturally vary across hardware, professional services, seasonal goods, and digital access.
 
 ### 3.6.5 Verified Vendor vs. Host Sourcing Disclaimers
-* **Verified Vendor Badge (Blue Checkmark):** When a pool is officially organized or fulfilled directly by an authorized brand, distributor, or registered vendor (e.g., Aquaguard, MuscleBlaze, Lenskart), a **Verified Partner / Blue Tick Badge** is rendered alongside the seller's name.
+* **Verified Vendor Badge (Blue Checkmark):** When a pool is officially organized or fulfilled directly by an authorized brand, distributor, or registered vendor, a **Verified Partner / Blue Tick Badge** is rendered alongside the seller's name.
 * **Host Sourcing Liability Disclaimer:** When a pool is organized by an individual community host (peer-to-peer), a subtle disclaimer informs participants: *"Organized by community host {Host Name}. Sourced independently on behalf of clan members."*
 
 ### 3.6.6 Expired Pool Lifecycle & Archival Governance
