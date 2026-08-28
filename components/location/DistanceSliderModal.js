@@ -8,7 +8,6 @@ import { mockClans } from '@/data/clans';
 import styles from './DistanceSliderModal.module.css';
 
 const MILESTONES = [
-    { value: 1, label: '1 km' },
     { value: 5, label: '5 km' },
     { value: 15, label: '15 km' },
     { value: 30, label: '30 km' },
@@ -113,7 +112,7 @@ export default function DistanceSliderModal({ isOpen, onClose, basePitches = nul
                             </span>
                             <div className={styles.highlightText}>
                                 <span className={styles.highlightValue}>
-                                    {isRemote ? '🌐 Remote & Pan-India Courier' : isAll ? 'All Distances & Regions' : `Within ${tempRadius} km radius`}
+                                    {isRemote ? 'Remote & Pan-India Courier' : isAll ? 'All Distances & Regions' : `Within ${tempRadius} km radius`}
                                 </span>
                                 <span className={styles.highlightDesc}>
                                     {isRemote
@@ -208,7 +207,7 @@ export default function DistanceSliderModal({ isOpen, onClose, basePitches = nul
                                 <span className="material-symbols-outlined" style={{ fontSize: '20px', color: isRemote ? 'var(--primary)' : 'var(--on-surface-variant)' }}>
                                     language
                                 </span>
-                                <span className={styles.modeCardTitle}>🌐 Remote & Pan-India</span>
+                                <span className={styles.modeCardTitle}>Remote & Pan-India</span>
                                 {isRemote && (
                                     <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)', marginLeft: 'auto' }}>
                                         check_circle
@@ -227,7 +226,7 @@ export default function DistanceSliderModal({ isOpen, onClose, basePitches = nul
                                 <span className="material-symbols-outlined" style={{ fontSize: '20px', color: isAll ? 'var(--primary)' : 'var(--on-surface-variant)' }}>
                                     explore
                                 </span>
-                                <span className={styles.modeCardTitle}>All Deals (No Filter)</span>
+                                <span className={styles.modeCardTitle}>All Deals</span>
                                 {isAll && (
                                     <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--primary)', marginLeft: 'auto' }}>
                                         check_circle
